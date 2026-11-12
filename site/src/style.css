@@ -1,0 +1,79 @@
+/* vd3-ui-core spec site — every measurement derives from vd3 / spec tokens.
+   The UI chrome (navbar, buttons, chips, badges, cards, theme, fonts) is
+   @vanduo-oss/vd3 itself; this file only lays out the spec content. */
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--vd-bg-primary);
+  color: var(--vd-text-primary);
+  font-family: var(--vd-font-family-sans);
+  font-size: 1rem;
+  line-height: var(--vd-line-height-normal, 1.5);
+  transition: background var(--vd-duration-89, 89ms) var(--vd-ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+code {
+  font-family: var(--vd-font-family-mono);
+  font-size: 0.9em;
+  background: var(--vd-bg-secondary);
+  border-radius: var(--vd-border-radius-sm);
+  padding: 0.1em 0.35em;
+}
+
+a { color: var(--vd-primary-6); }
+
+:focus-visible {
+  outline: 3px solid var(--vd-primary-6);
+  outline-offset: 2px;
+  border-radius: var(--vd-border-radius-sm);
+}
+
+main {
+  max-width: 987px; /* spec container.standard — F16 */
+  margin: 0 auto;
+  padding: var(--vd-space-fib-34) var(--vd-space-fib-21) var(--vd-space-fib-55);
+}
+
+section { margin-block-end: var(--vd-space-fib-55); scroll-margin-top: var(--vd-space-fib-55); }
+
+h1 {
+  font-size: clamp(1.625rem, 4vw, 2.625rem); /* type xl → 3xl */
+  line-height: 1.236; letter-spacing: -0.03em; margin: 0 0 var(--vd-space-fib-8);
+}
+h1 em { font-style: normal; color: var(--vd-primary-6); }
+h2 {
+  font-size: clamp(1.25rem, 2.6vw, 1.625rem); line-height: 1.236; letter-spacing: -0.02em;
+  margin: 0 0 var(--vd-space-fib-8); display: flex; align-items: center; gap: var(--vd-space-fib-8); flex-wrap: wrap;
+}
+h2 .n { color: var(--vd-primary-6); font-size: 0.8em; font-weight: 600; }
+h3 { font-size: 1rem; margin: var(--vd-space-fib-21) 0 var(--vd-space-fib-5); }
+
+.lead { color: var(--vd-text-secondary); max-width: 65ch; margin: 0 0 var(--vd-space-fib-13); }
+p { max-width: 70ch; }
+
+.hero .phi-card { display: flex; align-items: center; gap: var(--vd-space-fib-13); flex-wrap: wrap; margin-block-end: var(--vd-space-fib-13); }
+.phi-eq { font-size: 1.625rem; font-weight: 200; font-family: var(--vd-font-family-serif); }
+.hero-meta { display: flex; gap: var(--vd-space-fib-21); flex-wrap: wrap; color: var(--vd-text-secondary); font-size: 0.8125rem; margin-block-start: var(--vd-space-fib-13); }
+.hero-meta strong { color: var(--vd-text-primary); }
+
+.footnote {
+  font-size: 0.75rem; color: var(--vd-text-secondary); margin-block-start: var(--vd-space-fib-13);
+  border-left: 2px solid var(--vd-primary-6); padding-left: var(--vd-space-fib-8); max-width: 70ch;
+}
+
+/* — rendered markdown (the spec itself) — */
+.md-doc { max-width: 75ch; }
+.md-doc h1, .md-doc h2, .md-doc h3 { margin-block-start: var(--vd-space-fib-21); }
+.md-doc h2 { font-size: 1.25rem; margin-block-end: var(--vd-space-fib-5); }
+.md-doc h3 { font-size: 1rem; }
+.md-doc table { border-collapse: collapse; width: 100%; font-size: 0.8125rem; margin-block: var(--vd-space-fib-8); }
+.md-doc th, .md-doc td { text-align: left; padding: var(--vd-space-fib-5) var(--vd-space-fib-8); border-bottom: 1px solid var(--vd-border-color); vertical-align: top; }
+.md-doc th { color: var(--vd-text-secondary); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.md-doc ul { padding-left: var(--vd-space-fib-21); }
+.md-doc li { margin-block-end: var(--vd-space-fib-3); }
+.md-doc hr { border: none; border-top: 1px solid var(--vd-border-color); margin-block: var(--vd-space-fib-13); }
+
+footer { border-top: 1px solid var(--vd-border-color); margin-block-start: var(--vd-space-fib-34); }
+footer .inner { max-width: 987px; margin: 0 auto; padding: var(--vd-space-fib-21); color: var(--vd-text-secondary); font-size: 0.8125rem; }

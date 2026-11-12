@@ -1,0 +1,168 @@
+{
+  "$description": "vd3 design tokens — NORMATIVE single source of truth. W3C DTCG format. Values marked 'ILLUSTRATIVE' are placeholders pending the v2 token audit against the real tokens.css of @vanduo-oss/vd3; structure and naming are binding. Generated CSS in library repos MUST match this file (CI check). Basis classes: A = phi/Fibonacci/Lucas-derived, B = conventional-by-design (written reason), C = registered exception (see foundations/proportion.md registry).",
+  "$vd3": { "spec": "vd3-ui-core@2.0.0-draft" },
+  "color": {
+    "primitive": {
+      "$type": "color",
+      "$description": "Raw palette scales. Never consumed by components directly. ILLUSTRATIVE values pending audit.",
+      "gray": {
+        "0":    { "$value": "#fafaf8" },
+        "50":   { "$value": "#ffffff" },
+        "100":  { "$value": "#f4f2ee" },
+        "300":  { "$value": "#e5e1d8" },
+        "600":  { "$value": "#6b6558" },
+        "800":  { "$value": "#3a352a" },
+        "900":  { "$value": "#23211d" },
+        "950":  { "$value": "#2a261d" },
+        "1000": { "$value": "#16140f" }
+      },
+      "gold": {
+        "500": { "$value": "#c9971c" },
+        "600": { "$value": "#a87d14" }
+      },
+      "red": {
+        "600": { "$value": "#d64545" }
+      }
+    },
+    "role": {
+      "$type": "color",
+      "$description": "Semantic roles — default (light) theme values. Components consume ONLY these. The dark theme MUST define every role (theme.dark.color.role); a role undefined in a theme is a build error, not a runtime fallback.",
+      "canvas":         { "$value": "{color.primitive.gray.0}",   "$description": "Page background. ILLUSTRATIVE — pending audit." },
+      "layer":          { "$value": "{color.primitive.gray.50}",  "$description": "Raised content surface. ILLUSTRATIVE." },
+      "layer-hover":    { "$value": "{color.primitive.gray.100}", "$description": "Hovered layer." },
+      "text-primary":   { "$value": "{color.primitive.gray.900}", "$description": "Default text." },
+      "text-secondary": { "$value": "{color.primitive.gray.600}", "$description": "Muted text." },
+      "border":         { "$value": "{color.primitive.gray.300}", "$description": "Default border." },
+      "focus":          { "$value": "{color.primitive.gold.500}", "$description": "Focus ring. ILLUSTRATIVE." },
+      "interactive":    { "$value": "{color.primitive.gold.600}", "$description": "Interactive accent. ILLUSTRATIVE." },
+      "critical":       { "$value": "{color.primitive.red.600}",  "$description": "Destructive/error." },
+      "shadow":         { "$value": "#3c341e26",                  "$description": "Shadow ink, with alpha. ILLUSTRATIVE." }
+    }
+  },
+  "theme": {
+    "dark": {
+      "color": {
+        "role": {
+          "$type": "color",
+          "$description": "Dark theme — MUST define every role from color.role. Emitted as [data-theme=\"dark\"] overrides; custom-property names never carry the theme. ILLUSTRATIVE values pending audit.",
+          "canvas":         { "$value": "{color.primitive.gray.1000}" },
+          "layer":          { "$value": "{color.primitive.gray.900}" },
+          "layer-hover":    { "$value": "{color.primitive.gray.950}" },
+          "text-primary":   { "$value": "{color.primitive.gray.50}" },
+          "text-secondary": { "$value": "{color.primitive.gray.300}" },
+          "border":         { "$value": "{color.primitive.gray.800}" },
+          "focus":          { "$value": "{color.primitive.gold.500}" },
+          "interactive":    { "$value": "{color.primitive.gold.500}" },
+          "critical":       { "$value": "{color.primitive.red.600}" },
+          "shadow":         { "$value": "#00000090" }
+        }
+      }
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "$description": "ONE normative spacing scale, rem on a 16px base (PRN-002). Names are Fibonacci numbers. Values <= 12px follow registered exception C-01 (rem-rounded working scale 2/4/6/8/12); the sequence is literal from 13px. The px helper scale (--vd-spacing-*) MUST be generated as aliases of these tokens — one scale, two units. ILLUSTRATIVE values pending the v2 audit; names and structure binding.",
+    "fib-1":  { "$value": "0.125rem",  "$description": "2px" },
+    "fib-2":  { "$value": "0.25rem",   "$description": "4px · C-01 rem-rounded (literal would be 3px)" },
+    "fib-3":  { "$value": "0.375rem",  "$description": "6px · C-01 (literal 5px)" },
+    "fib-5":  { "$value": "0.5rem",    "$description": "8px · C-01" },
+    "fib-8":  { "$value": "0.75rem",   "$description": "12px · C-01" },
+    "fib-13": { "$value": "0.8125rem", "$description": "13px · sequence literal from here" },
+    "fib-21": { "$value": "1.3125rem", "$description": "21px" },
+    "fib-34": { "$value": "2.125rem",  "$description": "34px" },
+    "fib-55": { "$value": "3.4375rem", "$description": "55px" }
+  },
+  "line": {
+    "$type": "dimension",
+    "$description": "Border/line weights — Fibonacci 1/2/3/5px (class A). New in v2 (research brief F3-5: the gap Carbon exposed). ILLUSTRATIVE.",
+    "hair":    { "$value": "1px" },
+    "thin":    { "$value": "2px" },
+    "regular": { "$value": "3px" },
+    "thick":   { "$value": "5px" }
+  },
+  "radius": {
+    "$type": "dimension",
+    "$description": "Radii are Fibonacci steps (class A). ILLUSTRATIVE.",
+    "fib-2": { "$value": "0.125rem" },
+    "fib-3": { "$value": "0.1875rem" },
+    "fib-5": { "$value": "0.3125rem" },
+    "fib-8": { "$value": "0.5rem" },
+    "full":  { "$value": "9999rem", "$description": "Pill — a shape semantic, not a scale step. Registered exception C-04." }
+  },
+  "shadow": {
+    "$type": "shadow",
+    "$description": "Each level's y-offset and blur are a consecutive Fibonacci pair; x-offset and spread are 0. ILLUSTRATIVE values; pair structure binding.",
+    "1": { "$value": "0 0.0625rem 0.125rem 0 {color.role.shadow}",   "$description": "1/2 pair" },
+    "2": { "$value": "0 0.125rem 0.1875rem 0 {color.role.shadow}",   "$description": "2/3 pair" },
+    "3": { "$value": "0 0.1875rem 0.3125rem 0 {color.role.shadow}",  "$description": "3/5 pair" },
+    "4": { "$value": "0 0.5rem 0.8125rem 0 {color.role.shadow}",     "$description": "8/13 pair" },
+    "5": { "$value": "0 0.8125rem 1.3125rem 0 {color.role.shadow}",  "$description": "13/21 pair" },
+    "6": { "$value": "0 1.3125rem 2.125rem 0 {color.role.shadow}",   "$description": "21/34 pair" }
+  },
+  "glow": {
+    "$type": "dimension",
+    "$description": "Glow blur intensities — remapped from arithmetic 10/20/30px to Fibonacci 8/13/21 (Q2 decision; class A, no exception needed). ILLUSTRATIVE.",
+    "fib-8":  { "$value": "0.5rem" },
+    "fib-13": { "$value": "0.8125rem" },
+    "fib-21": { "$value": "1.3125rem" }
+  },
+  "z": {
+    "$type": "number",
+    "$description": "Stacking ladder — class B, conventional-by-design (Q3 decision): round increments are a platform/debugging seam where ecosystem familiarity wins (PRN-3); tokenized so stacking is predictable. Not Fibonacci.",
+    "base":    { "$value": 0 },
+    "raised":  { "$value": 10 },
+    "sticky":  { "$value": 100 },
+    "overlay": { "$value": 200 },
+    "modal":   { "$value": 300 },
+    "toast":   { "$value": 400 }
+  },
+  "container": {
+    "$type": "dimension",
+    "$description": "Container widths — Fibonacci and Lucas, both class A (both converge to phi). ILLUSTRATIVE.",
+    "sm":       { "$value": "521px",  "$description": "L13 (Lucas)" },
+    "md":       { "$value": "610px",  "$description": "F15" },
+    "standard": { "$value": "987px",  "$description": "F16" },
+    "wide":     { "$value": "1597px", "$description": "F17" }
+  },
+  "type": {
+    "$description": "Type scale: consecutive steps relate by sqrt(phi) ~ 1.272, so every two steps multiply by phi (16 -> 26 -> 42 -> 68px). Fluid clamp() behavior per the v1.9 docs is confirmed in the v2 audit. ILLUSTRATIVE values; structure binding.",
+    "size": {
+      "$type": "dimension",
+      "xs":   { "$value": "0.625rem",  "$description": "10px" },
+      "sm":   { "$value": "0.8125rem", "$description": "13px" },
+      "base": { "$value": "1rem",      "$description": "16px" },
+      "lg":   { "$value": "1.25rem",   "$description": "20px" },
+      "xl":   { "$value": "1.625rem",  "$description": "26px · 16×φ" },
+      "2xl":  { "$value": "2.0625rem", "$description": "33px" },
+      "3xl":  { "$value": "2.625rem",  "$description": "42px · 16×φ²" },
+      "4xl":  { "$value": "3.375rem",  "$description": "54px" },
+      "5xl":  { "$value": "4.25rem",   "$description": "68px · 16×φ³" },
+      "6xl":  { "$value": "5.4375rem", "$description": "87px" }
+    },
+    "leading": {
+      "$type": "number",
+      "tight":   { "$value": 1.236, "$description": "2/φ" },
+      "snug":    { "$value": 1.382 },
+      "normal":  { "$value": 1.5 },
+      "relaxed": { "$value": 1.618, "$description": "φ" }
+    }
+  },
+  "motion": {
+    "$type": "duration",
+    "$description": "Seven-step Fibonacci duration ladder (class A — research brief F3-1: motion is NOT conventional). Each tier has a usage class, noted per token. ILLUSTRATIVE values; ladder structure binding.",
+    "instant":  { "$value": "55ms",  "$description": "micro-interactions, presses" },
+    "fast":     { "$value": "89ms",  "$description": "icon toggles, checkmarks" },
+    "snappy":   { "$value": "144ms", "$description": "tooltips, small toggles" },
+    "normal":   { "$value": "233ms", "$description": "dropdowns, popovers, menus" },
+    "moderate": { "$value": "377ms", "$description": "drawers, modals, offcanvas" },
+    "slow":     { "$value": "610ms", "$description": "accordions, large panels" },
+    "gentle":   { "$value": "987ms", "$description": "page transitions, hero unfolds" }
+  },
+  "easing": {
+    "$type": "cubicBezier",
+    "$description": "The golden easing set (class A per v1.9 motion docs). No bespoke curves per component. ILLUSTRATIVE values pending audit.",
+    "out":    { "$value": [0.16, 1, 0.3, 1] },
+    "in":     { "$value": [0.7, 0, 0.84, 0] },
+    "in-out": { "$value": [0.85, 0, 0.15, 1] }
+  }
+}

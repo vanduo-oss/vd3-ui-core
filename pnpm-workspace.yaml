@@ -1,0 +1,7 @@
+packages:
+  - site
+verifyDepsBeforeRun: false
+minimumReleaseAgeExclude:
+  - '@vanduo-oss/vd3@1.9.0'
+onlyBuiltDependencies:
+  - esbuild

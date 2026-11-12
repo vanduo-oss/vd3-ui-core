@@ -1,0 +1,24 @@
+# Cross-system translations
+
+Status: stable · Spec: 2.0.0-draft
+
+Orientation for people (and agents) arriving from other systems. **This is a
+translation table, not conformance.** vd3 follows no external design system
+(`foundations/principles.md` PRN-003).
+
+| vd3 role | Carbon equivalent | Note |
+|---|---|---|
+| `--vd-canvas` | `background` | page behind all layers |
+| `--vd-layer` | `layer` | raised surface |
+| `--vd-layer-hover` | `layer-hover` | |
+| `--vd-text-primary` | `text-primary` | |
+| `--vd-text-secondary` | `text-secondary` | |
+| `--vd-border` | `border-subtle` | |
+| `--vd-focus` | `focus` | vd3: golden hue by default |
+| `--vd-interactive` | `link-primary` | vd3 generalizes to all interaction |
+| `--vd-critical` | `danger` | |
+| `--vd-shadow-1..6` | — (Carbon uses flat layers) | intentional identity deviation |
+
+Spacing: Carbon's 2x grid (2/4/8/16/24/32) overlaps vd3's normative scale at 2,
+4, 8 (with registered exception C-01 on the small steps) — the systems are
+cousins, not twins. vd3 ships one scale; the px helpers are aliases.
