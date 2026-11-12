@@ -10,7 +10,28 @@ Status: stable · Spec: 2.0.0-draft
   path: `--vd-` + path with `.` → `-`, except the `color.role.*` tier, which
   collapses to `--vd-⟨name⟩` (semantic roles are the public API). Where v1.9
   shipped a different public name (e.g. `--vd-border-color`), the v1.9 name
-  wins; the v2 audit maps any alias.
+  wins; the v2 audit maps any alias. Audited DTCG-path → public CSS name table
+  (v1.9, from `docs/token-audit-v2.md`):
+
+  | DTCG path | public CSS var |
+  |---|---|
+  | `color.role.canvas` | `--vd-bg-primary` |
+  | `color.role.layer` / `layer-hover` | `--vd-bg-secondary` / `--vd-bg-tertiary` |
+  | `color.role.text-primary` / `text-secondary` | `--vd-text-primary` / `--vd-text-secondary` |
+  | `color.role.border` | `--vd-border-color` |
+  | `color.role.focus` / `interactive` | `--vd-color-primary` (`-hover`) |
+  | `color.role.critical` | `--vd-color-error` |
+  | `space.fib-N` | `--vd-space-fib-N` |
+  | `radius.fib-N` | `--vd-radius-fib-N` |
+  | `motion.N` / `motion.base`… | `--vd-duration-N` / `--vd-duration-base`… |
+  | `easing.out` / `in` / `in-out` | `--vd-ease-out` / `-in` / `-in-out` |
+  | `shadow.N` | `--vd-shadow-*` (fib variant) |
+  | `z.modal` etc. | `--vd-z-modal` etc. |
+  | `container.lg` etc. | `--vd-container-lg` etc. |
+  | `breakpoint.md` etc. | `--vd-breakpoint-md` etc. |
+  | `type.size.base` | `--vd-font-size-base` |
+  | `type.leading.tight` | `--vd-line-height-tight` |
+  | `type.tracking.wide` | `--vd-letter-spacing-wide` |
 - **Attributes** — the v1.9 hooks verbatim, on the root element: `data-theme`,
   `data-primary`, `data-palette`, `data-motion`.
 - **Components** — Vue SFC, PascalCase, one word where possible

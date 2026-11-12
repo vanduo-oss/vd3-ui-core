@@ -52,9 +52,15 @@ Spec follows semver independently of library releases.
   time (`@spec` alias, `?raw` imports); the framework-free `site/index.html`
   mockup was replaced by the app entry. Verified with `vite build` + headless
   browser run (theme/font switching, zero console errors).
-- v2 audit kickoff: inspected `@vanduo-oss/vd3@1.9.0` `dist/tokens.json`
-  (878 CSS vars) — confirms C-01 exactly (`--vd-space-fib-2=4px`, `-3=6px`,
-  `-5=8px`, `-8=12px`, literal from 13) and the 55–987ms ladder
-  (`--vd-duration-55…987` plus named aliases `instant…slowest`). Full value
-  audit against `dist/vd3-core.css` remains the next task before normative
-  token tables.
+- v2 token audit COMPLETE — see `docs/token-audit-v2.md`. `tokens/vd3.tokens.json`
+  values now audited against `@vanduo-oss/vd3@1.9.0` (dist/tokens.json + vd3-core.css
+  + vd3.css); ILLUSTRATIVE flags removed. Highlights: space 9/9 confirmed (C-01
+  exact: fib-2=4px, -3=6px, -5=8px, -8=12px, literal from 13); fib shadow pairs
+  1/2…21/34 all ship as real composites; radius-fib extended to 21; containers
+  521/610/987/1364/1597; breakpoints 576…1400 (new group, class B); z ladder =
+  v1.9 --vd-z-* 1000…1080 (class B); motion = numeric ladder --vd-duration-55…987
+  plus named aliases; easing = real golden beziers (1/φ, 1/φ² control points);
+  type scale + φ leadings + 6 tracking tokens confirmed; glass blur soft-cap
+  (C-02) confirmed at 14–26px past fib 13; line weights and focus geometry
+  confirmed as real v1.9 gaps (new in v2). `conventions/naming.md` gained the
+  audited DTCG-path → public CSS-name table.

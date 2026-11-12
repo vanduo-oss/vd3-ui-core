@@ -45,12 +45,14 @@ export const containers = entries(t.container).map(([k, v]: [string, any]) => ({
   note: v.$description ?? '',
 }))
 
-export const typeSizes = entries(t.type.size).map(([k, v]: [string, any]) => ({
-  name: k,
-  css: v.$value as string,
-  px: remToPx(v.$value),
-  desc: v.$description ?? '',
-}))
+export const typeSizes = entries(t.type.size).map(([k, v]: [string, any]) => {
+  const css = v.$value as string
+  // fluid clamp() sizes: display the max bound
+  const px = css.startsWith('clamp')
+    ? Math.round(parseFloat(css.match(/([\d.]+)rem\)$/)?.[1] ?? '0') * 16)
+    : remToPx(css)
+  return { name: k, css, px, desc: v.$description ?? '' }
+})
 
 export const leadings = entries(t.type.leading).map(([k, v]: [string, any]) => ({
   name: k,
@@ -58,12 +60,18 @@ export const leadings = entries(t.type.leading).map(([k, v]: [string, any]) => (
   desc: v.$description ?? '',
 }))
 
-export const motionDurations = entries(t.motion).map(([k, v]: [string, any]) => ({
-  name: k,
-  token: `--vd-motion-${k}`,
-  ms: parseInt(v.$value as string, 10),
-  use: v.$description ?? '',
-}))
+export const motionDurations = entries(t.motion)
+  .filter(([k]) => /^\d+$/.test(k) && k !== '0') // numeric fib ladder only; named aliases reference these
+  .map(([k, v]: [string, any]) => ({
+    name: k,
+    token: `--vd-duration-${k}`,
+    ms: parseInt(v.$value as string, 10),
+    use: v.$description ?? '',
+  }))
+
+export const motionAliases = entries(t.motion)
+  .filter(([k]) => !/^\d+$/.test(k))
+  .map(([k, v]: [string, any]) => ({ name: k, token: `--vd-duration-${k}`, ref: v.$value }))
 
 export const zLadder = entries(t.z).map(([k, v]: [string, any]) => ({
   name: k,

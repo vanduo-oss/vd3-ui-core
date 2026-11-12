@@ -44,20 +44,22 @@ One normative scale (PRN-002). Names are Fibonacci numbers; values are rem on a
 | `space.fib-34` | 2.125rem  | 34 | A |
 | `space.fib-55` | 3.4375rem | 55 | A |
 
-The px helper scale (`--vd-spacing-*`) MUST be generated as aliases of these
-tokens — one scale, two units, no parallel system. Components MUST NOT use
-ad-hoc gaps. (Values ILLUSTRATIVE pending the v2 audit; names and structure are
-binding — concrete mapping in `tokens/vd3.tokens.json`.)
+Audited against v1.9 (`docs/token-audit-v2.md`): `--vd-spacing-*` ships the
+literal Fibonacci **px** values (the px alias of this scale), while
+`--vd-space-1…16` is a separate 4px-based conventional utility scale (class B).
+One normative scale, two units, no parallel system. Components MUST NOT use
+ad-hoc gaps. (Values audited; concrete mapping in `tokens/vd3.tokens.json`.)
 
 ## Containers
 
 Fibonacci and Lucas are both citizens — both sequences converge to φ at the same
 rate, so both are lawful class A:
 
-- Small container: **521px** (L₁₃, Lucas)
-- Medium container: **610px** (F₁₅)
-- Standard container: **987px** (F₁₆)
-- Wide container: **1597px** (F₁₇)
+- Small: **521px** (L₁₃, Lucas)
+- Medium: **610px** (F₁₅)
+- Large (standard): **987px** (F₁₆)
+- XL: **1364px** (L₁₆, Lucas)
+- Wide: **1597px** (F₁₇)
 
 ## Golden rows
 

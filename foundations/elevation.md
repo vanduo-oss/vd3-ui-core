@@ -15,8 +15,9 @@ Fibonacci pair**; x-offset and spread are 0.
 | 6 | 21 / 34 | topmost spotlights |
 
 - Elevation levels MUST be consumed as tokens (`--vd-shadow-1`…`--vd-shadow-6`
-  in `tokens/vd3.tokens.json`, group `shadow`). Values ILLUSTRATIVE; pair
-  structure binding.
+  in `tokens/vd3.tokens.json`, group `shadow`). Audited against v1.9: each level
+  is a real layered composite (pair + next-smaller pair); the conventional
+  v1.9 sm/md/lg/xl shadows are class-B aliases of levels 1/3/4/5.
 - Shadows carry identity; they MAY be layered with tinted borders, but a shadow
   level MUST NOT be replaced by a border alone.
 - Elevation is not a stacking-context ranking: stacking order is the tokened

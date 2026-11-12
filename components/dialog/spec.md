@@ -39,7 +39,7 @@ itself) / reduced-motion (no scale-in; opacity only).
 `--vd-layer` (surface), `--vd-shadow-4`, `--vd-radius-fib-8`, `--vd-z-modal`,
 `--vd-text-primary`, `--vd-text-secondary`, `--vd-border`, `--vd-focus`,
 `--vd-line-regular`, `--vd-space-fib-13`, `--vd-space-fib-21` (padding),
-`--vd-motion-normal` (open transition; suppressed on reduced motion per MOB-001).
+`--vd-duration-base` (`motion.base` = 233ms; open transition; suppressed on reduced motion per MOB-001).
 
 ## Deviations & references
 None — conforms to APG Dialog (Modal) Pattern. Consulted: Carbon Dialog —
