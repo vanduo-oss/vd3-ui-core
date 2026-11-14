@@ -35,6 +35,7 @@ jobs:
           cache-dependency-path: pnpm-lock.yaml
 
       - run: pnpm install --frozen-lockfile
+      - run: pnpm audit --audit-level=moderate
 
       - name: Build SSG specification site (base '/')
         run: pnpm run build
