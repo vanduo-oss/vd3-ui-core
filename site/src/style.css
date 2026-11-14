@@ -706,3 +706,271 @@ footer .inner {
   color: var(--vd3-color-text-secondary, #495057);
   font-size: 0.875rem;
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * Section 09: Golden-Angle & Fibonacci Chromatic Ramp Demo
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+.color-demo-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--vd3-space-fib-8, 0.5rem);
+  margin-block-end: var(--vd3-space-fib-8, 0.5rem);
+}
+
+.color-demo-title {
+  font-size: 0.875rem;
+  color: var(--vd3-color-text-primary, #1a1d20);
+}
+
+.color-demo-subtitle {
+  font-size: 0.75rem;
+  color: var(--vd3-color-text-secondary, #495057);
+  font-family: var(--vd3-font-family-mono, ui-monospace, monospace);
+}
+
+.color-swatch-card code {
+  display: block;
+  font-size: 0.6875rem;
+  opacity: 0.9;
+  margin-top: 0.125rem;
+}
+
+.fib-ramp-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vd3-space-fib-5, 0.3125rem);
+}
+
+.fib-ramp-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: center;
+  gap: var(--vd3-space-fib-8, 0.5rem);
+}
+
+@media (max-width: 640px) {
+  .fib-ramp-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.fib-ramp-meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.fib-ramp-meta strong {
+  font-size: 0.8125rem;
+  color: var(--vd3-color-text-primary, #1a1d20);
+}
+
+.fib-ramp-meta span {
+  font-size: 0.6875rem;
+  color: var(--vd3-color-text-secondary, #495057);
+  font-family: var(--vd3-font-family-mono, ui-monospace, monospace);
+}
+
+.fib-ramp-cells {
+  display: grid;
+  grid-template-columns: repeat(10, minmax(0, 1fr));
+  gap: 0.25rem;
+}
+
+.fib-ramp-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.375rem 0.125rem;
+  border-radius: var(--vd3-radius-xs, 3px);
+  font-family: var(--vd3-font-family-mono, ui-monospace, monospace);
+  min-width: 0;
+}
+
+.fib-ramp-cell.is-main-step {
+  outline: 2px solid var(--vd3-color-text-primary, #1a1d20);
+  outline-offset: 1px;
+}
+
+.fib-step-num {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.fib-step-hex {
+  font-size: 0.5625rem;
+  line-height: 1.1;
+  opacity: 0.92;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * VdThemeCustomizer Fixes & Live Site Bridge ([data-primary] / [data-neutral])
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+.tc-neutral-grid,
+.customizer-neutral-colors {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 0.5rem !important;
+}
+
+.tc-neutral-swatch {
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+[data-theme="dark"] .tc-motion-btn.is-active {
+  background-color: var(--vd-gray-2);
+  border-color: var(--vd-gray-2);
+  color: var(--vd-gray-9);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .tc-motion-btn.is-active {
+    background-color: var(--vd-gray-2);
+    border-color: var(--vd-gray-2);
+    color: var(--vd-gray-9);
+  }
+}
+
+/* Vivid Fibonacci step-6 customizer tokens & swatch overrides */
+:root {
+  --vd-fib-red-6: #de003a;
+  --vd-fib-rose-6: #dc0052;
+  --vd-fib-orange-6: #ec6a00;
+  --vd-fib-amber-6: #e89800;
+  --vd-fib-yellow-6: #e3be00;
+  --vd-fib-lime-6: #80b700;
+  --vd-fib-green-6: #00ae45;
+  --vd-fib-emerald-6: #00a974;
+  --vd-fib-teal-6: #00a68f;
+  --vd-fib-cyan-6: #00a3aa;
+  --vd-fib-sky-6: #009ec7;
+  --vd-fib-blue-6: #0074e1;
+  --vd-fib-indigo-6: #4e5eff;
+  --vd-fib-violet-6: #893dfb;
+  --vd-fib-purple-6: #b819ce;
+  --vd-fib-grape-6: #b819ce;
+  --vd-fib-fuchsia-6: #c900ae;
+  --vd-fib-pink-6: #d30086;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="red"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="red"] .tc-fan-swatch {
+  background-color: var(--vd-fib-red-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="orange"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="orange"] .tc-fan-swatch {
+  background-color: var(--vd-fib-orange-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="amber"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="amber"] .tc-fan-swatch {
+  background-color: var(--vd-fib-amber-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="yellow"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="yellow"] .tc-fan-swatch {
+  background-color: var(--vd-fib-yellow-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="lime"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="lime"] .tc-fan-swatch {
+  background-color: var(--vd-fib-lime-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="green"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="green"] .tc-fan-swatch {
+  background-color: var(--vd-fib-green-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="emerald"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="emerald"] .tc-fan-swatch {
+  background-color: var(--vd-fib-emerald-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="teal"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="teal"] .tc-fan-swatch {
+  background-color: var(--vd-fib-teal-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="cyan"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="cyan"] .tc-fan-swatch {
+  background-color: var(--vd-fib-cyan-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="sky"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="sky"] .tc-fan-swatch {
+  background-color: var(--vd-fib-sky-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="blue"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="blue"] .tc-fan-swatch {
+  background-color: var(--vd-fib-blue-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="indigo"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="indigo"] .tc-fan-swatch {
+  background-color: var(--vd-fib-indigo-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="violet"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="violet"] .tc-fan-swatch {
+  background-color: var(--vd-fib-violet-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="purple"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="purple"] .tc-fan-swatch {
+  background-color: var(--vd-fib-purple-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="fuchsia"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="fuchsia"] .tc-fan-swatch {
+  background-color: var(--vd-fib-fuchsia-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="pink"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="pink"] .tc-fan-swatch {
+  background-color: var(--vd-fib-pink-6) !important;
+}
+
+[data-palette="fibonacci"] .tc-color-swatch[data-color="rose"],
+[data-palette="fibonacci"] .tc-fan-item[data-color="rose"] .tc-fan-swatch {
+  background-color: var(--vd-fib-rose-6) !important;
+}
+
+/* Live site primary & neutral customizer bridge */
+html[data-primary] {
+  --site-accent: var(--vd-primary-6, #1946ba);
+  --site-accent-subtle: color-mix(in srgb, var(--site-accent) 12%, transparent);
+  --vd3-color-interactive: var(--vd-primary-6, #1946ba);
+  --vd3-color-focus: var(--vd-primary-6, #1946ba);
+}
+
+html[data-theme="dark"][data-primary] {
+  --site-accent: var(--vd-primary-4, #ffd43b);
+  --site-accent-subtle: color-mix(in srgb, var(--site-accent) 16%, transparent);
+  --vd3-color-interactive: var(--vd-primary-4, #ffd43b);
+  --vd3-color-focus: var(--vd-primary-4, #ffd43b);
+}
+
+html[data-neutral] {
+  --vd3-color-gray-0: var(--vd-gray-0);
+  --vd3-color-gray-1: var(--vd-gray-1);
+  --vd3-color-gray-2: var(--vd-gray-2);
+  --vd3-color-gray-3: var(--vd-gray-3);
+  --vd3-color-gray-4: var(--vd-gray-4);
+  --vd3-color-gray-5: var(--vd-gray-5);
+  --vd3-color-gray-6: var(--vd-gray-6);
+  --vd3-color-gray-7: var(--vd-gray-7);
+  --vd3-color-gray-8: var(--vd-gray-8);
+  --vd3-color-gray-9: var(--vd-gray-9);
+}
