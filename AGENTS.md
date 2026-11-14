@@ -45,3 +45,10 @@ Consulted literature (cite, don't conform): IBM Carbon. Material 3 is excluded.
   - `pnpm typecheck` (`scripts/verify-typecheck.mjs`)
   - `pnpm test:a11y` (`scripts/verify-a11y.mjs`)
   - `pnpm test:e2e` (`tests/e2e/runner.mjs`)
+
+### 5. Figma Design System & MCP Integration
+- Canonical Figma Design file: **"VD3 Design System — UI Core & Components (v1.0)"** (`fileKey: ae5AMiPoVXuHdaRfawhyjh`, [open in Figma](https://www.figma.com/design/ae5AMiPoVXuHdaRfawhyjh)).
+- Machine-readable Figma binding manifest: [`tokens/figma.manifest.json`](./tokens/figma.manifest.json) (served live at [core.vanduo.dev/tokens/figma.manifest.json](https://core.vanduo.dev/tokens/figma.manifest.json)).
+- Generative plugin: **"VD3 Design System Builder & Token Sync"** (`id: 473bca03-b7e4-4a6f-9b5c-1a755a58af4b`, `version: 6d6824bf91a335c4313fcd249cdcea8d64dfd4d9`), launchable directly inside the file via [try-plugin URL](https://www.figma.com/design/ae5AMiPoVXuHdaRfawhyjh?try-tool-resource-content-id=473bca03-b7e4-4a6f-9b5c-1a755a58af4b&try-tool-resource-type=gen_tool).
+- Dual-mode variable collections aligned to DTCG tokens (`VD3 Color Primitives` with `Fibonacci` / `Open Color` modes, `VD3 Semantic Theme` with `Light` / `Dark` aliased modes, and `VD3 Scale & Proportions`) expose `WEB` code syntax `var(--vd-*)` and normative `--vd3-*` variable descriptions.
+- Any UI Kit change or MCP design-to-code lookup MUST resolve semantic tokens through `tokens/figma.manifest.json` + `tokens/vd3.tokens.json` rather than hardcoding hex or pixel literals.

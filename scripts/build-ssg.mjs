@@ -31,6 +31,7 @@ function copyIfExists(src, dest) {
 const tokensJsonSrc = path.join(rootDir, 'tokens', 'vd3.tokens.json');
 const tokensCssSrc = path.join(rootDir, 'tokens', 'tokens.css');
 const schemaJsonSrc = path.join(rootDir, 'tokens', 'schema.json');
+const figmaManifestSrc = path.join(rootDir, 'tokens', 'figma.manifest.json');
 
 copyIfExists(tokensJsonSrc, path.join(siteDir, 'public', 'tokens', 'vd3.tokens.json'));
 copyIfExists(tokensJsonSrc, path.join(distDir, 'tokens', 'vd3.tokens.json'));
@@ -38,6 +39,8 @@ copyIfExists(tokensCssSrc, path.join(siteDir, 'public', 'tokens', 'tokens.css'))
 copyIfExists(tokensCssSrc, path.join(distDir, 'tokens', 'tokens.css'));
 copyIfExists(schemaJsonSrc, path.join(siteDir, 'public', 'tokens', 'schema.json'));
 copyIfExists(schemaJsonSrc, path.join(distDir, 'tokens', 'schema.json'));
+copyIfExists(figmaManifestSrc, path.join(siteDir, 'public', 'tokens', 'figma.manifest.json'));
+copyIfExists(figmaManifestSrc, path.join(distDir, 'tokens', 'figma.manifest.json'));
 
 function escHtml(str) {
   return String(str)
@@ -642,6 +645,8 @@ const ssgBody = `
         <div class="hero-links">
           <a href="/tokens/vd3.tokens.json" class="vd-btn vd-btn--sm vd-btn--primary">DTCG Tokens JSON</a>
           <a href="/tokens/schema.json" class="vd-btn vd-btn--sm vd-btn--outline">Token Schema JSON</a>
+          <a href="/tokens/figma.manifest.json" class="vd-btn vd-btn--sm vd-btn--outline">Figma Manifest JSON</a>
+          <a href="https://www.figma.com/design/ae5AMiPoVXuHdaRfawhyjh" target="_blank" rel="noopener noreferrer" class="vd-btn vd-btn--sm vd-btn--outline">Figma UI Kit</a>
           <a href="#components" class="vd-btn vd-btn--sm vd-btn--outline">Jump to Components</a>
         </div>
       </section>

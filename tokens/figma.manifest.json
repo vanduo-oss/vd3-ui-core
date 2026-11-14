@@ -1,0 +1,241 @@
+{
+  "name": "vd3-ui-core-figma-manifest",
+  "specVersion": "1.0.0-draft",
+  "canonicalSite": "https://core.vanduo.dev/",
+  "tokensSource": "https://core.vanduo.dev/tokens/vd3.tokens.json",
+  "cssSource": "https://core.vanduo.dev/tokens/tokens.css",
+  "figma": {
+    "fileName": "VD3 Design System — UI Core & Components (v1.0)",
+    "fileKey": "ae5AMiPoVXuHdaRfawhyjh",
+    "fileUrl": "https://www.figma.com/design/ae5AMiPoVXuHdaRfawhyjh",
+    "planKey": "team::1550908432214286411",
+    "planTier": "pro"
+  },
+  "plugin": {
+    "id": "473bca03-b7e4-4a6f-9b5c-1a755a58af4b",
+    "name": "VD3 Design System Builder & Token Sync",
+    "version": "6d6824bf91a335c4313fcd249cdcea8d64dfd4d9",
+    "tryInFileUrl": "https://www.figma.com/design/ae5AMiPoVXuHdaRfawhyjh?try-tool-resource-content-id=473bca03-b7e4-4a6f-9b5c-1a755a58af4b&try-tool-resource-type=gen_tool",
+    "tryInNewFileUrl": "https://www.figma.com/file/new?try-tool-resource-content-id=473bca03-b7e4-4a6f-9b5c-1a755a58af4b&try-tool-resource-type=gen_tool&type=design&mode=design"
+  },
+  "seededBoards": {
+    "pageId": "0:1",
+    "pageName": "Page 1",
+    "boards": [
+      {
+        "nodeId": "2:2",
+        "name": "VD3-00-Cover-Basis-Contract",
+        "width": 1600,
+        "height": 989,
+        "specSection": "foundations/proportion.md"
+      },
+      {
+        "nodeId": "2:73",
+        "name": "VD3-01-Proportions-Fibonacci",
+        "width": 1600,
+        "height": 1100,
+        "specSection": "foundations/space.md"
+      },
+      {
+        "nodeId": "2:187",
+        "name": "VD3-02-Color-Type-Elevation",
+        "width": 1600,
+        "height": 1250,
+        "specSection": "foundations/color.md"
+      },
+      {
+        "nodeId": "2:519",
+        "name": "VD3-03-Core-Components-Light-Dark",
+        "width": 1600,
+        "height": 1320,
+        "specSection": "components/SPEC.md"
+      }
+    ]
+  },
+  "pluginPages": [
+    "00 · Cover & Quickstart",
+    "01 · Foundations — Proportions & Space",
+    "02 · Foundations — Color, Typography & Elevation",
+    "03 · Core Components"
+  ],
+  "variableCollections": {
+    "VD3 Color Primitives": {
+      "modes": ["Fibonacci", "Open Color"],
+      "type": "COLOR",
+      "families": [
+        "gray", "charcoal", "slate", "zinc", "neutral", "stone",
+        "red", "orange", "amber", "yellow", "lime", "green",
+        "emerald", "teal", "cyan", "sky", "blue", "indigo",
+        "violet", "purple", "fuchsia", "pink", "rose", "gold", "black"
+      ],
+      "steps": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "anchors": ["common/white", "common/black", "gray/10"],
+      "webCodeSyntaxPattern": "var(--vd-<family>-<step>)",
+      "normativeTokenPattern": "--vd3-color-primitive-<family>-<step>"
+    },
+    "VD3 Semantic Theme": {
+      "modes": ["Light", "Dark"],
+      "type": "COLOR",
+      "aliasedTo": "VD3 Color Primitives",
+      "variables": [
+        { "name": "bg/canvas", "light": "common/white", "dark": "gray/10", "web": "var(--vd-bg-primary)" },
+        { "name": "bg/layer", "light": "gray/0", "dark": "gray/9", "web": "var(--vd-bg-secondary)" },
+        { "name": "bg/layer-hover", "light": "gray/1", "dark": "gray/8", "web": "var(--vd-bg-tertiary)" },
+        { "name": "text/primary", "light": "gray/9", "dark": "gray/0", "web": "var(--vd-text-primary)" },
+        { "name": "text/secondary", "light": "gray/7", "dark": "gray/3", "web": "var(--vd-text-secondary)" },
+        { "name": "text/muted", "light": "gray/6", "dark": "gray/5", "web": "var(--vd-text-muted)" },
+        { "name": "text/on-primary", "light": "common/white", "dark": "gray/9", "web": "var(--vd-text-inverse)" },
+        { "name": "border/default", "light": "gray/3", "dark": "gray/7", "web": "var(--vd-border-color)" },
+        { "name": "border/subtle", "light": "gray/2", "dark": "gray/8", "web": "var(--vd-border-color-light)" },
+        { "name": "color/primary", "light": "blue/7", "dark": "gold/3", "web": "var(--vd-color-primary)" },
+        { "name": "color/primary-hover", "light": "blue/8", "dark": "gold/4", "web": "var(--vd-color-primary-hover)" },
+        { "name": "color/focus", "light": "gold/4", "dark": "gold/3", "web": "var(--vd-color-focus)" },
+        { "name": "color/success", "light": "green/7", "dark": "green/4", "web": "var(--vd-color-success)" },
+        { "name": "color/success-subtle", "light": "green/0", "dark": "green/9", "web": "var(--vd-success-0)" },
+        { "name": "color/warning", "light": "amber/7", "dark": "amber/4", "web": "var(--vd-color-warning)" },
+        { "name": "color/warning-subtle", "light": "amber/0", "dark": "amber/9", "web": "var(--vd-warning-0)" },
+        { "name": "color/danger", "light": "red/6", "dark": "red/4", "web": "var(--vd-color-danger)" },
+        { "name": "color/danger-subtle", "light": "red/0", "dark": "red/9", "web": "var(--vd-danger-0)" },
+        { "name": "color/info", "light": "teal/7", "dark": "teal/4", "web": "var(--vd-color-info)" },
+        { "name": "color/info-subtle", "light": "teal/0", "dark": "teal/9", "web": "var(--vd-info-0)" }
+      ]
+    },
+    "VD3 Scale & Proportions": {
+      "modes": ["Value"],
+      "type": "FLOAT",
+      "variables": [
+        "space/fib-1", "space/fib-2", "space/fib-3", "space/fib-5", "space/fib-8",
+        "space/fib-13", "space/fib-21", "space/fib-34", "space/fib-55", "space/fib-89", "space/fib-144",
+        "radius/fib-2", "radius/fib-3", "radius/fib-5", "radius/fib-8", "radius/fib-13", "radius/fib-21", "radius/full",
+        "line/hair", "line/thin", "line/regular", "line/thick",
+        "container/sm", "container/md", "container/lg", "container/xl", "container/2xl"
+      ]
+    }
+  },
+  "styles": {
+    "textStyles": [
+      "VD3/Display 4xl",
+      "VD3/Heading 3xl",
+      "VD3/Heading 2xl",
+      "VD3/Heading xl",
+      "VD3/Heading lg",
+      "VD3/Body md",
+      "VD3/Body sm",
+      "VD3/Caption xs",
+      "VD3/Code Mono"
+    ],
+    "effectStyles": [
+      "VD3/Shadow 1 (1-2)",
+      "VD3/Shadow 2 (2-3)",
+      "VD3/Shadow 3 (3-5)",
+      "VD3/Shadow 4 (8-13)",
+      "VD3/Shadow 5 (13-21)",
+      "VD3/Shadow 6 (21-34)",
+      "VD3/Focus Ring (Dual)"
+    ]
+  },
+  "components": [
+    {
+      "slug": "button",
+      "figmaComponentSet": "Button",
+      "cssClass": ".vd-btn",
+      "spec": "components/button/spec.md",
+      "variantProperties": {
+        "Variant": ["Primary", "Secondary", "Outline", "Ghost", "Danger"],
+        "Size": ["sm", "md", "lg"],
+        "State": ["Default", "Focus", "Disabled"]
+      }
+    },
+    {
+      "slug": "input",
+      "figmaComponentSet": "Input",
+      "cssClass": ".vd-input",
+      "spec": "components/input/spec.md",
+      "variantProperties": {
+        "State": ["Default", "Focus", "Invalid", "Disabled"]
+      }
+    },
+    {
+      "slug": "select",
+      "figmaComponentSet": "Select",
+      "cssClass": ".vd-select",
+      "spec": "components/select/spec.md",
+      "variantProperties": {
+        "State": ["Default", "Focus", "Disabled"]
+      }
+    },
+    {
+      "slug": "checkbox",
+      "figmaComponentSet": "Checkbox",
+      "cssClass": ".vd-checkbox",
+      "spec": "components/checkbox/spec.md",
+      "variantProperties": {
+        "Checked": ["False", "True"],
+        "State": ["Default", "Disabled"]
+      }
+    },
+    {
+      "slug": "radio",
+      "figmaComponentSet": "Radio",
+      "cssClass": ".vd-radio",
+      "spec": "components/radio/spec.md",
+      "variantProperties": {
+        "Selected": ["False", "True"]
+      }
+    },
+    {
+      "slug": "switch",
+      "figmaComponentSet": "Switch",
+      "cssClass": ".vd-switch",
+      "spec": "components/switch/spec.md",
+      "variantProperties": {
+        "Checked": ["False", "True"]
+      }
+    },
+    {
+      "slug": "badge",
+      "figmaComponentSet": "Badge",
+      "cssClass": ".vd-badge",
+      "spec": "components/badge/spec.md",
+      "variantProperties": {
+        "Variant": ["Primary", "Info", "Success", "Warning", "Danger"]
+      }
+    },
+    {
+      "slug": "alert",
+      "figmaComponentSet": "Alert",
+      "cssClass": ".vd-alert",
+      "spec": "components/alert/spec.md",
+      "variantProperties": {
+        "Variant": ["Info", "Success", "Warning", "Danger"]
+      }
+    },
+    {
+      "slug": "card",
+      "figmaComponentSet": "Card",
+      "cssClass": ".vd-card",
+      "spec": "components/card/spec.md",
+      "variantProperties": {
+        "Variant": ["Default", "Elevated"]
+      }
+    },
+    {
+      "slug": "tabs",
+      "figmaComponentSet": "Tabs",
+      "cssClass": ".vd-tabs",
+      "spec": "components/tabs/spec.md",
+      "variantProperties": {
+        "ActiveTab": ["1", "2"]
+      }
+    },
+    {
+      "slug": "dialog",
+      "figmaComponentSet": "Dialog",
+      "cssClass": ".vd-dialog",
+      "spec": "components/dialog/spec.md",
+      "variantProperties": {
+        "Size": ["sm (521px)"]
+      }
+    }
+  ]
+}

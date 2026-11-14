@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Spec & SSG Documentation Bible for vd3-ui-core.",
   "scripts": {
-    "predev": "mkdir -p public/tokens && cp ../tokens/vd3.tokens.json ../tokens/tokens.css ../tokens/schema.json public/tokens/",
+    "predev": "mkdir -p public/tokens && cp ../tokens/vd3.tokens.json ../tokens/tokens.css ../tokens/schema.json ../tokens/figma.manifest.json public/tokens/",
     "dev": "vite",
     "build": "vite build && node ../scripts/build-ssg.mjs",
     "preview": "vite preview",
