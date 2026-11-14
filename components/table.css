@@ -1,0 +1,129 @@
+/**
+ * VD3 UI CORE — Accessible Data Table (Feature #34)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AAA/AA, High-Contrast Data Presentation, Scope Semantics
+ */
+
+@layer vd3.components {
+  /* Scrollable Responsive Wrapper */
+  .vd-table-container {
+    overflow-x: auto;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch;
+    border-radius: var(--vd3-radius-fib-8, 0.5rem);
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    margin-block: var(--vd3-space-fib-13, 0.8125rem);
+  }
+
+  .vd-table-container:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow));
+  }
+
+  /* Base Data Table */
+  .vd-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-family: var(--vd3-font-family-sans, system-ui, sans-serif);
+    font-size: var(--vd3-font-size-base, 1rem);
+    line-height: var(--vd3-line-height-normal, 1.5);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    background-color: var(--vd3-color-canvas, #ffffff);
+  }
+
+  .vd-table-caption {
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+    color: var(--vd3-color-text-secondary, #495057);
+    padding: var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-8, 0.75rem);
+    text-align: left;
+    caption-side: bottom;
+  }
+
+  /* Header Cells */
+  .vd-table th {
+    font-weight: 600;
+    font-size: var(--vd3-font-size-xs, 0.75rem);
+    text-transform: uppercase;
+    letter-spacing: var(--vd3-tracking-widest, 0.1em);
+    color: var(--vd3-color-text-secondary, #495057);
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    padding: var(--vd3-space-fib-8, 0.75rem) var(--vd3-space-fib-13, 0.8125rem);
+    border-bottom: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-border, #dee2e6);
+    vertical-align: bottom;
+  }
+
+  /* Data Cells */
+  .vd-table td {
+    padding: var(--vd3-space-fib-8, 0.75rem) var(--vd3-space-fib-13, 0.8125rem);
+    border-bottom: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    vertical-align: middle;
+  }
+
+  /* Scope row headers in tbody */
+  .vd-table tbody th[scope="row"] {
+    font-size: var(--vd3-font-size-base, 1rem);
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: normal;
+    background-color: var(--vd3-color-canvas, #ffffff);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    border-bottom: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+  }
+
+  /* Striped Option */
+  .vd-table--striped tbody tr:nth-child(even),
+  .vd-table-striped tbody tr:nth-child(even) {
+    background-color: var(--vd3-color-layer, #f8f9fa);
+  }
+
+  /* Bordered Option */
+  .vd-table--bordered th,
+  .vd-table--bordered td,
+  .vd-table-bordered th,
+  .vd-table-bordered td {
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+  }
+
+  /* Interactive Hover Option */
+  .vd-table--hover tbody tr:hover,
+  .vd-table-hover tbody tr:hover {
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+    transition: background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  /* Compact Density */
+  .vd-table--compact th,
+  .vd-table--compact td,
+  .vd-table-sm th,
+  .vd-table-sm td {
+    padding: var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-8, 0.75rem);
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+  }
+
+  /* Sticky Header Option */
+  .vd-table--sticky-header th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: var(--vd3-color-layer, #f8f9fa);
+  }
+
+  /* Tabular Numbers & Numeric Alignment */
+  .vd-table [data-align="numeric"],
+  .vd-table-cell--numeric {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  [data-theme="dark"] .vd-table tbody th[scope="row"] {
+    background-color: var(--vd3-color-canvas, #212529);
+  }
+
+  [data-theme="dark"] .vd-table--sticky-header th {
+    background-color: var(--vd3-color-layer, #2b3035);
+  }
+}

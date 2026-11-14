@@ -1,0 +1,193 @@
+/**
+ * VD3 UI CORE — Pure Semantic Form Controls (Feature #30)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA/AAA, Modern CSS :user-invalid
+ */
+
+@layer vd3.components {
+  /* Layout Group */
+  .vd-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--vd3-space-fib-3, 0.375rem);
+    margin-block-end: var(--vd3-space-fib-13, 0.8125rem);
+  }
+
+  /* Label */
+  .vd-label {
+    display: block;
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+    font-weight: 600;
+    color: var(--vd3-color-text-primary, #1a1d20);
+    line-height: var(--vd3-line-height-tight, 1.236);
+  }
+
+  /* Text Inputs & Textareas */
+  .vd-input {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: var(--vd3-font-size-base, 1rem);
+    line-height: var(--vd3-line-height-tight, 1.236);
+    padding: var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-8, 0.75rem);
+    border: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-fib-5, 0.3125rem);
+    background-color: var(--vd3-color-canvas, #ffffff);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    transition:
+      border-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  .vd-textarea {
+    min-height: 80px;
+    resize: vertical;
+    line-height: var(--vd3-line-height-normal, 1.5);
+  }
+
+  /* Select */
+  .vd-select {
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: var(--vd3-font-size-base, 1rem);
+    line-height: var(--vd3-line-height-tight, 1.236);
+    padding: var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-34, 2.125rem) var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-8, 0.75rem);
+    border: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-fib-5, 0.3125rem);
+    background-color: var(--vd3-color-canvas, #ffffff);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23495057' d='M2.22 4.47a.75.75 0 0 1 1.06 0L6 7.19l2.72-2.72a.75.75 0 1 1 1.06 1.06L6.53 8.78a.75.75 0 0 1-1.06 0L2.22 5.53a.75.75 0 0 1 0-1.06Z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--vd3-space-fib-8, 0.75rem) center;
+    background-size: 12px;
+    cursor: pointer;
+    transition:
+      border-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  /* Checkbox & Radio */
+  .vd-checkbox,
+  .vd-radio {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    display: inline-grid;
+    place-content: center;
+    border: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-border, #dee2e6);
+    background-color: var(--vd3-color-canvas, #ffffff);
+    cursor: pointer;
+    margin: 0;
+    vertical-align: middle;
+    transition:
+      border-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  .vd-checkbox {
+    border-radius: var(--vd3-radius-fib-3, 0.1875rem);
+  }
+  .vd-radio {
+    border-radius: var(--vd3-radius-full, 9999rem);
+  }
+
+  .vd-checkbox:checked {
+    background-color: var(--vd3-color-focus, #fab005);
+    border-color: var(--vd3-color-focus, #fab005);
+  }
+  .vd-checkbox:checked::before {
+    content: "";
+    width: 10px;
+    height: 6px;
+    border-left: 2px solid var(--vd3-color-gray-1000, #1a1d20);
+    border-bottom: 2px solid var(--vd3-color-gray-1000, #1a1d20);
+    transform: rotate(-45deg) translate(1px, -1px);
+  }
+
+  .vd-radio:checked {
+    border-color: var(--vd3-color-focus, #fab005);
+  }
+  .vd-radio:checked::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: var(--vd3-radius-full, 9999rem);
+    background-color: var(--vd3-color-focus, #fab005);
+  }
+
+  /* Focus Visible (Dual Ring) */
+  .vd-input:focus-visible,
+  .vd-select:focus-visible,
+  .vd-checkbox:focus-visible,
+  .vd-radio:focus-visible {
+    outline: none;
+    border-color: var(--vd3-color-focus, #fab005);
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow));
+  }
+
+  /* User-Invalid Validation State */
+  .vd-input:user-invalid,
+  .vd-input[aria-invalid="true"],
+  .vd-select:user-invalid,
+  .vd-select[aria-invalid="true"] {
+    border-color: var(--vd3-color-critical, #fa5252);
+  }
+
+  .vd-input:user-invalid:focus-visible,
+  .vd-input[aria-invalid="true"]:focus-visible,
+  .vd-select:user-invalid:focus-visible,
+  .vd-select[aria-invalid="true"]:focus-visible {
+    outline: none;
+    border-color: var(--vd3-color-critical, #fa5252);
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-color-canvas),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-color-critical, #fa5252),
+      0 0 8px rgba(250, 82, 82, 0.4);
+  }
+
+  /* Disabled State */
+  .vd-input:disabled,
+  .vd-input[aria-disabled="true"],
+  .vd-select:disabled,
+  .vd-select[aria-disabled="true"],
+  .vd-checkbox:disabled,
+  .vd-checkbox[aria-disabled="true"],
+  .vd-radio:disabled,
+  .vd-radio[aria-disabled="true"] {
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    border-color: var(--vd3-color-border-subtle, #e9ecef);
+    color: var(--vd3-color-text-secondary, #495057);
+    cursor: not-allowed;
+    opacity: 0.618;
+  }
+
+  /* Helper & Error Microcopy */
+  .vd-help-text {
+    font-size: var(--vd3-font-size-xs, 0.75rem);
+    color: var(--vd3-color-text-secondary, #495057);
+    line-height: var(--vd3-line-height-normal, 1.5);
+  }
+
+  .vd-error-text {
+    font-size: var(--vd3-font-size-xs, 0.75rem);
+    color: var(--vd3-color-critical, #fa5252);
+    font-weight: 500;
+    line-height: var(--vd3-line-height-normal, 1.5);
+  }
+
+  [data-theme="dark"] .vd-error-text {
+    color: var(--vd3-color-critical, #ff8787);
+  }
+
+  [data-theme="dark"] .vd-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%23dee2e6' stroke-width='1.618' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
+  }
+}

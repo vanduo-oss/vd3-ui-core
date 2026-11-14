@@ -1,0 +1,408 @@
+/**
+ * VD3 UI CORE — Layout Primitives & Responsive Grid Engine
+ * Cascade Layer: @layer vd3.layout
+ * Mathematical DNA: Golden Ratio (phi ~ 1.6180339887), Fibonacci (Fn), Lucas (Ln)
+ * Class Basis: Class A (Golden splits, Fib grids, Containers) + Class B (12-Col, Breakpoints)
+ */
+
+@layer vd3.layout {
+
+  /* ==========================================================================
+     1. Containers (Lucas & Fibonacci - Class A)
+     ========================================================================== */
+  .vd-container {
+    inline-size: 100%;
+    max-inline-size: var(--vd3-container-lg, var(--vd-container-lg, 987px));
+    margin-inline: auto;
+    padding-inline: var(--vd3-space-fib-21, var(--vd-space-fib-21, 1.3125rem));
+    box-sizing: border-box;
+  }
+
+  .vd-container-sm {
+    max-inline-size: var(--vd3-container-sm, var(--vd-container-sm, 521px));
+  }
+
+  .vd-container-md {
+    max-inline-size: var(--vd3-container-md, var(--vd-container-md, 610px));
+  }
+
+  .vd-container-lg {
+    max-inline-size: var(--vd3-container-lg, var(--vd-container-lg, 987px));
+  }
+
+  .vd-container-xl {
+    max-inline-size: var(--vd3-container-xl, var(--vd-container-xl, 1364px));
+  }
+
+  .vd-container-2xl {
+    max-inline-size: var(--vd3-container-2xl, var(--vd-container-2xl, 1597px));
+  }
+
+  .vd-container-fluid {
+    max-inline-size: 100%;
+  }
+
+  @media (max-width: 768px) {
+    .vd-container {
+      padding-inline: var(--vd3-space-fib-13, var(--vd-space-fib-13, 0.8125rem));
+    }
+  }
+
+  /* ==========================================================================
+     2. Container Queries Contexts
+     ========================================================================== */
+  .vd-container-query,
+  .vd-cq {
+    container-type: inline-size;
+    container-name: vd-layout;
+  }
+
+  /* ==========================================================================
+     3. Golden Ratio Layout Splits (Feature #13 - Class A)
+     ========================================================================== */
+  .vd-split-golden,
+  .vd-layout-golden {
+    display: grid;
+    grid-template-columns: minmax(0, 1.618fr) minmax(0, 1fr);
+    gap: var(--vd-grid-gap, var(--vd3-space-fib-21, var(--vd-space-fib-21, 1.3125rem)));
+    inline-size: 100%;
+    box-sizing: border-box;
+  }
+
+  .vd-split-golden-rev,
+  .vd-layout-golden-rev {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.618fr);
+    gap: var(--vd-grid-gap, var(--vd3-space-fib-21, var(--vd-space-fib-21, 1.3125rem)));
+    inline-size: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Explicit Child Segment Roles */
+  .vd-split-major {
+    min-inline-size: 0;
+    min-width: 0;
+  }
+
+  .vd-split-minor {
+    min-inline-size: 0;
+    min-width: 0;
+  }
+
+  /* Flexbox Split Fallback */
+  .vd-split-flex {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--vd-grid-gap, var(--vd3-space-fib-21, var(--vd-space-fib-21, 1.3125rem)));
+  }
+
+  .vd-split-flex > .vd-split-major {
+    flex: 1.618 1 0%;
+  }
+
+  .vd-split-flex > .vd-split-minor {
+    flex: 1 1 0%;
+  }
+
+  /* Responsive Stacking below Tablet (768px) */
+  @media (max-width: 768px) {
+    .vd-split-golden,
+    .vd-split-golden-rev,
+    .vd-layout-golden,
+    .vd-layout-golden-rev {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--vd-grid-gap, var(--vd3-space-fib-13, var(--vd-space-fib-13, 0.8125rem)));
+    }
+
+    .vd-split-flex {
+      flex-direction: column;
+      gap: var(--vd-grid-gap, var(--vd3-space-fib-13, var(--vd-space-fib-13, 0.8125rem)));
+    }
+  }
+
+  /* Container Query Stacking below 768px */
+  @container (max-width: 768px) {
+    .vd-split-golden,
+    .vd-split-golden-rev,
+    .vd-layout-golden,
+    .vd-layout-golden-rev {
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--vd-grid-gap, var(--vd3-space-fib-13, var(--vd-space-fib-13, 0.8125rem)));
+    }
+  }
+
+  /* ==========================================================================
+     4. Fibonacci Column Grids (Feature #14 - Class A)
+     ========================================================================== */
+  .vd-grid-1,
+  .vd-grid-fib-1 {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--vd-grid-gap, var(--vd3-space-fib-13, var(--vd-space-fib-13, 0.8125rem)));
+    inline-size: 100%;
+    box-sizing: border-box;
+  }
+
+  .vd-grid-2,
+  .vd-grid-fib-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--vd-grid-gap, var(--vd3-space-fib-13, var(--vd-space-fib-13, 0.8125rem)));
+    inline-size: 100%;
+    box-sizing: border-box;
+  }
+
+  .vd-grid-3,
+  .vd-grid-fib-3 {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--vd-grid-gap, var(--vd3-space-fib-21, var(--vd-space-fib-21, 1.3125rem)));
+    inline-size: 100%;
+    box-sizing: border-box;
+  }
+
+  .vd-grid-5,
+  .vd-grid-fib-5 {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--vd-grid-gap, var(--vd3-space-fib-13, var(--vd-space-fib-13, 0.8125rem)));
+    inline-size: 100%;
+    box-sizing: border-box;
+  }
+
+  .vd-grid-8,
+  .vd-grid-fib-8 {
+    display: grid;
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: var(--vd-grid-gap, var(--vd3-space-fib-8, var(--vd-space-fib-8, 0.75rem)));
+    inline-size: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Auto-Fit and Auto-Fill Grids */
+  .vd-grid-auto-fit {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--vd-grid-min-col, 233px)), 1fr));
+    gap: var(--vd-grid-gap, var(--vd3-space-fib-21, var(--vd-space-fib-21, 1.3125rem)));
+    inline-size: 100%;
+    box-sizing: border-box;
+  }
+
+  .vd-grid-auto-fill {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--vd-grid-min-col, 233px)), 1fr));
+    gap: var(--vd-grid-gap, var(--vd3-space-fib-21, var(--vd-space-fib-21, 1.3125rem)));
+    inline-size: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Fibonacci Min-Width Modifiers for Auto Grids */
+  .vd-grid-min-89  { --vd-grid-min-col: 89px; }
+  .vd-grid-min-144 { --vd-grid-min-col: 144px; }
+  .vd-grid-min-233 { --vd-grid-min-col: 233px; }
+  .vd-grid-min-377 { --vd-grid-min-col: 377px; }
+  .vd-grid-min-610 { --vd-grid-min-col: 610px; }
+
+  /* Responsive Collapse for Fibonacci Fixed Grids */
+  @media (max-width: 992px) {
+    .vd-grid-8,
+    .vd-grid-fib-8 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .vd-grid-5,
+    .vd-grid-fib-5 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 768px) {
+    .vd-grid-8,
+    .vd-grid-fib-8 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--vd3-space-fib-8, 0.75rem);
+    }
+    .vd-grid-5,
+    .vd-grid-fib-5 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--vd3-space-fib-13, 0.8125rem);
+    }
+    .vd-grid-3,
+    .vd-grid-fib-3 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--vd3-space-fib-13, 0.8125rem);
+    }
+    .vd-grid-2,
+    .vd-grid-fib-2 {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 576px) {
+    .vd-grid-8,
+    .vd-grid-fib-8,
+    .vd-grid-5,
+    .vd-grid-fib-5,
+    .vd-grid-3,
+    .vd-grid-fib-3 {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  /* ==========================================================================
+     5. 12-Column Conventional Grid Engine (Feature #15 - Class B)
+     ========================================================================== */
+  .vd-grid-12 {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: var(--vd-grid-gap, var(--vd3-space-fib-13, var(--vd-space-fib-13, 0.8125rem)));
+    inline-size: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Column Spans */
+  .vd-col-span-1  { grid-column: span 1 / span 1; }
+  .vd-col-span-2  { grid-column: span 2 / span 2; }
+  .vd-col-span-3  { grid-column: span 3 / span 3; }
+  .vd-col-span-4  { grid-column: span 4 / span 4; }
+  .vd-col-span-5  { grid-column: span 5 / span 5; }
+  .vd-col-span-6  { grid-column: span 6 / span 6; }
+  .vd-col-span-7  { grid-column: span 7 / span 7; }
+  .vd-col-span-8  { grid-column: span 8 / span 8; }
+  .vd-col-span-9  { grid-column: span 9 / span 9; }
+  .vd-col-span-10 { grid-column: span 10 / span 10; }
+  .vd-col-span-11 { grid-column: span 11 / span 11; }
+  .vd-col-span-12 { grid-column: span 12 / span 12; }
+  .vd-col-span-full { grid-column: 1 / -1; }
+
+  /* Column Offsets */
+  .vd-col-offset-0  { grid-column-start: auto; }
+  .vd-col-offset-1  { grid-column-start: 2; }
+  .vd-col-offset-2  { grid-column-start: 3; }
+  .vd-col-offset-3  { grid-column-start: 4; }
+  .vd-col-offset-4  { grid-column-start: 5; }
+  .vd-col-offset-5  { grid-column-start: 6; }
+  .vd-col-offset-6  { grid-column-start: 7; }
+  .vd-col-offset-7  { grid-column-start: 8; }
+  .vd-col-offset-8  { grid-column-start: 9; }
+  .vd-col-offset-9  { grid-column-start: 10; }
+  .vd-col-offset-10 { grid-column-start: 11; }
+  .vd-col-offset-11 { grid-column-start: 12; }
+
+  /* Responsive Column Spans - sm (>= 576px) */
+  @media (min-width: 576px) {
+    .vd-col-span-sm-1  { grid-column: span 1 / span 1; }
+    .vd-col-span-sm-2  { grid-column: span 2 / span 2; }
+    .vd-col-span-sm-3  { grid-column: span 3 / span 3; }
+    .vd-col-span-sm-4  { grid-column: span 4 / span 4; }
+    .vd-col-span-sm-5  { grid-column: span 5 / span 5; }
+    .vd-col-span-sm-6  { grid-column: span 6 / span 6; }
+    .vd-col-span-sm-7  { grid-column: span 7 / span 7; }
+    .vd-col-span-sm-8  { grid-column: span 8 / span 8; }
+    .vd-col-span-sm-9  { grid-column: span 9 / span 9; }
+    .vd-col-span-sm-10 { grid-column: span 10 / span 10; }
+    .vd-col-span-sm-11 { grid-column: span 11 / span 11; }
+    .vd-col-span-sm-12 { grid-column: span 12 / span 12; }
+  }
+
+  /* Responsive Column Spans - md (>= 768px) */
+  @media (min-width: 768px) {
+    .vd-col-span-md-1  { grid-column: span 1 / span 1; }
+    .vd-col-span-md-2  { grid-column: span 2 / span 2; }
+    .vd-col-span-md-3  { grid-column: span 3 / span 3; }
+    .vd-col-span-md-4  { grid-column: span 4 / span 4; }
+    .vd-col-span-md-5  { grid-column: span 5 / span 5; }
+    .vd-col-span-md-6  { grid-column: span 6 / span 6; }
+    .vd-col-span-md-7  { grid-column: span 7 / span 7; }
+    .vd-col-span-md-8  { grid-column: span 8 / span 8; }
+    .vd-col-span-md-9  { grid-column: span 9 / span 9; }
+    .vd-col-span-md-10 { grid-column: span 10 / span 10; }
+    .vd-col-span-md-11 { grid-column: span 11 / span 11; }
+    .vd-col-span-md-12 { grid-column: span 12 / span 12; }
+  }
+
+  /* Responsive Column Spans - lg (>= 992px) */
+  @media (min-width: 992px) {
+    .vd-col-span-lg-1  { grid-column: span 1 / span 1; }
+    .vd-col-span-lg-2  { grid-column: span 2 / span 2; }
+    .vd-col-span-lg-3  { grid-column: span 3 / span 3; }
+    .vd-col-span-lg-4  { grid-column: span 4 / span 4; }
+    .vd-col-span-lg-5  { grid-column: span 5 / span 5; }
+    .vd-col-span-lg-6  { grid-column: span 6 / span 6; }
+    .vd-col-span-lg-7  { grid-column: span 7 / span 7; }
+    .vd-col-span-lg-8  { grid-column: span 8 / span 8; }
+    .vd-col-span-lg-9  { grid-column: span 9 / span 9; }
+    .vd-col-span-lg-10 { grid-column: span 10 / span 10; }
+    .vd-col-span-lg-11 { grid-column: span 11 / span 11; }
+    .vd-col-span-lg-12 { grid-column: span 12 / span 12; }
+  }
+
+  /* Responsive Column Spans - xl (>= 1200px) */
+  @media (min-width: 1200px) {
+    .vd-col-span-xl-1  { grid-column: span 1 / span 1; }
+    .vd-col-span-xl-2  { grid-column: span 2 / span 2; }
+    .vd-col-span-xl-3  { grid-column: span 3 / span 3; }
+    .vd-col-span-xl-4  { grid-column: span 4 / span 4; }
+    .vd-col-span-xl-5  { grid-column: span 5 / span 5; }
+    .vd-col-span-xl-6  { grid-column: span 6 / span 6; }
+    .vd-col-span-xl-7  { grid-column: span 7 / span 7; }
+    .vd-col-span-xl-8  { grid-column: span 8 / span 8; }
+    .vd-col-span-xl-9  { grid-column: span 9 / span 9; }
+    .vd-col-span-xl-10 { grid-column: span 10 / span 10; }
+    .vd-col-span-xl-11 { grid-column: span 11 / span 11; }
+    .vd-col-span-xl-12 { grid-column: span 12 / span 12; }
+  }
+
+  /* Responsive Column Spans - 2xl (>= 1400px) */
+  @media (min-width: 1400px) {
+    .vd-col-span-2xl-1  { grid-column: span 1 / span 1; }
+    .vd-col-span-2xl-2  { grid-column: span 2 / span 2; }
+    .vd-col-span-2xl-3  { grid-column: span 3 / span 3; }
+    .vd-col-span-2xl-4  { grid-column: span 4 / span 4; }
+    .vd-col-span-2xl-5  { grid-column: span 5 / span 5; }
+    .vd-col-span-2xl-6  { grid-column: span 6 / span 6; }
+    .vd-col-span-2xl-7  { grid-column: span 7 / span 7; }
+    .vd-col-span-2xl-8  { grid-column: span 8 / span 8; }
+    .vd-col-span-2xl-9  { grid-column: span 9 / span 9; }
+    .vd-col-span-2xl-10 { grid-column: span 10 / span 10; }
+    .vd-col-span-2xl-11 { grid-column: span 11 / span 11; }
+    .vd-col-span-2xl-12 { grid-column: span 12 / span 12; }
+  }
+
+  /* Optional Stacking Modifiers for 12-Column Grids */
+  @media (max-width: 768px) {
+    .vd-grid-12.vd-grid-stack-md > * {
+      grid-column: span 12 / span 12;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .vd-grid-12.vd-grid-stack-sm > * {
+      grid-column: span 12 / span 12;
+    }
+  }
+
+  /* ==========================================================================
+     6. Fibonacci Gap Utility Classes
+     ========================================================================== */
+  .vd-gap-fib-1,  .vd-gap-1  { gap: var(--vd3-space-fib-1, var(--vd-space-fib-1, 0.125rem)); }
+  .vd-gap-fib-2,  .vd-gap-2  { gap: var(--vd3-space-fib-2, var(--vd-space-fib-2, 0.25rem)); }
+  .vd-gap-fib-3,  .vd-gap-3  { gap: var(--vd3-space-fib-3, var(--vd-space-fib-3, 0.375rem)); }
+  .vd-gap-fib-5,  .vd-gap-5  { gap: var(--vd3-space-fib-5, var(--vd-space-fib-5, 0.5rem)); }
+  .vd-gap-fib-8,  .vd-gap-8  { gap: var(--vd3-space-fib-8, var(--vd-space-fib-8, 0.75rem)); }
+  .vd-gap-fib-13, .vd-gap-13 { gap: var(--vd3-space-fib-13, var(--vd-space-fib-13, 0.8125rem)); }
+  .vd-gap-fib-21, .vd-gap-21 { gap: var(--vd3-space-fib-21, var(--vd-space-fib-21, 1.3125rem)); }
+  .vd-gap-fib-34, .vd-gap-34 { gap: var(--vd3-space-fib-34, var(--vd-space-fib-34, 2.125rem)); }
+  .vd-gap-fib-55, .vd-gap-55 { gap: var(--vd3-space-fib-55, var(--vd-space-fib-55, 3.4375rem)); }
+
+  /* ==========================================================================
+     7. Golden Aspect Ratio Utilities (Feature #12 - Class A)
+     ========================================================================== */
+  .vd-aspect-golden {
+    aspect-ratio: var(--vd3-aspect-golden, 1.618 / 1);
+  }
+
+  .vd-aspect-golden-portrait {
+    aspect-ratio: var(--vd3-aspect-golden-portrait, 1 / 1.618);
+  }
+
+}

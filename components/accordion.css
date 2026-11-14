@@ -1,0 +1,95 @@
+/**
+ * VD3 UI CORE — Native Disclosure / Accordion Component (Feature #33)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: Zero-JS Native Browser A11y, W3C ARIA APG Disclosure
+ */
+
+@layer vd3.components {
+  .vd-accordion {
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-fib-5, 0.3125rem);
+    background-color: var(--vd3-color-canvas, #ffffff);
+    overflow: hidden;
+    margin-block-end: var(--vd3-space-fib-8, 0.75rem);
+    transition: border-color var(--vd3-duration-144, 144ms) var(--vd3-ease-out);
+  }
+
+  .vd-accordion-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--vd3-space-fib-13, 0.8125rem);
+    padding: var(--vd3-space-fib-13, 0.8125rem) var(--vd3-space-fib-21, 1.3125rem);
+    font-size: var(--vd3-font-size-base, 1rem);
+    font-weight: 600;
+    line-height: var(--vd3-line-height-tight, 1.236);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition:
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      color var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  /* Suppress default triangle markers */
+  .vd-accordion-summary::-webkit-details-marker {
+    display: none;
+  }
+  .vd-accordion-summary::marker {
+    display: none;
+    content: "";
+  }
+
+  .vd-accordion-summary:hover {
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+  }
+
+  /* Dual-Ring Focus on Summary */
+  .vd-accordion-summary:focus-visible {
+    outline: none;
+    box-shadow:
+      inset 0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-color-canvas, #ffffff),
+      inset 0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-color-focus, #fab005);
+  }
+
+  /* Custom Animated Chevron */
+  .vd-accordion-icon,
+  .vd-accordion-summary::after {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-right: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-text-secondary, #495057);
+    border-bottom: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-text-secondary, #495057);
+    transform: rotate(45deg);
+    transition: transform var(--vd3-duration-144, 144ms) var(--vd3-ease-out);
+    flex-shrink: 0;
+  }
+
+  .vd-accordion[open] > .vd-accordion-summary .vd-accordion-icon,
+  .vd-accordion[open] > .vd-accordion-summary::after {
+    transform: rotate(-135deg);
+  }
+
+  /* Content Body */
+  .vd-accordion-content {
+    padding: var(--vd3-space-fib-21, 1.3125rem);
+    border-top: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border-subtle, #e9ecef);
+    color: var(--vd3-color-text-secondary, #495057);
+    font-size: var(--vd3-font-size-base, 1rem);
+    line-height: var(--vd3-line-height-relaxed, 1.618);
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-accordion-icon,
+    .vd-accordion-summary::after {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-accordion-icon,
+  [data-motion="reduce"] .vd-accordion-summary::after {
+    transition: none !important;
+  }
+}

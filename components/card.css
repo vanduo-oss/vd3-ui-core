@@ -1,0 +1,171 @@
+/**
+ * VD3 UI CORE — Golden Card Surface Component (Feature #29)
+ * Cascade Layer: @layer vd3.components
+ * Mathematical DNA: Golden Ratio (phi ~ 1.618), Fibonacci Spacing, C-02 Frosted Glass
+ */
+
+@layer vd3.components {
+  /* Base Card Container */
+  .vd-card {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-sizing: border-box;
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-fib-8, 0.5rem);
+    box-shadow: var(--vd3-shadow-1);
+    overflow: hidden;
+    padding: var(--vd3-space-fib-21, 1.3125rem);
+    transition:
+      transform var(--vd3-duration-base, 233ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-base, 233ms) var(--vd3-ease-out),
+      border-color var(--vd3-duration-base, 233ms) var(--vd3-ease-out);
+  }
+
+  /* Reset padding when child sections are present */
+  .vd-card:has(.vd-card-header, .vd-card-body, .vd-card-footer, .vd-card-image) {
+    padding: 0;
+  }
+
+  /* Golden Proportions */
+  .vd-card--golden,
+  .vd-card-golden {
+    aspect-ratio: var(--vd3-aspect-golden, 1.618 / 1);
+  }
+
+  .vd-card--golden-portrait,
+  .vd-card-golden-portrait {
+    aspect-ratio: var(--vd3-aspect-golden-portrait, 1 / 1.618);
+  }
+
+  /* Padding Scale Modifiers */
+  .vd-card--compact,
+  .vd-card-compact {
+    padding: var(--vd3-space-fib-13, 0.8125rem);
+  }
+
+  .vd-card--spacious,
+  .vd-card-spacious {
+    padding: var(--vd3-space-fib-34, 2.125rem);
+  }
+
+  /* Elevated Variant */
+  .vd-card--elevated,
+  .vd-card-elevated {
+    box-shadow: var(--vd3-shadow-2);
+  }
+
+  /* Frosted Glass Variant (C-02 Convergence Zone) */
+  .vd-card--glass,
+  .vd-card-glass {
+    background-color: var(--vd3-color-layer, #f8f9fa);
+  }
+
+  @supports (backdrop-filter: blur(10px)) or (-webkit-backdrop-filter: blur(10px)) {
+    .vd-card--glass,
+    .vd-card-glass {
+      background-color: rgba(var(--vd3-color-canvas-rgb, 255, 255, 255), var(--vd3-glass-tint-lg, 0.21));
+      backdrop-filter: blur(var(--vd3-glass-blur-lg, 20px)) saturate(var(--vd3-glass-saturate-lg, 162%));
+      -webkit-backdrop-filter: blur(var(--vd3-glass-blur-lg, 20px)) saturate(var(--vd3-glass-saturate-lg, 162%));
+      border-color: rgba(255, 255, 255, 0.34);
+      box-shadow: var(--vd3-shadow-3);
+    }
+
+    [data-theme="dark"] .vd-card--glass,
+    [data-theme="dark"] .vd-card-glass {
+      background-color: rgba(var(--vd3-color-canvas-rgb, 33, 37, 41), 0.68);
+      border-color: rgba(255, 255, 255, 0.13);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.13), var(--vd3-shadow-3);
+    }
+  }
+
+  /* Interactive Hover Elevation */
+  .vd-card--interactive,
+  .vd-card-interactive,
+  a.vd-card,
+  button.vd-card {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .vd-card--interactive:hover,
+  .vd-card-interactive:hover,
+  a.vd-card:hover,
+  button.vd-card:hover {
+    transform: translateY(calc(-1 * var(--vd3-space-fib-1, 2px)));
+    box-shadow: var(--vd3-shadow-4), 0 0 var(--vd3-glow-fib-13, 0.8125rem) var(--vd3-color-focus-glow);
+    border-color: var(--vd3-color-focus, #fab005);
+  }
+
+  .vd-card--interactive:focus-visible,
+  .vd-card-interactive:focus-visible,
+  a.vd-card:focus-visible,
+  button.vd-card:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow));
+  }
+
+  /* Sub-element Anatomy */
+  .vd-card-header {
+    padding: var(--vd3-space-fib-21, 1.3125rem) var(--vd3-space-fib-21, 1.3125rem) var(--vd3-space-fib-13, 0.8125rem);
+  }
+
+  .vd-card-title {
+    margin: 0;
+    font-size: var(--vd3-font-size-xl, 1.25rem);
+    line-height: var(--vd3-line-height-snug, 1.382);
+    font-weight: 600;
+    color: var(--vd3-color-text-primary, #1a1d20);
+  }
+
+  .vd-card-subtitle {
+    display: block;
+    margin-top: var(--vd3-space-fib-2, 0.25rem);
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+    color: var(--vd3-color-text-secondary, #495057);
+  }
+
+  .vd-card-body {
+    padding: var(--vd3-space-fib-13, 0.8125rem) var(--vd3-space-fib-21, 1.3125rem);
+    flex: 1 1 auto;
+    font-size: var(--vd3-font-size-base, 1rem);
+    line-height: var(--vd3-line-height-normal, 1.5);
+  }
+
+  .vd-card-footer {
+    padding: var(--vd3-space-fib-13, 0.8125rem) var(--vd3-space-fib-21, 1.3125rem) var(--vd3-space-fib-21, 1.3125rem);
+    display: flex;
+    align-items: center;
+    gap: var(--vd3-space-fib-8, 0.75rem);
+    border-top: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border-subtle, var(--vd3-color-border, #dee2e6));
+  }
+
+  .vd-card-image {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .vd-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-card {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-card {
+    transition: none !important;
+    transform: none !important;
+  }
+}

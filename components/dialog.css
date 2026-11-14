@@ -1,0 +1,134 @@
+/**
+ * VD3 UI CORE — Native Dialog Component (Feature #28)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: W3C ARIA APG Dialog (Modal) Pattern, WCAG 2.1/2.2 AA
+ */
+
+@layer vd3.components {
+  .vd-dialog {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    padding: var(--vd3-space-fib-21, 1.3125rem);
+    max-width: var(--vd3-container-sm, 521px);
+    width: calc(100% - 2 * var(--vd3-space-fib-21, 1.3125rem));
+    max-height: calc(100vh - 2 * var(--vd3-space-fib-34, 2.125rem));
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-fib-8, 0.5rem);
+    background-color: var(--vd3-color-canvas, #ffffff);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    box-shadow: var(--vd3-shadow-4);
+    z-index: var(--vd3-z-modal, 1050);
+    box-sizing: border-box;
+    overflow: auto;
+
+    /* Discrete entrance/exit animation */
+    opacity: 0;
+    transform: scale(0.95);
+    transition:
+      opacity var(--vd3-duration-233, 233ms) var(--vd3-ease-out),
+      transform var(--vd3-duration-233, 233ms) var(--vd3-ease-out),
+      overlay var(--vd3-duration-233, 233ms) allow-discrete,
+      display var(--vd3-duration-233, 233ms) allow-discrete;
+  }
+
+  .vd-dialog--md,
+  .vd-dialog-md {
+    max-width: var(--vd3-container-md, 610px);
+  }
+
+  .vd-dialog[open] {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @starting-style {
+    .vd-dialog[open] {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  /* Frosted Glass Backdrop (C-02 Convergence Zone Glass 4) */
+  .vd-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(var(--vd3-glass-blur-xl, 26px)) saturate(162%);
+    -webkit-backdrop-filter: blur(var(--vd3-glass-blur-xl, 26px)) saturate(162%);
+    opacity: 0;
+    transition:
+      opacity var(--vd3-duration-233, 233ms) var(--vd3-ease-out),
+      backdrop-filter var(--vd3-duration-233, 233ms) var(--vd3-ease-out),
+      overlay var(--vd3-duration-233, 233ms) allow-discrete,
+      display var(--vd3-duration-233, 233ms) allow-discrete;
+  }
+
+  .vd-dialog[open]::backdrop {
+    opacity: 1;
+  }
+
+  @starting-style {
+    .vd-dialog[open]::backdrop {
+      opacity: 0;
+    }
+  }
+
+  [data-theme="dark"] .vd-dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.68);
+    backdrop-filter: blur(var(--vd3-glass-blur-xl, 26px)) saturate(200%);
+    -webkit-backdrop-filter: blur(var(--vd3-glass-blur-xl, 26px)) saturate(200%);
+  }
+
+  /* Internal Anatomy */
+  .vd-dialog__header,
+  .vd-dialog-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--vd3-space-fib-13, 0.8125rem);
+    margin-block-end: var(--vd3-space-fib-13, 0.8125rem);
+  }
+
+  .vd-dialog__title,
+  .vd-dialog-title {
+    margin: 0;
+    font-size: var(--vd3-font-size-xl-static, 1.25rem);
+    line-height: var(--vd3-line-height-tight, 1.236);
+    font-weight: 600;
+    color: var(--vd3-color-text-primary, #1a1d20);
+  }
+
+  .vd-dialog__close,
+  .vd-dialog-close {
+    margin-inline-start: auto;
+  }
+
+  .vd-dialog__body,
+  .vd-dialog-body {
+    margin-block-end: var(--vd3-space-fib-21, 1.3125rem);
+    color: var(--vd3-color-text-secondary, #495057);
+    font-size: var(--vd3-font-size-base, 1rem);
+    line-height: var(--vd3-line-height-relaxed, 1.618);
+  }
+
+  .vd-dialog__footer,
+  .vd-dialog-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--vd3-space-fib-8, 0.75rem);
+    flex-wrap: wrap;
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-dialog,
+    .vd-dialog::backdrop {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-dialog,
+  [data-motion="reduce"] .vd-dialog::backdrop {
+    transition: none !important;
+    transform: none !important;
+  }
+}

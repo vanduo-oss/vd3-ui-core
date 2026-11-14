@@ -1,0 +1,21 @@
+/**
+ * VD3 UI CORE — Components Master Index
+ * Layer Order: @layer vd3.tokens, vd3.reset, vd3.base, vd3.layout, vd3.components;
+ */
+
+@layer vd3.tokens, vd3.reset, vd3.base, vd3.layout, vd3.components;
+
+/* 1. Golden Ratio Layout Primitives (#13-16) */
+@import './layout.css' layer(vd3.layout);
+
+/* 2. Interactive & Surface Components (#27-36) */
+@import './button.css' layer(vd3.components);
+@import './dialog.css' layer(vd3.components);
+@import './card.css' layer(vd3.components);
+@import './form.css' layer(vd3.components);
+@import './badge.css' layer(vd3.components);
+@import './navbar.css' layer(vd3.components);
+@import './accordion.css' layer(vd3.components);
+@import './table.css' layer(vd3.components);
+@import './code.css' layer(vd3.components);
+@import './toast.css' layer(vd3.components);
