@@ -1,6 +1,6 @@
 # Glassmorphism & The Convergence Zone
 
-Status: stable · Spec: 2.0.0-draft
+Status: stable · Spec: 1.0.0-draft
 
 Frosted glass surfaces (`backdrop-filter: blur(...)`) in VD3 UI CORE deliver depth, optical layering, and contextual transparency while strictly adhering to hardware performance constraints.
 

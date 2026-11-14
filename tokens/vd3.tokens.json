@@ -1,7 +1,7 @@
 {
-  "$description": "vd3 design tokens — NORMATIVE single source of truth. W3C DTCG format. VALUES AUDITED against @vanduo-oss/vd3@1.9.0 (dist/tokens.json, vd3-core.css, vd3.css) — see docs/token-audit-v2.md. Structure and naming are binding; public CSS names follow v1.9 verbatim (see conventions/naming.md mapping table). Generated CSS in library repos MUST match this file (CI check). Basis classes: A = phi/Fibonacci/Lucas-derived, B = conventional-by-design (written reason), C = registered exception (foundations/proportion.md registry).",
+  "$description": "vd3 design tokens — NORMATIVE single source of truth. W3C DTCG format. VALUES AUDITED against @vanduo-oss/vd3@1.9.0 (dist/tokens.json, vd3-core.css, vd3.css) — see docs/token-audit.md. Structure and naming are binding; public CSS names follow v1.9 verbatim (see conventions/naming.md mapping table). Generated CSS in library repos MUST match this file (CI check). Basis classes: A = phi/Fibonacci/Lucas-derived, B = conventional-by-design (written reason), C = registered exception (foundations/proportion.md registry).",
   "$vd3": {
-    "spec": "vd3-ui-core@2.0.0-draft",
+    "spec": "vd3-ui-core@1.0.0-draft",
     "auditedAgainst": "@vanduo-oss/vd3@1.9.0"
   },
   "math": {
@@ -82,7 +82,7 @@
       "text-primary":   { "$value": "{color.primitive.gray.1000}", "$description": "v1.9 --vd-text-primary", "$extensions": { "vd3": { "class": "B", "reason": "WCAG AAA compliant text color" } } },
       "text-secondary": { "$value": "{color.primitive.gray.7}",  "$description": "v1.9 --vd-text-secondary / --vd-text-muted", "$extensions": { "vd3": { "class": "B", "reason": "WCAG AA compliant supporting text" } } },
       "border":         { "$value": "{color.primitive.gray.3}",  "$description": "v1.9 --vd-border-color", "$extensions": { "vd3": { "class": "B", "reason": "Structural boundary rule" } } },
-      "focus":          { "$value": "{color.primitive.gold.6}",  "$description": "v1.9 --vd-color-primary (default light primary = amber). v1.9 has NO dedicated focus-geometry tokens — ring width/offset are the F3-7 gap, new in v2.", "$extensions": { "vd3": { "class": "B", "reason": "High-visibility focus ring indicator" } } },
+      "focus":          { "$value": "{color.primitive.gold.6}",  "$description": "v1.9 --vd-color-primary (default light primary = amber). v1.9 has NO dedicated focus-geometry tokens — ring width/offset are the F3-7 gap, new in 1.0.", "$extensions": { "vd3": { "class": "B", "reason": "High-visibility focus ring indicator" } } },
       "interactive":    { "$value": "{color.primitive.gold.7}",  "$description": "v1.9 --vd-color-primary-hover/dark", "$extensions": { "vd3": { "class": "B", "reason": "Interactive button hover/active" } } },
       "critical":       { "$value": "{color.primitive.red.6}",   "$description": "v1.9 --vd-color-error / --vd-color-danger", "$extensions": { "vd3": { "class": "B", "reason": "Accessible error indicator" } } },
       "shadow":         { "$value": "#0000001a",                 "$description": "Shadow ink, light theme (dark uses #0000004d). v1.9 fib shadows bake hex-alpha literals.", "$extensions": { "vd3": { "class": "B", "reason": "Alpha-blended black ink for shadows" } } }
@@ -125,7 +125,7 @@
   },
   "line": {
     "$type": "dimension",
-    "$description": "Border/line weights — Fibonacci 1/2/3/5px (class A). NEW IN v2: v1.9 ships only --vd-border-width: 1px (F3-5 gap confirmed by audit).",
+    "$description": "Border/line weights — Fibonacci 1/2/3/5px (class A). NEW IN 1.0: v1.9 ships only --vd-border-width: 1px (F3-5 gap confirmed by audit).",
     "hair":    { "$value": "1px", "$description": "= v1.9 --vd-border-width", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_1/F_2 = 1" } } },
     "thin":    { "$value": "2px", "$description": "2px thin border", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_3 = 2" } } },
     "regular": { "$value": "3px", "$description": "3px regular border", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_4 = 3" } } },
@@ -154,15 +154,15 @@
   },
   "glow": {
     "$type": "dimension",
-    "$description": "Glow blur intensities — remapped from v1.9 arithmetic 10/20/30px (un tokenized, component classes) to Fibonacci 8/13/21 (Q2 decision; class A). NEW tokenization in v2.",
+    "$description": "Glow blur intensities — remapped from v1.9 arithmetic 10/20/30px (un tokenized, component classes) to Fibonacci 8/13/21 (Q2 decision; class A). NEW tokenization in 1.0.",
     "fib-8":  { "$value": "0.5rem",    "$description": "8px · F_6", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_6 = 8" } } },
     "fib-13": { "$value": "0.8125rem", "$description": "13px · F_7", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_7 = 13" } } },
     "fib-21": { "$value": "1.3125rem", "$description": "21px · F_8", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_8 = 21" } } }
   },
   "z": {
     "$type": "number",
-    "$description": "Stacking ladder — v1.9 --vd-z-* confirmed: named, conventional 10-step from 1000 (class B, Q3 decision: platform/debugging seam, tokenized). base is new in v2.",
-    "base":            { "$value": 0,    "$description": "new in v2", "$extensions": { "vd3": { "class": "B", "reason": "Base normal content layer" } } },
+    "$description": "Stacking ladder — v1.9 --vd-z-* confirmed: named, conventional 10-step from 1000 (class B, Q3 decision: platform/debugging seam, tokenized). base is new in 1.0.",
+    "base":            { "$value": 0,    "$description": "new in 1.0", "$extensions": { "vd3": { "class": "B", "reason": "Base normal content layer" } } },
     "dropdown":        { "$value": 1000, "$description": "--vd-z-dropdown", "$extensions": { "vd3": { "class": "B", "reason": "Standard popover/dropdown layer" } } },
     "sticky":          { "$value": 1020, "$description": "--vd-z-sticky", "$extensions": { "vd3": { "class": "B", "reason": "Sticky element header layer" } } },
     "fixed":           { "$value": 1030, "$description": "--vd-z-fixed", "$extensions": { "vd3": { "class": "B", "reason": "Fixed floating UI element layer" } } },

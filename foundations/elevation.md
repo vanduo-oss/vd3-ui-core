@@ -1,6 +1,6 @@
 # Elevation — Golden Shadows & Glow
 
-Status: stable · Spec: 2.0.0-draft
+Status: stable · Spec: 1.0.0-draft
 
 Elevation in VD3 UI CORE conveys spatial depth through consecutive Fibonacci shadow pairs, ambient golden glow blurs, and a tokenized stacking ladder.
 

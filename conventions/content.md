@@ -1,6 +1,6 @@
 # Editorial Tone & Content Conventions
 
-Status: stable · Spec: 2.0.0-draft
+Status: stable · Spec: 1.0.0-draft
 
 This specification establishes the editorial voice, microcopy rules, form validation anatomy, empty state patterns, and dual human/AI readability guidelines for VD3 UI CORE.
 

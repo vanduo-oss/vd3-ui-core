@@ -76,7 +76,7 @@ Two structural insights for the core spec:
 - **The Lucas numbers are already citizens** (containers 521, 843, 1364 would continue the family). Both Fibonacci and Lucas converge to φ at the same rate — the doctrine should say "**any sequence whose neighbor-ratio converges to φ**" rather than "Fibonacci only."
 - **The glass blur soft-cap is a pattern, not an anomaly**: where physics, performance, or platform limits cap a value (blur beyond ~20px wastes GPU for no perceptual gain), vd3 already documents the cap and lets other properties (tint, edge, elevation) continue the progression. This deserves a named rule in core — call it the **convergence zone**.
 
-### F3 — Contradictions and gaps found (the v2 spec worklist)
+### F3 — Contradictions and gaps found (the core 1.0 spec worklist)
 
 1. **Honesty table is stale.** It labels transition timings "conventional," but v1.9 ships a seven-step Fibonacci duration ladder with named tokens. ([golden ratio](https://vd3.vanduo.dev/core/golden-ratio) vs [motion](https://vd3.vanduo.dev/core/motion))
 2. **Small spacing steps don't match their names.** `--vd-space-fib-2` = 4px, `-3` = 6px, `-5` = 8px, `-8` = 12px — the scale only becomes literal from 13 onward. Either correct the values or codify the fudge (e.g., "steps ≤8px are the rem-rounded working scale; the sequence is literal from 13px"). The docs currently show both 1/2/3/5/8 px conceptual scales and the rounded token values without reconciling them. ([fibonacci guide](https://vd3.vanduo.dev/guides/fibonacci))
@@ -199,14 +199,14 @@ Derived from the gap analysis; each doc must ship with normative tables, not pro
 3. **Z-index policy** — keep conventional increments (class B) or tokenize a Fibonacci stacking ladder (55/89/144/233…)?
 4. **Density registers** — does vd3 want Carbon-style productive/expressive modes, or is the fluid type scale + glass/surface register system sufficient?
 5. **Lucas numbers' status** — coequal φ-convergent citizens (containers already use L₁₃ = 521) or Fib-only doctrine?
-6. **DTCG export** — should the normative token JSON adopt current `--vd-*` names verbatim, or use v2 as the moment for semantic renames?
+6. **DTCG export** — should the normative token JSON adopt current `--vd-*` names verbatim, or use core 1.0 as the moment for semantic renames?
 7. **Charts color contract** — derived from the Fibonacci palette alone, or defined for both palette engines?
 
 ## Recommendations / Next Steps
 
 1. **Adopt the three-class proportional contract (A/B/C) + exceptions registry as the philosophical core** of vd3-ui-core — it already describes vd3's practice; codify it before any other spec work.
 2. **Migrate the honesty table into core as the normative "basis" table** and fix its stale rows (motion is class A now) — this is the first concrete proof of the spec repo's value.
-3. **Run the v2 token audit** against the real `tokens.css` and resolve the open questions above (especially spacing unification and small steps) before writing normative tables.
+3. **Run the token audit** against the real `tokens.css` and resolve the open questions above (especially spacing unification and small steps) before writing normative tables.
 4. **Close the six Carbon-coverage gaps in core**: line weights, z-index, focus ring, density decision, content guidelines, data-viz colors.
 5. **Write the 12 foundation docs (F7) with tables, requirement IDs, and status headers**; seed the exceptions registry with the three known exceptions (glass cap, rounded small steps, glow blur — pending Q2).
 6. **Spec the top interactive components first** (dialog, menu, autocomplete, tabs, tree) against APG, then batch the rest.

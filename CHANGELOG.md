@@ -2,16 +2,16 @@
 
 Spec follows semver independently of library releases.
 
-## 2.0.0-draft — incepting
+## 1.0.0-draft — incepting
 
 - First principles (PRN-001…007), proportional spine, semantic color model,
   golden elevation ladder.
 - Normative references set: W3C APG (behavior), W3C DTCG (tokens).
 - Consulted literature: IBM Carbon only; Material 3 excluded.
 - Token architecture: three tiers (primitive → semantic role → component).
-- Conformance model: `"implements": "vd3-ui-core@^2.0"` + CI drift checks.
+- Conformance model: `"implements": "vd3-ui-core@^1.0"` + CI drift checks.
 - Components scaffolded: `_TEMPLATE.md`, worked example `dialog/spec.md`.
-- VALUES IN `tokens/vd3.tokens.json` ARE ILLUSTRATIVE — pending the v2 token
+- VALUES IN `tokens/vd3.tokens.json` ARE ILLUSTRATIVE — pending the token
   audit; structure and naming are binding, values are not.
 - Consistency pass against `docs/research-brief.md` (F3): three-class A/B/C
   contract codified in `principles.md` (PRN-001, PRN-008) and
@@ -36,12 +36,12 @@ Spec follows semver independently of library releases.
   stays `--vd-` verbatim — the draft `--vd3-` prefix is retired everywhere;
   v1.9 attribute hooks `data-theme` / `data-primary` / `data-palette` /
   `data-motion` adopted (backwards compatibility; leaf-name aliases reconciled
-  in the v2 audit). **Q7** chart color contract defined for both palette engines
+  in the token audit). **Q7** chart color contract defined for both palette engines
   (`foundations/color.md` → Data visualization). **Q4** density: recommendation
   recorded in `foundations/typography.md` (registers + fluid scale suffice;
   Carbon-style productive/expressive modes not adopted) — decision stays open.
 - Q1 (small-step fudge) codified as C-01 and Q5 (Lucas = class A) settled by the
-  kickoff doctrine; both still need value confirmation in the v2 audit.
+  kickoff doctrine; both still need value confirmation in the token audit.
 - Repo layout: the spec skeleton moved from `export-from-vibe-web/` to the repo
   root; the folder is gone.
 - `site/` rebuilt as a real app dogfooding `@vanduo-oss/vd3@1.9.0` (pnpm
@@ -52,7 +52,7 @@ Spec follows semver independently of library releases.
   time (`@spec` alias, `?raw` imports); the framework-free `site/index.html`
   mockup was replaced by the app entry. Verified with `vite build` + headless
   browser run (theme/font switching, zero console errors).
-- v2 token audit COMPLETE — see `docs/token-audit-v2.md`. `tokens/vd3.tokens.json`
+- token audit COMPLETE — see `docs/token-audit.md`. `tokens/vd3.tokens.json`
   values now audited against `@vanduo-oss/vd3@1.9.0` (dist/tokens.json + vd3-core.css
   + vd3.css); ILLUSTRATIVE flags removed. Highlights: space 9/9 confirmed (C-01
   exact: fib-2=4px, -3=6px, -5=8px, -8=12px, literal from 13); fib shadow pairs
@@ -62,5 +62,5 @@ Spec follows semver independently of library releases.
   plus named aliases; easing = real golden beziers (1/φ, 1/φ² control points);
   type scale + φ leadings + 6 tracking tokens confirmed; glass blur soft-cap
   (C-02) confirmed at 14–26px past fib 13; line weights and focus geometry
-  confirmed as real v1.9 gaps (new in v2). `conventions/naming.md` gained the
+  confirmed as real v1.9 gaps (new in 1.0). `conventions/naming.md` gained the
   audited DTCG-path → public CSS-name table.

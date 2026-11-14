@@ -1,6 +1,6 @@
 {
   "name": "vd3-ui-core",
-  "version": "2.0.0-draft",
+  "version": "1.0.0-draft",
   "private": true,
   "description": "Specification, normative tokens (DTCG), and references for the vd3 design system. Spec-only except site/.",
   "type": "module",

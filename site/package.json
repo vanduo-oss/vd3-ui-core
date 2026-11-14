@@ -1,6 +1,6 @@
 {
   "name": "@vd3-ui-core/site",
-  "version": "2.0.0",
+  "version": "1.0.0-draft",
   "private": true,
   "type": "module",
   "description": "Spec & SSG Documentation Bible for vd3-ui-core.",

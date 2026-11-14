@@ -1,17 +1,17 @@
 # Naming conventions
 
-Status: stable · Spec: 2.0.0-draft
+Status: stable · Spec: 1.0.0-draft
 
 - **Tokens** — semantic, kebab-case, no theme in the name (`--vd-layer-hover`,
   never `--vd-layer-hover-dark`; themes swap values, names stay).
 - **CSS** — custom properties always prefixed `--vd-`: the v1.9 prefix, kept
-  verbatim for backwards compatibility (Q6 decision — no renames at v2).
+  verbatim for backwards compatibility (Q6 decision — no renames in core 1.0).
   Component-scoped tokens as `--vd-⟨component⟩-⟨role⟩`. Mapping from DTCG
   path: `--vd-` + path with `.` → `-`, except the `color.role.*` tier, which
   collapses to `--vd-⟨name⟩` (semantic roles are the public API). Where v1.9
   shipped a different public name (e.g. `--vd-border-color`), the v1.9 name
-  wins; the v2 audit maps any alias. Audited DTCG-path → public CSS name table
-  (v1.9, from `docs/token-audit-v2.md`):
+  wins; the token audit maps any alias. Audited DTCG-path → public CSS name table
+  (v1.9, from `docs/token-audit.md`):
 
   | DTCG path | public CSS var |
   |---|---|

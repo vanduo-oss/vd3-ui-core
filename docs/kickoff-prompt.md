@@ -19,7 +19,7 @@ Binding rules from the research:
 - W3C ARIA APG is normative for component behavior; W3C DTCG for token format.
   IBM Carbon is consulted literature only (cite, never conform). Material 3 is excluded.
 - Markdown is the source of truth; any site output is generated from it — PRs only.
-- Token values in tokens/vd3.tokens.json are ILLUSTRATIVE, pending the v2 audit
+- Token values in tokens/vd3.tokens.json are ILLUSTRATIVE, pending the token audit
   against the real tokens.css of @vanduo-oss/vd3. Structure and naming are binding;
   values are not.
 - Vue 3 only for the library repos (Vite + Nuxt); no React, ever.

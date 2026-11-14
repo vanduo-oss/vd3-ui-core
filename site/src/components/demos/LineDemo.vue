@@ -10,7 +10,7 @@ import { lineWeights } from '../../spec'
       <span class="mono">{{ w.token }}</span> · {{ w.px }}px
     </VdCard>
   </div>
-  <p class="footnote">Foundation added in core v2 — the one gap Carbon exposed that v1.9 had not
+  <p class="footnote">Foundation added in core 1.0 — the one gap Carbon exposed that v1.9 had not
   filled. Hairlines in dark mode are why <code>--vd-line-hair</code> is a token, not a literal.</p>
 </template>
 

@@ -1,6 +1,6 @@
 # vd3-ui-core
 
-**Spec version:** 2.0.0-draft · **Status:** incepting
+**Spec version:** 1.0.0-draft · **Status:** incepting
 
 vd3-ui-core is the source of truth for the vd3 design system: first principles,
 foundations, proportions, per-component contracts, and the normative design
@@ -24,7 +24,7 @@ the markdown spec and `tokens/vd3.tokens.json` at build time.
 Implementing libraries declare the spec they follow in `package.json`:
 
 ```json
-"implements": "vd3-ui-core@^2.0"
+"implements": "vd3-ui-core@^1.0"
 ```
 
 CI in each library repo MUST verify: (1) generated CSS custom properties match

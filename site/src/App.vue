@@ -806,9 +806,9 @@ const componentSnippets = {
   <footer>
     <div class="inner">
       <p>
-        <strong>vd3-ui-core</strong> · Specification v2.0.0 · Markdown specs and W3C DTCG
+        <strong>vd3-ui-core</strong> · Specification v1.0.0-draft · Markdown specs and W3C DTCG
         <code>tokens/vd3.tokens.json</code> are the normative source of truth. Library conformance:
-        <code>"implements": "vd3-ui-core@^2.0"</code>.
+        <code>"implements": "vd3-ui-core@^1.0"</code>.
       </p>
     </div>
   </footer>

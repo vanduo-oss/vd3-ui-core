@@ -235,17 +235,17 @@ const chapters = [
 
 const foundationRows = [
   ['proportion', 'Spec’d', 'A', 'A/B/C contract, Fibonacci & Lucas Binet lattices, golden convergence'],
-  ['spacing', 'Unify v2', 'A / C-01', 'Fibonacci rem ladder (2..144px) with physical sub-pixel Exception C-01'],
-  ['line', 'New v2', 'A', 'Fibonacci hairline/thin/regular/thick stroke widths (1/2/3/5px)'],
+  ['spacing', 'Unified', 'A / C-01', 'Fibonacci rem ladder (2..144px) with physical sub-pixel Exception C-01'],
+  ['line', 'New in 1.0', 'A', 'Fibonacci hairline/thin/regular/thick stroke widths (1/2/3/5px)'],
   ['typography', 'Spec’d', 'A', '√φ modular scale, fluid clamp() expressions, φ line-heights'],
   ['motion', 'Spec’d', 'A', '55..987ms Fibonacci durations, golden Bézier easings, MOB-001 0ms contract'],
   ['elevation', 'Spec’d', 'A', 'Consecutive Fibonacci shadow offset/blur pairs F_k / F_k+2'],
   ['glass + surfaces', 'Spec’d', 'A / C-02', 'Frosted blur steps 1..89 capped per GPU safety Exception C-02'],
   ['color', 'Spec’d', 'A / B', 'Semantic dual-theme WCAG AAA/AA roles + 137.508° golden-angle palette'],
   ['grid + layout', 'Spec’d', 'B / A', '12-column responsive engine + Class A golden split & Fibonacci grids'],
-  ['z-index', 'New v2', 'B', 'Conventional semantic layering from base (0) to toast (1080)'],
-  ['focus', 'New v2', 'B', 'WCAG 2.2 SC 2.4.13 Dual-Ring focus indicator with inner offset gap'],
-  ['components', 'New v2', 'A / B / C', '11 zero-framework semantic HTML + @layer vd3.components stylesheets'],
+  ['z-index', 'New in 1.0', 'B', 'Conventional semantic layering from base (0) to toast (1080)'],
+  ['focus', 'New in 1.0', 'B', 'WCAG 2.2 SC 2.4.13 Dual-Ring focus indicator with inner offset gap'],
+  ['components', 'New in 1.0', 'A / B / C', '11 zero-framework semantic HTML + @layer vd3.components stylesheets'],
   ['conventions', 'Normative', 'B', 'Identifier naming, cross-system mappings, and editorial copy rules'],
 ];
 
@@ -533,7 +533,7 @@ const ssgBody = `
       <div class="vd-navbar-container">
         <div class="vd-navbar-brand">
           <a href="#main-content" class="brand">vd3<em>-ui-core</em></a>
-          <span class="vd-badge vd-badge--info">v2.0.0</span>
+          <span class="vd-badge vd-badge--info" data-version="1.0.0-draft">v1.0.0 · draft</span>
         </div>
         <div class="vd-navbar-menu">
           <nav class="site-nav-pillars" aria-label="Primary specification navigation">
@@ -618,9 +618,9 @@ const ssgBody = `
   <footer>
     <div class="inner">
       <p>
-        <strong>vd3-ui-core</strong> · Specification v2.0.0 · Markdown specs and W3C DTCG
+        <strong>vd3-ui-core</strong> · Specification v1.0.0-draft · Markdown specs and W3C DTCG
         <code>tokens/vd3.tokens.json</code> are the normative source of truth. Library conformance:
-        <code>"implements": "vd3-ui-core@^2.0"</code>.
+        <code>"implements": "vd3-ui-core@^1.0"</code>.
       </p>
     </div>
   </footer>

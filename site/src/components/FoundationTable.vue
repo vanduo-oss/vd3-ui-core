@@ -3,19 +3,19 @@ import { VdBadge } from '@vanduo-oss/vd3'
 
 const rows: { name: string; status: string; basis: ('a' | 'b' | 'c')[]; note: string }[] = [
   { name: 'proportion', status: '✓ spec’d', basis: ['a'], note: 'A/B/C contract, Fib+Lucas lawful, convergence zone' },
-  { name: 'spacing', status: '✓ unify in v2', basis: ['a', 'c'], note: 'Two v1.9 scales reconcile to one normative scale' },
-  { name: 'line', status: 'new in v2', basis: ['a'], note: '1/2/3/5px — the gap Carbon exposed' },
+  { name: 'spacing', status: '✓ unified', basis: ['a', 'c'], note: 'Two v1.9 scales reconcile to one normative scale' },
+  { name: 'line', status: 'new in 1.0', basis: ['a'], note: '1/2/3/5px — the gap Carbon exposed' },
   { name: 'typography', status: '✓ spec’d', basis: ['a'], note: '√φ steps, fluid clamps, φ line-heights' },
   { name: 'motion', status: '✓ spec’d', basis: ['a'], note: '55–987ms ladder, golden easings, reduced-motion law' },
   { name: 'elevation', status: '✓ spec’d', basis: ['a'], note: 'Fibonacci pairs; Carbon uses flat layers — deliberate divergence' },
   { name: 'glass + surfaces', status: '✓ spec’d', basis: ['a', 'c'], note: 'Strength steps 1–89; soft-cap in the convergence zone' },
   { name: 'color', status: '✓ spec’d', basis: ['a', 'b'], note: 'Open Color default · Fibonacci golden-angle opt-in' },
   { name: 'grid', status: '✓ spec’d', basis: ['b', 'a'], note: '12-col engine + golden modes' },
-  { name: 'z-index', status: 'new in v2', basis: ['b'], note: 'Conventional increments, tokened — Q3 decided' },
-  { name: 'focus', status: 'new in v2', basis: ['b'], note: 'Ring geometry tokens, focus-visible policy' },
+  { name: 'z-index', status: 'new in 1.0', basis: ['b'], note: 'Conventional increments, tokened — Q3 decided' },
+  { name: 'focus', status: 'new in 1.0', basis: ['b'], note: 'Ring geometry tokens, focus-visible policy' },
   { name: 'icons', status: '✓ spec’d', basis: ['a'], note: 'Phosphor, 6 weights, fib sizing steps' },
-  { name: 'content', status: 'new in v2', basis: [], note: 'Writing rules for built-in strings' },
-  { name: 'data-viz color', status: 'new in v2', basis: ['a'], note: 'Categorical/sequential/diverging contract for vd3-charts — both palette engines (Q7)' },
+  { name: 'content', status: 'new in 1.0', basis: [], note: 'Writing rules for built-in strings' },
+  { name: 'data-viz color', status: 'new in 1.0', basis: ['a'], note: 'Categorical/sequential/diverging contract for vd3-charts — both palette engines (Q7)' },
 ]
 const badgeVariant = { a: 'primary', b: 'info', c: 'warning' } as const
 </script>

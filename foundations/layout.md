@@ -1,6 +1,6 @@
 # Layout Primitives & Proportions
 
-Status: stable · Spec: 2.0.0-draft
+Status: stable · Spec: 1.0.0-draft
 
 Layout structures in VD3 UI CORE are governed by the Golden Section ($\phi \approx 1.6180339887$), Fibonacci column scaling ($1, 2, 3, 5, 8$), and Lucas/Fibonacci container max-width thresholds.
 
