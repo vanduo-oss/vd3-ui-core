@@ -1,48 +1,91 @@
 {
   "$description": "vd3 design tokens — NORMATIVE single source of truth. W3C DTCG format. VALUES AUDITED against @vanduo-oss/vd3@1.9.0 (dist/tokens.json, vd3-core.css, vd3.css) — see docs/token-audit-v2.md. Structure and naming are binding; public CSS names follow v1.9 verbatim (see conventions/naming.md mapping table). Generated CSS in library repos MUST match this file (CI check). Basis classes: A = phi/Fibonacci/Lucas-derived, B = conventional-by-design (written reason), C = registered exception (foundations/proportion.md registry).",
-  "$vd3": { "spec": "vd3-ui-core@2.0.0-draft", "auditedAgainst": "@vanduo-oss/vd3@1.9.0" },
+  "$vd3": {
+    "spec": "vd3-ui-core@2.0.0-draft",
+    "auditedAgainst": "@vanduo-oss/vd3@1.9.0"
+  },
+  "math": {
+    "$type": "number",
+    "$description": "Core mathematical constants derived from the Golden Ratio (phi = (1 + sqrt(5)) / 2). Class A.",
+    "phi": {
+      "$value": 1.6180339887,
+      "$description": "Golden ratio constant phi = (1 + sqrt(5)) / 2",
+      "$extensions": { "vd3": { "class": "A", "derivation": "(1 + sqrt(5)) / 2" } }
+    },
+    "inv-phi": {
+      "$value": 0.6180339887,
+      "$description": "Reciprocal golden ratio 1/phi = phi - 1",
+      "$extensions": { "vd3": { "class": "A", "derivation": "1 / phi" } }
+    },
+    "inv-phi-sq": {
+      "$value": 0.3819660113,
+      "$description": "Square of reciprocal golden ratio 1/phi^2 = 1 - 1/phi",
+      "$extensions": { "vd3": { "class": "A", "derivation": "1 / (phi^2)" } }
+    },
+    "sqrt-phi": {
+      "$value": 1.2720196495,
+      "$description": "Square root of golden ratio sqrt(phi) - typography modular step multiplier",
+      "$extensions": { "vd3": { "class": "A", "derivation": "sqrt(phi)" } }
+    },
+    "golden-angle": {
+      "$value": 137.507764,
+      "$description": "Golden angle in degrees: 360 * (1 - 1/phi)",
+      "$extensions": { "vd3": { "class": "A", "derivation": "360 * (1 - 1/phi)" } }
+    }
+  },
   "color": {
     "primitive": {
       "$type": "color",
       "$description": "Raw palette scales — v1.9 values (Open Color baseline: --vd-gray-*, --vd-yellow-*, --vd-red-*; Fibonacci golden-angle palette: --vd-fib-* / --vd-golden-*). Never consumed by components directly.",
       "gray": {
-        "0":    { "$value": "#f8f9fa", "$description": "v1.9 --vd-gray-0" },
-        "1":    { "$value": "#f1f3f5", "$description": "--vd-gray-1" },
-        "2":    { "$value": "#e9ecef", "$description": "--vd-gray-2" },
-        "3":    { "$value": "#dee2e6", "$description": "--vd-gray-3" },
-        "4":    { "$value": "#ced4da", "$description": "--vd-gray-4" },
-        "5":    { "$value": "#adb5bd", "$description": "--vd-gray-5" },
-        "6":    { "$value": "#868e96", "$description": "--vd-gray-6" },
-        "7":    { "$value": "#495057", "$description": "--vd-gray-7" },
-        "8":    { "$value": "#343a40", "$description": "--vd-gray-8" },
-        "9":    { "$value": "#212529", "$description": "--vd-gray-9" },
-        "1000": { "$value": "#1a1d20", "$description": "--vd-bg-darker / --vd-text-primary baseline" }
+        "0":    { "$value": "#f8f9fa", "$description": "v1.9 --vd-gray-0", "$extensions": { "vd3": { "class": "B", "reason": "Open Color baseline gray scale" } } },
+        "1":    { "$value": "#f1f3f5", "$description": "--vd-gray-1", "$extensions": { "vd3": { "class": "B", "reason": "Open Color baseline gray scale" } } },
+        "2":    { "$value": "#e9ecef", "$description": "--vd-gray-2", "$extensions": { "vd3": { "class": "B", "reason": "Open Color baseline gray scale" } } },
+        "3":    { "$value": "#dee2e6", "$description": "--vd-gray-3", "$extensions": { "vd3": { "class": "B", "reason": "Open Color baseline gray scale" } } },
+        "4":    { "$value": "#ced4da", "$description": "--vd-gray-4", "$extensions": { "vd3": { "class": "B", "reason": "Open Color baseline gray scale" } } },
+        "5":    { "$value": "#adb5bd", "$description": "--vd-gray-5", "$extensions": { "vd3": { "class": "B", "reason": "Open Color baseline gray scale" } } },
+        "6":    { "$value": "#868e96", "$description": "--vd-gray-6", "$extensions": { "vd3": { "class": "B", "reason": "Open Color baseline gray scale" } } },
+        "7":    { "$value": "#495057", "$description": "--vd-gray-7", "$extensions": { "vd3": { "class": "B", "reason": "Open Color baseline gray scale" } } },
+        "8":    { "$value": "#343a40", "$description": "--vd-gray-8", "$extensions": { "vd3": { "class": "B", "reason": "Open Color baseline gray scale" } } },
+        "9":    { "$value": "#212529", "$description": "--vd-gray-9", "$extensions": { "vd3": { "class": "B", "reason": "Open Color baseline gray scale" } } },
+        "1000": { "$value": "#1a1d20", "$description": "--vd-bg-darker / --vd-text-primary baseline", "$extensions": { "vd3": { "class": "B", "reason": "Open Color baseline gray scale" } } }
       },
       "gold": {
         "$description": "v1.9 Open Color yellow family (--vd-yellow-*), the default light primary (amber).",
-        "4": { "$value": "#ffd43b", "$description": "--vd-yellow-4" },
-        "6": { "$value": "#fab005", "$description": "--vd-yellow-6 · default light primary" },
-        "7": { "$value": "#f59f00", "$description": "--vd-yellow-7" }
+        "4": { "$value": "#ffd43b", "$description": "--vd-yellow-4", "$extensions": { "vd3": { "class": "B", "reason": "Open Color yellow accent ramp" } } },
+        "6": { "$value": "#fab005", "$description": "--vd-yellow-6 · default light primary", "$extensions": { "vd3": { "class": "B", "reason": "Open Color yellow baseline primary" } } },
+        "7": { "$value": "#f59f00", "$description": "--vd-yellow-7", "$extensions": { "vd3": { "class": "B", "reason": "Open Color yellow interactive hover state" } } }
       },
       "red": {
         "$description": "v1.9 Open Color red (--vd-red-*).",
-        "4": { "$value": "#ff8787", "$description": "--vd-red-4" },
-        "6": { "$value": "#fa5252", "$description": "--vd-red-6 · --vd-color-error" }
+        "4": { "$value": "#ff8787", "$description": "--vd-red-4", "$extensions": { "vd3": { "class": "B", "reason": "Open Color red dark mode critical role" } } },
+        "6": { "$value": "#fa5252", "$description": "--vd-red-6 · --vd-color-error", "$extensions": { "vd3": { "class": "B", "reason": "Open Color red critical error baseline" } } }
+      },
+      "golden-angle": {
+        "$description": "Algorithmic golden-angle palette (H_k = (43 + k * 137.508) mod 360) generating maximally dispersed categorical hues. Class A.",
+        "0": { "$value": "#fab005", "$description": "Step 0 · 43.0° · Gold baseline · H_0", "$extensions": { "vd3": { "class": "A", "derivation": "Golden angle phyllotaxis step 0" } } },
+        "1": { "$value": "#0ab5b5", "$description": "Step 1 · 180.5° · Cyan / Aqua · H_1", "$extensions": { "vd3": { "class": "A", "derivation": "Golden angle phyllotaxis step 1" } } },
+        "2": { "$value": "#f20d91", "$description": "Step 2 · 318.0° · Magenta / Pink · H_2", "$extensions": { "vd3": { "class": "A", "derivation": "Golden angle phyllotaxis step 2" } } },
+        "3": { "$value": "#68c20a", "$description": "Step 3 · 95.5° · Lime Green · H_3", "$extensions": { "vd3": { "class": "A", "derivation": "Golden angle phyllotaxis step 3" } } },
+        "4": { "$value": "#254ef0", "$description": "Step 4 · 233.0° · Cobalt Blue · H_4", "$extensions": { "vd3": { "class": "A", "derivation": "Golden angle phyllotaxis step 4" } } },
+        "5": { "$value": "#f22d0d", "$description": "Step 5 · 10.5° · Crimson Red · H_5", "$extensions": { "vd3": { "class": "A", "derivation": "Golden angle phyllotaxis step 5" } } },
+        "6": { "$value": "#0ac265", "$description": "Step 6 · 148.0° · Emerald Teal · H_6", "$extensions": { "vd3": { "class": "A", "derivation": "Golden angle phyllotaxis step 6" } } },
+        "7": { "$value": "#ba0df2", "$description": "Step 7 · 285.5° · Violet Purple · H_7", "$extensions": { "vd3": { "class": "A", "derivation": "Golden angle phyllotaxis step 7" } } }
       }
     },
     "role": {
       "$type": "color",
       "$description": "Semantic roles — default (light) theme, v1.9-audited. Components consume ONLY these. Dark theme: theme.dark.color.role MUST define every role. Public CSS names follow v1.9 (--vd-bg-primary, --vd-text-primary, --vd-border-color, --vd-color-primary, --vd-color-error).",
-      "canvas":         { "$value": "#ffffff",                  "$description": "v1.9 --vd-bg-primary (light). body background." },
-      "layer":          { "$value": "{color.primitive.gray.0}",  "$description": "v1.9 --vd-bg-secondary (light)" },
-      "layer-hover":    { "$value": "{color.primitive.gray.1}",  "$description": "v1.9 --vd-bg-tertiary (light)" },
-      "text-primary":   { "$value": "{color.primitive.gray.1000}", "$description": "v1.9 --vd-text-primary" },
-      "text-secondary": { "$value": "{color.primitive.gray.7}",  "$description": "v1.9 --vd-text-secondary / --vd-text-muted" },
-      "border":         { "$value": "{color.primitive.gray.3}",  "$description": "v1.9 --vd-border-color" },
-      "focus":          { "$value": "{color.primitive.gold.6}",  "$description": "v1.9 --vd-color-primary (default light primary = amber). v1.9 has NO dedicated focus-geometry tokens — ring width/offset are the F3-7 gap, new in v2." },
-      "interactive":    { "$value": "{color.primitive.gold.7}",  "$description": "v1.9 --vd-color-primary-hover/dark" },
-      "critical":       { "$value": "{color.primitive.red.6}",   "$description": "v1.9 --vd-color-error / --vd-color-danger" },
-      "shadow":         { "$value": "#0000001a",                 "$description": "Shadow ink, light theme (dark uses #0000004d). v1.9 fib shadows bake hex-alpha literals." }
+      "canvas":         { "$value": "#ffffff",                  "$description": "v1.9 --vd-bg-primary (light). body background.", "$extensions": { "vd3": { "class": "B", "reason": "Standard high-contrast canvas" } } },
+      "layer":          { "$value": "{color.primitive.gray.0}",  "$description": "v1.9 --vd-bg-secondary (light)", "$extensions": { "vd3": { "class": "B", "reason": "Subtle card/layer surface elevation" } } },
+      "layer-hover":    { "$value": "{color.primitive.gray.1}",  "$description": "v1.9 --vd-bg-tertiary (light)", "$extensions": { "vd3": { "class": "B", "reason": "Interactive hover state for layers" } } },
+      "text-primary":   { "$value": "{color.primitive.gray.1000}", "$description": "v1.9 --vd-text-primary", "$extensions": { "vd3": { "class": "B", "reason": "WCAG AAA compliant text color" } } },
+      "text-secondary": { "$value": "{color.primitive.gray.7}",  "$description": "v1.9 --vd-text-secondary / --vd-text-muted", "$extensions": { "vd3": { "class": "B", "reason": "WCAG AA compliant supporting text" } } },
+      "border":         { "$value": "{color.primitive.gray.3}",  "$description": "v1.9 --vd-border-color", "$extensions": { "vd3": { "class": "B", "reason": "Structural boundary rule" } } },
+      "focus":          { "$value": "{color.primitive.gold.6}",  "$description": "v1.9 --vd-color-primary (default light primary = amber). v1.9 has NO dedicated focus-geometry tokens — ring width/offset are the F3-7 gap, new in v2.", "$extensions": { "vd3": { "class": "B", "reason": "High-visibility focus ring indicator" } } },
+      "interactive":    { "$value": "{color.primitive.gold.7}",  "$description": "v1.9 --vd-color-primary-hover/dark", "$extensions": { "vd3": { "class": "B", "reason": "Interactive button hover/active" } } },
+      "critical":       { "$value": "{color.primitive.red.6}",   "$description": "v1.9 --vd-color-error / --vd-color-danger", "$extensions": { "vd3": { "class": "B", "reason": "Accessible error indicator" } } },
+      "shadow":         { "$value": "#0000001a",                 "$description": "Shadow ink, light theme (dark uses #0000004d). v1.9 fib shadows bake hex-alpha literals.", "$extensions": { "vd3": { "class": "B", "reason": "Alpha-blended black ink for shadows" } } }
     }
   },
   "theme": {
@@ -51,158 +94,238 @@
         "role": {
           "$type": "color",
           "$description": "Dark theme — v1.9 [data-theme=\"dark\"] block values. MUST define every role from color.role.",
-          "canvas":         { "$value": "{color.primitive.gray.9}" },
-          "layer":          { "$value": "{color.primitive.gray.8}" },
-          "layer-hover":    { "$value": "{color.primitive.gray.7}" },
-          "text-primary":   { "$value": "{color.primitive.gray.0}" },
-          "text-secondary": { "$value": "{color.primitive.gray.3}" },
-          "border":         { "$value": "{color.primitive.gray.7}" },
-          "focus":          { "$value": "{color.primitive.gold.4}" },
-          "interactive":    { "$value": "{color.primitive.gold.4}" },
-          "critical":       { "$value": "{color.primitive.red.4}" },
-          "shadow":         { "$value": "#0000004d" }
+          "canvas":         { "$value": "{color.primitive.gray.9}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode canvas background" } } },
+          "layer":          { "$value": "{color.primitive.gray.8}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode elevated layer" } } },
+          "layer-hover":    { "$value": "{color.primitive.gray.7}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode hover layer" } } },
+          "text-primary":   { "$value": "{color.primitive.gray.0}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode primary text (AAA)" } } },
+          "text-secondary": { "$value": "{color.primitive.gray.3}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode secondary text (AAA)" } } },
+          "border":         { "$value": "{color.primitive.gray.7}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode boundary stroke" } } },
+          "focus":          { "$value": "{color.primitive.gold.4}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode luminous focus ring" } } },
+          "interactive":    { "$value": "{color.primitive.gold.4}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode interactive primary" } } },
+          "critical":       { "$value": "{color.primitive.red.4}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode accessible error text" } } },
+          "shadow":         { "$value": "#0000004d", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode shadow opacity adjustment" } } }
         }
       }
     }
   },
   "space": {
     "$type": "dimension",
-    "$description": "ONE normative spacing scale, rem on a 16px base — v1.9 --vd-space-fib-*, 9/9 match. Names are Fibonacci numbers. Values <= 12px follow registered exception C-01 (rem-rounded 2/4/6/8/12); literal from 13px. v1.9 also ships --vd-spacing-* (literal Fibonacci px — same values in px) and --vd-space-* (4px-based conventional utility scale, class B); both are aliases, not parallel systems.",
-    "fib-1":  { "$value": "0.125rem",  "$description": "2px · --vd-space-fib-1" },
-    "fib-2":  { "$value": "0.25rem",   "$description": "4px · C-01 · --vd-space-fib-2" },
-    "fib-3":  { "$value": "0.375rem",  "$description": "6px · C-01 · --vd-space-fib-3" },
-    "fib-5":  { "$value": "0.5rem",    "$description": "8px · C-01 · --vd-space-fib-5" },
-    "fib-8":  { "$value": "0.75rem",   "$description": "12px · C-01 · --vd-space-fib-8" },
-    "fib-13": { "$value": "0.8125rem", "$description": "13px · literal from here · --vd-space-fib-13" },
-    "fib-21": { "$value": "1.3125rem", "$description": "21px · --vd-space-fib-21" },
-    "fib-34": { "$value": "2.125rem",  "$description": "34px · --vd-space-fib-34" },
-    "fib-55": { "$value": "3.4375rem", "$description": "55px · --vd-space-fib-55" }
+    "$description": "ONE normative spacing scale, rem on a 16px base — v1.9 --vd-space-fib-*, 11/11 match. Names are Fibonacci numbers. Values <= 12px follow registered exception C-01 (rem-rounded 2/4/6/8/12); literal from 13px. v1.9 also ships --vd-spacing-* (literal Fibonacci px — same values in px) and --vd-space-* (4px-based conventional utility scale, class B); both are aliases, not parallel systems.",
+    "fib-1":   { "$value": "0.125rem",  "$description": "2px · --vd-space-fib-1", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_1/F_2 = 1, rounded to 2px for baseline screen grid" } } },
+    "fib-2":   { "$value": "0.25rem",   "$description": "4px · C-01 · --vd-space-fib-2", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Rem-rounded small spacing step" } } },
+    "fib-3":   { "$value": "0.375rem",  "$description": "6px · C-01 · --vd-space-fib-3", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Rem-rounded small spacing step" } } },
+    "fib-5":   { "$value": "0.5rem",    "$description": "8px · C-01 · --vd-space-fib-5", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Rem-rounded small spacing step" } } },
+    "fib-8":   { "$value": "0.75rem",   "$description": "12px · C-01 · --vd-space-fib-8", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Rem-rounded small spacing step" } } },
+    "fib-13":  { "$value": "0.8125rem", "$description": "13px · literal from here · --vd-space-fib-13", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_7 = 13" } } },
+    "fib-21":  { "$value": "1.3125rem", "$description": "21px · --vd-space-fib-21", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_8 = 21" } } },
+    "fib-34":  { "$value": "2.125rem",  "$description": "34px · --vd-space-fib-34", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_9 = 34" } } },
+    "fib-55":  { "$value": "3.4375rem", "$description": "55px · --vd-space-fib-55", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_10 = 55" } } },
+    "fib-89":  { "$value": "5.5625rem", "$description": "89px · literal Fibonacci F_11 · --vd-space-fib-89", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_11 = 89" } } },
+    "fib-144": { "$value": "9rem",     "$description": "144px · literal Fibonacci F_12 · --vd-space-fib-144", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_12 = 144" } } }
   },
   "line": {
     "$type": "dimension",
     "$description": "Border/line weights — Fibonacci 1/2/3/5px (class A). NEW IN v2: v1.9 ships only --vd-border-width: 1px (F3-5 gap confirmed by audit).",
-    "hair":    { "$value": "1px", "$description": "= v1.9 --vd-border-width" },
-    "thin":    { "$value": "2px" },
-    "regular": { "$value": "3px" },
-    "thick":   { "$value": "5px" }
+    "hair":    { "$value": "1px", "$description": "= v1.9 --vd-border-width", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_1/F_2 = 1" } } },
+    "thin":    { "$value": "2px", "$description": "2px thin border", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_3 = 2" } } },
+    "regular": { "$value": "3px", "$description": "3px regular border", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_4 = 3" } } },
+    "thick":   { "$value": "5px", "$description": "5px thick border", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_5 = 5" } } }
   },
   "radius": {
     "$type": "dimension",
     "$description": "Radii are Fibonacci steps (class A) — v1.9 --vd-radius-fib-2/3/5/8/13/21 confirmed. v1.9 also ships conventional --vd-border-radius-sm/md/lg/xl (4/8/12/16px, class B utility aliases).",
-    "fib-2":  { "$value": "0.125rem",  "$description": "2px · --vd-radius-fib-2" },
-    "fib-3":  { "$value": "0.1875rem", "$description": "3px · --vd-radius-fib-3" },
-    "fib-5":  { "$value": "0.3125rem", "$description": "5px · --vd-radius-fib-5" },
-    "fib-8":  { "$value": "0.5rem",    "$description": "8px · --vd-radius-fib-8" },
-    "fib-13": { "$value": "0.8125rem", "$description": "13px · --vd-radius-fib-13" },
-    "fib-21": { "$value": "1.3125rem", "$description": "21px · --vd-radius-fib-21" },
-    "full":   { "$value": "9999rem",   "$description": "Pill — shape semantic, not a scale step. Registered exception C-04." }
+    "fib-2":  { "$value": "0.125rem",  "$description": "2px · --vd-radius-fib-2", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_3 = 2" } } },
+    "fib-3":  { "$value": "0.1875rem", "$description": "3px · --vd-radius-fib-3", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_4 = 3" } } },
+    "fib-5":  { "$value": "0.3125rem", "$description": "5px · --vd-radius-fib-5", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_5 = 5" } } },
+    "fib-8":  { "$value": "0.5rem",    "$description": "8px · --vd-radius-fib-8", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_6 = 8" } } },
+    "fib-13": { "$value": "0.8125rem", "$description": "13px · --vd-radius-fib-13", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_7 = 13" } } },
+    "fib-21": { "$value": "1.3125rem", "$description": "21px · --vd-radius-fib-21", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_8 = 21" } } },
+    "full":   { "$value": "9999rem",   "$description": "Pill — shape semantic, not a scale step. Registered exception C-04.", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-04", "derivation": "Pill shape semantic contract" } } }
   },
   "shadow": {
     "$type": "shadow",
     "$description": "Elevation ladder — v1.9 fib pairs confirmed in vd3-core.css: 1/2 (--vd-shadow-sm), 2/3 (--vd-shadow), 3/5 (--vd-shadow-md fib variant), 8/13 (--vd-shadow-lg fib), 13/21 (--vd-shadow-xl fib), 21/34 (--vd-shadow-2xl). Values below are the real light-theme composites; dark theme swaps alpha (#...4d/#...80). v1.9 ALSO ships conventional sm/md/lg/xl (tokens.json) — class B aliases.",
-    "1": { "$value": "0 1px 2px #0000000d", "$description": "1/2 pair · --vd-shadow-sm" },
-    "2": { "$value": "0 2px 3px 0 #0000001a, 0 1px 2px -1px #0000001a", "$description": "2/3 pair · --vd-shadow" },
-    "3": { "$value": "0 3px 5px -1px #0000001a, 0 2px 3px -2px #0000001a", "$description": "3/5 pair · --vd-shadow-md (fib)" },
-    "4": { "$value": "0 8px 13px -3px #0000001a, 0 3px 5px -3px #0000001a", "$description": "8/13 pair · --vd-shadow-lg (fib)" },
-    "5": { "$value": "0 13px 21px -5px #0000001a, 0 5px 8px -5px #0000001a", "$description": "13/21 pair · --vd-shadow-xl (fib)" },
-    "6": { "$value": "0 21px 34px -8px #00000040", "$description": "21/34 pair · --vd-shadow-2xl" }
+    "1": { "$value": "0 1px 2px #0000000d", "$description": "1/2 pair · --vd-shadow-sm", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_2, F_3) = (1, 2)" } } },
+    "2": { "$value": "0 2px 3px 0 #0000001a, 0 1px 2px -1px #0000001a", "$description": "2/3 pair · --vd-shadow", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_3, F_4) = (2, 3)" } } },
+    "3": { "$value": "0 3px 5px -1px #0000001a, 0 2px 3px -2px #0000001a", "$description": "3/5 pair · --vd-shadow-md (fib)", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_4, F_5) = (3, 5)" } } },
+    "4": { "$value": "0 8px 13px -3px #0000001a, 0 3px 5px -3px #0000001a", "$description": "8/13 pair · --vd-shadow-lg (fib)", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_6, F_7) = (8, 13)" } } },
+    "5": { "$value": "0 13px 21px -5px #0000001a, 0 5px 8px -5px #0000001a", "$description": "13/21 pair · --vd-shadow-xl (fib)", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_7, F_8) = (13, 21)" } } },
+    "6": { "$value": "0 21px 34px -8px #00000040", "$description": "21/34 pair · --vd-shadow-2xl", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_8, F_9) = (21, 34)" } } }
   },
   "glow": {
     "$type": "dimension",
     "$description": "Glow blur intensities — remapped from v1.9 arithmetic 10/20/30px (un tokenized, component classes) to Fibonacci 8/13/21 (Q2 decision; class A). NEW tokenization in v2.",
-    "fib-8":  { "$value": "0.5rem",    "$description": "8px" },
-    "fib-13": { "$value": "0.8125rem", "$description": "13px" },
-    "fib-21": { "$value": "1.3125rem", "$description": "21px" }
+    "fib-8":  { "$value": "0.5rem",    "$description": "8px · F_6", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_6 = 8" } } },
+    "fib-13": { "$value": "0.8125rem", "$description": "13px · F_7", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_7 = 13" } } },
+    "fib-21": { "$value": "1.3125rem", "$description": "21px · F_8", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_8 = 21" } } }
   },
   "z": {
     "$type": "number",
     "$description": "Stacking ladder — v1.9 --vd-z-* confirmed: named, conventional 10-step from 1000 (class B, Q3 decision: platform/debugging seam, tokenized). base is new in v2.",
-    "base":            { "$value": 0,    "$description": "new in v2" },
-    "dropdown":        { "$value": 1000, "$description": "--vd-z-dropdown" },
-    "sticky":          { "$value": 1020, "$description": "--vd-z-sticky" },
-    "fixed":           { "$value": 1030, "$description": "--vd-z-fixed" },
-    "modal-backdrop":  { "$value": 1040, "$description": "--vd-z-modal-backdrop" },
-    "modal":           { "$value": 1050, "$description": "--vd-z-modal" },
-    "popover":         { "$value": 1060, "$description": "--vd-z-popover" },
-    "tooltip":         { "$value": 1070, "$description": "--vd-z-tooltip" },
-    "toast":           { "$value": 1080, "$description": "--vd-z-toast" }
+    "base":            { "$value": 0,    "$description": "new in v2", "$extensions": { "vd3": { "class": "B", "reason": "Base normal content layer" } } },
+    "dropdown":        { "$value": 1000, "$description": "--vd-z-dropdown", "$extensions": { "vd3": { "class": "B", "reason": "Standard popover/dropdown layer" } } },
+    "sticky":          { "$value": 1020, "$description": "--vd-z-sticky", "$extensions": { "vd3": { "class": "B", "reason": "Sticky element header layer" } } },
+    "fixed":           { "$value": 1030, "$description": "--vd-z-fixed", "$extensions": { "vd3": { "class": "B", "reason": "Fixed floating UI element layer" } } },
+    "modal-backdrop":  { "$value": 1040, "$description": "--vd-z-modal-backdrop", "$extensions": { "vd3": { "class": "B", "reason": "Dimmer backdrop beneath modal container" } } },
+    "modal":           { "$value": 1050, "$description": "--vd-z-modal", "$extensions": { "vd3": { "class": "B", "reason": "Native dialog and modal window layer" } } },
+    "popover":         { "$value": 1060, "$description": "--vd-z-popover", "$extensions": { "vd3": { "class": "B", "reason": "Contextual floating popover layer" } } },
+    "tooltip":         { "$value": 1070, "$description": "--vd-z-tooltip", "$extensions": { "vd3": { "class": "B", "reason": "Floating tooltip layer" } } },
+    "toast":           { "$value": 1080, "$description": "--vd-z-toast", "$extensions": { "vd3": { "class": "B", "reason": "Topmost notification toast layer" } } }
   },
   "container": {
     "$type": "dimension",
     "$description": "Container widths — v1.9 --vd-container-* confirmed: 521/610/987/1364/1597px. Fibonacci and Lucas, both class A.",
-    "sm":  { "$value": "521px",  "$description": "L13 (Lucas) · --vd-container-sm" },
-    "md":  { "$value": "610px",  "$description": "F15 · --vd-container-md" },
-    "lg":  { "$value": "987px",  "$description": "F16 · --vd-container-lg (max-width)" },
-    "xl":  { "$value": "1364px", "$description": "L16 (Lucas) · --vd-container-xl" },
-    "2xl": { "$value": "1597px", "$description": "F17 · --vd-container-2xl (wide)" }
+    "sm":  { "$value": "521px",  "$description": "L13 (Lucas) · --vd-container-sm", "$extensions": { "vd3": { "class": "A", "derivation": "Lucas L_13 = 521" } } },
+    "md":  { "$value": "610px",  "$description": "F15 · --vd-container-md", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_15 = 610" } } },
+    "lg":  { "$value": "987px",  "$description": "F16 · --vd-container-lg (max-width)", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_16 = 987" } } },
+    "xl":  { "$value": "1364px", "$description": "L15 (Lucas, 16th term) · --vd-container-xl", "$extensions": { "vd3": { "class": "A", "derivation": "Lucas L_15 = 1364" } } },
+    "2xl": { "$value": "1597px", "$description": "F17 · --vd-container-2xl (wide)", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_17 = 1597" } } }
   },
   "breakpoint": {
     "$type": "dimension",
     "$description": "Breakpoints — v1.9 --vd-breakpoint-* confirmed. Class B: conventional platform values (familiarity beats math, PRN-3).",
-    "sm":  { "$value": "576px",  "$description": "--vd-breakpoint-sm" },
-    "md":  { "$value": "768px",  "$description": "--vd-breakpoint-md" },
-    "lg":  { "$value": "992px",  "$description": "--vd-breakpoint-lg" },
-    "xl":  { "$value": "1200px", "$description": "--vd-breakpoint-xl" },
-    "2xl": { "$value": "1400px", "$description": "--vd-breakpoint-2xl" }
+    "sm":  { "$value": "576px",  "$description": "--vd-breakpoint-sm", "$extensions": { "vd3": { "class": "B", "reason": "Conventional responsive mobile breakpoint" } } },
+    "md":  { "$value": "768px",  "$description": "--vd-breakpoint-md", "$extensions": { "vd3": { "class": "B", "reason": "Conventional responsive tablet breakpoint" } } },
+    "lg":  { "$value": "992px",  "$description": "--vd-breakpoint-lg", "$extensions": { "vd3": { "class": "B", "reason": "Conventional responsive desktop breakpoint" } } },
+    "xl":  { "$value": "1200px", "$description": "--vd-breakpoint-xl", "$extensions": { "vd3": { "class": "B", "reason": "Conventional responsive large display breakpoint" } } },
+    "2xl": { "$value": "1400px", "$description": "--vd-breakpoint-2xl", "$extensions": { "vd3": { "class": "B", "reason": "Conventional responsive ultra-wide breakpoint" } } }
   },
   "type": {
     "$description": "Type scale — v1.9 --vd-font-size-* confirmed: static steps xs..4xl (min bounds) plus fluid clamp() for lg..6xl (max bounds are phi multiples: 1.25/1.625/2.0625/2.625/3.3125/4.25/5.375rem). Class A.",
     "size": {
       "$type": "dimension",
-      "xs":   { "$value": "0.75rem",  "$description": "12px · --vd-font-size-xs" },
-      "sm":   { "$value": "0.8125rem", "$description": "13px · --vd-font-size-sm" },
-      "base": { "$value": "1rem",     "$description": "16px · --vd-font-size-base" },
-      "lg":   { "$value": "1.125rem", "$description": "18px static; fluid clamp(1.125rem, 1.08rem + .22vw, 1.25rem)" },
-      "xl":   { "$value": "1.25rem",  "$description": "20px static; fluid clamp(1.35rem, 1.25rem + .5vw, 1.625rem)" },
-      "2xl":  { "$value": "1.5rem",   "$description": "24px static; fluid clamp(1.62rem, 1.46rem + .8vw, 2.0625rem)" },
-      "3xl":  { "$value": "1.875rem", "$description": "30px static; fluid clamp(1.94rem, 1.69rem + 1.25vw, 2.625rem)" },
-      "4xl":  { "$value": "2.25rem",  "$description": "36px static; fluid clamp(2.33rem, 1.97rem + 1.8vw, 3.3125rem)" },
-      "5xl":  { "$value": "clamp(2.8rem, 2.27rem + 2.65vw, 4.25rem)",  "$description": "fluid only · 68px max (16×φ³)" },
-      "6xl":  { "$value": "clamp(3.36rem, 2.63rem + 3.65vw, 5.375rem)", "$description": "fluid only · 86px max" }
+      "xs":   { "$value": "0.75rem",  "$description": "12px · --vd-font-size-xs", "$extensions": { "vd3": { "class": "B", "reason": "Conventional accessibility floor for microcopy" } } },
+      "sm":   { "$value": "0.8125rem", "$description": "13px · --vd-font-size-sm", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_7 = 13px" } } },
+      "base": { "$value": "1rem",     "$description": "16px · --vd-font-size-base", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography baseline 16 * sqrt(phi)^0" } } },
+      "lg":   { "$value": "1.125rem", "$description": "18px static; fluid clamp(1.125rem, 1.08rem + .22vw, 1.25rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^1" } } },
+      "xl":   { "$value": "1.25rem",  "$description": "20px static; fluid clamp(1.35rem, 1.25rem + .5vw, 1.625rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^2 = 16 * phi" } } },
+      "2xl":  { "$value": "1.5rem",   "$description": "24px static; fluid clamp(1.62rem, 1.46rem + .8vw, 2.0625rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^3" } } },
+      "3xl":  { "$value": "1.875rem", "$description": "30px static; fluid clamp(1.94rem, 1.69rem + 1.25vw, 2.625rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^4 = 16 * phi^2" } } },
+      "4xl":  { "$value": "2.25rem",  "$description": "36px static; fluid clamp(2.33rem, 1.97rem + 1.8vw, 3.3125rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^5" } } },
+      "5xl":  { "$value": "clamp(2.8rem, 2.27rem + 2.65vw, 4.25rem)",  "$description": "fluid only · 68px max (16×φ³)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^6 = 16 * phi^3" } } },
+      "6xl":  { "$value": "clamp(3.36rem, 2.63rem + 3.65vw, 5.375rem)", "$description": "fluid only · 86px max", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^7" } } }
     },
     "leading": {
       "$type": "number",
       "$description": "phi line-heights — confirmed present in v1.9 css (--vd-line-height-tight 1.236 = 2/phi, snug 1.382, normal 1.5, relaxed 1.618 = phi). v1.9 also ships conventional 1.25/1.5/1.75/2 (class B aliases).",
-      "tight":   { "$value": 1.236, "$description": "2/φ" },
-      "snug":    { "$value": 1.382 },
-      "normal":  { "$value": 1.5 },
-      "relaxed": { "$value": 1.618, "$description": "φ" }
+      "tight":   { "$value": 1.236, "$description": "2/φ", "$extensions": { "vd3": { "class": "A", "derivation": "2 / phi = 1.236" } } },
+      "snug":    { "$value": 1.382, "$description": "1 + 1/φ²", "$extensions": { "vd3": { "class": "A", "derivation": "1 + 1/(phi^2) = 1.382" } } },
+      "normal":  { "$value": 1.5, "$description": "Harmonic bridge", "$extensions": { "vd3": { "class": "B", "reason": "Harmonic conventional body line-height" } } },
+      "relaxed": { "$value": 1.618, "$description": "φ", "$extensions": { "vd3": { "class": "A", "derivation": "phi = 1.618" } } },
+      "loose":   { "$value": 2.0, "$description": "2.0 · phi + 1/phi^2 · double-spaced editorial reading", "$extensions": { "vd3": { "class": "B", "reason": "Conventional double line spacing for editorial reading" } } }
     },
     "tracking": {
       "$type": "dimension",
       "$description": "Six tracking tokens — v1.9 --vd-letter-spacing-* confirmed. Class B: conventional em steps.",
-      "tighter": { "$value": "-0.05em" },
-      "tight":   { "$value": "-0.025em" },
-      "normal":  { "$value": "0" },
-      "wide":    { "$value": "0.025em" },
-      "wider":   { "$value": "0.05em" },
-      "widest":  { "$value": "0.1em" }
+      "tighter": { "$value": "-0.05em", "$extensions": { "vd3": { "class": "B", "reason": "Conventional optical tightening for large display titles" } } },
+      "tight":   { "$value": "-0.025em", "$extensions": { "vd3": { "class": "B", "reason": "Conventional optical tightening for section headings" } } },
+      "normal":  { "$value": "0", "$extensions": { "vd3": { "class": "B", "reason": "Default tracking baseline" } } },
+      "wide":    { "$value": "0.025em", "$extensions": { "vd3": { "class": "B", "reason": "Subtle optical spacing for small caps / buttons" } } },
+      "wider":   { "$value": "0.05em", "$extensions": { "vd3": { "class": "B", "reason": "Expanded optical tracking for badges / labels" } } },
+      "widest":  { "$value": "0.1em", "$extensions": { "vd3": { "class": "B", "reason": "Wide uppercase tracking for headers" } } }
     }
   },
   "motion": {
     "$type": "duration",
     "$description": "Fibonacci duration ladder — v1.9 --vd-duration-55..987 confirmed (plus --vd-duration-0). Named aliases below are the v1.9 named layer (instant..slowest = 89..987ms, aliasing the ladder). CSS mapping: motion.* -> --vd-duration-*. Class A.",
-    "0":    { "$value": "0ms" },
-    "55":   { "$value": "55ms",  "$description": "--vd-duration-55" },
-    "89":   { "$value": "89ms",  "$description": "--vd-duration-89" },
-    "144":  { "$value": "144ms", "$description": "--vd-duration-144" },
-    "233":  { "$value": "233ms", "$description": "--vd-duration-233" },
-    "377":  { "$value": "377ms", "$description": "--vd-duration-377" },
-    "610":  { "$value": "610ms", "$description": "--vd-duration-610" },
-    "987":  { "$value": "987ms", "$description": "--vd-duration-987" },
-    "instant": { "$value": "{motion.89}",  "$description": "v1.9 named alias --vd-duration-instant" },
-    "fast":    { "$value": "{motion.144}", "$description": "--vd-duration-fast" },
-    "base":    { "$value": "{motion.233}", "$description": "--vd-duration-base · dropdowns, popovers, menus" },
-    "slow":    { "$value": "{motion.377}", "$description": "--vd-duration-slow · drawers, modals" },
-    "slower":  { "$value": "{motion.610}", "$description": "--vd-duration-slower" },
-    "slowest": { "$value": "{motion.987}", "$description": "--vd-duration-slowest · page transitions" }
+    "0":       { "$value": "0ms", "$extensions": { "vd3": { "class": "A", "derivation": "Instant transition boundary" } } },
+    "55":      { "$value": "55ms",  "$description": "--vd-duration-55", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_10 = 55" } } },
+    "89":      { "$value": "89ms",  "$description": "--vd-duration-89", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_11 = 89" } } },
+    "144":     { "$value": "144ms", "$description": "--vd-duration-144", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_12 = 144" } } },
+    "233":     { "$value": "233ms", "$description": "--vd-duration-233", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_13 = 233" } } },
+    "377":     { "$value": "377ms", "$description": "--vd-duration-377", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_14 = 377" } } },
+    "610":     { "$value": "610ms", "$description": "--vd-duration-610", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_15 = 610" } } },
+    "987":     { "$value": "987ms", "$description": "--vd-duration-987", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_16 = 987" } } },
+    "instant": { "$value": "{motion.89}",  "$description": "v1.9 named alias --vd-duration-instant", "$extensions": { "vd3": { "class": "A", "derivation": "Alias for motion.89 (F_11)" } } },
+    "fast":    { "$value": "{motion.144}", "$description": "--vd-duration-fast", "$extensions": { "vd3": { "class": "A", "derivation": "Alias for motion.144 (F_12)" } } },
+    "base":    { "$value": "{motion.233}", "$description": "--vd-duration-base · dropdowns, popovers, menus", "$extensions": { "vd3": { "class": "A", "derivation": "Alias for motion.233 (F_13)" } } },
+    "slow":    { "$value": "{motion.377}", "$description": "--vd-duration-slow · drawers, modals", "$extensions": { "vd3": { "class": "A", "derivation": "Alias for motion.377 (F_14)" } } },
+    "slower":  { "$value": "{motion.610}", "$description": "--vd-duration-slower", "$extensions": { "vd3": { "class": "A", "derivation": "Alias for motion.610 (F_15)" } } },
+    "slowest": { "$value": "{motion.987}", "$description": "--vd-duration-slowest · page transitions", "$extensions": { "vd3": { "class": "A", "derivation": "Alias for motion.987 (F_16)" } } }
   },
   "easing": {
     "$type": "cubicBezier",
     "$description": "Golden easing set — v1.9 --vd-ease-* confirmed; control points are 1/φ (0.618) and 1/φ² (0.382). Class A. CSS mapping: easing.* -> --vd-ease-*.",
-    "out":    { "$value": [0.236, 1, 0.382, 1], "$description": "--vd-ease-out" },
-    "in":     { "$value": [0.618, 0, 0.764, 0], "$description": "--vd-ease-in" },
-    "in-out": { "$value": [0.618, 0, 0.382, 1], "$description": "--vd-ease-in-out" },
-    "linear": { "$value": [0, 0, 1, 1], "$description": "--vd-ease-linear" }
+    "out":    { "$value": [0.236, 1, 0.382, 1], "$description": "--vd-ease-out", "$extensions": { "vd3": { "class": "A", "derivation": "(phi^-3, 1, phi^-2, 1)" } } },
+    "in":     { "$value": [0.618, 0, 0.764, 0], "$description": "--vd-ease-in", "$extensions": { "vd3": { "class": "A", "derivation": "(phi^-1, 0, 2*phi^-2, 0)" } } },
+    "in-out": { "$value": [0.618, 0, 0.382, 1], "$description": "--vd-ease-in-out", "$extensions": { "vd3": { "class": "A", "derivation": "(phi^-1, 0, phi^-2, 1)" } } },
+    "linear": { "$value": [0, 0, 1, 1], "$description": "--vd-ease-linear", "$extensions": { "vd3": { "class": "A", "derivation": "Linear identity progression" } } }
+  },
+  "aspect": {
+    "$type": "aspectRatio",
+    "$description": "Golden aspect ratio tokens — Class A.",
+    "golden": {
+      "$value": "1.618 / 1",
+      "$description": "Landscape golden ratio phi : 1 (1.618 / 1)",
+      "$extensions": { "vd3": { "class": "A", "derivation": "phi : 1" } }
+    },
+    "golden-portrait": {
+      "$value": "1 / 1.618",
+      "$description": "Portrait golden ratio 1 : phi (1 / 1.618)",
+      "$extensions": { "vd3": { "class": "A", "derivation": "1 : phi" } }
+    }
+  },
+  "glass": {
+    "$description": "Frosted glass tokens — blur radii, tint opacities, and saturation boosts adhering to the C-02 Convergence Zone.",
+    "blur-sm": {
+      "$type": "dimension",
+      "$value": "5px",
+      "$description": "5px · F_5 · Subtle glass overlay / pill",
+      "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_5 = 5" } }
+    },
+    "blur-md": {
+      "$type": "dimension",
+      "$value": "13px",
+      "$description": "13px · F_7 · Sticky navbar / toolbar blur",
+      "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_7 = 13" } }
+    },
+    "blur-lg": {
+      "$type": "dimension",
+      "$value": "20px",
+      "$description": "20px · C-02 · Convergence Zone soft-cap for cards / popovers",
+      "$extensions": { "vd3": { "class": "C", "exceptionId": "C-02", "derivation": "GPU fill-rate convergence soft-cap" } }
+    },
+    "blur-xl": {
+      "$type": "dimension",
+      "$value": "26px",
+      "$description": "26px · C-02 · Convergence Zone hard-cap for modal backdrops / drawers",
+      "$extensions": { "vd3": { "class": "C", "exceptionId": "C-02", "derivation": "GPU fill-rate convergence hard-cap" } }
+    },
+    "saturate-md": {
+      "$type": "dimension",
+      "$value": "138%",
+      "$description": "138% · 1 + 1/phi^2 · Mid-level vibrancy boost",
+      "$extensions": { "vd3": { "class": "A", "derivation": "1 + 1/(phi^2)" } }
+    },
+    "saturate-lg": {
+      "$type": "dimension",
+      "$value": "162%",
+      "$description": "162% · phi · High-level vibrancy boost",
+      "$extensions": { "vd3": { "class": "A", "derivation": "phi = 1.618" } }
+    },
+    "tint-sm": {
+      "$type": "number",
+      "$value": 0.08,
+      "$description": "0.08 · F_6 = 8% alpha tint",
+      "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_6 = 8%" } }
+    },
+    "tint-md": {
+      "$type": "number",
+      "$value": 0.13,
+      "$description": "0.13 · F_7 = 13% alpha tint",
+      "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_7 = 13%" } }
+    },
+    "tint-lg": {
+      "$type": "number",
+      "$value": 0.21,
+      "$description": "0.21 · F_8 = 21% alpha tint",
+      "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_8 = 21%" } }
+    },
+    "tint-xl": {
+      "$type": "number",
+      "$value": 0.34,
+      "$description": "0.34 · F_9 = 34% alpha tint",
+      "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_9 = 34%" } }
+    }
   }
 }

@@ -1,0 +1,561 @@
+/**
+ * VD3 UI CORE — Tokens CSS
+ * Single Source of Truth compiled Design Tokens
+ * Cascade Layer: @layer vd3.tokens
+ * Dual theme: :root (light) and [data-theme="dark"]
+ * Reduced motion: @media (prefers-reduced-motion: reduce) and [data-motion="reduce"]
+ */
+
+/* Cascade layer declaration order conforming to PROJECT.md Feature #47 */
+@layer vd3.tokens, vd3.reset, vd3.base, vd3.layout, vd3.components, vd3.utilities;
+
+@layer vd3.tokens {
+  :root {
+    /* -------------------------------------------------------------------------
+       1. Mathematical Constants (Class A)
+       ------------------------------------------------------------------------- */
+    --vd3-phi: 1.6180339887;
+    --vd3-inv-phi: 0.6180339887;
+    --vd3-inv-phi-sq: 0.3819660113;
+    --vd3-sqrt-phi: 1.2720196495;
+    --vd3-golden-angle: 137.507764deg;
+
+    /* -------------------------------------------------------------------------
+       2. Spacing Scale (Fibonacci & C-01)
+       ------------------------------------------------------------------------- */
+    --vd3-space-fib-1: 0.125rem;
+    --vd3-space-fib-2: 0.25rem;
+    --vd3-space-fib-3: 0.375rem;
+    --vd3-space-fib-5: 0.5rem;
+    --vd3-space-fib-8: 0.75rem;
+    --vd3-space-fib-13: 0.8125rem;
+    --vd3-space-fib-21: 1.3125rem;
+    --vd3-space-fib-34: 2.125rem;
+    --vd3-space-fib-55: 3.4375rem;
+    --vd3-space-fib-89: 5.5625rem;
+    --vd3-space-fib-144: 9rem;
+
+    /* Literal pixel spacing aliases */
+    --vd3-spacing-1: 2px;
+    --vd3-spacing-2: 4px;
+    --vd3-spacing-3: 6px;
+    --vd3-spacing-5: 8px;
+    --vd3-spacing-8: 12px;
+    --vd3-spacing-13: 13px;
+    --vd3-spacing-21: 21px;
+    --vd3-spacing-34: 34px;
+    --vd3-spacing-55: 55px;
+    --vd3-spacing-89: 89px;
+    --vd3-spacing-144: 144px;
+
+    /* -------------------------------------------------------------------------
+       3. Line & Border Weights (Fibonacci 1/2/3/5px - Class A)
+       ------------------------------------------------------------------------- */
+    --vd3-border-width-hair: 1px;
+    --vd3-border-width-thin: 2px;
+    --vd3-border-width-regular: 3px;
+    --vd3-border-width-thick: 5px;
+
+    --vd3-line-hair: 1px;
+    --vd3-line-thin: 2px;
+    --vd3-line-regular: 3px;
+    --vd3-line-thick: 5px;
+
+    /* -------------------------------------------------------------------------
+       4. Border Radii (Fibonacci & C-04)
+       ------------------------------------------------------------------------- */
+    --vd3-radius-fib-2: 0.125rem;
+    --vd3-radius-fib-3: 0.1875rem;
+    --vd3-radius-fib-5: 0.3125rem;
+    --vd3-radius-fib-8: 0.5rem;
+    --vd3-radius-fib-13: 0.8125rem;
+    --vd3-radius-fib-21: 1.3125rem;
+    --vd3-radius-full: 9999rem;
+
+    /* -------------------------------------------------------------------------
+       5. Containers (Lucas & Fibonacci - Class A)
+       ------------------------------------------------------------------------- */
+    --vd3-container-sm: 521px;
+    --vd3-container-md: 610px;
+    --vd3-container-lg: 987px;
+    --vd3-container-xl: 1364px;
+    --vd3-container-2xl: 1597px;
+
+    /* -------------------------------------------------------------------------
+       6. Breakpoints (Conventional - Class B)
+       ------------------------------------------------------------------------- */
+    --vd3-breakpoint-sm: 576px;
+    --vd3-breakpoint-md: 768px;
+    --vd3-breakpoint-lg: 992px;
+    --vd3-breakpoint-xl: 1200px;
+    --vd3-breakpoint-2xl: 1400px;
+
+    /* -------------------------------------------------------------------------
+       7. Aspect Ratios (Golden - Class A)
+       ------------------------------------------------------------------------- */
+    --vd3-aspect-golden: 1.618 / 1;
+    --vd3-aspect-golden-portrait: 1 / 1.618;
+
+    /* -------------------------------------------------------------------------
+       8. Frosted Glass (C-02 Convergence Zone)
+       ------------------------------------------------------------------------- */
+    --vd3-glass-blur-sm: 5px;
+    --vd3-glass-blur-md: 13px;
+    --vd3-glass-blur-lg: 20px;
+    --vd3-glass-blur-xl: 26px;
+    --vd3-glass-saturate-md: 138%;
+    --vd3-glass-saturate-lg: 162%;
+    --vd3-glass-tint-sm: 0.08;
+    --vd3-glass-tint-md: 0.13;
+    --vd3-glass-tint-lg: 0.21;
+    --vd3-glass-tint-xl: 0.34;
+
+    /* -------------------------------------------------------------------------
+       9. Typography (Modular sqrt(phi) scale & phi line-heights)
+       ------------------------------------------------------------------------- */
+    --vd3-font-family-sans: var(--vd-font-family-sans, "Ubuntu", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+    --vd3-font-family-serif: var(--vd-font-family-serif, Georgia, "Times New Roman", serif);
+    --vd3-font-family-mono: var(--vd-font-family-mono, "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace);
+    --vd3-font-size-xs: 0.75rem;
+    --vd3-font-size-sm: 0.8125rem;
+    --vd3-font-size-base: 1rem;
+    --vd3-font-size-lg: clamp(1.125rem, 1.08rem + .22vw, 1.25rem);
+    --vd3-font-size-xl: clamp(1.35rem, 1.25rem + .5vw, 1.625rem);
+    --vd3-font-size-2xl: clamp(1.62rem, 1.46rem + .8vw, 2.0625rem);
+    --vd3-font-size-3xl: clamp(1.94rem, 1.69rem + 1.25vw, 2.625rem);
+    --vd3-font-size-4xl: clamp(2.33rem, 1.97rem + 1.8vw, 3.3125rem);
+    --vd3-font-size-5xl: clamp(2.8rem, 2.27rem + 2.65vw, 4.25rem);
+    --vd3-font-size-6xl: clamp(3.36rem, 2.63rem + 3.65vw, 5.375rem);
+
+    --vd3-font-size-lg-static: 1.125rem;
+    --vd3-font-size-xl-static: 1.25rem;
+    --vd3-font-size-2xl-static: 1.5rem;
+    --vd3-font-size-3xl-static: 1.875rem;
+    --vd3-font-size-4xl-static: 2.25rem;
+
+    --vd3-line-height-tight: 1.236;
+    --vd3-line-height-snug: 1.382;
+    --vd3-line-height-normal: 1.5;
+    --vd3-line-height-relaxed: 1.618;
+    --vd3-line-height-loose: 2.0;
+
+    --vd3-leading-tight: 1.236;
+    --vd3-leading-snug: 1.382;
+    --vd3-leading-normal: 1.5;
+    --vd3-leading-relaxed: 1.618;
+    --vd3-leading-loose: 2.0;
+
+    --vd3-letter-spacing-tighter: -0.05em;
+    --vd3-letter-spacing-tight: -0.025em;
+    --vd3-letter-spacing-normal: 0;
+    --vd3-letter-spacing-wide: 0.025em;
+    --vd3-letter-spacing-wider: 0.05em;
+    --vd3-letter-spacing-widest: 0.1em;
+
+    --vd3-tracking-tighter: -0.05em;
+    --vd3-tracking-tight: -0.025em;
+    --vd3-tracking-normal: 0;
+    --vd3-tracking-wide: 0.025em;
+    --vd3-tracking-wider: 0.05em;
+    --vd3-tracking-widest: 0.1em;
+
+    /* -------------------------------------------------------------------------
+       10. Elevation Shadows (Consecutive Fibonacci Pairs - Class A)
+       ------------------------------------------------------------------------- */
+    --vd3-shadow-1: 0 1px 2px #0000000d;
+    --vd3-shadow-2: 0 2px 3px 0 #0000001a, 0 1px 2px -1px #0000001a;
+    --vd3-shadow-3: 0 3px 5px -1px #0000001a, 0 2px 3px -2px #0000001a;
+    --vd3-shadow-4: 0 8px 13px -3px #0000001a, 0 3px 5px -3px #0000001a;
+    --vd3-shadow-5: 0 13px 21px -5px #0000001a, 0 5px 8px -5px #0000001a;
+    --vd3-shadow-6: 0 21px 34px -8px #00000040;
+
+    --vd3-shadow-sm: var(--vd3-shadow-1);
+    --vd3-shadow: var(--vd3-shadow-2);
+    --vd3-shadow-md: var(--vd3-shadow-3);
+    --vd3-shadow-lg: var(--vd3-shadow-4);
+    --vd3-shadow-xl: var(--vd3-shadow-5);
+    --vd3-shadow-2xl: var(--vd3-shadow-6);
+
+    /* -------------------------------------------------------------------------
+       11. Ambient Glow (Fibonacci - Class A)
+       ------------------------------------------------------------------------- */
+    --vd3-glow-fib-8: 0.5rem;
+    --vd3-glow-fib-13: 0.8125rem;
+    --vd3-glow-fib-21: 1.3125rem;
+
+    /* -------------------------------------------------------------------------
+       12. Stacking Ladder (z-index - Class B)
+       ------------------------------------------------------------------------- */
+    --vd3-z-base: 0;
+    --vd3-z-dropdown: 1000;
+    --vd3-z-sticky: 1020;
+    --vd3-z-fixed: 1030;
+    --vd3-z-modal-backdrop: 1040;
+    --vd3-z-modal: 1050;
+    --vd3-z-popover: 1060;
+    --vd3-z-tooltip: 1070;
+    --vd3-z-toast: 1080;
+
+    /* -------------------------------------------------------------------------
+       13. Motion Durations (Fibonacci Ladder - Class A)
+       ------------------------------------------------------------------------- */
+    --vd3-duration-0: 0ms;
+    --vd3-duration-55: 55ms;
+    --vd3-duration-89: 89ms;
+    --vd3-duration-144: 144ms;
+    --vd3-duration-233: 233ms;
+    --vd3-duration-377: 377ms;
+    --vd3-duration-610: 610ms;
+    --vd3-duration-987: 987ms;
+
+    --vd3-duration-instant: var(--vd3-duration-89);
+    --vd3-duration-fast: var(--vd3-duration-144);
+    --vd3-duration-base: var(--vd3-duration-233);
+    --vd3-duration-slow: var(--vd3-duration-377);
+    --vd3-duration-slower: var(--vd3-duration-610);
+    --vd3-duration-slowest: var(--vd3-duration-987);
+
+    /* -------------------------------------------------------------------------
+       14. Easing Curves (Golden Béziers - Class A)
+       ------------------------------------------------------------------------- */
+    --vd3-ease-out: cubic-bezier(0.236, 1, 0.382, 1);
+    --vd3-ease-in: cubic-bezier(0.618, 0, 0.764, 0);
+    --vd3-ease-in-out: cubic-bezier(0.618, 0, 0.382, 1);
+    --vd3-ease-linear: cubic-bezier(0, 0, 1, 1);
+
+    /* -------------------------------------------------------------------------
+       15. Primitive Palette Colors
+       ------------------------------------------------------------------------- */
+    --vd3-color-gray-0: #f8f9fa;
+    --vd3-color-gray-1: #f1f3f5;
+    --vd3-color-gray-2: #e9ecef;
+    --vd3-color-gray-3: #dee2e6;
+    --vd3-color-gray-4: #ced4da;
+    --vd3-color-gray-5: #adb5bd;
+    --vd3-color-gray-6: #868e96;
+    --vd3-color-gray-7: #495057;
+    --vd3-color-gray-8: #343a40;
+    --vd3-color-gray-9: #212529;
+    --vd3-color-gray-1000: #1a1d20;
+
+    --vd3-color-gold-4: #ffd43b;
+    --vd3-color-gold-6: #fab005;
+    --vd3-color-gold-7: #f59f00;
+
+    --vd3-color-red-4: #ff8787;
+    --vd3-color-red-6: #fa5252;
+
+    /* Golden Angle Algorithmic Palette */
+    --vd3-color-golden-0: #fab005;
+    --vd3-color-golden-1: #0ab5b5;
+    --vd3-color-golden-2: #f20d91;
+    --vd3-color-golden-3: #68c20a;
+    --vd3-color-golden-4: #254ef0;
+    --vd3-color-golden-5: #f22d0d;
+    --vd3-color-golden-6: #0ac265;
+    --vd3-color-golden-7: #ba0df2;
+
+    /* -------------------------------------------------------------------------
+       16. Focus Indicator Contract
+       ------------------------------------------------------------------------- */
+    --vd3-focus-ring-width: 2px;
+    --vd3-focus-ring-offset: 2px;
+    --vd3-focus-ring-color: var(--vd3-color-focus);
+    --vd3-focus-ring-offset-color: var(--vd3-color-canvas);
+    --vd3-focus-ring-glow: 0 0 8px var(--vd3-color-focus-glow);
+
+    /* -------------------------------------------------------------------------
+       17. Semantic Roles (Default / Light Theme)
+       ------------------------------------------------------------------------- */
+    --vd3-color-canvas: #ffffff;
+    --vd3-color-canvas-rgb: 255, 255, 255;
+    --vd3-color-layer: var(--vd3-color-gray-0);
+    --vd3-color-layer-hover: var(--vd3-color-gray-1);
+    --vd3-color-text-primary: var(--vd3-color-gray-1000);
+    --vd3-color-text-secondary: var(--vd3-color-gray-7);
+    --vd3-color-border: var(--vd3-color-gray-3);
+    --vd3-color-border-subtle: var(--vd3-color-gray-2);
+    --vd3-color-focus: var(--vd3-color-gold-6);
+    --vd3-color-focus-glow: rgba(250, 176, 5, 0.4);
+    --vd3-color-interactive: var(--vd3-color-gold-7);
+    --vd3-color-critical: var(--vd3-color-red-6);
+    --vd3-color-shadow: #0000001a;
+
+    /* -------------------------------------------------------------------------
+       18. 100% Backward Compatibility Legacy Aliases (--vd-*)
+       ------------------------------------------------------------------------- */
+    --vd-phi: var(--vd3-phi);
+    --vd-golden-angle: var(--vd3-golden-angle);
+
+    --vd-space-fib-1: var(--vd3-space-fib-1);
+    --vd-space-fib-2: var(--vd3-space-fib-2);
+    --vd-space-fib-3: var(--vd3-space-fib-3);
+    --vd-space-fib-5: var(--vd3-space-fib-5);
+    --vd-space-fib-8: var(--vd3-space-fib-8);
+    --vd-space-fib-13: var(--vd3-space-fib-13);
+    --vd-space-fib-21: var(--vd3-space-fib-21);
+    --vd-space-fib-34: var(--vd3-space-fib-34);
+    --vd-space-fib-55: var(--vd3-space-fib-55);
+    --vd-space-fib-89: var(--vd3-space-fib-89);
+    --vd-space-fib-144: var(--vd3-space-fib-144);
+
+    --vd-spacing-1: var(--vd3-spacing-1);
+    --vd-spacing-2: var(--vd3-spacing-2);
+    --vd-spacing-3: var(--vd3-spacing-3);
+    --vd-spacing-5: var(--vd3-spacing-5);
+    --vd-spacing-8: var(--vd3-spacing-8);
+    --vd-spacing-13: var(--vd3-spacing-13);
+    --vd-spacing-21: var(--vd3-spacing-21);
+    --vd-spacing-34: var(--vd3-spacing-34);
+    --vd-spacing-55: var(--vd3-spacing-55);
+    --vd-spacing-89: var(--vd3-spacing-89);
+    --vd-spacing-144: var(--vd3-spacing-144);
+
+    --vd-border-width: var(--vd3-border-width-hair);
+    --vd-line-hair: var(--vd3-line-hair);
+    --vd-line-thin: var(--vd3-line-thin);
+    --vd-line-regular: var(--vd3-line-regular);
+    --vd-line-thick: var(--vd3-line-thick);
+
+    --vd-radius-fib-2: var(--vd3-radius-fib-2);
+    --vd-radius-fib-3: var(--vd3-radius-fib-3);
+    --vd-radius-fib-5: var(--vd3-radius-fib-5);
+    --vd-radius-fib-8: var(--vd3-radius-fib-8);
+    --vd-radius-fib-13: var(--vd3-radius-fib-13);
+    --vd-radius-fib-21: var(--vd3-radius-fib-21);
+    --vd-radius-full: var(--vd3-radius-full);
+
+    --vd-container-sm: var(--vd3-container-sm);
+    --vd-container-md: var(--vd3-container-md);
+    --vd-container-lg: var(--vd3-container-lg);
+    --vd-container-xl: var(--vd3-container-xl);
+    --vd-container-2xl: var(--vd3-container-2xl);
+
+    --vd-breakpoint-sm: var(--vd3-breakpoint-sm);
+    --vd-breakpoint-md: var(--vd3-breakpoint-md);
+    --vd-breakpoint-lg: var(--vd3-breakpoint-lg);
+    --vd-breakpoint-xl: var(--vd3-breakpoint-xl);
+    --vd-breakpoint-2xl: var(--vd3-breakpoint-2xl);
+
+    --vd-font-size-xs: var(--vd3-font-size-xs);
+    --vd-font-size-sm: var(--vd3-font-size-sm);
+    --vd-font-size-base: var(--vd3-font-size-base);
+    --vd-font-size-lg: var(--vd3-font-size-lg);
+    --vd-font-size-xl: var(--vd3-font-size-xl);
+    --vd-font-size-2xl: var(--vd3-font-size-2xl);
+    --vd-font-size-3xl: var(--vd3-font-size-3xl);
+    --vd-font-size-4xl: var(--vd3-font-size-4xl);
+    --vd-font-size-5xl: var(--vd3-font-size-5xl);
+    --vd-font-size-6xl: var(--vd3-font-size-6xl);
+
+    --vd-line-height-tight: var(--vd3-line-height-tight);
+    --vd-line-height-snug: var(--vd3-line-height-snug);
+    --vd-line-height-normal: var(--vd3-line-height-normal);
+    --vd-line-height-relaxed: var(--vd3-line-height-relaxed);
+    --vd-line-height-loose: var(--vd3-line-height-loose);
+
+    --vd-leading-tight: var(--vd3-leading-tight);
+    --vd-leading-snug: var(--vd3-leading-snug);
+    --vd-leading-normal: var(--vd3-leading-normal);
+    --vd-leading-relaxed: var(--vd3-leading-relaxed);
+    --vd-leading-loose: var(--vd3-leading-loose);
+
+    --vd-letter-spacing-tighter: var(--vd3-letter-spacing-tighter);
+    --vd-letter-spacing-tight: var(--vd3-letter-spacing-tight);
+    --vd-letter-spacing-normal: var(--vd3-letter-spacing-normal);
+    --vd-letter-spacing-wide: var(--vd3-letter-spacing-wide);
+    --vd-letter-spacing-wider: var(--vd3-letter-spacing-wider);
+    --vd-letter-spacing-widest: var(--vd3-letter-spacing-widest);
+
+    --vd-shadow-1: var(--vd3-shadow-1);
+    --vd-shadow-2: var(--vd3-shadow-2);
+    --vd-shadow-3: var(--vd3-shadow-3);
+    --vd-shadow-4: var(--vd3-shadow-4);
+    --vd-shadow-5: var(--vd3-shadow-5);
+    --vd-shadow-6: var(--vd3-shadow-6);
+    --vd-shadow-sm: var(--vd3-shadow-1);
+    --vd-shadow: var(--vd3-shadow-2);
+    --vd-shadow-md: var(--vd3-shadow-3);
+    --vd-shadow-lg: var(--vd3-shadow-4);
+    --vd-shadow-xl: var(--vd3-shadow-5);
+    --vd-shadow-2xl: var(--vd3-shadow-6);
+
+    --vd-glow-fib-8: var(--vd3-glow-fib-8);
+    --vd-glow-fib-13: var(--vd3-glow-fib-13);
+    --vd-glow-fib-21: var(--vd3-glow-fib-21);
+
+    --vd-z-base: var(--vd3-z-base);
+    --vd-z-dropdown: var(--vd3-z-dropdown);
+    --vd-z-sticky: var(--vd3-z-sticky);
+    --vd-z-fixed: var(--vd3-z-fixed);
+    --vd-z-modal-backdrop: var(--vd3-z-modal-backdrop);
+    --vd-z-modal: var(--vd3-z-modal);
+    --vd-z-popover: var(--vd3-z-popover);
+    --vd-z-tooltip: var(--vd3-z-tooltip);
+    --vd-z-toast: var(--vd3-z-toast);
+
+    --vd-duration-0: var(--vd3-duration-0);
+    --vd-duration-55: var(--vd3-duration-55);
+    --vd-duration-89: var(--vd3-duration-89);
+    --vd-duration-144: var(--vd3-duration-144);
+    --vd-duration-233: var(--vd3-duration-233);
+    --vd-duration-377: var(--vd3-duration-377);
+    --vd-duration-610: var(--vd3-duration-610);
+    --vd-duration-987: var(--vd3-duration-987);
+
+    --vd-duration-instant: var(--vd3-duration-instant);
+    --vd-duration-fast: var(--vd3-duration-fast);
+    --vd-duration-base: var(--vd3-duration-base);
+    --vd-duration-slow: var(--vd3-duration-slow);
+    --vd-duration-slower: var(--vd3-duration-slower);
+    --vd-duration-slowest: var(--vd3-duration-slowest);
+
+    --vd-ease-out: var(--vd3-ease-out);
+    --vd-ease-in: var(--vd3-ease-in);
+    --vd-ease-in-out: var(--vd3-ease-in-out);
+    --vd-ease-linear: var(--vd3-ease-linear);
+
+    --vd-gray-0: var(--vd3-color-gray-0);
+    --vd-gray-1: var(--vd3-color-gray-1);
+    --vd-gray-2: var(--vd3-color-gray-2);
+    --vd-gray-3: var(--vd3-color-gray-3);
+    --vd-gray-4: var(--vd3-color-gray-4);
+    --vd-gray-5: var(--vd3-color-gray-5);
+    --vd-gray-6: var(--vd3-color-gray-6);
+    --vd-gray-7: var(--vd3-color-gray-7);
+    --vd-gray-8: var(--vd3-color-gray-8);
+    --vd-gray-9: var(--vd3-color-gray-9);
+    --vd-bg-darker: var(--vd3-color-gray-1000);
+
+    --vd-yellow-4: var(--vd3-color-gold-4);
+    --vd-yellow-6: var(--vd3-color-gold-6);
+    --vd-yellow-7: var(--vd3-color-gold-7);
+
+    --vd-red-4: var(--vd3-color-red-4);
+    --vd-red-6: var(--vd3-color-red-6);
+
+    --vd-bg-primary: var(--vd3-color-canvas);
+    --vd-bg-secondary: var(--vd3-color-layer);
+    --vd-bg-tertiary: var(--vd3-color-layer-hover);
+    --vd-text-primary: var(--vd3-color-text-primary);
+    --vd-text-secondary: var(--vd3-color-text-secondary);
+    --vd-text-muted: var(--vd3-color-text-secondary);
+    --vd-border-color: var(--vd3-color-border);
+    --vd-color-primary: var(--vd3-color-focus);
+    --vd-color-primary-hover: var(--vd3-color-interactive);
+    --vd-color-error: var(--vd3-color-critical);
+    --vd-color-danger: var(--vd3-color-critical);
+  }
+
+  /* ---------------------------------------------------------------------------
+     18b. Runtime Font Family Switcher Presets ([data-font])
+     --------------------------------------------------------------------------- */
+  [data-font="system"] {
+    --vd-font-family-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --vd-font-family-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    --vd3-font-family-sans: var(--vd-font-family-sans);
+    --vd3-font-family-mono: var(--vd-font-family-mono);
+  }
+
+  [data-font="ubuntu"] {
+    --vd-font-family-sans: "Ubuntu", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --vd3-font-family-sans: var(--vd-font-family-sans);
+  }
+
+  [data-font="nunito"] {
+    --vd-font-family-sans: "Nunito", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --vd3-font-family-sans: var(--vd-font-family-sans);
+  }
+
+  [data-font="lato"] {
+    --vd-font-family-sans: "Lato", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --vd3-font-family-sans: var(--vd-font-family-sans);
+  }
+
+  [data-font="open-sans"] {
+    --vd-font-family-sans: "Open Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --vd3-font-family-sans: var(--vd-font-family-sans);
+  }
+
+  [data-font="jetbrains-mono"] {
+    --vd-font-family-sans: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --vd-font-family-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    --vd3-font-family-sans: var(--vd-font-family-sans);
+    --vd3-font-family-mono: var(--vd-font-family-mono);
+  }
+
+  /* ---------------------------------------------------------------------------
+     19. Dark Theme Overrides
+     --------------------------------------------------------------------------- */
+  [data-theme="dark"] {
+    --vd3-color-canvas: var(--vd3-color-gray-9);
+    --vd3-color-canvas-rgb: 33, 37, 41;
+    --vd3-color-layer: var(--vd3-color-gray-8);
+    --vd3-color-layer-hover: var(--vd3-color-gray-7);
+    --vd3-color-text-primary: var(--vd3-color-gray-0);
+    --vd3-color-text-secondary: var(--vd3-color-gray-3);
+    --vd3-color-border: var(--vd3-color-gray-7);
+    --vd3-color-border-subtle: var(--vd3-color-gray-8);
+    --vd3-color-focus: var(--vd3-color-gold-4);
+    --vd3-color-focus-glow: rgba(255, 212, 59, 0.4);
+    --vd3-color-interactive: var(--vd3-color-gold-4);
+    --vd3-color-critical: var(--vd3-color-red-4);
+    --vd3-color-shadow: #0000004d;
+
+    /* Dark theme elevation shadows with adjusted opacity */
+    --vd3-shadow-1: 0 1px 2px #00000033;
+    --vd3-shadow-2: 0 2px 3px 0 #0000004d, 0 1px 2px -1px #0000004d;
+    --vd3-shadow-3: 0 3px 5px -1px #0000004d, 0 2px 3px -2px #0000004d;
+    --vd3-shadow-4: 0 8px 13px -3px #0000004d, 0 3px 5px -3px #0000004d;
+    --vd3-shadow-5: 0 13px 21px -5px #0000004d, 0 5px 8px -5px #0000004d;
+    --vd3-shadow-6: 0 21px 34px -8px #00000080;
+  }
+
+  /* ---------------------------------------------------------------------------
+     20. Reduced Motion Contract (MOB-001)
+     --------------------------------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    :root {
+      --vd3-duration-55: 0ms;
+      --vd3-duration-89: 0ms;
+      --vd3-duration-144: 0ms;
+      --vd3-duration-233: 0ms;
+      --vd3-duration-377: 0ms;
+      --vd3-duration-610: 0ms;
+      --vd3-duration-987: 0ms;
+
+      --vd-duration-55: 0ms;
+      --vd-duration-89: 0ms;
+      --vd-duration-144: 0ms;
+      --vd-duration-233: 0ms;
+      --vd-duration-377: 0ms;
+      --vd-duration-610: 0ms;
+      --vd-duration-987: 0ms;
+    }
+
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+
+  [data-motion="reduce"] {
+    --vd3-duration-55: 0ms;
+    --vd3-duration-89: 0ms;
+    --vd3-duration-144: 0ms;
+    --vd3-duration-233: 0ms;
+    --vd3-duration-377: 0ms;
+    --vd3-duration-610: 0ms;
+    --vd3-duration-987: 0ms;
+
+    --vd-duration-55: 0ms;
+    --vd-duration-89: 0ms;
+    --vd-duration-144: 0ms;
+    --vd-duration-233: 0ms;
+    --vd-duration-377: 0ms;
+    --vd-duration-610: 0ms;
+    --vd-duration-987: 0ms;
+  }
+}
