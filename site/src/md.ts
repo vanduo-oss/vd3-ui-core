@@ -18,13 +18,62 @@ export function renderMd(src: string, options: RenderMdOptions = {}): string {
   const esc = (s: string) =>
     s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
+  const formatMathBody = (raw: string) => {
+    let s = esc(raw.trim())
+    s = s
+      .replace(/\\left\(/g, '(')
+      .replace(/\\right\)/g, ')')
+      .replace(/\\quad/g, '  ')
+      .replace(/\\phi/g, 'φ')
+      .replace(/\\psi/g, 'ψ')
+      .replace(/\\approx/g, '≈')
+      .replace(/\\ge/g, '≥')
+      .replace(/\\le/g, '≤')
+      .replace(/\\times/g, '×')
+      .replace(/\\to/g, '→')
+      .replace(/\\infty/g, '∞')
+      .replace(/\\dots/g, '…')
+      .replace(/\^\\circ/g, '°')
+      .replace(/\\([%$])/g, '$1')
+      .replace(/\\text\{([^{}]+)\}/g, '$1')
+      .replace(/\\pmod\{([^{}]+)\}/g, '(mod $1)')
+      .replace(/\\lim_\{([^{}]+)\}/g, 'lim[$1]')
+      .replace(/\\sqrt\{φ\}/g, '√φ')
+      .replace(/\\sqrt\{5\}/g, '√5')
+      .replace(/_\{([^{}]+)\}/g, '<sub>$1</sub>')
+      .replace(/_([a-zA-Z0-9]+)/g, '<sub>$1</sub>')
+      .replace(/\^\{([^{}]+)\}/g, '<sup>$1</sup>')
+      .replace(/\^(-?[a-zA-Z0-9]+)/g, '<sup>$1</sup>')
+    for (let k = 0; k < 4; k++) {
+      s = s
+        .replace(/\\sqrt\{([^{}]+)\}/g, '√($1)')
+        .replace(/\\frac\{([^{}]+)\}\{([^{}]+)\}/g, '($1) / ($2)')
+    }
+    s = s
+      .replace(/\(1\)\s*\/\s*\((φ(?:<sup>[0-9-]+<\/sup>)?)\)/g, '1/$1')
+      .replace(/\(([^()]+)\)\s*\/\s*\(√5\)/g, '($1) / √5')
+      .replace(/\(([^()]+)\)\s*\/\s*\(2\)/g, '($1) / 2')
+    return s
+  }
+
   const inline = (s: string) => {
     const codeSpans: string[] = []
-    const tokenized = s.replace(/`([^`]+)`/g, (_, code: string) => {
-      const idx = codeSpans.length
-      codeSpans.push(`<code class="vd-code-inline">${esc(code)}</code>`)
-      return `\u0000CODE${idx}\u0000`
-    })
+    const tokenized = s
+      .replace(/`([^`]+)`/g, (_, code: string) => {
+        const idx = codeSpans.length
+        codeSpans.push(`<code class="vd-code-inline">${esc(code)}</code>`)
+        return `\u0000CODE${idx}\u0000`
+      })
+      .replace(/\$\$([^$]+)\$\$/g, (_, math: string) => {
+        const idx = codeSpans.length
+        codeSpans.push(`<code class="vd-code-inline vd-math-block">${formatMathBody(math)}</code>`)
+        return `\u0000CODE${idx}\u0000`
+      })
+      .replace(/\$([^$\n]+)\$/g, (_, math: string) => {
+        const idx = codeSpans.length
+        codeSpans.push(`<span class="vd-math">${formatMathBody(math)}</span>`)
+        return `\u0000CODE${idx}\u0000`
+      })
 
     const formatted = esc(tokenized)
       .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
