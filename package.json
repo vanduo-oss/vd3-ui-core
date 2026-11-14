@@ -10,7 +10,14 @@
   "scripts": {
     "dev": "pnpm --filter @vd3-ui-core/site dev",
     "build": "pnpm --filter @vd3-ui-core/site build",
-    "preview": "pnpm --filter @vd3-ui-core/site preview"
+    "preview": "pnpm --filter @vd3-ui-core/site preview",
+    "typecheck": "node scripts/verify-typecheck.mjs",
+    "test:tokens": "node scripts/verify-tokens.mjs",
+    "test:components": "node scripts/verify-components.mjs",
+    "test:m2": "node tests/challenge-m2-interactive.mjs",
+    "test:a11y": "node scripts/verify-a11y.mjs",
+    "test:e2e": "node tests/e2e/runner.mjs",
+    "test": "pnpm test:tokens && pnpm test:components && pnpm test:m2 && pnpm typecheck && pnpm test:a11y && pnpm test:e2e"
   },
   "license": "CC-BY-4.0"
 }

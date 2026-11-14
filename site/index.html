@@ -3,8 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>vd3-ui-core — The vd3 Design Bible</title>
+  <meta name="color-scheme" content="light dark" />
+  <meta name="description" content="VD3 UI CORE v2.0.0 — Normative Web Design System Bible grounded in the Fibonacci sequence, Lucas numbers, and Golden Ratio (φ = 1.6180339887)." />
+  <title>VD3 UI CORE — The Golden-Ratio Web Design Bible</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Lato:wght@400;700&family=Nunito:wght@400;600;700&family=Open+Sans:wght@400;600;700&family=Ubuntu:wght@400;500;700&display=swap" />
+  <link rel="design-tokens" href="/tokens/vd3.tokens.json" type="application/design-tokens+json" />
+  <link rel="describedby" href="/tokens/schema.json" type="application/schema+json" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234c6ef5'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='white' font-family='Georgia'%3Eφ%3C/text%3E%3C/svg%3E" />
+  <script type="application/ld+json" id="vd3-jsonld">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://vanduo.dev/vd3-ui-core/#website",
+        "name": "VD3 UI CORE — The Golden-Ratio Web Design Bible",
+        "url": "https://vanduo.dev/vd3-ui-core/",
+        "version": "2.0.0",
+        "description": "Machine-readable and human-readable normative specification for the VD3 UI CORE design system."
+      },
+      {
+        "@type": "TechArticle",
+        "@id": "https://vanduo.dev/vd3-ui-core/#specification",
+        "headline": "VD3 UI CORE v2.0.0 Normative Design System Specification",
+        "name": "VD3 UI CORE Specification",
+        "version": "2.0.0",
+        "proficiencyLevel": "Expert",
+        "isPartOf": { "@id": "https://vanduo.dev/vd3-ui-core/#website" },
+        "about": [
+          {
+            "@type": "DefinedTerm",
+            "name": "Golden Ratio (φ)",
+            "description": "Irrational proportional constant φ = (1 + √5) / 2 ≈ 1.6180339887 governing harmonic scaling."
+          },
+          {
+            "@type": "DefinedTerm",
+            "name": "Fibonacci & Lucas Sequences (Fn, Ln)",
+            "description": "Closed-form integer Binet lattices for spacing, elevation shadows, motion durations, and containers."
+          },
+          {
+            "@type": "DefinedTerm",
+            "name": "W3C DTCG 2025.10 Design Tokens",
+            "description": "Normative JSON single source of truth exported at /tokens/vd3.tokens.json."
+          },
+          {
+            "@type": "DefinedTerm",
+            "name": "W3C WAI-ARIA APG Component Contracts",
+            "description": "Zero-framework semantic HTML and layered CSS component primitives conforming to WCAG 2.2 AA/AAA."
+          }
+        ]
+      },
+      {
+        "@type": "DefinedTermSet",
+        "@id": "https://vanduo.dev/vd3-ui-core/#axioms",
+        "name": "VD3 UI CORE Normative Principles & Basis Classes",
+        "hasDefinedTerm": [
+          {
+            "@type": "DefinedTerm",
+            "termCode": "Class A",
+            "name": "Basis Class A — Mathematical Derivation",
+            "description": "Values derived directly from φ, √φ, Fibonacci numbers Fn, Lucas numbers Ln, or Golden Angle 137.508°."
+          },
+          {
+            "@type": "DefinedTerm",
+            "termCode": "Class B",
+            "name": "Basis Class B — Conventional by Design",
+            "description": "Values mandated by web interoperability standards, 12-column grids, breakpoints, or WCAG contrast."
+          },
+          {
+            "@type": "DefinedTerm",
+            "termCode": "Class C",
+            "name": "Basis Class C — Registered Exception",
+            "description": "Audited physical sub-pixel or perceptual exceptions (C-01..C-04); Class D does not exist."
+          }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div id="app"></div>

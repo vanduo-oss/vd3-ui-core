@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "baseUrl": ".",
+    "paths": {
+      "@spec/*": ["./*"]
+    }
+  },
+  "include": ["site/src/**/*.ts", "site/src/**/*.vue", "scripts/**/*.mjs", "tests/**/*.mjs"]
+}

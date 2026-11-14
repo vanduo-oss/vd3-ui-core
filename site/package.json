@@ -1,13 +1,15 @@
 {
   "name": "@vd3-ui-core/site",
-  "version": "2.0.0-draft",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "Spec site for vd3-ui-core. Built with @vanduo-oss/vd3 itself; page content is generated from the markdown spec at build time.",
+  "description": "Spec & SSG Documentation Bible for vd3-ui-core.",
   "scripts": {
+    "predev": "mkdir -p public/tokens && cp ../tokens/vd3.tokens.json ../tokens/tokens.css ../tokens/schema.json public/tokens/",
     "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "build": "vite build && node ../scripts/build-ssg.mjs",
+    "preview": "vite preview",
+    "typecheck": "node ../scripts/verify-typecheck.mjs"
   },
   "dependencies": {
     "@vanduo-oss/vd3": "^1.9.0",
