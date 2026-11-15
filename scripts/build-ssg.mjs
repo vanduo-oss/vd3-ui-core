@@ -597,7 +597,7 @@ const ssgBody = `
               .join('\n            ')}
           </nav>
           <div class="vd-navbar-actions">
-            <span class="vd-btn vd-btn--sm vd-btn--outline vd-btn-ring">Aa · Ubuntu</span>
+            <span class="vd-btn vd-btn--sm vd-btn--outline font-cycle-btn" title="Typeface: Ubuntu — activate to change"><span class="font-cycle-aa" style="font-family: Ubuntu, sans-serif">Aa</span></span>
           </div>
         </div>
       </div>
@@ -621,12 +621,13 @@ const ssgBody = `
 
     <main id="main-content" class="doc-main">
       <section id="overview" class="hero">
-        <h1>VD3 UI CORE — The Golden-Ratio Web Design Bible</h1>
+        <h1>VD3 UI Core — Framework-Agnostic Design System on Golden-Ratio Math</h1>
         <p class="lead">
           First principles, mathematical proportions, layered CSS component primitives, and normative
           W3C DTCG tokens for the <strong>vd3</strong> design system. Fibonacci-first — conventional
-          only where web standards and human ergonomics demand it. Engineered cleanly for both human
-          engineers and machine agents.
+          only where web standards and human ergonomics demand it. Consume the tokens and CSS from any
+          stack — vanilla JS, React, Vue, Svelte — with zero runtime dependency. Built cleanly for both
+          human engineers and machine agents.
         </p>
         <div class="vd-card phi-card">
           <div class="vd-card-body">
@@ -639,6 +640,7 @@ const ssgBody = `
         <div class="hero-meta">
           <span><strong>3</strong> basis classes — A / B / C (No Class D)</span>
           <span><strong>11</strong> zero-framework core CSS modules</span>
+          <span><strong>0</strong> runtime deps — any framework</span>
           <span><strong>W3C APG</strong>-normative keyboard &amp; ARIA</span>
           <span><strong>W3C DTCG 2025.10</strong> token registry</span>
         </div>
@@ -649,6 +651,12 @@ const ssgBody = `
           <a href="https://www.figma.com/design/ae5AMiPoVXuHdaRfawhyjh" target="_blank" rel="noopener noreferrer" class="vd-btn vd-btn--sm vd-btn--outline">Figma UI Kit</a>
           <a href="#components" class="vd-btn vd-btn--sm vd-btn--outline">Jump to Components</a>
         </div>
+        <p class="footnote">
+          Markdown documents in <code>foundations/</code>, <code>components/</code>, and
+          <code>conventions/</code> alongside <code>tokens/vd3.tokens.json</code> are the single
+          authoritative source of truth. Project codename: <strong>HydroCORE</strong>
+          (<em>Project HydroCORE</em> — <em>vanduo</em> means water in Lithuanian).
+        </p>
       </section>
 
       ${sectionsHtml

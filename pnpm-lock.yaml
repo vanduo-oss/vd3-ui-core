@@ -11,8 +11,8 @@ importers:
   site:
     dependencies:
       '@vanduo-oss/vd3':
-        specifier: ^1.9.0
-        version: 1.9.0(vue@3.5.45)
+        specifier: ^1.9.1
+        version: 1.9.1(vue@3.5.45)
       vue:
         specifier: ^3.5.0
         version: 3.5.45
@@ -351,8 +351,8 @@ packages:
   '@types/estree@1.0.10':
     resolution: {integrity: sha512-lTyOMnOcmRBzdCv6/4zUZCrEhV0xrqQiUZBZtVcbmLHBXKLnN8q89v/wKRF/Q0HbwVsqbIG3o5HDoFl9sduM+g==}
 
-  '@vanduo-oss/vd3@1.9.0':
-    resolution: {integrity: sha512-+wx5CzM8m0eZHt3Uii2Lon3xSf6HAMG8zwfvVNdA0fph6XUcEyD0kAngRBcR9Bip4G0XRf48YQpyi/yPvMfHbA==}
+  '@vanduo-oss/vd3@1.9.1':
+    resolution: {integrity: sha512-+Qi0V2jLp60ekd7fwRA+rKGTMCRRgsT4XkjSFzGJPx5m8Sgd+kVfsz4gbR+262aUNBZm9oRpu05/hZQkLpC9Tw==}
     engines: {node: '>=20.19.0', pnpm: '>=10'}
     peerDependencies:
       vue: '>=3.3.0'
@@ -677,7 +677,7 @@ snapshots:
 
   '@types/estree@1.0.10': {}
 
-  '@vanduo-oss/vd3@1.9.0(vue@3.5.45)':
+  '@vanduo-oss/vd3@1.9.1(vue@3.5.45)':
     dependencies:
       vue: 3.5.45
 

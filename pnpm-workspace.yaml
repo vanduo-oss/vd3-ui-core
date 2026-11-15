@@ -3,5 +3,6 @@ packages:
 verifyDepsBeforeRun: false
 minimumReleaseAgeExclude:
   - '@vanduo-oss/vd3@1.9.0'
+  - '@vanduo-oss/vd3@1.9.1'
 onlyBuiltDependencies:
   - esbuild

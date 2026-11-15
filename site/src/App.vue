@@ -273,12 +273,13 @@ const componentSnippets = {
     <main id="main-content" class="doc-main">
       <!-- HERO -->
       <section id="overview" class="hero">
-        <h1>VD3 UI CORE — The Golden-Ratio Web Design Bible</h1>
+        <h1>VD3 UI Core — Framework-Agnostic Design System on Golden-Ratio Math</h1>
         <p class="lead">
           First principles, mathematical proportions, layered CSS component primitives, and normative
           W3C DTCG tokens for the <strong>vd3</strong> design system. Fibonacci-first — conventional
-          only where web standards and human ergonomics demand it. Built cleanly for both human
-          engineers and machine agents.
+          only where web standards and human ergonomics demand it. Consume the tokens and CSS from any
+          stack — vanilla JS, React, Vue, Svelte — with zero runtime dependency. Built cleanly for both
+          human engineers and machine agents.
         </p>
         <VdCard glass class="phi-card">
           <span class="phi-eq">φ = (1 + √5) ⁄ 2 = 1.6180339887…</span>
@@ -289,6 +290,7 @@ const componentSnippets = {
         <div class="hero-meta">
           <span><strong>3</strong> basis classes — A / B / C (No Class D)</span>
           <span><strong>11</strong> zero-framework core CSS modules</span>
+          <span><strong>0</strong> runtime deps — any framework</span>
           <span><strong>W3C APG</strong>-normative keyboard &amp; ARIA</span>
           <span><strong>W3C DTCG 2025.10</strong> token registry</span>
         </div>
@@ -302,7 +304,8 @@ const componentSnippets = {
         <p class="footnote">
           Markdown documents in <code>foundations/</code>, <code>components/</code>, and
           <code>conventions/</code> alongside <code>tokens/vd3.tokens.json</code> are the single
-          authoritative source of truth.
+          authoritative source of truth. Project codename: <strong>HydroCORE</strong>
+          (<em>Project HydroCORE</em> — <em>vanduo</em> means water in Lithuanian).
         </p>
       </section>
 

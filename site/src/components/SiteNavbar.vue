@@ -8,6 +8,7 @@ import {
   VdThemeCustomizer,
   VdThemeSwitcher,
   useThemePreference,
+  useToast,
 } from '@vanduo-oss/vd3'
 
 const props = defineProps<{
@@ -20,12 +21,14 @@ const emit = defineEmits<{
 }>()
 
 const theme = useThemePreference()
+const toast = useToast()
 const localActiveId = ref(props.activeId ?? props.links[0]?.id ?? 'contract')
 
 const currentActiveId = computed(() => props.activeId ?? localActiveId.value)
 
 const fontIndex = computed(() => Math.max(0, FONT_OPTIONS.findIndex((f) => f.key === theme.state.font)))
 const fontLabel = computed(() => FONT_OPTIONS[fontIndex.value]?.name ?? theme.state.font)
+const fontFamily = computed(() => FONT_OPTIONS[fontIndex.value]?.family ?? 'inherit')
 
 watch(
   () => props.activeId,
@@ -48,6 +51,12 @@ function cycleFont() {
   if (next) {
     theme.setFont(next.key)
     document.documentElement.dataset.font = next.key
+    toast.info(`Typeface set to ${next.name}`, {
+      title: 'Font changed',
+      duration: 4181,
+      position: 'bottom-right',
+      dismissible: true,
+    })
   }
 }
 
@@ -65,6 +74,8 @@ function onHashChange() {
 
 onMounted(() => {
   theme.setTheme(theme.state.theme)
+  // Cyan default primary comes from setThemeDefaults() in main.ts (also covers
+  // the customizer's "Reset to default"); stored prefs still win.
   if (theme.state.font) {
     document.documentElement.dataset.font = theme.state.font
   }
@@ -101,11 +112,12 @@ onUnmounted(() => {
         <VdButton
           size="sm"
           outline
-          ring
-          :title="'Cycle global typeface: ' + fontLabel"
+          class="font-cycle-btn"
+          :title="'Typeface: ' + fontLabel + ' — activate to change'"
+          :aria-label="'Typeface: ' + fontLabel + '. Activate to change typeface.'"
           @click="cycleFont"
         >
-          Aa · {{ fontLabel }}
+          <span class="font-cycle-aa" :style="{ fontFamily: fontFamily }">Aa</span>
         </VdButton>
         <VdThemeSwitcher :menu="false" />
         <VdThemeCustomizer variant="panel" />

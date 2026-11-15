@@ -2,18 +2,30 @@
    Normative palette, spacing, elevation, motion, and component classes come from
    tokens/tokens.css + components/index.css + @vanduo-oss/vd3. */
 
+/* Futuristic display face for the hero wordmark (self-hosted, OFL — see /fonts/michroma/) */
+@font-face {
+  font-family: 'Michroma';
+  src: url('/fonts/michroma/michroma-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   color-scheme: light;
-  --site-accent: #1946ba;
-  --site-accent-subtle: rgba(25, 70, 186, 0.08);
+  --site-accent: var(--vd-primary-7, #1098ad);
+  --site-accent-subtle: color-mix(in oklab, var(--vd-primary-7, #1098ad) 8%, transparent);
   --site-navbar-bg: rgba(255, 255, 255, 0.9);
   --site-navbar-border: var(--vd3-color-border, #dee2e6);
+  /* Follow the theme primary (default cyan) instead of the core gold interactive ramp */
+  --vd3-color-interactive: var(--vd-primary-5, #22b8cf);
+  --vd3-color-focus: var(--vd-primary-6, #15aabf);
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --site-accent: #ffd43b;
-  --site-accent-subtle: rgba(255, 212, 59, 0.12);
+  --site-accent: var(--vd-primary-4, #3bc9db);
+  --site-accent-subtle: color-mix(in oklab, var(--vd-primary-4, #3bc9db) 12%, transparent);
   --site-navbar-bg: rgba(26, 29, 32, 0.9);
   --site-navbar-border: var(--vd3-color-border, #495057);
 }
@@ -21,8 +33,8 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --site-accent: #ffd43b;
-    --site-accent-subtle: rgba(255, 212, 59, 0.12);
+    --site-accent: var(--vd-primary-4, #3bc9db);
+    --site-accent-subtle: color-mix(in oklab, var(--vd-primary-4, #3bc9db) 12%, transparent);
     --site-navbar-bg: rgba(26, 29, 32, 0.9);
     --site-navbar-border: var(--vd3-color-border, #495057);
     --vd3-color-canvas: var(--vd3-color-gray-9);
@@ -33,9 +45,9 @@
     --vd3-color-text-secondary: var(--vd3-color-gray-3);
     --vd3-color-border: var(--vd3-color-gray-7);
     --vd3-color-border-subtle: var(--vd3-color-gray-8);
-    --vd3-color-focus: var(--vd3-color-gold-4);
-    --vd3-color-focus-glow: rgba(255, 212, 59, 0.4);
-    --vd3-color-interactive: var(--vd3-color-gold-4);
+    --vd3-color-focus: var(--vd-primary-3, #66d9e8);
+    --vd3-color-focus-glow: color-mix(in oklab, var(--vd-primary-4, #3bc9db) 40%, transparent);
+    --vd3-color-interactive: var(--vd-primary-4, #3bc9db);
     --vd3-color-critical: var(--vd3-color-red-4);
     --vd3-color-shadow: #0000004d;
     --vd3-shadow-1: 0 1px 2px #00000033;
@@ -90,11 +102,26 @@ html {
 body {
   margin: 0;
   background-color: var(--vd3-color-canvas, #ffffff);
+  background-image:
+    radial-gradient(60rem 30rem at 85% -10%, var(--site-accent-subtle), transparent 60%),
+    radial-gradient(50rem 26rem at -10% 0%, var(--site-accent-subtle), transparent 55%);
   color: var(--vd3-color-text-primary, #1a1d20);
   font-family: var(--vd3-font-family-sans, var(--vd-font-family-sans, system-ui, -apple-system, sans-serif));
   font-size: 1rem;
   line-height: var(--vd3-line-height-normal, 1.5);
   transition: background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+}
+
+.site-header,
+.doc-layout {
+  position: relative;
+  z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 button,
@@ -195,7 +222,8 @@ pre.vd-code,
 }
 
 .site-header .vd-theme-switcher-toggle,
-.site-header .vd-theme-customizer-trigger {
+.site-header .vd-theme-customizer-trigger,
+.site-header .font-cycle-btn {
   width: 2.125rem;
   height: 2.125rem;
   min-width: 2.125rem;
@@ -218,7 +246,8 @@ pre.vd-code,
 }
 
 .site-header .vd-theme-switcher-toggle:hover,
-.site-header .vd-theme-customizer-trigger:hover {
+.site-header .vd-theme-customizer-trigger:hover,
+.site-header .font-cycle-btn:hover {
   background-color: var(--vd3-color-layer-hover, #f1f3f5);
   border-color: var(--site-accent, #1946ba);
 }
@@ -303,6 +332,14 @@ a.vd-btn--outline:hover {
   background-color: var(--vd3-color-layer-hover, #f1f3f5);
   border-color: var(--site-accent, #1946ba);
   color: var(--vd3-color-text-primary, #1a1d20);
+}
+
+/* Typeface cycler "Aa" glyph — the button chrome itself is unified with the
+   theme switcher / customizer triggers via the .site-header rule above */
+.font-cycle-aa {
+  font-size: 0.875rem;
+  line-height: 1;
+  pointer-events: none;
 }
 
 a:focus-visible,
@@ -494,6 +531,21 @@ p {
 .hero {
   padding-block: 0 var(--vd3-space-fib-21, 1.3125rem);
   border-bottom: var(--vd3-line-thin, 2px) solid var(--vd3-color-border, #dee2e6);
+}
+
+.hero h1 {
+  font-family: 'Michroma', var(--vd3-font-family-sans, system-ui, -apple-system, sans-serif);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.hero .phi-card {
+  background-color: color-mix(in oklab, var(--vd3-color-layer, #f8f9fa) 72%, transparent);
+  backdrop-filter: blur(var(--vd-glass-blur, 16px)) saturate(var(--vd-glass-saturate, 160%));
+  -webkit-backdrop-filter: blur(var(--vd-glass-blur, 16px)) saturate(var(--vd-glass-saturate, 160%));
+  box-shadow:
+    var(--vd-glass-shadow, 0 8px 24px rgb(0 0 0 / 12%)),
+    0 0 24px color-mix(in oklab, var(--site-accent) 18%, transparent);
 }
 
 .hero .phi-card,

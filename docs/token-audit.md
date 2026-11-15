@@ -2,6 +2,15 @@
 
 Status: stable · Spec: 1.0.0-draft · Date of audit: against vd3 **1.9.0**
 
+## 1.9.1 delta (site dep bumped to `@vanduo-oss/vd3@1.9.1`)
+
+Programmatic diff of `dist/tokens.json` 1.9.0 → 1.9.1: 998 → 998 variables, 0 removed,
+0 added, 181 changed — **all** changes are primitive ramps only (`--vd-fib-*`, plus Open
+Color `rose`/`purple`/`fuchsia`/`golden` steps). Zero `--vd3-*` semantic tokens and zero
+`--vd-color-*` role tokens changed, and `customizer` is identical, so every conformance
+statement below still holds against 1.9.1. The spec's `golden-angle` primitives remain
+audited at 1.9.0 values; the 1.9.1 fib-ramp shift is recorded here, not silently merged.
+
 ## Method
 
 Sources inspected locally (no doc-snippet guessing this time):

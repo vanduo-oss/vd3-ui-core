@@ -6,6 +6,8 @@
 
 Normative web design system specification and W3C DTCG 2025.10 design tokens for the **vd3** line, grounded in the Golden Ratio ($\phi \approx 1.6180339887$), Fibonacci numbers ($F_n$), and Lucas numbers ($L_n$).
 
+Framework-agnostic by contract (PRN-004): consume the DTCG tokens and zero-framework CSS from any stack — vanilla JS, React, Vue, Svelte — with zero runtime dependency. Project codename: **HydroCORE** (*vanduo* means water in Lithuanian).
+
 **Status: 1.0.0-draft.** Published at [core.vanduo.dev](https://core.vanduo.dev/). Agents integrating or auditing the specification should read [AGENTS.md](./AGENTS.md). Release notes are in [CHANGELOG.md](./CHANGELOG.md).
 
 ## Repository Roles (`vanduo-oss`)
