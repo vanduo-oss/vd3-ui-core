@@ -1,6 +1,6 @@
 # Cross-system translations
 
-Status: stable · Spec: 1.0.0-draft
+Status: stable · Spec: 1.0.1-draft
 
 Orientation for people (and agents) arriving from other systems. **This is a
 translation table, not conformance.** vd3 follows no external design system

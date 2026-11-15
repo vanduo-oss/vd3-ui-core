@@ -585,7 +585,7 @@ const ssgBody = `
       <div class="vd-navbar-container">
         <div class="vd-navbar-brand">
           <a href="#main-content" class="brand">vd3<em>-ui-core</em></a>
-          <span class="vd-badge vd-badge--info" data-version="1.0.0-draft">v1.0.0 · draft</span>
+          <span class="vd-badge vd-badge--info" data-version="1.0.1-draft">v1.0.1 · draft</span>
         </div>
         <div class="vd-navbar-menu">
           <nav class="site-nav-pillars" aria-label="Primary specification navigation">
@@ -597,7 +597,7 @@ const ssgBody = `
               .join('\n            ')}
           </nav>
           <div class="vd-navbar-actions">
-            <span class="vd-btn vd-btn--sm vd-btn--outline font-cycle-btn" title="Typeface: Ubuntu — activate to change"><span class="font-cycle-aa" style="font-family: Ubuntu, sans-serif">Aa</span></span>
+            <span class="vd-btn vd-btn--sm vd-btn--outline font-cycle-btn" title="Typeface: Open Sans — activate to change"><span class="font-cycle-aa" style="font-family: &quot;Open Sans&quot;, -apple-system, BlinkMacSystemFont, sans-serif">Aa</span></span>
           </div>
         </div>
       </div>
@@ -680,7 +680,7 @@ const ssgBody = `
   <footer>
     <div class="inner">
       <p>
-        <strong>vd3-ui-core</strong> · Specification v1.0.0-draft · Markdown specs and W3C DTCG
+        <strong>vd3-ui-core</strong> · Specification v1.0.1-draft · Markdown specs and W3C DTCG
         <code>tokens/vd3.tokens.json</code> are the normative source of truth. Library conformance:
         <code>"implements": "vd3-ui-core@^1.0"</code>.
       </p>

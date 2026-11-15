@@ -1,7 +1,7 @@
 {
   "$description": "vd3 design tokens — NORMATIVE single source of truth. W3C DTCG format. VALUES AUDITED against @vanduo-oss/vd3@1.9.0 (dist/tokens.json, vd3-core.css, vd3.css) — see docs/token-audit.md. Structure and naming are binding; public CSS names follow v1.9 verbatim (see conventions/naming.md mapping table). Generated CSS in library repos MUST match this file (CI check). Basis classes: A = phi/Fibonacci/Lucas-derived, B = conventional-by-design (written reason), C = registered exception (foundations/proportion.md registry).",
   "$vd3": {
-    "spec": "vd3-ui-core@1.0.0-draft",
+    "spec": "vd3-ui-core@1.0.1-draft",
     "auditedAgainst": "@vanduo-oss/vd3@1.9.0"
   },
   "math": {

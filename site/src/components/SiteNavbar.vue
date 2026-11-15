@@ -93,7 +93,7 @@ onUnmounted(() => {
     <VdNavbar variant="glass" position="sticky" :scroll-threshold="34">
       <template #brand>
         <a href="#main-content" class="brand">vd3<em>-ui-core</em></a>
-        <VdBadge variant="info" pill data-version="1.0.0-draft">v1.0.0 · draft</VdBadge>
+        <VdBadge variant="info" pill data-version="1.0.1-draft">v1.0.1 · draft</VdBadge>
       </template>
       <nav class="site-nav-pillars" aria-label="Primary specification navigation">
         <a

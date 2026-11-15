@@ -1,6 +1,6 @@
 # Proportion — The Golden Spine
 
-Status: stable · Spec: 1.0.0-draft
+Status: stable · Spec: 1.0.1-draft
 
 The mathematical DNA of VD3 UI CORE is rooted in the Golden Ratio ($\phi$), the Fibonacci sequence ($F_n$), and the Lucas sequence ($L_n$). Every spacing increment, typography step, layout proportion, and container boundary derives from these formal mathematical definitions.
 

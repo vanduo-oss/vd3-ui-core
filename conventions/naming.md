@@ -1,6 +1,6 @@
 # Naming conventions
 
-Status: stable · Spec: 1.0.0-draft
+Status: stable · Spec: 1.0.1-draft
 
 - **Tokens** — semantic, kebab-case, no theme in the name (`--vd-layer-hover`,
   never `--vd-layer-hover-dark`; themes swap values, names stay).

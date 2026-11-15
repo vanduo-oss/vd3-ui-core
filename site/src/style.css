@@ -13,13 +13,10 @@
 
 :root {
   color-scheme: light;
-  --site-accent: var(--vd-primary-7, #1098ad);
-  --site-accent-subtle: color-mix(in oklab, var(--vd-primary-7, #1098ad) 8%, transparent);
+  --site-accent: #1946ba;
+  --site-accent-subtle: rgba(25, 70, 186, 0.08);
   --site-navbar-bg: rgba(255, 255, 255, 0.9);
   --site-navbar-border: var(--vd3-color-border, #dee2e6);
-  /* Follow the theme primary (default cyan) instead of the core gold interactive ramp */
-  --vd3-color-interactive: var(--vd-primary-5, #22b8cf);
-  --vd3-color-focus: var(--vd-primary-6, #15aabf);
 }
 
 :root[data-theme="dark"] {
@@ -229,6 +226,7 @@ pre.vd-code,
   min-width: 2.125rem;
   min-height: 2.125rem;
   padding: 0;
+  margin: 0;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -335,10 +333,13 @@ a.vd-btn--outline:hover {
 }
 
 /* Typeface cycler "Aa" glyph — the button chrome itself is unified with the
-   theme switcher / customizer triggers via the .site-header rule above */
+   theme switcher / customizer triggers via the .site-header rule above.
+   translateY compensates cap-height glyphs sitting high on the baseline so the
+   "Aa" optically centers like the SVG icons in the neighboring buttons. */
 .font-cycle-aa {
   font-size: 0.875rem;
   line-height: 1;
+  transform: translateY(1px);
   pointer-events: none;
 }
 
@@ -999,19 +1000,20 @@ footer .inner {
   background-color: var(--vd-fib-rose-6) !important;
 }
 
-/* Live site primary & neutral customizer bridge */
+/* Live site primary & neutral customizer bridge — single source for brand
+   accent/interactive/focus; follows the active [data-primary] (default cyan) */
 html[data-primary] {
-  --site-accent: var(--vd-primary-6, #1946ba);
+  --site-accent: var(--vd-primary-6, #1098ad);
   --site-accent-subtle: color-mix(in srgb, var(--site-accent) 12%, transparent);
-  --vd3-color-interactive: var(--vd-primary-6, #1946ba);
-  --vd3-color-focus: var(--vd-primary-6, #1946ba);
+  --vd3-color-interactive: var(--vd-primary-6, #1098ad);
+  --vd3-color-focus: var(--vd-primary-6, #1098ad);
 }
 
 html[data-theme="dark"][data-primary] {
-  --site-accent: var(--vd-primary-4, #ffd43b);
+  --site-accent: var(--vd-primary-4, #3bc9db);
   --site-accent-subtle: color-mix(in srgb, var(--site-accent) 16%, transparent);
-  --vd3-color-interactive: var(--vd-primary-4, #ffd43b);
-  --vd3-color-focus: var(--vd-primary-4, #ffd43b);
+  --vd3-color-interactive: var(--vd-primary-4, #3bc9db);
+  --vd3-color-focus: var(--vd-primary-4, #3bc9db);
 }
 
 html[data-neutral] {

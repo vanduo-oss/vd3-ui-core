@@ -1,6 +1,6 @@
 {
   "name": "vd3-ui-core-figma-manifest",
-  "specVersion": "1.0.0-draft",
+  "specVersion": "1.0.1-draft",
   "canonicalSite": "https://core.vanduo.dev/",
   "tokensSource": "https://core.vanduo.dev/tokens/vd3.tokens.json",
   "cssSource": "https://core.vanduo.dev/tokens/tokens.css",

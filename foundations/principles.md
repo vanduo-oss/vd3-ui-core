@@ -1,6 +1,6 @@
 # First Principles
 
-Status: stable · Spec: 1.0.0-draft
+Status: stable · Spec: 1.0.1-draft
 
 These are the axioms of VD3 UI CORE. Every rule, component, token, and layout primitive elsewhere in this system derives from them.
 

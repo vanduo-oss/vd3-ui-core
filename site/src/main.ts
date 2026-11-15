@@ -6,8 +6,9 @@ import '../../components/index.css'
 import App from './App.vue'
 import './style.css'
 
-// Site-wide defaults: cyan primary in both schemes, so the customizer's
-// "Reset to default" restores cyan (not the library's amber baseline).
-setThemeDefaults({ PRIMARY_LIGHT: 'cyan', PRIMARY_DARK: 'cyan' })
+// Site-wide defaults: cyan primary in both schemes and Open Sans as the global
+// typeface, so first visit and the customizer's "Reset to default" both land
+// here (not the library's amber/ubuntu baseline).
+setThemeDefaults({ PRIMARY_LIGHT: 'cyan', PRIMARY_DARK: 'cyan', FONT: 'open-sans' })
 
 createApp(App).use(VanduoVue).mount('#app')

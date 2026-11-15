@@ -1,6 +1,6 @@
 # Token audit — `@vanduo-oss/vd3@1.9.0` vs `tokens/vd3.tokens.json`
 
-Status: stable · Spec: 1.0.0-draft · Date of audit: against vd3 **1.9.0**
+Status: stable · Spec: 1.0.1-draft · Date of audit: against vd3 **1.9.0**
 
 ## 1.9.1 delta (site dep bumped to `@vanduo-oss/vd3@1.9.1`)
 

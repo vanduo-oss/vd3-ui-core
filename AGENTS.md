@@ -1,6 +1,6 @@
 # AGENTS.md — vd3-ui-core
 
-You are working on the normative specification and W3C DTCG token source for the **vd3** design system (`v1.0.0-draft`, published at [core.vanduo.dev](https://core.vanduo.dev/)).
+You are working on the normative specification and W3C DTCG token source for the **vd3** design system (`v1.0.1-draft`, published at [core.vanduo.dev](https://core.vanduo.dev/)).
 Before planning or writing code for this repository or any implementing `vd3` library, read:
 
 1. `foundations/principles.md` — always (`PRN-001`…`PRN-008`)
@@ -24,7 +24,7 @@ Consulted literature (cite, don't conform): IBM Carbon. Material 3 is excluded.
 - Golden split rows partition width into $61.8\%$ ($1/\phi$) and $38.2\%$ ($1/\phi^2$). Containers land on `521px` ($L_{13}$), `610px` ($F_{15}$), `987px` ($F_{16}$), `1364px` ($L_{15}$), and `1597px` ($F_{17}$).
 
 ### 2. Tokens & CSS Custom Properties
-- Authoritative source: `tokens/vd3.tokens.json` (audited against `@vanduo-oss/vd3@1.9.0`; see `docs/token-audit.md`).
+- Authoritative source: `tokens/vd3.tokens.json` (audited against `@vanduo-oss/vd3@1.9.0`; the `@1.9.1` delta changes primitive ramps only — 0 semantic/role token changes, see `docs/token-audit.md`).
 - `tokens/tokens.css` exports both the normative `--vd3-*` variables and the backwards-compatible `--vd-*` aliases inside `@layer vd3.reset, vd3.tokens, vd3.base, vd3.components, vd3.utilities;`.
 - Components consume semantic role tokens only — never raw hex or pixel literals.
 - Root theme/state hooks: `data-theme="light|dark"`, `data-palette="open-color|fibonacci"`, `data-primary`, `data-neutral`, `data-radius`, `data-font`, and `data-motion`.

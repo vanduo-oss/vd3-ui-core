@@ -2,6 +2,29 @@
 
 Spec follows semver independently of library releases.
 
+## 1.0.1-draft — framework-agnostic positioning & site polish
+
+- Site hero/meta/JSON-LD/README now state the contract explicitly: "VD3 UI Core —
+  Framework-Agnostic Design System on Golden-Ratio Math", consumable from any
+  stack (vanilla JS, React, Vue, Svelte) with zero runtime dependency. Project
+  codename "HydroCORE" recorded (vanduo = water, Lithuanian).
+- Docs site adopts the vanduo-oss home/vd3-docs visual direction: self-hosted
+  Michroma display face on the hero, glass hero card, subtle CSS gradient wash
+  (WebGL liquid layer dropped). Navbar font cycler unified with the theme
+  switcher/customizer actions (2.125rem circular outline button, "Aa" in the
+  active font, info toast on change).
+- Cyan is the site default primary in both themes: `data-primary="cyan"` first
+  paint + `setThemeDefaults({ PRIMARY_LIGHT/DARK: 'cyan' })` so the customizer
+  "Reset to default" restores cyan; accent/interactive/focus tokens follow
+  `--vd-primary-*` via a single bridge. Global default font is Open Sans
+  (`FONT: 'open-sans'`, also on reset and first paint via `data-font`).
+- `@vanduo-oss/vd3` bumped `^1.9.0` → `^1.9.1`. Audited delta: 181 changed values,
+  all primitive ramps (`--vd-fib-*`, OC rose/purple/fuchsia/golden); zero
+  semantic `--vd3-*` or role `--vd-color-*` changes. Recorded in
+  `docs/token-audit.md`; normative `tokens/` values unchanged.
+- Spec version renumbered `1.0.0-draft` → `1.0.1-draft` across spec headers,
+  package manifests, JSON-LD, badges, and e2e assertions.
+
 ## 1.0.0-draft — incepting
 
 - First principles (PRN-001…007), proportional spine, semantic color model,

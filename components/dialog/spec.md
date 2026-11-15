@@ -1,7 +1,7 @@
 ---
 slug: dialog
 status: stable
-spec: vd3-ui-core@1.0.0-draft
+spec: vd3-ui-core@1.0.1-draft
 apg: https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
 ---
 
