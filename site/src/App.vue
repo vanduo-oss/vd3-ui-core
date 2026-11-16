@@ -39,6 +39,9 @@ import glassMd from '@spec/foundations/glass.md?raw'
 import colorMd from '@spec/foundations/color.md?raw'
 import focusMd from '@spec/foundations/focus.md?raw'
 import dialogMd from '@spec/components/dialog/spec.md?raw'
+import switchMd from '@spec/components/switch/spec.md?raw'
+import alertMd from '@spec/components/alert/spec.md?raw'
+import tabsMd from '@spec/components/tabs/spec.md?raw'
 import namingMd from '@spec/conventions/naming.md?raw'
 import mappingsMd from '@spec/conventions/mappings.md?raw'
 import contentMd from '@spec/conventions/content.md?raw'
@@ -241,6 +244,10 @@ const componentSnippets = {
   table: '<div class="vd-table-container" tabindex="0"><table class="vd-table">...</table></div>',
   code: '<pre class="vd-code" data-language="css" tabindex="0"><code>:root { --vd3-phi: 1.618; }</code></pre>',
   toast: '<div class="vd-toast vd-toast--success" role="status">Verified</div>',
+  switch:
+    '<button type="button" role="switch" aria-checked="false" class="vd-switch"><span class="vd-switch-thumb"></span></button>',
+  alert: '<div class="vd-alert vd-alert--critical" role="alert">...</div>',
+  tabs: '<div class="vd-tabs" role="tablist"><button class="vd-tab" role="tab" aria-selected="true">…</button></div>',
   layout: '<div class="vd-container-lg vd-split-golden">...</div>',
 }
 </script>
@@ -289,7 +296,7 @@ const componentSnippets = {
         </VdCard>
         <div class="hero-meta">
           <span><strong>3</strong> basis classes — A / B / C (No Class D)</span>
-          <span><strong>11</strong> zero-framework core CSS modules</span>
+          <span><strong>14</strong> zero-framework core CSS modules</span>
           <span><strong>0</strong> runtime deps — any framework</span>
           <span><strong>W3C APG</strong>-normative keyboard &amp; ARIA</span>
           <span><strong>W3C DTCG 2025.10</strong> token registry</span>
@@ -405,7 +412,7 @@ const componentSnippets = {
       <!-- 13 COMPONENTS -->
       <section id="components" class="doc-section">
         <h2>
-          <span class="n">13</span> Components — 11 Normative UI Primitives
+          <span class="n">13</span> Components — 14 Normative UI Primitives
           <VdBadge variant="primary" pill>Zero-Framework CSS</VdBadge>
           <VdBadge variant="info" pill>@vanduo-oss/vd3 Live</VdBadge>
         </h2>
@@ -786,10 +793,93 @@ const componentSnippets = {
               </button>
             </div>
           </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="switch"
+            data-vd-basis-class="A"
+            data-vd-tokens="space.fib-21 space.fib-34 radius.full color.role.focus focus.ring.width motion.144"
+          >
+            <div class="specimen-header">
+              <h3>Switch (<code>.vd-switch</code>)</h3>
+              <VdBadge variant="info">Class A</VdBadge>
+            </div>
+            <div class="specimen-preview">
+              <button type="button" role="switch" aria-checked="true" class="vd-switch" aria-label="Notifications enabled">
+                <span class="vd-switch-thumb"></span>
+              </button>
+              <button type="button" role="switch" aria-checked="false" class="vd-switch vd-switch--sm" aria-label="Compact mode"></button>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.switch"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy switch HTML snippet" @click="copySnippet('switch', componentSnippets.switch)">
+                {{ copiedKey === 'switch' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="alert"
+            data-vd-basis-class="B"
+            data-vd-tokens="space.fib-13 space.fib-21 line.regular color.role.critical color.role.focus radius.fib-8"
+          >
+            <div class="specimen-header">
+              <h3>Alert (<code>.vd-alert</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-alert vd-alert--warning" role="alert">
+                <span class="vd-alert-icon" aria-hidden="true">!</span>
+                <div class="vd-alert-content">
+                  <p class="vd-alert-title">Registered exception C-02</p>
+                  <p class="vd-alert-body">Glass blur soft-caps at 20px — the Convergence Zone is documented in the glass foundation.</p>
+                </div>
+                <button type="button" class="vd-alert-close" aria-label="Dismiss alert">×</button>
+              </div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.alert"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy alert HTML snippet" @click="copySnippet('alert', componentSnippets.alert)">
+                {{ copiedKey === 'alert' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="tabs"
+            data-vd-basis-class="B"
+            data-vd-tokens="space.fib-8 space.fib-13 line.hair line.thin color.role.focus motion.89"
+          >
+            <div class="specimen-header">
+              <h3>Tabs (<code>.vd-tabs</code> / <code>.vd-tab</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-tabs" role="tablist" aria-label="Specimen tabs">
+                <button type="button" class="vd-tab" role="tab" id="app-tab-a" aria-selected="true" aria-controls="app-panel-a">Tokens</button>
+                <button type="button" class="vd-tab" role="tab" id="app-tab-b" aria-selected="false" aria-controls="app-panel-b" tabindex="-1">Components</button>
+              </div>
+              <div class="vd-tab-panel" role="tabpanel" id="app-panel-a" aria-labelledby="app-tab-a">
+                DTCG 2025.10 registry — every leaf token carries a basis class (A/B/C).
+              </div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.tabs"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy tabs HTML snippet" @click="copySnippet('tabs', componentSnippets.tabs)">
+                {{ copiedKey === 'tabs' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
         </div>
 
         <h3>Dialog Behavioral Specification (W3C APG Modal Pattern)</h3>
         <MdDoc :source="dialogMd" />
+        <h3>Switch · Alert · Tabs Specifications (new in 1.0.2)</h3>
+        <MdDoc :source="switchMd" />
+        <MdDoc :source="alertMd" />
+        <MdDoc :source="tabsMd" />
       </section>
 
       <!-- 14 CONVENTIONS -->
@@ -811,7 +901,7 @@ const componentSnippets = {
   <footer>
     <div class="inner">
       <p>
-        <strong>vd3-ui-core</strong> · Specification v1.0.1-draft · Markdown specs and W3C DTCG
+        <strong>vd3-ui-core</strong> · Specification v1.0.2-draft · Markdown specs and W3C DTCG
         <code>tokens/vd3.tokens.json</code> are the normative source of truth. Library conformance:
         <code>"implements": "vd3-ui-core@^1.0"</code>.
       </p>

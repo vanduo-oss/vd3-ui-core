@@ -297,7 +297,7 @@ const foundationRows = [
   ['grid + layout', 'Spec’d', 'B / A', '12-column responsive engine + Class A golden split & Fibonacci grids'],
   ['z-index', 'New in 1.0', 'B', 'Conventional semantic layering from base (0) to toast (1080)'],
   ['focus', 'New in 1.0', 'B', 'WCAG 2.2 SC 2.4.13 Dual-Ring focus indicator with inner offset gap'],
-  ['components', 'New in 1.0', 'A / B / C', '11 zero-framework semantic HTML + @layer vd3.components stylesheets'],
+  ['components', 'New in 1.0', 'A / B / C', '14 zero-framework semantic HTML + @layer vd3.components stylesheets'],
   ['conventions', 'Normative', 'B', 'Identifier naming, cross-system mappings, and editorial copy rules'],
 ];
 
@@ -407,6 +407,32 @@ const specimens = [
       </div>
       <div class="vd-toast vd-toast--success" role="status"><div class="vd-toast-content"><div class="vd-toast-title">Static specimen preview</div><p class="vd-toast-message">Tokens verified (368/368) · Auto-dismisses after 4181ms (F₁₉).</p></div></div>`,
     code: '<div class="vd-toast vd-toast--success" role="status">Verified</div>',
+  },
+  {
+    id: 'switch',
+    title: 'Switch (.vd-switch)',
+    basis: 'A',
+    tokens: 'space.fib-21 space.fib-34 radius.full color.role.focus focus.ring.width motion.144',
+    preview: `<button type="button" role="switch" aria-checked="true" class="vd-switch" aria-label="Notifications enabled"><span class="vd-switch-thumb"></span></button>
+      <button type="button" role="switch" aria-checked="false" class="vd-switch vd-switch--sm" aria-label="Compact mode"></button>`,
+    code: '<button type="button" role="switch" aria-checked="false" class="vd-switch"><span class="vd-switch-thumb"></span></button>',
+  },
+  {
+    id: 'alert',
+    title: 'Alert (.vd-alert)',
+    basis: 'B',
+    tokens: 'space.fib-13 space.fib-21 line.regular color.role.critical color.role.focus radius.fib-8',
+    preview: `<div class="vd-alert vd-alert--warning" role="alert"><span class="vd-alert-icon" aria-hidden="true">!</span><div class="vd-alert-content"><p class="vd-alert-title">Registered exception C-02</p><p class="vd-alert-body">Glass blur soft-caps at 20px — the Convergence Zone is documented in foundations/glass.md.</p></div><button type="button" class="vd-alert-close" aria-label="Dismiss alert">×</button></div>`,
+    code: '<div class="vd-alert vd-alert--critical" role="alert">...</div>',
+  },
+  {
+    id: 'tabs',
+    title: 'Tabs (.vd-tabs / .vd-tab)',
+    basis: 'B',
+    tokens: 'space.fib-8 space.fib-13 line.hair line.thin color.role.focus motion.89',
+    preview: `<div class="vd-tabs" role="tablist" aria-label="Specimen tabs"><button type="button" class="vd-tab" role="tab" id="ssg-tab-a" aria-selected="true" aria-controls="ssg-panel-a">Tokens</button><button type="button" class="vd-tab" role="tab" id="ssg-tab-b" aria-selected="false" aria-controls="ssg-panel-b" tabindex="-1">Components</button></div>
+      <div class="vd-tab-panel" role="tabpanel" id="ssg-panel-a" aria-labelledby="ssg-tab-a">DTCG 2025.10 registry — 150+ leaf tokens, all basis-classed.</div>`,
+    code: '<div class="vd-tabs" role="tablist"><button class="vd-tab" role="tab" aria-selected="true">…</button></div>',
   },
   {
     id: 'layout',
@@ -537,7 +563,7 @@ const foundationMatrixHtml = `
 
 const componentsSectionHtml = `
 <section id="components" class="doc-section">
-  <h2><span class="n">13</span> Components — 11 Normative UI Primitives <span class="vd-badge vd-badge--info">Zero-Framework CSS</span></h2>
+  <h2><span class="n">13</span> Components — 14 Normative UI Primitives <span class="vd-badge vd-badge--info">Zero-Framework CSS</span></h2>
   <p class="lead">
     Every core stylesheet resides inside <code>@layer vd3.components</code> or <code>@layer vd3.layout</code>,
     binds strictly to W3C DTCG tokens from <code>tokens/vd3.tokens.json</code>, and exposes machine-readable
@@ -565,6 +591,16 @@ const componentsSectionHtml = `
   <div class="md-doc">
     ${renderMarkdown(readSpec('components/dialog/spec.md'), 3, 'Dialog specification table')}
   </div>
+  <h3>Switch · Alert · Tabs Specifications (new in 1.0.2)</h3>
+  <div class="md-doc">
+    ${renderMarkdown(readSpec('components/switch/spec.md'), 3, 'Switch specification table')}
+  </div>
+  <div class="md-doc">
+    ${renderMarkdown(readSpec('components/alert/spec.md'), 3, 'Alert specification table')}
+  </div>
+  <div class="md-doc">
+    ${renderMarkdown(readSpec('components/tabs/spec.md'), 3, 'Tabs specification table')}
+  </div>
 </section>`;
 
 const conventionsSectionHtml = `
@@ -585,7 +621,7 @@ const ssgBody = `
       <div class="vd-navbar-container">
         <div class="vd-navbar-brand">
           <a href="#main-content" class="brand">vd3<em>-ui-core</em></a>
-          <span class="vd-badge vd-badge--info" data-version="1.0.1-draft">v1.0.1 · draft</span>
+          <span class="vd-badge vd-badge--info" data-version="1.0.2-draft">v1.0.1 · draft</span>
         </div>
         <div class="vd-navbar-menu">
           <nav class="site-nav-pillars" aria-label="Primary specification navigation">
@@ -639,7 +675,7 @@ const ssgBody = `
         </div>
         <div class="hero-meta">
           <span><strong>3</strong> basis classes — A / B / C (No Class D)</span>
-          <span><strong>11</strong> zero-framework core CSS modules</span>
+          <span><strong>14</strong> zero-framework core CSS modules</span>
           <span><strong>0</strong> runtime deps — any framework</span>
           <span><strong>W3C APG</strong>-normative keyboard &amp; ARIA</span>
           <span><strong>W3C DTCG 2025.10</strong> token registry</span>
@@ -680,7 +716,7 @@ const ssgBody = `
   <footer>
     <div class="inner">
       <p>
-        <strong>vd3-ui-core</strong> · Specification v1.0.1-draft · Markdown specs and W3C DTCG
+        <strong>vd3-ui-core</strong> · Specification v1.0.2-draft · Markdown specs and W3C DTCG
         <code>tokens/vd3.tokens.json</code> are the normative source of truth. Library conformance:
         <code>"implements": "vd3-ui-core@^1.0"</code>.
       </p>
