@@ -830,7 +830,7 @@ const ssgBody = `
       <div class="vd-navbar-container">
         <div class="vd-navbar-brand">
           <a href="#main-content" class="brand">vd3<em>-ui-core</em></a>
-          <span class="vd-badge vd-badge--info" data-version="1.1.0-draft">v1.0.1 · draft</span>
+          <span class="vd-badge vd-badge--info" data-version="1.1.0-draft">v1.1.0 · draft</span>
         </div>
         <div class="vd-navbar-menu">
           <nav class="site-nav-pillars" aria-label="Primary specification navigation">
