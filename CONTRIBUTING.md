@@ -40,5 +40,6 @@ UPDATE_SNAPSHOTS=1 node scripts/verify-components.mjs
 - Every visual constant carries a basis class (A/B/C — no Class D); enforced by `test:tokens` suite 15.
 - Components consume semantic role tokens from `tokens/vd3.tokens.json` only — never raw hex/px.
 - New components: add `components/<slug>.css` (single `@layer vd3.components` block, dual-ring `:focus-visible`, MOB-001 blocks, logical properties) + `components/<slug>/spec.md` (per `_TEMPLATE.md`), register in `components/index.css`, extend `scripts/verify-components.mjs`, add a site specimen in `scripts/build-ssg.mjs` and `site/src/App.vue`.
+- Site specimens live in **two places that must be edited in the same commit**: `site/src/App.vue` (live client preview + copyable snippet) and the `specimens` array in `scripts/build-ssg.mjs` (pre-rendered into `site/dist/index.html`). `test:a11y` and the e2e SSG suites scan the built HTML, so a one-sided edit fails the suite — that is intentional, it is the drift gate.
 - Never add framework names to `components/*.css` (zero-framework contract, suite 43).
 - Docs: AGENTS.md is the entry point; keep README/glossary/manifest in sync when counts change.

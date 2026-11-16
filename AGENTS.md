@@ -40,6 +40,7 @@ Consulted literature (cite, don't conform): IBM Carbon. Material 3 is excluded.
 
 ### 4. Documentation Site (`site/`) & Verification Gates
 - `site/` is a Vue 3 + Vite workspace app that dogfoods `@vanduo-oss/vd3` (`VdNavbar`, `VdThemeSwitcher`, `VdThemeCustomizer`) and pre-renders static HTML into `site/dist/index.html` via `scripts/build-ssg.mjs`.
+- Specimen markup is duplicated by design: `site/src/App.vue` renders the live page, while `scripts/build-ssg.mjs` keeps its own `specimens` array that is pre-rendered into `site/dist/index.html`. Always change both together — `test:a11y` and the e2e suites read the built HTML, so they catch one-sided edits.
 - Before committing any change, run `pnpm build && pnpm test`. All 6 verification commands MUST pass with zero errors:
   - `pnpm test:tokens` (`scripts/verify-tokens.mjs`)
   - `pnpm test:components` (`scripts/verify-components.mjs`)
