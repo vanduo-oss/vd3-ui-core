@@ -1,6 +1,6 @@
 {
   "name": "vd3-ui-core-figma-manifest",
-  "specVersion": "1.0.1-draft",
+  "specVersion": "1.0.2-draft",
   "canonicalSite": "https://core.vanduo.dev/",
   "tokensSource": "https://core.vanduo.dev/tokens/vd3.tokens.json",
   "cssSource": "https://core.vanduo.dev/tokens/tokens.css",
@@ -34,7 +34,7 @@
         "name": "VD3-01-Proportions-Fibonacci",
         "width": 1600,
         "height": 1100,
-        "specSection": "foundations/space.md"
+        "specSection": "foundations/proportion.md"
       },
       {
         "nodeId": "2:187",
@@ -139,7 +139,7 @@
       "slug": "button",
       "figmaComponentSet": "Button",
       "cssClass": ".vd-btn",
-      "spec": "components/button/spec.md",
+      "spec": "components/SPEC.md#button",
       "variantProperties": {
         "Variant": ["Primary", "Secondary", "Outline", "Ghost", "Danger"],
         "Size": ["sm", "md", "lg"],
@@ -150,7 +150,7 @@
       "slug": "input",
       "figmaComponentSet": "Input",
       "cssClass": ".vd-input",
-      "spec": "components/input/spec.md",
+      "spec": "components/SPEC.md#input",
       "variantProperties": {
         "State": ["Default", "Focus", "Invalid", "Disabled"]
       }
@@ -159,7 +159,7 @@
       "slug": "select",
       "figmaComponentSet": "Select",
       "cssClass": ".vd-select",
-      "spec": "components/select/spec.md",
+      "spec": "components/SPEC.md#select",
       "variantProperties": {
         "State": ["Default", "Focus", "Disabled"]
       }
@@ -168,7 +168,7 @@
       "slug": "checkbox",
       "figmaComponentSet": "Checkbox",
       "cssClass": ".vd-checkbox",
-      "spec": "components/checkbox/spec.md",
+      "spec": "components/SPEC.md#checkbox",
       "variantProperties": {
         "Checked": ["False", "True"],
         "State": ["Default", "Disabled"]
@@ -178,7 +178,7 @@
       "slug": "radio",
       "figmaComponentSet": "Radio",
       "cssClass": ".vd-radio",
-      "spec": "components/radio/spec.md",
+      "spec": "components/SPEC.md#radio",
       "variantProperties": {
         "Selected": ["False", "True"]
       }
@@ -196,7 +196,7 @@
       "slug": "badge",
       "figmaComponentSet": "Badge",
       "cssClass": ".vd-badge",
-      "spec": "components/badge/spec.md",
+      "spec": "components/SPEC.md#badge",
       "variantProperties": {
         "Variant": ["Primary", "Info", "Success", "Warning", "Danger"]
       }
@@ -214,7 +214,7 @@
       "slug": "card",
       "figmaComponentSet": "Card",
       "cssClass": ".vd-card",
-      "spec": "components/card/spec.md",
+      "spec": "components/SPEC.md#card",
       "variantProperties": {
         "Variant": ["Default", "Elevated"]
       }

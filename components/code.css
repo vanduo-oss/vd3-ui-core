@@ -53,7 +53,7 @@
     content: attr(data-language);
     position: absolute;
     top: var(--vd3-space-fib-8, 0.75rem);
-    right: var(--vd3-space-fib-89, 5.5625rem);
+    inset-inline-end: var(--vd3-space-fib-89, 5.5625rem);
     font-size: var(--vd3-font-size-xs, 0.75rem);
     text-transform: uppercase;
     font-weight: 600;
@@ -67,7 +67,7 @@
   .vd-code-copy {
     position: absolute;
     top: var(--vd3-space-fib-8, 0.75rem);
-    right: var(--vd3-space-fib-8, 0.75rem);
+    inset-inline-end: var(--vd3-space-fib-8, 0.75rem);
     padding: var(--vd3-space-fib-2, 0.25rem) var(--vd3-space-fib-5, 0.5rem);
     font-size: var(--vd3-font-size-xs, 0.75rem);
     font-weight: 500;

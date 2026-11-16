@@ -104,7 +104,7 @@
     content: "";
     width: 10px;
     height: 6px;
-    border-left: 2px solid var(--vd3-color-gray-1000, #1a1d20);
+    border-inline-start: 2px solid var(--vd3-color-gray-1000, #1a1d20);
     border-bottom: 2px solid var(--vd3-color-gray-1000, #1a1d20);
     transform: rotate(-45deg) translate(1px, -1px);
   }

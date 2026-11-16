@@ -6,7 +6,7 @@
 - **Layer** — a raised surface on the canvas; vd3 pairs layers with golden shadow steps.
 - **DTCG** — W3C Design Tokens Community Group format; the JSON structure of `tokens/vd3.tokens.json`.
 - **APG** — W3C ARIA Authoring Practices Guide; the normative behavior reference.
-- **Conformance** — a library's declared `"implements": "vd3-ui-core@^2.x"`; verified by CI.
+- **Conformance** — a library's declared `"implements": "vd3-ui-core@^1.0"`; verified by CI.
 - **Spec semver** — this repo versions independently of library releases.
 - **Golden row** — a 1 : 1.618 two-part split of a container.
 - **Basis class (A/B/C)** — the proportional contract's classification of every visual constant: A = φ/Fibonacci/Lucas-derived (default), B = conventional-by-design (written reason required), C = registered exception. No class D.

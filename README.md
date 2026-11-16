@@ -8,7 +8,7 @@ Normative web design system specification and W3C DTCG 2025.10 design tokens for
 
 Framework-agnostic by contract (PRN-004): consume the DTCG tokens and zero-framework CSS from any stack — vanilla JS, React, Vue, Svelte — with zero runtime dependency. Project codename: **HydroCORE** (*vanduo* means water in Lithuanian).
 
-**Status: 1.0.1-draft.** Published at [core.vanduo.dev](https://core.vanduo.dev/). Agents integrating or auditing the specification should read [AGENTS.md](./AGENTS.md). Release notes are in [CHANGELOG.md](./CHANGELOG.md).
+**Status: 1.0.2-draft.** Published at [core.vanduo.dev](https://core.vanduo.dev/). Agents integrating or auditing the specification should read [AGENTS.md](./AGENTS.md). Release notes are in [CHANGELOG.md](./CHANGELOG.md).
 
 ## Repository Roles (`vanduo-oss`)
 
@@ -33,12 +33,12 @@ CI in each implementing library MUST verify:
 
 ## Architecture & Directory Structure
 
-- **[foundations/](./foundations/)** — First principles (`PRN-001`…`PRN-008`), Three-Class Basis Contract (Class A $\phi$-derived, Class B conventional-by-design, Class C registered exceptions `C-01`…`C-04`), proportion, space, line, typography, motion, elevation, glass, color, layout, and focus.
+- **[foundations/](./foundations/)** — First principles (`PRN-001`…`PRN-010`), Three-Class Basis Contract (Class A $\phi$-derived, Class B conventional-by-design, Class C registered exceptions `C-01`…`C-04`), proportion, space, line, typography, motion, elevation, glass, color, layout, and focus (FOC-001…004).
 - **[tokens/](./tokens/)** — Audited W3C DTCG 2025.10 token source ([vd3.tokens.json](./tokens/vd3.tokens.json)), dual-prefixed CSS custom properties (`--vd3-*` and `--vd-*` in [tokens.css](./tokens/tokens.css)), JSON Schema ([schema.json](./tokens/schema.json)), and Figma binding manifest ([figma.manifest.json](./tokens/figma.manifest.json)).
-- **[components/](./components/)** — Normative specifications (`<slug>/spec.md` + [SPEC.md](./components/SPEC.md)) and zero-framework layered CSS primitives ([index.css](./components/index.css)) for 11 core components (`button`, `input`, `select`, `checkbox`, `radio`, `switch`, `card`, `badge`, `alert`, `tabs`, `dialog`).
+- **[components/](./components/)** — Normative specifications ([SPEC.md](./components/SPEC.md) master index + `<slug>/spec.md` per component) and zero-framework layered CSS primitives ([index.css](./components/index.css)) for 14 core modules: the layout engine plus `button`, `dialog`, `card`, `form` (input/select/checkbox/radio/textarea), `badge`/chip, `navbar`, `accordion`, `table`, `code`, `toast`, `switch`, `alert`, `tabs`.
 - **[conventions/](./conventions/)** — Token naming contract ([naming.md](./conventions/naming.md)) and IBM Carbon cross-system translation matrix ([mappings.md](./conventions/mappings.md)).
 - **[site/](./site/)** — Pre-rendered SSG specification bible built with Vue 3, Vite, and `@vanduo-oss/vd3` (`VdNavbar`, `VdThemeSwitcher`, `VdThemeCustomizer`), exposing Schema.org JSON-LD and `data-vd-*` machine-readable metadata for headless AI agents.
-- **[scripts/](./scripts/) & [tests/e2e/](./tests/e2e/)** — 7 automated verification suites validating token math, component contracts, prose integrity, TypeScript/JSON schemas, WCAG AA/AAA accessibility, and Tier 1–4 E2E scenarios.
+- **[scripts/](./scripts/) & [tests/e2e/](./tests/e2e/)** — 6 automated verification commands validating token math, component contracts, adversarial CSS challenges, TypeScript/JSON schemas, WCAG AA/AAA accessibility, and Tier 1–4 E2E scenarios.
 
 ## Figma Design System & MCP Integration
 
@@ -56,7 +56,7 @@ CI in each implementing library MUST verify:
 pnpm install       # install workspace dependencies
 pnpm dev           # synchronize tokens and start Vite dev server
 pnpm build         # build site/dist and inject pre-rendered SSG HTML + DTCG tokens
-pnpm test          # run all 7 verification suites (tokens, components, m2, typecheck, a11y, e2e)
+pnpm test          # run all 6 verification commands (tokens, components, m2, typecheck, a11y, e2e)
 ```
 
 ## Security
