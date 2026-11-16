@@ -8,7 +8,7 @@
 /* 1. Golden Ratio Layout Primitives (#13-16) */
 @import './layout.css' layer(vd3.layout);
 
-/* 2. Interactive & Surface Components (#27-36) */
+/* 2. Interactive & Surface Components (#27-39) */
 @import './button.css' layer(vd3.components);
 @import './dialog.css' layer(vd3.components);
 @import './card.css' layer(vd3.components);
@@ -19,3 +19,6 @@
 @import './table.css' layer(vd3.components);
 @import './code.css' layer(vd3.components);
 @import './toast.css' layer(vd3.components);
+@import './switch.css' layer(vd3.components);
+@import './alert.css' layer(vd3.components);
+@import './tabs.css' layer(vd3.components);

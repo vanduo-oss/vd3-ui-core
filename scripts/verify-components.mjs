@@ -5,7 +5,7 @@
  * Automated verification of Milestone 2 CSS deliverables:
  * - Cascade Layers: @layer vd3.layout and @layer vd3.components
  * - Master Index Architecture (@layer ordering & imports)
- * - 14 Target Features (#13, #14, #15, #16, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36)
+ * - 17 Target Features (#13, #14, #15, #16, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39)
  * - W3C ARIA APG Accessibility Contracts (keyboard navigation, dialog backdrop, scope semantics, live regions)
  * - M1 Contrast Advisory: Dual-Ring Focus Pattern Resolution
  * - MOB-001 Reduced Motion Overrides
@@ -71,6 +71,9 @@ const requiredFiles = [
   'table.css',
   'code.css',
   'toast.css',
+  'switch.css',
+  'alert.css',
+  'tabs.css',
   'index.css',
 ];
 
@@ -105,10 +108,11 @@ assert(
   "index.css must import layout.css into layer(vd3.layout)"
 );
 
-// Imports of 10 components
+// Imports of 13 components
 const componentFiles = [
   'button.css', 'dialog.css', 'card.css', 'form.css', 'badge.css',
-  'navbar.css', 'accordion.css', 'table.css', 'code.css', 'toast.css'
+  'navbar.css', 'accordion.css', 'table.css', 'code.css', 'toast.css',
+  'switch.css', 'alert.css', 'tabs.css'
 ];
 
 for (const comp of componentFiles) {
@@ -124,7 +128,7 @@ assert(
   'layout.css must enclose rules within @layer vd3.layout {'
 );
 
-// All 10 component files must enclose rules within @layer vd3.components {
+// All 13 component files must enclose rules within @layer vd3.components {
 for (const comp of componentFiles) {
   const compContent = fileContents[comp] || '';
   assert(
@@ -786,13 +790,125 @@ for (const p of toastPlacements) {
 }
 
 // =============================================================================
-// Suite 17: M1 Contrast Advisory & Dual-Ring Focus Resolution
+// Suite 17: Feature #37: Switch Toggle (APG Switch Pattern, RTL-safe)
+// =============================================================================
+suite('Feature #37: Switch Toggle (APG Switch Pattern, RTL-safe)');
+
+const switchCss = fileContents['switch.css'] || '';
+
+assert(
+  switchCss.includes('.vd-switch') && switchCss.includes('.vd-switch-thumb'),
+  'switch.css must define .vd-switch track and .vd-switch-thumb'
+);
+assert(
+  switchCss.includes('[aria-checked="true"]'),
+  'switch.css must style the aria-checked="true" state (role="switch" contract)'
+);
+assert(
+  switchCss.includes('inset-inline-start'),
+  'switch.css thumb travel must use the logical property inset-inline-start (RTL-safe)'
+);
+assert(
+  switchCss.includes('.vd-switch:focus-visible') &&
+    switchCss.includes('--vd3-focus-ring-offset') && switchCss.includes('--vd3-focus-ring-width'),
+  'switch.css must implement the dual-ring :focus-visible pattern'
+);
+assert(
+  switchCss.includes('.vd-switch:disabled') && switchCss.includes('[aria-disabled="true"]'),
+  'switch.css must style :disabled and [aria-disabled="true"]'
+);
+assert(
+  switchCss.includes('.vd-switch--sm') && switchCss.includes('.vd-switch-sm') &&
+    switchCss.includes('.vd-switch--lg') && switchCss.includes('.vd-switch-lg'),
+  'switch.css must define sm/lg size modifiers with single-dash aliases'
+);
+assert(
+  switchCss.includes('var(--vd3-radius-full') || switchCss.includes('9999rem'),
+  'switch.css must use the pill radius (C-04) for track and thumb'
+);
+assert(
+  switchCss.includes('var(--vd3-space-fib-34') && switchCss.includes('var(--vd3-space-fib-21'),
+  'switch.css md track must bind to Fibonacci space tokens (34px / 21px ≈ φ ratio)'
+);
+
+// =============================================================================
+// Suite 18: Feature #38: Alert Banner (live-region roles, RTL-safe accent)
+// =============================================================================
+suite('Feature #38: Alert Banner (live-region roles, RTL-safe accent)');
+
+const alertCss = fileContents['alert.css'] || '';
+
+assert(
+  alertCss.includes('.vd-alert'),
+  'alert.css must define base .vd-alert class'
+);
+
+const alertVariants = ['info', 'success', 'warning', 'critical'];
+for (const v of alertVariants) {
+  assert(
+    alertCss.includes(`.vd-alert--${v}`) && alertCss.includes(`.vd-alert-${v}`),
+    `alert.css must define variant .vd-alert--${v} and alias .vd-alert-${v}`
+  );
+}
+
+const alertAnatomy = ['icon', 'content', 'title', 'body', 'close'];
+for (const part of alertAnatomy) {
+  assert(
+    alertCss.includes(`.vd-alert-${part}`),
+    `alert.css must define anatomy part .vd-alert-${part}`
+  );
+}
+assert(
+  alertCss.includes('border-inline-start'),
+  'alert.css accent bar must use the logical property border-inline-start (RTL-safe)'
+);
+assert(
+  alertCss.includes('.vd-alert-close:focus-visible'),
+  'alert.css must define :focus-visible dual ring on the dismiss action'
+);
+
+// =============================================================================
+// Suite 19: Feature #39: Tabs (APG Tabs Pattern)
+// =============================================================================
+suite('Feature #39: Tabs (APG Tabs Pattern)');
+
+const tabsCss = fileContents['tabs.css'] || '';
+
+assert(
+  tabsCss.includes('.vd-tabs') && tabsCss.includes('.vd-tab') && tabsCss.includes('.vd-tab-panel'),
+  'tabs.css must define .vd-tabs tablist, .vd-tab, and .vd-tab-panel'
+);
+assert(
+  tabsCss.includes('[aria-selected="true"]'),
+  'tabs.css must style the aria-selected="true" active tab'
+);
+assert(
+  tabsCss.includes('.vd-tab:focus-visible') &&
+    tabsCss.includes('--vd3-focus-ring-offset') && tabsCss.includes('--vd3-focus-ring-width'),
+  'tabs.css must implement the dual-ring :focus-visible pattern on tabs'
+);
+assert(
+  tabsCss.includes('.vd-tab:disabled') && tabsCss.includes('[aria-disabled="true"]'),
+  'tabs.css must style disabled tabs'
+);
+assert(
+  tabsCss.includes('.vd-tab-panel[hidden]') && tabsCss.includes('display: none'),
+  'tabs.css must hide inactive panels via [hidden]'
+);
+assert(
+  tabsCss.includes('var(--vd3-border-width-thin') && tabsCss.includes('var(--vd3-color-focus'),
+  'tabs.css active indicator must bind to line.thin (2px) in color.role.focus'
+);
+
+// =============================================================================
+// Suite 20: M1 Contrast Advisory & Dual-Ring Focus Resolution
 // =============================================================================
 suite('M1 Contrast Advisory & Dual-Ring Focus Resolution');
 
 const focusFiles = [
   'button.css', 'form.css', 'badge.css', 'navbar.css',
-  'accordion.css', 'table.css', 'code.css', 'toast.css'
+  'accordion.css', 'table.css', 'code.css', 'toast.css',
+  'switch.css', 'alert.css', 'tabs.css'
 ];
 
 for (const f of focusFiles) {
@@ -814,11 +930,14 @@ assert(
 );
 
 // =============================================================================
-// Suite 18: Reduced Motion Overrides (MOB-001)
+// Suite 21: Reduced Motion Overrides (MOB-001)
 // =============================================================================
 suite('Reduced Motion Overrides (MOB-001)');
 
-const animatedFiles = ['button.css', 'dialog.css', 'card.css', 'accordion.css', 'toast.css'];
+const animatedFiles = [
+  'button.css', 'dialog.css', 'card.css', 'accordion.css', 'toast.css',
+  'switch.css', 'alert.css', 'tabs.css'
+];
 
 for (const f of animatedFiles) {
   const content = fileContents[f] || '';
@@ -830,7 +949,7 @@ for (const f of animatedFiles) {
 }
 
 // =============================================================================
-// Suite 19: Zero External Framework Dependencies
+// Suite 22: Zero External Framework Dependencies
 // =============================================================================
 suite('Zero External Framework Dependencies');
 

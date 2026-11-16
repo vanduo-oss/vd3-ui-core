@@ -1,0 +1,123 @@
+/**
+ * VD3 UI CORE — Switch Toggle Component (Feature #37)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, W3C ARIA APG Switch Pattern (role="switch", aria-checked)
+ * RTL-safe: thumb travel is positioned with the logical property inset-inline-start,
+ * so the toggle direction mirrors automatically in right-to-left layouts.
+ * Track proportions are golden: width / height = F_(n+1) / F_n ≈ φ at every size.
+ */
+
+@layer vd3.components {
+  .vd-switch {
+    --_vd-switch-h: var(--vd3-space-fib-21, 1.3125rem);   /* 21px · F_8 */
+    --_vd-switch-w: var(--vd3-space-fib-34, 2.125rem);     /* 34px · F_9 — w/h = 34/21 ≈ φ */
+    --_vd-switch-pad: var(--vd3-space-fib-1, 0.125rem);    /* 2px · F_1 */
+    --_vd-switch-border: var(--vd3-border-width-thin, 2px);
+    --_vd-switch-thumb: calc(var(--_vd-switch-h) - 2 * var(--_vd-switch-border) - 2 * var(--_vd-switch-pad));
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    width: var(--_vd-switch-w);
+    height: var(--_vd-switch-h);
+    padding: 0;
+    border: var(--_vd-switch-border) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    cursor: pointer;
+    box-sizing: border-box;
+    transition:
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      border-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  .vd-switch-thumb {
+    position: absolute;
+    top: 50%;
+    inset-inline-start: var(--_vd-switch-pad);
+    transform: translateY(-50%);
+    width: var(--_vd-switch-thumb);
+    height: var(--_vd-switch-thumb);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    background-color: var(--vd3-color-text-secondary, #495057);
+    pointer-events: none;
+    transition:
+      inset-inline-start var(--vd3-duration-144, 144ms) var(--vd3-ease-out),
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  /* Checked State (aria-checked="true" drives state; role="switch" is set in markup) */
+  .vd-switch[aria-checked="true"] {
+    background-color: var(--vd3-color-focus, #fab005);
+    border-color: var(--vd3-color-focus, #fab005);
+  }
+  .vd-switch[aria-checked="true"] .vd-switch-thumb {
+    inset-inline-start: calc(100% - var(--_vd-switch-thumb) - var(--_vd-switch-pad));
+    background-color: var(--vd3-color-gray-1000, #1a1d20);
+  }
+
+  /* Sizes — every track keeps the golden ratio: 21/13, 34/21, 55/34 ≈ φ */
+  .vd-switch--sm,
+  .vd-switch-sm {
+    --_vd-switch-h: var(--vd3-space-fib-13, 0.8125rem);
+    --_vd-switch-w: var(--vd3-space-fib-21, 1.3125rem);
+    --_vd-switch-border: var(--vd3-border-width-hair, 1px);
+  }
+
+  .vd-switch--md,
+  .vd-switch-md {
+    /* Default variables apply */
+  }
+
+  .vd-switch--lg,
+  .vd-switch-lg {
+    --_vd-switch-h: var(--vd3-space-fib-34, 2.125rem);
+    --_vd-switch-w: var(--vd3-space-fib-55, 3.4375rem);
+  }
+
+  /* Hover */
+  .vd-switch:hover:not(:disabled):not([aria-disabled="true"]) {
+    border-color: var(--vd3-color-gray-5, #adb5bd);
+  }
+  .vd-switch[aria-checked="true"]:hover:not(:disabled):not([aria-disabled="true"]) {
+    filter: brightness(0.96);
+  }
+
+  /* Dual-Ring Focus */
+  .vd-switch:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow));
+  }
+
+  /* Disabled State */
+  .vd-switch:disabled,
+  .vd-switch[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    border-color: var(--vd3-color-border-subtle, #e9ecef);
+  }
+
+  /* Dark Theme Nuances */
+  [data-theme="dark"] .vd-switch[aria-checked="true"] {
+    background-color: var(--vd3-color-gold-4, #ffd43b);
+    border-color: var(--vd3-color-gold-4, #ffd43b);
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-switch,
+    .vd-switch-thumb {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-switch,
+  [data-motion="reduce"] .vd-switch-thumb {
+    transition: none !important;
+  }
+}
