@@ -569,6 +569,108 @@ suite('Focus Ring Geometry Tokens (FOC contract, F_3 = 2px)', () => {
   );
 });
 
+// SUITE 17: Iconography & Density Tokens (new in 1.1)
+suite('Iconography & Density Tokens (F_7..F_10 sizes, phi stroke, phi^-1/2 density)', () => {
+  assert(tokens.icon?.size !== undefined, 'icon.size token group exists');
+
+  const expectedIconSizes = {
+    sm: { n: 7, px: 13 },
+    md: { n: 8, px: 21 },
+    lg: { n: 9, px: 34 },
+    xl: { n: 10, px: 55 },
+  };
+  for (const [key, exp] of Object.entries(expectedIconSizes)) {
+    if (tokens.icon?.size?.[key]) {
+      const val = tokens.icon.size[key].$value;
+      assert(binetFib(exp.n) === exp.px, `Binet F_${exp.n} === ${exp.px}`);
+      assert(
+        Math.round(parseFloat(val) * 16) === exp.px,
+        `icon.size.${key} (${val}) converts to ${exp.px}px (F_${exp.n})`
+      );
+    } else {
+      assert(false, `icon.size.${key} token missing`);
+    }
+  }
+
+  const stroke = tokens.icon?.stroke?.outline?.$value;
+  assertClose(stroke, PHI, 1e-3, 'icon.stroke.outline (1.618) ~= phi');
+
+  for (const role of ['default', 'secondary', 'accent', 'critical']) {
+    assert(
+      typeof tokens.icon?.color?.[role]?.$value === 'string' &&
+        tokens.icon.color[role].$value.startsWith('{color.role.'),
+      `icon.color.${role} aliases a semantic color role`
+    );
+  }
+
+  assert(tokens.density?.scale !== undefined, 'density.scale token group exists');
+  if (tokens.density?.scale) {
+    assert(tokens.density.scale.comfortable?.$value === 1, 'density.scale.comfortable === 1 (identity default)');
+    const compact = tokens.density.scale.compact?.$value;
+    assertClose(compact, 1 / SQRT_PHI, 1e-3, 'density.scale.compact (0.7862) ~= 1/sqrt(phi) = phi^(-1/2)');
+  }
+});
+
+// SUITE 18: JSON -> CSS drift gate (every leaf token must export a --vd3-* var in tokens.css)
+suite('DTCG JSON to tokens.css Export Drift Gate', () => {
+  const tokensCssPath = path.resolve(__dirname, '../tokens/tokens.css');
+  assert(fs.existsSync(tokensCssPath), 'tokens/tokens.css exists');
+  const css = fs.readFileSync(tokensCssPath, 'utf8');
+  const definedVars = new Set(
+    [...css.matchAll(/(--vd3-[a-z0-9-]+)\s*:/g)].map((m) => m[1])
+  );
+
+  const kebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+
+  function cssVarFor(tokenPath) {
+    const p = tokenPath.split('.');
+    if (p[0] === 'theme') return '--vd3-color-' + kebab(p.slice(4).join('-')); // theme.dark.color.role.X -> --vd3-color-X (dark block)
+    if (p[0] === 'color' && p[1] === 'primitive' && p[2] === 'golden-angle') return '--vd3-color-golden-' + p.slice(3).join('-');
+    if (p[0] === 'color' && p[1] === 'primitive') return '--vd3-color-' + kebab(p.slice(2).join('-'));
+    if (p[0] === 'color' && p[1] === 'role') return '--vd3-color-' + kebab(p.slice(2).join('-'));
+    if (p[0] === 'math') return '--vd3-' + kebab(p.slice(1).join('-'));
+    if (p[0] === 'space') return '--vd3-space-' + p.slice(1).join('-');
+    if (p[0] === 'line') return '--vd3-line-' + p.slice(1).join('-');
+    if (p[0] === 'focus') return '--vd3-focus-' + kebab(p.slice(1).join('-'));
+    if (p[0] === 'icon') {
+      if (p[1] === 'color' && p[2] === 'default') return '--vd3-icon-color';
+      return '--vd3-icon-' + kebab(p.slice(1).join('-'));
+    }
+    if (p[0] === 'density') return '--vd3-density-' + kebab(p.slice(1).join('-'));
+    if (p[0] === 'radius') return '--vd3-radius-' + p.slice(1).join('-');
+    if (p[0] === 'shadow') return '--vd3-shadow-' + p.slice(1).join('-');
+    if (p[0] === 'glow') return '--vd3-glow-' + p.slice(1).join('-');
+    if (p[0] === 'z') return '--vd3-z-' + kebab(p.slice(1).join('-'));
+    if (p[0] === 'container') return '--vd3-container-' + p.slice(1).join('-');
+    if (p[0] === 'breakpoint') return '--vd3-breakpoint-' + p.slice(1).join('-');
+    if (p[0] === 'motion') return '--vd3-duration-' + kebab(p.slice(1).join('-'));
+    if (p[0] === 'easing') return '--vd3-ease-' + kebab(p.slice(1).join('-'));
+    if (p[0] === 'aspect') return '--vd3-aspect-' + kebab(p.slice(1).join('-'));
+    if (p[0] === 'glass') return '--vd3-glass-' + p.slice(1).join('-');
+    if (p[0] === 'type' && p[1] === 'size') return '--vd3-font-size-' + kebab(p.slice(2).join('-'));
+    if (p[0] === 'type' && p[1] === 'leading') return '--vd3-line-height-' + p.slice(2).join('-');
+    if (p[0] === 'type' && p[1] === 'tracking') return '--vd3-tracking-' + p.slice(2).join('-');
+    return null;
+  }
+
+  const leaves = getLeafTokens(tokens);
+  let checked = 0;
+  let skipped = 0;
+  for (const { path: tokenPath } of leaves) {
+    const varName = cssVarFor(tokenPath);
+    if (!varName) {
+      skipped++;
+      continue;
+    }
+    checked++;
+    assert(
+      definedVars.has(varName),
+      `Token ${tokenPath} must export ${varName} in tokens/tokens.css (drift gate)`
+    );
+  }
+  assert(checked > 100, `Drift gate covered ${checked} leaf tokens (skipped ${skipped} non-CSS groups)`);
+});
+
 // ---------------------------------------------------------------------------
 // 5. Output Summary Formatting & Process Exit Code
 // ---------------------------------------------------------------------------

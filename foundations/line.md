@@ -1,6 +1,6 @@
 # Line & Border Weights
 
-Status: stable · Spec: 1.0.2-draft
+Status: stable · Spec: 1.1.0-draft
 
 Line weights and border strokes in VD3 UI CORE are strictly derived from the Fibonacci sequence ($F_n$). Every border carries an explicit basis classification and satisfies W3C non-text contrast guidelines.
 

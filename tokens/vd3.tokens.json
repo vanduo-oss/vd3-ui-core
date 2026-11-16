@@ -1,7 +1,7 @@
 {
   "$description": "vd3 design tokens — NORMATIVE single source of truth. W3C DTCG format. VALUES AUDITED against @vanduo-oss/vd3@1.9.0 (dist/tokens.json, vd3-core.css, vd3.css) — see docs/token-audit.md. Structure and naming are binding; public CSS names follow v1.9 verbatim (see conventions/naming.md mapping table). Generated CSS in library repos MUST match this file (CI check). Basis classes: A = phi/Fibonacci/Lucas-derived, B = conventional-by-design (written reason), C = registered exception (foundations/proportion.md registry).",
   "$vd3": {
-    "spec": "vd3-ui-core@1.0.2-draft",
+    "spec": "vd3-ui-core@1.1.0-draft",
     "auditedAgainst": "@vanduo-oss/vd3@1.9.0"
   },
   "math": {
@@ -141,6 +141,51 @@
       "color":        { "$type": "color", "$value": "{color.role.focus}", "$description": "Ring ink · --vd3-focus-ring-color", "$extensions": { "vd3": { "class": "B", "reason": "Alias of the semantic focus role (WCAG 2.2 SC 2.4.13 >= 3:1)" } } },
       "offset-color": { "$type": "color", "$value": "{color.role.canvas}", "$description": "Offset gap matches the canvas · --vd3-focus-ring-offset-color", "$extensions": { "vd3": { "class": "B", "reason": "Alias of the semantic canvas role" } } },
       "glow":         { "$type": "shadow", "$value": "0 0 8px {color.role.focus-glow}", "$description": "8px = F_6 halo · --vd3-focus-ring-glow", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_6 = 8 blur" } } }
+    }
+  },
+  "icon": {
+    "$description": "Iconography contract (foundations/icons.md, new in 1.1). Sizes are Fibonacci steps F_7..F_10 (Class A) on a 16px rem base; stroke width is phi (Class A); color leaves are semantic-role aliases only. Resolves the token-audit open unknown 'Phosphor icon sizing steps' (docs/token-audit.md). CSS mapping per conventions/naming.md: icon.* -> --vd3-icon-* (legacy alias --vd-icon-*).",
+    "size": {
+      "$type": "dimension",
+      "$description": "Icon box sizes — Fibonacci F_7..F_10. Base .vd-icon defaults to md (F_8 = 21px).",
+      "sm": { "$value": "0.8125rem", "$description": "13px · --vd3-icon-size-sm", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_7 = 13; rem value identical to space.fib-13" } } },
+      "md": { "$value": "1.3125rem", "$description": "21px · --vd3-icon-size-md · default", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_8 = 21; rem value identical to space.fib-21" } } },
+      "lg": { "$value": "2.125rem", "$description": "34px · --vd3-icon-size-lg", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_9 = 34; rem value identical to space.fib-34" } } },
+      "xl": { "$value": "3.4375rem", "$description": "55px · --vd3-icon-size-xl", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_10 = 55; rem value identical to space.fib-55" } } }
+    },
+    "stroke": {
+      "$description": "Outline icon stroke — SVG stroke-width in user units of the icon viewBox (Phosphor outline/regular weight is the reference).",
+      "outline": { "$type": "number", "$value": 1.618, "$description": "--vd3-icon-stroke-outline · 1.618 = phi rounded to 3 decimals; matches the select chevron in components/form.css", "$extensions": { "vd3": { "class": "A", "derivation": "phi = (1 + sqrt(5)) / 2 = 1.6180339887, rounded to 3 decimals" } } }
+    },
+    "color": {
+      "$type": "color",
+      "$description": "Icon ink — semantic-role aliases only; components never consume primitives directly (foundations/color.md).",
+      "default":   { "$value": "{color.role.text-primary}",   "$description": "--vd3-icon-color · default icon ink", "$extensions": { "vd3": { "class": "B", "reason": "Alias of color.role.text-primary" } } },
+      "secondary": { "$value": "{color.role.text-secondary}", "$description": "--vd3-icon-color-secondary · muted / caption icons", "$extensions": { "vd3": { "class": "B", "reason": "Alias of color.role.text-secondary" } } },
+      "accent":    { "$value": "{color.role.focus}",          "$description": "--vd3-icon-color-accent · interactive / active icons", "$extensions": { "vd3": { "class": "B", "reason": "Alias of color.role.focus" } } },
+      "critical":  { "$value": "{color.role.critical}",       "$description": "--vd3-icon-color-critical · error status icons, always paired with text (WCAG 1.4.1)", "$extensions": { "vd3": { "class": "B", "reason": "Alias of color.role.critical" } } }
+    },
+    "gap": {
+      "$type": "dimension",
+      "$value": "{space.fib-5}",
+      "$description": "8px icon-to-label gap · --vd3-icon-gap",
+      "$extensions": { "vd3": { "class": "A", "derivation": "Alias for space.fib-5 (F_5 = 8px, C-01)" } }
+    }
+  },
+  "density": {
+    "$type": "number",
+    "$description": "Density scale factors — exactly two modes (resolves docs/research-brief.md open question Q4; new in 1.1, foundations/density.md). Runtime hook data-density=\"compact\" on the root element sets --vd3-density-scale and remaps every --vd3-space-fib-* to calc(<base> * var(--vd3-density-scale)) in tokens.css. Spacing only: containers, breakpoints, type, line weights, radii are structural and never scaled. CSS mapping: density.scale.* -> --vd3-density-scale-*; runtime var --vd3-density-scale.",
+    "scale": {
+      "comfortable": {
+        "$value": 1,
+        "$description": "Default mode, identity scale · --vd3-density-scale-comfortable",
+        "$extensions": { "vd3": { "class": "B", "reason": "Identity no-op default — a missing data-density hook must never change rendering; conventional-by-design" } }
+      },
+      "compact": {
+        "$value": 0.7862,
+        "$description": "Compact mode · --vd3-density-scale-compact · activated by [data-density=\"compact\"] on the root element",
+        "$extensions": { "vd3": { "class": "A", "derivation": "phi^(-1/2) = 1/sqrt(phi) = 0.7862 — reciprocal of the sqrt(phi) typography modular step, applied to spacing" } }
+      }
     }
   },
   "radius": {

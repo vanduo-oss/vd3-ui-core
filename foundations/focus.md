@@ -1,6 +1,6 @@
 # Focus & Accessibility Contracts
 
-Status: stable · Spec: 1.0.2-draft
+Status: stable · Spec: 1.1.0-draft
 
 Focus management is a foundational pillar of accessibility in VD3 UI CORE. This specification defines the mathematical geometry, token contracts, and APG operational behaviors governing keyboard navigation and focus indicators across all components.
 

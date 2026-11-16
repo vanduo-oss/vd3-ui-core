@@ -265,6 +265,27 @@
     --vd3-focus-ring-glow: 0 0 8px var(--vd3-color-focus-glow);
 
     /* -------------------------------------------------------------------------
+       16b. Iconography (Fibonacci icon sizes F_7..F_10, phi stroke) — new in 1.1
+       ------------------------------------------------------------------------- */
+    --vd3-icon-size-sm: 0.8125rem;   /* 13px · F_7 */
+    --vd3-icon-size-md: 1.3125rem;   /* 21px · F_8 · default */
+    --vd3-icon-size-lg: 2.125rem;    /* 34px · F_9 */
+    --vd3-icon-size-xl: 3.4375rem;   /* 55px · F_10 */
+    --vd3-icon-stroke-outline: 1.618; /* phi, rounded to 3 decimals */
+    --vd3-icon-color: var(--vd3-color-text-primary);
+    --vd3-icon-color-secondary: var(--vd3-color-text-secondary);
+    --vd3-icon-color-accent: var(--vd3-color-focus);
+    --vd3-icon-color-critical: var(--vd3-color-critical);
+    --vd3-icon-gap: var(--vd3-space-fib-5); /* 8px · F_5 */
+
+    /* -------------------------------------------------------------------------
+       16c. Density Scale (foundations/density.md) — new in 1.1
+       ------------------------------------------------------------------------- */
+    --vd3-density-scale-comfortable: 1;
+    --vd3-density-scale-compact: 0.7862; /* 1/sqrt(phi) = phi^(-1/2) */
+    --vd3-density-scale: var(--vd3-density-scale-comfortable, 1);
+
+    /* -------------------------------------------------------------------------
        17. Semantic Roles (Default / Light Theme)
        ------------------------------------------------------------------------- */
     --vd3-color-canvas: #ffffff;
@@ -445,6 +466,27 @@
     --vd-color-primary-hover: var(--vd3-color-interactive);
     --vd-color-error: var(--vd3-color-critical);
     --vd-color-danger: var(--vd3-color-critical);
+  }
+
+  /* ---------------------------------------------------------------------------
+     18a. Density Mode ([data-density="compact"]) — foundations/density.md
+     Remaps every spacing token to calc(base * --vd3-density-scale). Structural
+     groups (container, breakpoint, type, line, radius) are never scaled.
+     --------------------------------------------------------------------------- */
+  [data-density="compact"] {
+    --vd3-density-scale: var(--vd3-density-scale-compact, 0.7862);
+
+    --vd3-space-fib-1: calc(0.125rem * var(--vd3-density-scale));
+    --vd3-space-fib-2: calc(0.25rem * var(--vd3-density-scale));
+    --vd3-space-fib-3: calc(0.375rem * var(--vd3-density-scale));
+    --vd3-space-fib-5: calc(0.5rem * var(--vd3-density-scale));
+    --vd3-space-fib-8: calc(0.75rem * var(--vd3-density-scale));
+    --vd3-space-fib-13: calc(0.8125rem * var(--vd3-density-scale));
+    --vd3-space-fib-21: calc(1.3125rem * var(--vd3-density-scale));
+    --vd3-space-fib-34: calc(2.125rem * var(--vd3-density-scale));
+    --vd3-space-fib-55: calc(3.4375rem * var(--vd3-density-scale));
+    --vd3-space-fib-89: calc(5.5625rem * var(--vd3-density-scale));
+    --vd3-space-fib-144: calc(9rem * var(--vd3-density-scale));
   }
 
   /* ---------------------------------------------------------------------------

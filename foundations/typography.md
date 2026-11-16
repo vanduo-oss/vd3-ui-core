@@ -1,6 +1,6 @@
 # Typography
 
-Status: stable · Spec: 1.0.2-draft
+Status: stable · Spec: 1.1.0-draft
 
 The typographic hierarchy in VD3 UI CORE is governed by a modular scale factor of $\sqrt{\phi} \approx 1.2720196495$, paired with line-height ratios derived from $\phi$.
 

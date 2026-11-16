@@ -1,6 +1,6 @@
 # Motion
 
-Status: stable · Spec: 1.0.2-draft
+Status: stable · Spec: 1.1.0-draft
 
 Motion in VD3 UI CORE is grounded in the Fibonacci duration ladder and cubic Bézier easing curves derived from powers of the golden ratio $\phi$.
 

@@ -1,6 +1,6 @@
 # Color — Semantic Role Model
 
-Status: stable · Spec: 1.0.2-draft
+Status: stable · Spec: 1.1.0-draft
 
 The color system in VD3 UI CORE is architected across three strict tiers, guaranteeing high contrast accessibility (WCAG AA/AAA) and algorithmic color harmony derived from the golden angle ($\psi \approx 137.508^\circ$).
 
