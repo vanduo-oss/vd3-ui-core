@@ -1,7 +1,7 @@
 ---
 slug: alert
 status: stable
-spec: vd3-ui-core@1.0.2-draft
+spec: vd3-ui-core@1.1.0-draft
 apg: none
 ---
 

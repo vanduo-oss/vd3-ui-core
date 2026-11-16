@@ -1,7 +1,7 @@
 ---
 slug: tabs
 status: stable
-spec: vd3-ui-core@1.0.2-draft
+spec: vd3-ui-core@1.1.0-draft
 apg: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/
 ---
 

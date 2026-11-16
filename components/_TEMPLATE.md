@@ -5,7 +5,7 @@ Copy for each component. Delete guidance lines marked ⟵.
 ---
 slug: <kebab-case name>
 status: stable | experimental | deprecated
-spec: vd3-ui-core@1.0.2-draft
+spec: vd3-ui-core@1.1.0-draft
 apg: <URL of the APG pattern this component conforms to, or "none">
 ---
 
