@@ -1,0 +1,210 @@
+/**
+ * VD3 UI CORE — Datepicker Component (Feature #53)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, W3C ARIA APG Grid Pattern (date-picker dialog)
+ *   https://www.w3.org/WAI/ARIA/apg/patterns/grid/
+ * RTL-safe: layout uses CSS logical properties throughout. The only physical
+ * left/right usage is the rotated chevron glyph stroke on .vd-datepicker-prev /
+ * .vd-datepicker-next (border-right / border-left rotated into an arrow) — intentional.
+ */
+
+@layer vd3.components {
+  /* Popover surface */
+  .vd-datepicker {
+    position: absolute;
+    z-index: var(--vd3-z-popover, 1060);
+    box-sizing: border-box;
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-fib-8, 0.5rem);
+    box-shadow: var(--vd3-shadow-4, 0 8px 13px -3px #0000001a, 0 3px 5px -3px #0000001a);
+    padding: var(--vd3-space-fib-13, 0.8125rem);
+    font-family: var(--vd3-font-family-sans, system-ui, sans-serif);
+    color: var(--vd3-color-text-primary, #1a1d20);
+  }
+
+  .vd-datepicker[hidden] {
+    display: none;
+  }
+
+  /* Header: prev button + month/year title + next button */
+  .vd-datepicker-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--vd3-space-fib-8, 0.75rem);
+    margin-block-end: var(--vd3-space-fib-8, 0.75rem);
+  }
+
+  .vd-datepicker-title {
+    flex: 1 1 auto;
+    margin: 0;
+    font-size: var(--vd3-font-size-base, 1rem);
+    font-weight: 600;
+    line-height: var(--vd3-line-height-tight, 1.236);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    text-align: center;
+  }
+
+  .vd-datepicker-prev,
+  .vd-datepicker-next {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--vd3-space-fib-34, 2.125rem);
+    height: var(--vd3-space-fib-34, 2.125rem);
+    padding: 0;
+    border: none;
+    border-radius: var(--vd3-radius-full, 9999rem);
+    background-color: transparent;
+    color: var(--vd3-color-text-primary, #1a1d20);
+    cursor: pointer;
+    transition:
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1)),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1));
+  }
+
+  /* Chevron glyphs: physical right/left borders are intentional here — they form
+     the rotated arrow stroke (the only permitted physical left/right usage) */
+  .vd-datepicker-prev::before,
+  .vd-datepicker-next::before {
+    content: "";
+    width: var(--vd3-space-fib-5, 0.5rem);
+    height: var(--vd3-space-fib-5, 0.5rem);
+    border-top: var(--vd3-border-width-thin, 2px) solid currentColor;
+    border-right: var(--vd3-border-width-thin, 2px) solid currentColor; /* intentional physical stroke — rotated chevron glyph */
+  }
+  .vd-datepicker-prev::before {
+    transform: rotate(-135deg); /* physical left stroke: chevron pointing inline-back */
+    margin-inline-end: var(--vd3-space-fib-1, 0.125rem);
+  }
+  .vd-datepicker-next::before {
+    transform: rotate(45deg);
+    margin-inline-start: var(--vd3-space-fib-1, 0.125rem);
+  }
+
+  .vd-datepicker-prev:hover:not(:disabled):not([aria-disabled="true"]),
+  .vd-datepicker-next:hover:not(:disabled):not([aria-disabled="true"]) {
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+  }
+
+  /* Calendar grid: 7 columns — weekday header cells, then day cells */
+  .vd-datepicker-grid {
+    display: grid;
+    grid-template-columns: repeat(7, var(--vd3-space-fib-34, 2.125rem));
+    justify-content: center;
+    gap: var(--vd3-space-fib-1, 0.125rem);
+  }
+
+  .vd-datepicker-weekday {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: var(--vd3-space-fib-2, 0.25rem);
+    font-size: var(--vd3-font-size-xs, 0.75rem);
+    font-weight: 600;
+    line-height: var(--vd3-line-height-tight, 1.236);
+    letter-spacing: var(--vd3-tracking-wider, 0.05em);
+    text-transform: uppercase;
+    color: var(--vd3-color-text-secondary, #495057);
+    user-select: none;
+  }
+
+  /* Day cell */
+  .vd-datepicker-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    box-sizing: border-box;
+    padding: 0;
+    border: none;
+    border-radius: var(--vd3-radius-full, 9999rem);
+    background-color: transparent;
+    font-family: inherit;
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+    line-height: var(--vd3-line-height-tight, 1.236);
+    font-variant-numeric: tabular-nums;
+    color: var(--vd3-color-text-primary, #1a1d20);
+    cursor: pointer;
+    transition:
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1)),
+      color var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1)),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1));
+  }
+
+  .vd-datepicker-day:hover:not(:disabled):not([aria-disabled="true"]):not([aria-selected="true"]) {
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+  }
+
+  /* Selected day — focus-hue fill */
+  .vd-datepicker-day[aria-selected="true"] {
+    background-color: var(--vd3-color-focus, #fab005);
+    color: var(--vd3-color-gray-1000, #1a1d20);
+    font-weight: 600;
+  }
+
+  /* Today marker — hair outline in the focus hue (focus ring below replaces it) */
+  .vd-datepicker-day[data-today] {
+    outline: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-focus, #fab005);
+    outline-offset: calc(-1 * var(--vd3-border-width-hair, 1px));
+  }
+
+  /* Dual-Ring Focus (FOC-001…004) on days and header nav buttons */
+  .vd-datepicker-day:focus-visible,
+  .vd-datepicker-prev:focus-visible,
+  .vd-datepicker-next:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
+  }
+
+  /* Disabled days / nav buttons */
+  .vd-datepicker-day:disabled,
+  .vd-datepicker-day[aria-disabled="true"],
+  .vd-datepicker-prev:disabled,
+  .vd-datepicker-prev[aria-disabled="true"],
+  .vd-datepicker-next:disabled,
+  .vd-datepicker-next[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+    color: var(--vd3-color-text-secondary, #495057);
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  /* Footer: Today / Clear / Apply actions (rendered with .vd-btn) */
+  .vd-datepicker-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--vd3-space-fib-8, 0.75rem);
+    margin-block-start: var(--vd3-space-fib-8, 0.75rem);
+    padding-block-start: var(--vd3-space-fib-8, 0.75rem);
+    border-top: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+  }
+
+  /* Dark Theme: selected day uses the luminous dark focus hue */
+  [data-theme="dark"] .vd-datepicker-day[aria-selected="true"] {
+    background-color: var(--vd3-color-gold-4, #ffd43b);
+    color: var(--vd3-color-gray-1000, #1a1d20);
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-datepicker-day,
+    .vd-datepicker-prev,
+    .vd-datepicker-next {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-datepicker-day,
+  [data-motion="reduce"] .vd-datepicker-prev,
+  [data-motion="reduce"] .vd-datepicker-next {
+    transition: none !important;
+  }
+}

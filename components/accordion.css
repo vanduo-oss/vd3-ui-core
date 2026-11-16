@@ -60,7 +60,7 @@
     display: inline-block;
     width: 8px;
     height: 8px;
-    border-right: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-text-secondary, #495057);
+    border-right: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-text-secondary, #495057); /* intentional physical stroke — rotated chevron glyph */
     border-bottom: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-text-secondary, #495057);
     transform: rotate(45deg);
     transition: transform var(--vd3-duration-144, 144ms) var(--vd3-ease-out);

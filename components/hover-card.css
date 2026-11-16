@@ -1,0 +1,63 @@
+/**
+ * VD3 UI CORE — Hover Card Component (Feature #59)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA + W3C ARIA APG Tooltip pattern (behavioral reference; no dedicated APG hover-card pattern) — https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/
+ */
+
+@layer vd3.components {
+  /* Floating rich-preview surface. Open state is driven by the behavioral layer
+     via [data-open="true"] or the Popover API (:popover-open); the open DELAY is
+     behavioral, not CSS. Fade-in is 144ms (motion.144). */
+  .vd-hover-card {
+    position: absolute;
+    z-index: var(--vd3-z-popover, 1060);
+    max-width: var(--vd3-container-sm, 521px);
+    padding: var(--vd3-space-fib-13, 0.8125rem);
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-fib-8, 0.5rem);
+    box-shadow: var(--vd3-shadow-4);
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--vd3-duration-144, 144ms) var(--vd3-ease-out),
+      visibility var(--vd3-duration-144, 144ms) var(--vd3-ease-out);
+  }
+
+  .vd-hover-card[data-open="true"],
+  .vd-hover-card:popover-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .vd-hover-card[hidden] {
+    display: none;
+  }
+
+  .vd-hover-card-title {
+    margin: 0 0 var(--vd3-space-fib-5, 0.5rem);
+    font-size: var(--vd3-font-size-base, 1rem);
+    font-weight: 600;
+    line-height: var(--vd3-line-height-snug, 1.382);
+    color: var(--vd3-color-text-primary, #1a1d20);
+  }
+
+  .vd-hover-card-body {
+    margin: 0;
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+    line-height: var(--vd3-line-height-normal, 1.5);
+    color: var(--vd3-color-text-secondary, #495057);
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-hover-card {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-hover-card {
+    transition: none !important;
+  }
+}

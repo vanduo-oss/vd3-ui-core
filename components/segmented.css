@@ -1,0 +1,91 @@
+/**
+ * VD3 UI CORE — Segmented Control Component (Feature #58)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA + W3C ARIA APG Radio Group (radiogroup) semantics — https://www.w3.org/WAI/ARIA/apg/patterns/radio/
+ */
+
+@layer vd3.components {
+  /* Pill container: markup carries role="radiogroup" (or role="group") + aria-label */
+  .vd-segmented {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--vd3-space-fib-1, 0.125rem);
+    padding: var(--vd3-space-fib-1, 0.125rem);
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    box-sizing: border-box;
+  }
+
+  /* Option: role="radio" + aria-checked (single-select) or aria-pressed (toggle segments) */
+  .vd-segmented-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--vd3-space-fib-3, 0.375rem);
+    padding: var(--vd3-space-fib-3, 0.375rem) var(--vd3-space-fib-13, 0.8125rem);
+    font-family: inherit;
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+    font-weight: 500;
+    line-height: var(--vd3-line-height-tight, 1.236);
+    white-space: nowrap;
+    color: var(--vd3-color-text-secondary, #495057);
+    background-color: transparent;
+    border: none;
+    border-radius: var(--vd3-radius-full, 9999rem);
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+    transition:
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  .vd-segmented-item:hover:not(:disabled):not([aria-disabled="true"]):not([aria-checked="true"]):not([aria-pressed="true"]) {
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+    color: var(--vd3-color-text-primary, #1a1d20);
+  }
+
+  /* Selected option: raised canvas pill */
+  .vd-segmented-item[aria-checked="true"],
+  .vd-segmented-item[aria-pressed="true"] {
+    background-color: var(--vd3-color-canvas, #ffffff);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    font-weight: 600;
+    box-shadow: var(--vd3-shadow-1);
+  }
+
+  /* Dark theme: canvas is darker than layer, so the selected pill uses the hover layer for contrast */
+  [data-theme="dark"] .vd-segmented-item[aria-checked="true"],
+  [data-theme="dark"] .vd-segmented-item[aria-pressed="true"] {
+    background-color: var(--vd3-color-layer-hover, #495057);
+  }
+
+  /* Dual-Ring Focus (FOC-001…004) */
+  .vd-segmented-item:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow));
+  }
+
+  /* Disabled State */
+  .vd-segmented-item:disabled,
+  .vd-segmented-item[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+    box-shadow: none;
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-segmented-item {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-segmented-item {
+    transition: none !important;
+  }
+}

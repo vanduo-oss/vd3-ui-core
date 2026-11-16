@@ -1,0 +1,231 @@
+/**
+ * VD3 UI CORE — Drawer Component (Feature #40)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, W3C ARIA APG Dialog (Modal) Pattern — non-modal variant (https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+ */
+
+@layer vd3.components {
+  /* Backdrop (dimmer beneath the drawer panel) */
+  .vd-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: var(--vd3-z-modal-backdrop, 1040);
+    background-color: color-mix(in srgb, var(--vd3-color-gray-1000, #1a1d20) 55%, transparent);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity var(--vd3-duration-slow, 377ms) var(--vd3-ease-in-out, cubic-bezier(0.618, 0, 0.382, 1)),
+      visibility 0s linear var(--vd3-duration-slow, 377ms);
+  }
+
+  .vd-drawer-backdrop[data-open="true"] {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity var(--vd3-duration-slow, 377ms) var(--vd3-ease-in-out, cubic-bezier(0.618, 0, 0.382, 1));
+  }
+
+  [data-theme="dark"] .vd-drawer-backdrop {
+    background-color: color-mix(in srgb, var(--vd3-color-gray-1000, #1a1d20) 68%, transparent);
+  }
+
+  /* Drawer panel — default placement is inline-start */
+  .vd-drawer {
+    --_vd-drawer-inline-size: var(--vd3-container-sm, 521px);
+
+    position: fixed;
+    inset-block: 0;
+    inset-inline-start: 0;
+    z-index: var(--vd3-z-modal, 1050);
+    display: flex;
+    flex-direction: column;
+    inline-size: var(--_vd-drawer-inline-size);
+    max-inline-size: 100%;
+    box-sizing: border-box;
+    background-color: var(--vd3-color-canvas, #ffffff);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    border-inline-end: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    box-shadow: var(--vd3-shadow-4, 0 8px 13px -3px #0000001a, 0 3px 5px -3px #0000001a);
+    overflow-y: auto;
+    overflow-x: hidden;
+    visibility: hidden;
+    transform: translateX(-100%);
+    transition:
+      transform var(--vd3-duration-slow, 377ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1)),
+      visibility 0s linear var(--vd3-duration-slow, 377ms);
+  }
+
+  .vd-drawer[data-open="true"] {
+    visibility: visible;
+    transform: none;
+    transition: transform var(--vd3-duration-slow, 377ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1));
+  }
+
+  /* Placement: inline-end */
+  .vd-drawer--end,
+  .vd-drawer-end {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+    border-inline-end: none;
+    border-inline-start: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    transform: translateX(100%);
+  }
+
+  /* Placement: block-start (top) */
+  .vd-drawer--top,
+  .vd-drawer-top {
+    inset-inline: 0;
+    inset-block-start: 0;
+    inset-block-end: auto;
+    inline-size: 100%;
+    max-inline-size: none;
+    block-size: auto;
+    max-block-size: calc(100vh - 2 * var(--vd3-space-fib-34, 2.125rem));
+    border-inline-end: none;
+    border-block-end: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    transform: translateY(-100%);
+  }
+
+  /* Placement: block-end (bottom) */
+  .vd-drawer--bottom,
+  .vd-drawer-bottom {
+    inset-inline: 0;
+    inset-block-start: auto;
+    inset-block-end: 0;
+    inline-size: 100%;
+    max-inline-size: none;
+    block-size: auto;
+    max-block-size: calc(100vh - 2 * var(--vd3-space-fib-34, 2.125rem));
+    border-inline-end: none;
+    border-block-start: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    transform: translateY(100%);
+  }
+
+  /* Explicit start placement (default behavior, kept as a named modifier) */
+  .vd-drawer--start,
+  .vd-drawer-start {
+    inset-inline-start: 0;
+    inset-inline-end: auto;
+    transform: translateX(-100%);
+  }
+
+  .vd-drawer[data-open="true"] {
+    transform: none;
+  }
+
+  /* Transform axes are physical; flip the slide sign per text direction so the
+     panel always exits toward its logical inline edge (intentional physical axis) */
+  :dir(rtl) .vd-drawer,
+  :dir(rtl) .vd-drawer--start,
+  :dir(rtl) .vd-drawer-start {
+    transform: translateX(100%);
+  }
+  :dir(rtl) .vd-drawer--end,
+  :dir(rtl) .vd-drawer-end {
+    transform: translateX(-100%);
+  }
+  :dir(rtl) .vd-drawer[data-open="true"] {
+    transform: none;
+  }
+
+  /* Anatomy: header */
+  .vd-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--vd3-space-fib-13, 0.8125rem);
+    padding: var(--vd3-space-fib-13, 0.8125rem) var(--vd3-space-fib-21, 1.3125rem);
+    border-block-end: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    flex-shrink: 0;
+  }
+
+  .vd-drawer-title {
+    margin: 0;
+    font-size: var(--vd3-font-size-xl-static, 1.25rem);
+    font-weight: 600;
+    line-height: var(--vd3-line-height-tight, 1.236);
+    color: var(--vd3-color-text-primary, #1a1d20);
+  }
+
+  /* Anatomy: close button */
+  .vd-drawer-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-inline-start: auto;
+    padding: var(--vd3-space-fib-5, 0.5rem);
+    background: transparent;
+    border: var(--vd3-border-width-hair, 1px) solid transparent;
+    border-radius: var(--vd3-radius-fib-3, 0.1875rem);
+    color: var(--vd3-color-text-secondary, #495057);
+    font-size: var(--vd3-font-size-lg-static, 1.125rem);
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1)),
+      color var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1)),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1));
+  }
+
+  .vd-drawer-close:hover {
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+    color: var(--vd3-color-text-primary, #1a1d20);
+  }
+
+  /* Dual-Ring Focus */
+  .vd-drawer-close:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
+  }
+
+  /* Disabled State */
+  .vd-drawer-close:disabled,
+  .vd-drawer-close[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: var(--vd3-inv-phi-sq, 0.3819660113);
+    box-shadow: none;
+  }
+
+  /* Anatomy: body */
+  .vd-drawer-body {
+    flex: 1 1 auto;
+    padding: var(--vd3-space-fib-21, 1.3125rem);
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-size: var(--vd3-font-size-base, 1rem);
+    line-height: var(--vd3-line-height-relaxed, 1.618);
+    color: var(--vd3-color-text-primary, #1a1d20);
+  }
+
+  /* Anatomy: footer */
+  .vd-drawer-footer {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: var(--vd3-space-fib-8, 0.75rem);
+    padding: var(--vd3-space-fib-13, 0.8125rem) var(--vd3-space-fib-21, 1.3125rem);
+    border-block-start: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    flex-shrink: 0;
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-drawer,
+    .vd-drawer-backdrop,
+    .vd-drawer-close {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-drawer,
+  [data-motion="reduce"] .vd-drawer-backdrop,
+  [data-motion="reduce"] .vd-drawer-close {
+    transition: none !important;
+    transform: none !important;
+  }
+}

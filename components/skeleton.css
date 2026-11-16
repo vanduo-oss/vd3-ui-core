@@ -1,0 +1,66 @@
+/**
+ * VD3 UI CORE — Skeleton Component (Feature #51)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, aria-busy on the loading container
+ */
+
+@layer vd3.components {
+  /* Base placeholder — layer-hover fill, F_5 radius, pulsing opacity.
+     Width is set by the behavioral layer via --_vd-skeleton-w; height via
+     --_vd-skeleton-h (defaults to a text-line-ish F_7). */
+  .vd-skeleton {
+    display: block;
+    width: var(--_vd-skeleton-w, 100%);
+    height: var(--_vd-skeleton-h, var(--vd3-space-fib-13, 0.8125rem));
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+    border-radius: var(--vd3-radius-fib-5, 0.3125rem);
+    animation: vd-skeleton-pulse var(--vd3-duration-377, 377ms) var(--vd3-ease-in-out, cubic-bezier(0.618, 0, 0.382, 1)) infinite alternate;
+  }
+
+  @keyframes vd-skeleton-pulse {
+    from { opacity: 1; }
+    to   { opacity: var(--vd3-inv-phi-sq, 0.382); }
+  }
+
+  /* Text line shape — one em tall, full width unless --_vd-skeleton-w */
+  .vd-skeleton--text,
+  .vd-skeleton-text {
+    height: 1em;
+  }
+
+  /* Circle shape (avatars) — square via aspect ratio, pill radius */
+  .vd-skeleton--circle,
+  .vd-skeleton-circle {
+    width: var(--_vd-skeleton-w, var(--vd3-space-fib-34, 2.125rem));
+    height: auto;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--vd3-radius-full, 9999rem);
+  }
+
+  /* Dual-Ring Focus (only if a behavioral layer makes a placeholder focusable) */
+  .vd-skeleton:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
+  }
+
+  /* Disabled State */
+  .vd-skeleton:disabled,
+  .vd-skeleton[aria-disabled="true"] {
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+  }
+
+  /* Reduced Motion (MOB-001) — the pulse MUST stop */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-skeleton {
+      animation: none !important;
+      opacity: 1;
+    }
+  }
+  [data-motion="reduce"] .vd-skeleton {
+    animation: none !important;
+    opacity: 1;
+  }
+}

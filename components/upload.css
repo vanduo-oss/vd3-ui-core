@@ -1,0 +1,134 @@
+/**
+ * VD3 UI CORE — Upload Component (Feature #55)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, native file input + label pattern (no APG pattern exists)
+ */
+
+@layer vd3.components {
+  /* Dropzone — a <label> wrapping the visually-hidden file input */
+  .vd-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--vd3-space-fib-8, 0.75rem);
+    padding: var(--vd3-space-fib-21, 1.3125rem);
+    box-sizing: border-box;
+    text-align: center;
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    border: var(--vd3-border-width-thin, 2px) dashed var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-fib-8, 0.5rem);
+    cursor: pointer;
+    transition:
+      border-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  /* Hover — border switches to the focus role */
+  .vd-upload:hover:not([aria-disabled="true"]):not(:has(.vd-upload-input:disabled)) {
+    border-color: var(--vd3-color-focus, #fab005);
+  }
+
+  /* Drag-over — focus-colored border on the hover layer */
+  .vd-upload--dragover,
+  .vd-upload-dragover {
+    border-color: var(--vd3-color-focus, #fab005);
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+  }
+
+  /* Dual-ring focus — shown on the zone while the hidden input is focused */
+  .vd-upload:focus-within {
+    outline: none;
+    border-color: var(--vd3-color-focus, #fab005);
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
+  }
+
+  /* Icon — large glyph slot (icon.size.lg hook, falls back to type.size.2xl = 24px) */
+  .vd-upload-icon {
+    font-size: var(--vd3-icon-size-lg, var(--vd3-font-size-2xl-static, 1.5rem));
+    line-height: 1;
+    color: var(--vd3-color-text-secondary, #495057);
+  }
+
+  /* Primary text — label-weight line inside the zone */
+  .vd-upload-text {
+    margin: 0;
+    font-size: var(--vd3-font-size-base, 1rem);
+    font-weight: 600;
+    line-height: var(--vd3-line-height-tight, 1.236);
+    color: var(--vd3-color-text-primary, #1a1d20);
+  }
+
+  /* Hint — help-text microcopy (same contract as .vd-help-text) */
+  .vd-upload-hint {
+    margin: 0;
+    font-size: var(--vd3-font-size-xs, 0.75rem);
+    line-height: var(--vd3-line-height-normal, 1.5);
+    color: var(--vd3-color-text-secondary, #495057);
+  }
+
+  /* Visually-hidden native file input — clip pattern, stays focusable */
+  .vd-upload-input {
+    position: absolute;
+    width: var(--vd3-line-hair, 1px);
+    height: var(--vd3-line-hair, 1px);
+    margin: calc(-1 * var(--vd3-line-hair, 1px));
+    padding: 0;
+    border: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+  }
+
+  /* The clipped input itself never draws a ring — the zone ring (focus-within) does */
+  .vd-upload-input:focus-visible {
+    outline: none;
+  }
+
+  /* Selected-file list */
+  .vd-upload-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--vd3-space-fib-8, 0.75rem);
+    margin: var(--vd3-space-fib-13, 0.8125rem) 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .vd-upload-file {
+    display: flex;
+    align-items: center;
+    gap: var(--vd3-space-fib-8, 0.75rem);
+    padding: var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-8, 0.75rem);
+    box-sizing: border-box;
+    background-color: var(--vd3-color-canvas, #ffffff);
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-fib-5, 0.3125rem);
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+    line-height: var(--vd3-line-height-normal, 1.5);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    text-align: start;
+  }
+
+  /* Disabled — input disabled or zone marked aria-disabled */
+  .vd-upload:has(.vd-upload-input:disabled),
+  .vd-upload[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-upload {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-upload {
+    transition: none !important;
+  }
+}

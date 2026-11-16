@@ -1,0 +1,79 @@
+/**
+ * VD3 UI CORE — Spinner Component (Feature #50)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, WAI-ARIA role="status" live region / aria-busy
+ */
+
+@layer vd3.components {
+  /* Border spinner — hair ring, transparent body, focus-colored arc.
+     Sizes are Fibonacci: sm F_7 = 13px, md F_8 = 21px, lg F_9 = 34px. */
+  .vd-spinner {
+    --_vd-spinner-size: var(--vd3-space-fib-21, 1.3125rem);
+
+    display: inline-block;
+    width: var(--_vd-spinner-size);
+    height: var(--_vd-spinner-size);
+    border: var(--vd3-border-width-hair, 1px) solid transparent;
+    border-top-color: var(--vd3-color-focus, #fab005);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    animation: vd-spinner-rotate var(--vd3-duration-610, 610ms) var(--vd3-ease-linear, linear) infinite;
+  }
+
+  @keyframes vd-spinner-rotate {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Sizes */
+  .vd-spinner--sm,
+  .vd-spinner-sm {
+    --_vd-spinner-size: var(--vd3-space-fib-13, 0.8125rem);
+  }
+
+  .vd-spinner--md,
+  .vd-spinner-md {
+    --_vd-spinner-size: var(--vd3-space-fib-21, 1.3125rem);
+  }
+
+  .vd-spinner--lg,
+  .vd-spinner-lg {
+    --_vd-spinner-size: var(--vd3-space-fib-34, 2.125rem);
+  }
+
+  /* Label — visible status text paired with the spinner inside a
+     role="status" container */
+  .vd-spinner--label,
+  .vd-spinner-label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--vd3-space-fib-5, 0.5rem);
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+    line-height: var(--vd3-line-height-normal, 1.5);
+    color: var(--vd3-color-text-secondary, #495057);
+  }
+
+  /* Dual-Ring Focus (only if a behavioral layer makes the spinner focusable) */
+  .vd-spinner:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
+  }
+
+  /* Disabled State */
+  .vd-spinner:disabled,
+  .vd-spinner[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+  }
+
+  /* Reduced Motion (MOB-001) — the animation MUST stop */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-spinner {
+      animation: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-spinner {
+    animation: none !important;
+  }
+}

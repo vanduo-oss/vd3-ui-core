@@ -1,0 +1,119 @@
+/**
+ * VD3 UI CORE — Menubar Component (Feature #45)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, W3C ARIA APG Menubar Pattern — https://www.w3.org/WAI/ARIA/apg/patterns/menubar/
+ */
+
+@layer vd3.components {
+  /* Horizontal menubar strip — hosts .vd-menu dropdowns beneath its items */
+  .vd-menubar {
+    display: flex;
+    align-items: center;
+    gap: var(--vd3-space-fib-2, 0.25rem);
+    width: 100%;
+    padding: var(--vd3-space-fib-2, 0.25rem) var(--vd3-space-fib-5, 0.5rem);
+    list-style: none;
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    border-block-end: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    box-sizing: border-box;
+  }
+
+  .vd-menubar[hidden] {
+    display: none;
+  }
+
+  /* Menubar item (role="menuitem" with aria-haspopup="menu") */
+  .vd-menubar-item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--vd3-space-fib-5, 0.5rem);
+    padding: var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-8, 0.75rem);
+    font-family: inherit;
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+    font-weight: 500;
+    line-height: var(--vd3-line-height-tight, 1.236);
+    color: var(--vd3-color-text-secondary, #495057);
+    text-decoration: none;
+    white-space: nowrap;
+    background: transparent;
+    border: 0;
+    border-radius: var(--vd3-radius-fib-5, 0.3125rem);
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+    transition:
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  .vd-menubar-item:hover:not(:disabled):not([aria-disabled="true"]) {
+    color: var(--vd3-color-text-primary, #1a1d20);
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+  }
+
+  /* Open state — the item whose dropdown is visible */
+  .vd-menubar-item[aria-expanded="true"] {
+    color: var(--vd3-color-text-primary, #1a1d20);
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+    font-weight: 600;
+  }
+
+  /* Submenu chevron glyph on items that own a dropdown */
+  .vd-menubar-item[aria-haspopup]::after {
+    content: "";
+    width: var(--vd3-space-fib-5, 0.5rem);
+    height: var(--vd3-space-fib-5, 0.5rem);
+    /* physical right/bottom borders are intentional: rotated glyph stroke (chevron), mirrored for RTL below */
+    border-right: var(--vd3-border-width-thin, 2px) solid currentColor;
+    border-bottom: var(--vd3-border-width-thin, 2px) solid currentColor;
+    transform: rotate(-45deg);
+  }
+
+  [dir="rtl"] .vd-menubar-item[aria-haspopup]::after {
+    transform: rotate(135deg);
+  }
+
+  /* Dual-Ring Focus (FOC-001…004) */
+  .vd-menubar-item:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow));
+  }
+
+  /* Disabled State */
+  .vd-menubar-item:disabled,
+  .vd-menubar-item[aria-disabled="true"] {
+    cursor: not-allowed;
+    color: var(--vd3-color-text-secondary, #495057);
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+    box-shadow: none;
+  }
+
+  /* Hosted dropdown: .vd-menu (menu.css) anchors beneath its menubar item */
+  .vd-menubar-item > .vd-menu {
+    margin-block-start: var(--vd3-space-fib-1, 0.125rem);
+  }
+
+  /* Dark Theme Nuances */
+  [data-theme="dark"] .vd-menubar {
+    background-color: var(--vd3-color-layer, #343a40);
+    border-block-end-color: var(--vd3-color-border, #495057);
+  }
+
+  /* Reduced Motion Compliance (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-menubar,
+    .vd-menubar-item {
+      transition: none !important;
+    }
+  }
+
+  [data-motion="reduce"] .vd-menubar,
+  [data-motion="reduce"] .vd-menubar-item {
+    transition: none !important;
+  }
+}

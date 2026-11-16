@@ -1,0 +1,135 @@
+/**
+ * VD3 UI CORE — Tooltip Component (Feature #41)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, W3C ARIA APG Tooltip Pattern (https://www.w3.org/WAI/ARIA/apg/patterns/tooltip/)
+ */
+
+@layer vd3.components {
+  /* Base tooltip — small dark bubble, non-interactive (pointer-events: none) */
+  .vd-tooltip {
+    --_vd-tooltip-arrow: var(--vd3-space-fib-3, 0.375rem);
+
+    position: absolute;
+    z-index: var(--vd3-z-tooltip, 1070);
+    display: block;
+    max-inline-size: var(--vd3-container-sm, 521px);
+    margin: 0;
+    padding: var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-8, 0.75rem);
+    background-color: var(--vd3-color-gray-1000, #1a1d20);
+    color: var(--vd3-color-gray-0, #f8f9fa);
+    font-size: var(--vd3-font-size-xs, 0.75rem);
+    line-height: var(--vd3-line-height-normal, 1.5);
+    text-align: center;
+    white-space: normal;
+    overflow-wrap: break-word;
+    border-radius: var(--vd3-radius-fib-3, 0.1875rem);
+    box-shadow: var(--vd3-shadow-2, 0 2px 3px 0 #0000001a, 0 1px 2px -1px #0000001a);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+      opacity var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1)),
+      visibility 0s linear var(--vd3-duration-89, 89ms);
+  }
+
+  .vd-tooltip[data-open="true"] {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1));
+  }
+
+  /* Arrow is optional: only placement modifiers render it (::before glyph).
+     Triangle borders are glyph strokes, so physical border sides are used
+     intentionally; the anchor edge itself is logical (inset-inline/block). */
+  .vd-tooltip--top::before,
+  .vd-tooltip-top::before,
+  .vd-tooltip[data-placement="top"]::before {
+    content: "";
+    position: absolute;
+    inset-block-end: calc(-1 * var(--_vd-tooltip-arrow));
+    inset-inline: 0;
+    margin-inline: auto;
+    inline-size: 0;
+    block-size: 0;
+    border: var(--_vd-tooltip-arrow) solid transparent;
+    border-block-start-color: var(--vd3-color-gray-1000, #1a1d20);
+    border-block-end: none;
+  }
+
+  .vd-tooltip--bottom::before,
+  .vd-tooltip-bottom::before,
+  .vd-tooltip[data-placement="bottom"]::before {
+    content: "";
+    position: absolute;
+    inset-block-start: calc(-1 * var(--_vd-tooltip-arrow));
+    inset-inline: 0;
+    margin-inline: auto;
+    inline-size: 0;
+    block-size: 0;
+    border: var(--_vd-tooltip-arrow) solid transparent;
+    border-block-end-color: var(--vd3-color-gray-1000, #1a1d20);
+    border-block-start: none;
+  }
+
+  .vd-tooltip--start::before,
+  .vd-tooltip-start::before,
+  .vd-tooltip[data-placement="start"]::before {
+    content: "";
+    position: absolute;
+    inset-inline-end: calc(-1 * var(--_vd-tooltip-arrow));
+    inset-block: 0;
+    margin-block: auto;
+    inline-size: 0;
+    block-size: 0;
+    border: var(--_vd-tooltip-arrow) solid transparent;
+    border-inline-start-color: var(--vd3-color-gray-1000, #1a1d20);
+    border-inline-end: none;
+  }
+
+  .vd-tooltip--end::before,
+  .vd-tooltip-end::before,
+  .vd-tooltip[data-placement="end"]::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: calc(-1 * var(--_vd-tooltip-arrow));
+    inset-block: 0;
+    margin-block: auto;
+    inline-size: 0;
+    block-size: 0;
+    border: var(--_vd-tooltip-arrow) solid transparent;
+    border-inline-end-color: var(--vd3-color-gray-1000, #1a1d20);
+    border-inline-start: none;
+  }
+
+  /* Placement offset — keeps the bubble one arrow-length away from the trigger */
+  .vd-tooltip--top,
+  .vd-tooltip-top,
+  .vd-tooltip[data-placement="top"] {
+    margin-block-end: var(--_vd-tooltip-arrow);
+  }
+  .vd-tooltip--bottom,
+  .vd-tooltip-bottom,
+  .vd-tooltip[data-placement="bottom"] {
+    margin-block-start: var(--_vd-tooltip-arrow);
+  }
+  .vd-tooltip--start,
+  .vd-tooltip-start,
+  .vd-tooltip[data-placement="start"] {
+    margin-inline-end: var(--_vd-tooltip-arrow);
+  }
+  .vd-tooltip--end,
+  .vd-tooltip-end,
+  .vd-tooltip[data-placement="end"] {
+    margin-inline-start: var(--_vd-tooltip-arrow);
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-tooltip {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-tooltip {
+    transition: none !important;
+  }
+}

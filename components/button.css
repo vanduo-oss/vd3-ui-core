@@ -126,8 +126,7 @@
   }
   .vd-btn--danger:hover:not(:disabled),
   .vd-btn-danger:hover:not(:disabled) {
-    background-color: #e03131;
-    border-color: #e03131;
+    filter: brightness(0.92); /* token-only: no raw hex; darkens the critical role */
   }
 
   /* Icon Button */

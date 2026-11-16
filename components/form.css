@@ -40,7 +40,7 @@
   }
 
   .vd-textarea {
-    min-height: 80px;
+    min-height: var(--vd3-space-fib-89, 5.5625rem);
     resize: vertical;
     line-height: var(--vd3-line-height-normal, 1.5);
   }
@@ -52,7 +52,8 @@
     font-family: inherit;
     font-size: var(--vd3-font-size-base, 1rem);
     line-height: var(--vd3-line-height-tight, 1.236);
-    padding: var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-34, 2.125rem) var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-8, 0.75rem);
+    padding-block: var(--vd3-space-fib-5, 0.5rem);
+    padding-inline: var(--vd3-space-fib-8, 0.75rem) var(--vd3-space-fib-34, 2.125rem);
     border: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-border, #dee2e6);
     border-radius: var(--vd3-radius-fib-5, 0.3125rem);
     background-color: var(--vd3-color-canvas, #ffffff);
@@ -61,7 +62,7 @@
     -webkit-appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23495057' d='M2.22 4.47a.75.75 0 0 1 1.06 0L6 7.19l2.72-2.72a.75.75 0 1 1 1.06 1.06L6.53 8.78a.75.75 0 0 1-1.06 0L2.22 5.53a.75.75 0 0 1 0-1.06Z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right var(--vd3-space-fib-8, 0.75rem) center;
+    background-position: right var(--vd3-space-fib-8, 0.75rem) center; /* physical: background-position has no logical keyword; RTL mirror below */
     background-size: 12px;
     cursor: pointer;
     transition:
@@ -74,8 +75,8 @@
   .vd-radio {
     appearance: none;
     -webkit-appearance: none;
-    width: 20px;
-    height: 20px;
+    width: var(--vd3-space-fib-21, 1.3125rem);
+    height: var(--vd3-space-fib-21, 1.3125rem);
     display: inline-grid;
     place-content: center;
     border: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-border, #dee2e6);
@@ -190,4 +191,45 @@
   [data-theme="dark"] .vd-select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%23dee2e6' stroke-width='1.618' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 6l4 4 4-4'/%3E%3C/svg%3E");
   }
+  /* Indeterminate checkbox (behavioral layer sets :indeterminate) */
+  .vd-checkbox:indeterminate {
+    background-color: var(--vd3-color-focus, #fab005);
+    border-color: var(--vd3-color-focus, #fab005);
+  }
+  .vd-checkbox:indeterminate::before {
+    content: "";
+    width: 10px;
+    height: var(--vd3-line-thin, 2px);
+    border: none;
+    background-color: var(--vd3-color-gray-1000, #1a1d20);
+    transform: none;
+  }
+
+  /* Read-only fields */
+  .vd-input:read-only,
+  .vd-select:read-only {
+    background-color: var(--vd3-color-layer, #f8f9fa);
+  }
+
+  /* RTL mirror for the select chevron (background-position has no logical keyword) */
+  [dir="rtl"] .vd-select {
+    background-position: left var(--vd3-space-fib-8, 0.75rem) center;
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-input,
+    .vd-select,
+    .vd-checkbox,
+    .vd-radio {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-input,
+  [data-motion="reduce"] .vd-select,
+  [data-motion="reduce"] .vd-checkbox,
+  [data-motion="reduce"] .vd-radio {
+    transition: none !important;
+  }
+
 }

@@ -1,0 +1,166 @@
+/**
+ * VD3 UI CORE — Carousel Component (Feature #56)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, aria-roledescription="carousel" region semantics (no APG pattern exists)
+ */
+
+@layer vd3.components {
+  /* Root — clips the sliding track */
+  .vd-carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--vd3-radius-fib-8, 0.5rem);
+    background-color: var(--vd3-color-canvas, #ffffff);
+  }
+
+  /* Track — the behavioral layer sets --_vd-carousel-index (zero-based) */
+  .vd-carousel-track {
+    display: flex;
+    transform: translateX(calc(var(--_vd-carousel-index, 0) * -100%));
+    transition: transform var(--vd3-duration-377, 377ms) var(--vd3-ease-out);
+    will-change: transform;
+  }
+
+  /* Slide — exactly one viewport wide */
+  .vd-carousel-slide {
+    flex: 0 0 100%;
+    min-inline-size: 0;
+  }
+
+  /* Prev / next buttons — overlaid at the inline edges, 8px (fib-5) inset */
+  .vd-carousel-prev,
+  .vd-carousel-next {
+    position: absolute;
+    inset-block-start: 50%;
+    translate: 0 -50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--vd3-space-fib-34, 2.125rem);
+    block-size: var(--vd3-space-fib-34, 2.125rem);
+    padding: 0;
+    box-sizing: border-box;
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    background-color: var(--vd3-color-canvas, #ffffff);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    cursor: pointer;
+    transition:
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      border-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  .vd-carousel-prev {
+    inset-inline-start: var(--vd3-space-fib-5, 0.5rem);
+  }
+
+  .vd-carousel-next {
+    inset-inline-end: var(--vd3-space-fib-5, 0.5rem);
+  }
+
+  .vd-carousel-prev:hover:not(:disabled):not([aria-disabled="true"]),
+  .vd-carousel-next:hover:not(:disabled):not([aria-disabled="true"]) {
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+    border-color: var(--vd3-color-text-secondary, #495057);
+  }
+
+  /* Chevron glyphs — physical left/right borders are intentional: they are the
+     rotated glyph strokes, not layout direction (layout uses inset-inline-*) */
+  .vd-carousel-prev::before,
+  .vd-carousel-next::before {
+    content: "";
+    inline-size: var(--vd3-space-fib-8, 0.75rem);
+    block-size: var(--vd3-space-fib-8, 0.75rem);
+    border-top: var(--vd3-line-thin, 2px) solid currentColor;
+  }
+
+  .vd-carousel-prev::before {
+    border-left: var(--vd3-line-thin, 2px) solid currentColor; /* intentional physical stroke — rotated chevron glyph */
+    transform: rotate(-45deg);
+    margin-inline-start: var(--vd3-space-fib-2, 0.25rem); /* optical re-centering of the rotated stroke */
+  }
+
+  .vd-carousel-next::before {
+    border-right: var(--vd3-line-thin, 2px) solid currentColor; /* intentional physical stroke — rotated chevron glyph */
+    transform: rotate(45deg);
+    margin-inline-end: var(--vd3-space-fib-2, 0.25rem); /* optical re-centering of the rotated stroke */
+  }
+
+  /* Dual-ring focus on the controls */
+  .vd-carousel-prev:focus-visible,
+  .vd-carousel-next:focus-visible,
+  .vd-carousel-dot:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
+  }
+
+  /* Disabled controls */
+  .vd-carousel-prev:disabled,
+  .vd-carousel-prev[aria-disabled="true"],
+  .vd-carousel-next:disabled,
+  .vd-carousel-next[aria-disabled="true"],
+  .vd-carousel-dot:disabled,
+  .vd-carousel-dot[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+    box-shadow: none;
+  }
+
+  /* Dot navigation — centered at the block end of the region */
+  .vd-carousel-dots {
+    position: absolute;
+    inset-block-end: var(--vd3-space-fib-8, 0.75rem);
+    inset-inline: 0;
+    display: flex;
+    justify-content: center;
+    gap: var(--vd3-space-fib-5, 0.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .vd-carousel-dot {
+    inline-size: var(--vd3-space-fib-5, 0.5rem);
+    block-size: var(--vd3-space-fib-5, 0.5rem);
+    padding: 0;
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    background-color: var(--vd3-color-canvas, #ffffff);
+    cursor: pointer;
+    transition:
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      border-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  .vd-carousel-dot:hover:not(:disabled):not([aria-disabled="true"]) {
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+  }
+
+  /* Current slide marker */
+  .vd-carousel-dot[aria-current="true"],
+  .vd-carousel-dot[aria-selected="true"] {
+    background-color: var(--vd3-color-focus, #fab005);
+    border-color: var(--vd3-color-focus, #fab005);
+  }
+
+  /* Reduced Motion (MOB-001) — the track jumps instantly instead of sliding */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-carousel-track,
+    .vd-carousel-prev,
+    .vd-carousel-next,
+    .vd-carousel-dot {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-carousel-track,
+  [data-motion="reduce"] .vd-carousel-prev,
+  [data-motion="reduce"] .vd-carousel-next,
+  [data-motion="reduce"] .vd-carousel-dot {
+    transition: none !important;
+  }
+}

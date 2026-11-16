@@ -137,4 +137,16 @@
   section[id] {
     scroll-margin-top: calc(var(--vd-navbar-height, 4rem) + var(--vd3-space-fib-13, 0.8125rem));
   }
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-navbar,
+    .vd-nav-link {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-navbar,
+  [data-motion="reduce"] .vd-nav-link {
+    transition: none !important;
+  }
+
 }

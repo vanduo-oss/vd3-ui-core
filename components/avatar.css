@@ -1,0 +1,187 @@
+/**
+ * VD3 UI CORE — Avatar Component (Feature #48)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, img alt text / decorative aria-hidden status dot; no APG pattern exists
+ */
+
+@layer vd3.components {
+  /* Base — img variant (fills the shape) or initials variant (direct text) */
+  .vd-avatar {
+    --_vd-avatar-size: var(--vd3-space-fib-34, 2.125rem); /* md default = F_9 = 34px */
+
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--_vd-avatar-size);
+    block-size: var(--_vd-avatar-size);
+    box-sizing: border-box;
+    border-radius: var(--vd3-radius-full, 9999rem);
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    color: var(--vd3-color-text-secondary, #495057);
+    font-family: var(--vd3-font-family-sans, system-ui, sans-serif);
+    font-size: calc(var(--_vd-avatar-size) * 0.4);
+    font-weight: 600;
+    line-height: 1;
+    overflow: hidden;
+    flex-shrink: 0;
+    vertical-align: middle;
+    user-select: none;
+  }
+
+  /* Image fills the shape */
+  .vd-avatar img,
+  .vd-avatar-img {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+
+  /* Initials fallback */
+  .vd-avatar-initials {
+    text-transform: uppercase;
+  }
+
+  /* Sizes — golden Fibonacci 21/34/55px (F_8 / F_9 / F_10) */
+  .vd-avatar--sm,
+  .vd-avatar-sm {
+    --_vd-avatar-size: var(--vd3-space-fib-21, 1.3125rem);
+  }
+  .vd-avatar--md,
+  .vd-avatar-md {
+    --_vd-avatar-size: var(--vd3-space-fib-34, 2.125rem);
+  }
+  .vd-avatar--lg,
+  .vd-avatar-lg {
+    --_vd-avatar-size: var(--vd3-space-fib-55, 3.4375rem);
+  }
+
+  /* Shapes — round (default, pill radius C-04) / square (radius.fib-5) */
+  .vd-avatar--round,
+  .vd-avatar-round {
+    border-radius: var(--vd3-radius-full, 9999rem);
+  }
+  .vd-avatar--square,
+  .vd-avatar-square {
+    border-radius: var(--vd3-radius-fib-5, 0.3125rem);
+  }
+
+  /* Status dot — anchored at the logical inline-end/block-end corner so RTL
+     layouts mirror it. Badge status colors via golden-angle / role tokens. */
+  .vd-avatar:has(.vd-avatar-status) {
+    overflow: visible;
+  }
+
+  .vd-avatar-status {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-end: 0;
+    inline-size: 25%;
+    block-size: 25%;
+    box-sizing: border-box;
+    border-radius: var(--vd3-radius-full, 9999rem);
+    border: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-canvas, #ffffff);
+    background-color: var(--vd3-color-gray-5, #adb5bd); /* offline default */
+  }
+
+  .vd-avatar-status--online,
+  .vd-avatar-status-online {
+    background-color: var(--vd3-color-golden-6, #0ac265);
+  }
+  .vd-avatar-status--away,
+  .vd-avatar-status-away {
+    background-color: var(--vd3-color-focus, #fab005);
+  }
+  .vd-avatar-status--busy,
+  .vd-avatar-status-busy {
+    background-color: var(--vd3-color-critical, #fa5252);
+  }
+  .vd-avatar-status--info,
+  .vd-avatar-status-info {
+    background-color: var(--vd3-color-golden-1, #0ab5b5);
+  }
+  .vd-avatar-status--offline,
+  .vd-avatar-status-offline {
+    background-color: var(--vd3-color-gray-5, #adb5bd);
+  }
+
+  /* Avatar group — stacked overlap via negative logical margin-inline-start */
+  .vd-avatar-group {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .vd-avatar-group .vd-avatar:not(:first-child) {
+    margin-inline-start: calc(-1 * var(--vd3-space-fib-8, 0.75rem));
+    box-shadow: 0 0 0 var(--vd3-border-width-thin, 2px) var(--vd3-color-canvas, #ffffff);
+  }
+
+  .vd-avatar-group .vd-avatar:hover {
+    z-index: 1;
+  }
+
+  /* Interactive avatar (link / button) */
+  a.vd-avatar,
+  button.vd-avatar {
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      transform var(--vd3-duration-144, 144ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-144, 144ms) var(--vd3-ease-out);
+  }
+
+  a.vd-avatar:hover:not([aria-disabled="true"]),
+  button.vd-avatar:hover:not(:disabled) {
+    transform: scale(1.05);
+  }
+
+  /* Dual-Ring Focus (FOC-001…004) */
+  a.vd-avatar:focus-visible,
+  button.vd-avatar:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
+  }
+
+  /* Disabled State */
+  a.vd-avatar:disabled,
+  a.vd-avatar[aria-disabled="true"],
+  button.vd-avatar:disabled,
+  button.vd-avatar[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Dark Theme Nuances */
+  [data-theme="dark"] .vd-avatar {
+    background-color: var(--vd3-color-layer-hover, #495057);
+  }
+  [data-theme="dark"] .vd-avatar-status,
+  [data-theme="dark"] .vd-avatar-group .vd-avatar:not(:first-child) {
+    border-color: var(--vd3-color-canvas, #212529);
+    box-shadow: 0 0 0 var(--vd3-border-width-thin, 2px) var(--vd3-color-canvas, #212529);
+  }
+  [data-theme="dark"] .vd-avatar-status--offline,
+  [data-theme="dark"] .vd-avatar-status-offline {
+    background-color: var(--vd3-color-gray-6, #868e96);
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    a.vd-avatar,
+    button.vd-avatar {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+  [data-motion="reduce"] a.vd-avatar,
+  [data-motion="reduce"] button.vd-avatar {
+    transition: none !important;
+    transform: none !important;
+  }
+}

@@ -5,7 +5,7 @@
  * Automated verification of Milestone 2 CSS deliverables:
  * - Cascade Layers: @layer vd3.layout and @layer vd3.components
  * - Master Index Architecture (@layer ordering & imports)
- * - 17 Target Features (#13, #14, #15, #16, #27, #28, #29, #30, #31, #32, #33, #34, #35, #36, #37, #38, #39)
+ * - 38 Target Features (#13-16 layout, #27-60 components)
  * - W3C ARIA APG Accessibility Contracts (keyboard navigation, dialog backdrop, scope semantics, live regions)
  * - M1 Contrast Advisory: Dual-Ring Focus Pattern Resolution
  * - MOB-001 Reduced Motion Overrides
@@ -15,6 +15,7 @@
  * Exits with code 0 on 100% pass, 1 on any failure.
  */
 
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -74,6 +75,27 @@ const requiredFiles = [
   'switch.css',
   'alert.css',
   'tabs.css',
+  'drawer.css',
+  'tooltip.css',
+  'popover.css',
+  'menu.css',
+  'context-menu.css',
+  'menubar.css',
+  'breadcrumb.css',
+  'pagination.css',
+  'avatar.css',
+  'progress.css',
+  'spinner.css',
+  'skeleton.css',
+  'slider.css',
+  'datepicker.css',
+  'timepicker.css',
+  'upload.css',
+  'carousel.css',
+  'toolbar.css',
+  'segmented.css',
+  'hover-card.css',
+  'tour.css',
   'index.css',
 ];
 
@@ -108,11 +130,15 @@ assert(
   "index.css must import layout.css into layer(vd3.layout)"
 );
 
-// Imports of 13 components
+// Imports of 34 components
 const componentFiles = [
   'button.css', 'dialog.css', 'card.css', 'form.css', 'badge.css',
   'navbar.css', 'accordion.css', 'table.css', 'code.css', 'toast.css',
-  'switch.css', 'alert.css', 'tabs.css'
+  'switch.css', 'alert.css', 'tabs.css',
+  'drawer.css', 'tooltip.css', 'popover.css', 'menu.css', 'context-menu.css',
+  'menubar.css', 'breadcrumb.css', 'pagination.css', 'avatar.css', 'progress.css',
+  'spinner.css', 'skeleton.css', 'slider.css', 'datepicker.css', 'timepicker.css',
+  'upload.css', 'carousel.css', 'toolbar.css', 'segmented.css', 'hover-card.css', 'tour.css'
 ];
 
 for (const comp of componentFiles) {
@@ -128,7 +154,7 @@ assert(
   'layout.css must enclose rules within @layer vd3.layout {'
 );
 
-// All 13 component files must enclose rules within @layer vd3.components {
+// All 34 component files must enclose rules within @layer vd3.components {
 for (const comp of componentFiles) {
   const compContent = fileContents[comp] || '';
   assert(
@@ -901,14 +927,121 @@ assert(
 );
 
 // =============================================================================
-// Suite 20: M1 Contrast Advisory & Dual-Ring Focus Resolution
+// Suites 20-40: New Component Features #40-60 (phase 1.2/1.3 primitives)
+// =============================================================================
+
+const newFeatures = [
+  { file: "drawer.css", num: 40, name: "Drawer / Offcanvas", base: ".vd-drawer", checks: [".vd-drawer-backdrop", ".vd-drawer--start", ".vd-drawer--end", ".vd-drawer--top", ".vd-drawer--bottom", ".vd-drawer-header", ".vd-drawer-body", ".vd-drawer-footer", ".vd-drawer-close", "var(--vd3-z-modal", "var(--vd3-z-modal-backdrop"] },
+  { file: "tooltip.css", num: 41, name: "Tooltip", base: ".vd-tooltip", checks: [".vd-tooltip--top", ".vd-tooltip--bottom", "var(--vd3-z-tooltip", "::before"] },
+  { file: "popover.css", num: 42, name: "Popover", base: ".vd-popover", checks: [".vd-popover-arrow", ".vd-popover-header", ".vd-popover-body", "var(--vd3-z-popover"] },
+  { file: "menu.css", num: 43, name: "Dropdown Menu", base: ".vd-menu", checks: [".vd-menu-item", ".vd-menu-divider", ".vd-menu-label", "var(--vd3-z-dropdown", "[aria-current"] },
+  { file: "context-menu.css", num: 44, name: "Context Menu", base: ".vd-context-menu", checks: [".vd-context-menu-item", ".vd-context-menu-divider", "var(--vd3-z-popover"] },
+  { file: "menubar.css", num: 45, name: "Menubar", base: ".vd-menubar", checks: [".vd-menubar-item", "[aria-haspopup]", "[aria-expanded=\"true\"]"] },
+  { file: "breadcrumb.css", num: 46, name: "Breadcrumb", base: ".vd-breadcrumb", checks: [".vd-breadcrumb-item", ".vd-breadcrumb-link", "[aria-current=\"page\"]"] },
+  { file: "pagination.css", num: 47, name: "Pagination", base: ".vd-pagination", checks: [".vd-pagination-list", ".vd-pagination-item", ".vd-pagination-link", ".vd-pagination-link--prev", "[aria-current=\"page\"]"] },
+  { file: "avatar.css", num: 48, name: "Avatar", base: ".vd-avatar", checks: [".vd-avatar--sm", ".vd-avatar--lg", ".vd-avatar--round", ".vd-avatar-status", ".vd-avatar-group", "margin-inline-start"] },
+  { file: "progress.css", num: 49, name: "Progress Bar", base: ".vd-progress", checks: [".vd-progress-bar", ".vd-progress--indeterminate", "--_vd-progress-value", "@keyframes", ".vd-progress--critical"] },
+  { file: "spinner.css", num: 50, name: "Spinner", base: ".vd-spinner", checks: [".vd-spinner--sm", ".vd-spinner--lg", "@keyframes"] },
+  { file: "skeleton.css", num: 51, name: "Skeleton Loader", base: ".vd-skeleton", checks: [".vd-skeleton--text", ".vd-skeleton--circle", "@keyframes"] },
+  { file: "slider.css", num: 52, name: "Range Slider", base: ".vd-slider", checks: ["::-webkit-slider-thumb", "::-moz-range-thumb", ":focus-visible"] },
+  { file: "datepicker.css", num: 53, name: "Date Picker", base: ".vd-datepicker", checks: [".vd-datepicker-grid", ".vd-datepicker-day", "[aria-selected=\"true\"]", "[data-today]", ".vd-datepicker-prev", ".vd-datepicker-next"] },
+  { file: "timepicker.css", num: 54, name: "Time Picker", base: ".vd-timepicker", checks: [".vd-timepicker-item", "[aria-selected=\"true\"]", ":focus-visible"] },
+  { file: "upload.css", num: 55, name: "File Upload", base: ".vd-upload", checks: [".vd-upload--dragover", ".vd-upload-input", ".vd-upload-list", ":focus-within"] },
+  { file: "carousel.css", num: 56, name: "Carousel", base: ".vd-carousel", checks: [".vd-carousel-track", ".vd-carousel-slide", ".vd-carousel-prev", ".vd-carousel-next", ".vd-carousel-dots", ".vd-carousel-dot"] },
+  { file: "toolbar.css", num: 57, name: "Toolbar", base: ".vd-toolbar", checks: [".vd-toolbar-group", ".vd-toolbar-button", ".vd-toolbar-separator"] },
+  { file: "segmented.css", num: 58, name: "Segmented Control", base: ".vd-segmented", checks: [".vd-segmented-item", "[aria-checked=\"true\"]"] },
+  { file: "hover-card.css", num: 59, name: "Hover Card", base: ".vd-hover-card", checks: [".vd-hover-card-title", ".vd-hover-card-body", "var(--vd3-z-popover"] },
+  { file: "tour.css", num: 60, name: "Tour / Spotlight", base: ".vd-tour", checks: [".vd-tour-title", ".vd-tour-progress", ".vd-tour-btn", ".vd-tour-backdrop", "var(--vd3-z-"] },
+];
+
+for (const feat of newFeatures) {
+  suite(`Feature #${feat.num}: ${feat.name}`);
+  const featCss = fileContents[feat.file] || "";
+  assert(featCss.includes(feat.base), `${feat.file} must define base class ${feat.base}`);
+  for (const c of feat.checks) {
+    assert(featCss.includes(c), `${feat.file} must contain ${c}`);
+  }
+}
+
+// =============================================================================
+// Suite 41a: RTL Guard — physical horizontal properties only as commented glyphs
+// =============================================================================
+suite('RTL Guard: logical properties only (physical horizontal props need a glyph/rtl comment)');
+{
+  const allCss = fs.readdirSync(componentsDir).filter((f) => f.endsWith('.css'));
+  for (const f of allCss) {
+    const raw = fs.readFileSync(path.join(componentsDir, f), 'utf8');
+    const linesArr = raw.split('\n');
+    // blank out block comments so only real code is scanned
+    const codeOnly = raw.replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' ')).split('\n');
+    const physical = /(^|[\s;{])(left|right)\s*:|border-(left|right)(-color)?\s*:|background-position[^;]*\b(left|right)\b/;
+    linesArr.forEach((orig, i) => {
+      if (!physical.test(codeOnly[i])) return;
+      const context = [linesArr[i - 2] || '', linesArr[i - 1] || '', orig].join('\n');
+      assert(
+        /intentional|physical|\[dir="rtl"\]/.test(context),
+        `${f}:${i + 1} uses a physical horizontal property without an intentional-glyph/rtl comment: ${orig.trim()}`
+      );
+    });
+  }
+}
+
+// =============================================================================
+// Suite 41b: CSS Snapshot Integrity (regenerate intentionally with UPDATE_SNAPSHOTS=1)
+// =============================================================================
+suite('CSS Snapshot Integrity (UPDATE_SNAPSHOTS=1 to regenerate)');
+{
+  const snapPath = path.resolve(__dirname, 'snapshots.json');
+  const files = fs.readdirSync(componentsDir).filter((f) => f.endsWith('.css')).sort();
+  const current = {};
+  for (const f of files) {
+    current[f] = crypto.createHash('sha256').update(fs.readFileSync(path.join(componentsDir, f))).digest('hex');
+  }
+  if (process.env.UPDATE_SNAPSHOTS === '1') {
+    fs.writeFileSync(snapPath, JSON.stringify(current, null, 2) + '\n');
+    console.log('  [snapshots] scripts/snapshots.json regenerated for ' + files.length + ' files');
+  }
+  assert(fs.existsSync(snapPath), 'scripts/snapshots.json must exist (run UPDATE_SNAPSHOTS=1 once)');
+  const snap = JSON.parse(fs.readFileSync(snapPath, 'utf8'));
+  for (const f of files) {
+    assert(
+      snap[f] === current[f],
+      `${f} differs from scripts/snapshots.json — if this change is intentional, regenerate with UPDATE_SNAPSHOTS=1 node scripts/verify-components.mjs`
+    );
+  }
+  for (const f of Object.keys(snap)) {
+    assert(files.includes(f), `snapshots.json lists removed file ${f}`);
+  }
+}
+
+// =============================================================================
+// Suite 41: M1 Contrast Advisory & Dual-Ring Focus Resolution
 // =============================================================================
 suite('M1 Contrast Advisory & Dual-Ring Focus Resolution');
 
 const focusFiles = [
   'button.css', 'form.css', 'badge.css', 'navbar.css',
   'accordion.css', 'table.css', 'code.css', 'toast.css',
-  'switch.css', 'alert.css', 'tabs.css'
+  'switch.css', 'alert.css', 'tabs.css',
+  'drawer.css',
+  'popover.css',
+  'menu.css',
+  'context-menu.css',
+  'menubar.css',
+  'breadcrumb.css',
+  'pagination.css',
+  'avatar.css',
+  'progress.css',
+  'spinner.css',
+  'skeleton.css',
+  'slider.css',
+  'datepicker.css',
+  'timepicker.css',
+  'upload.css',
+  'carousel.css',
+  'toolbar.css',
+  'segmented.css',
+  'tour.css'
 ];
 
 for (const f of focusFiles) {
@@ -930,13 +1063,17 @@ assert(
 );
 
 // =============================================================================
-// Suite 21: Reduced Motion Overrides (MOB-001)
+// Suite 42: Reduced Motion Overrides (MOB-001)
 // =============================================================================
 suite('Reduced Motion Overrides (MOB-001)');
 
 const animatedFiles = [
   'button.css', 'dialog.css', 'card.css', 'accordion.css', 'toast.css',
-  'switch.css', 'alert.css', 'tabs.css'
+  'switch.css', 'alert.css', 'tabs.css', 'form.css', 'navbar.css',
+  'drawer.css', 'tooltip.css', 'popover.css', 'menu.css', 'context-menu.css',
+  'menubar.css', 'breadcrumb.css', 'pagination.css', 'avatar.css', 'progress.css',
+  'spinner.css', 'skeleton.css', 'slider.css', 'datepicker.css', 'timepicker.css',
+  'upload.css', 'carousel.css', 'toolbar.css', 'segmented.css', 'hover-card.css', 'tour.css'
 ];
 
 for (const f of animatedFiles) {
@@ -949,7 +1086,7 @@ for (const f of animatedFiles) {
 }
 
 // =============================================================================
-// Suite 22: Zero External Framework Dependencies
+// Suite 43: Zero External Framework Dependencies
 // =============================================================================
 suite('Zero External Framework Dependencies');
 

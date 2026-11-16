@@ -1,0 +1,187 @@
+/**
+ * VD3 UI CORE — Tour Component (Feature #60)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA + non-modal dialog behavior (APG Dialog non-modal guidance; no dedicated APG tour pattern) — https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
+ */
+
+@layer vd3.components {
+  /* Anchored step card. NON-MODAL: the page stays interactive, focus is not
+     trapped. Open state is driven by the behavioral layer via [data-open="true"]
+     or the Popover API (:popover-open). */
+  .vd-tour {
+    position: absolute;
+    z-index: var(--vd3-z-popover, 1060);
+    /* F_14 = 2·F_12 + F_11 = 2·144px + 89px = 377px — derived from space tokens, no raw px */
+    max-width: calc(2 * var(--vd3-space-fib-144, 9rem) + var(--vd3-space-fib-89, 5.5625rem));
+    padding: var(--vd3-space-fib-21, 1.3125rem);
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-fib-8, 0.5rem);
+    box-shadow: var(--vd3-shadow-5);
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity var(--vd3-duration-144, 144ms) var(--vd3-ease-out),
+      visibility var(--vd3-duration-144, 144ms) var(--vd3-ease-out);
+  }
+
+  .vd-tour[data-open="true"],
+  .vd-tour:popover-open {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .vd-tour[hidden] {
+    display: none;
+  }
+
+  .vd-tour-title {
+    margin: 0 0 var(--vd3-space-fib-5, 0.5rem);
+    font-size: var(--vd3-font-size-lg, 1.125rem);
+    font-weight: 600;
+    line-height: var(--vd3-line-height-snug, 1.382);
+    color: var(--vd3-color-text-primary, #1a1d20);
+  }
+
+  .vd-tour-body {
+    margin: 0;
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+    line-height: var(--vd3-line-height-normal, 1.5);
+    color: var(--vd3-color-text-secondary, #495057);
+  }
+
+  /* Progress track: thin fib-2 bar; fill width is set by the behavioral layer
+     through --_vd-tour-progress (a 0–100% ratio, e.g. 40%) */
+  .vd-tour-progress {
+    --_vd-tour-progress: 0%;
+    margin-block-start: var(--vd3-space-fib-13, 0.8125rem);
+    inline-size: 100%;
+    block-size: var(--vd3-space-fib-2, 0.25rem);
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    overflow: hidden;
+  }
+
+  .vd-tour-progress::after {
+    content: "";
+    display: block;
+    block-size: 100%;
+    inline-size: var(--_vd-tour-progress);
+    background-color: var(--vd3-color-focus, #fab005);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    transition: inline-size var(--vd3-duration-233, 233ms) var(--vd3-ease-out);
+  }
+
+  /* Footer: step counter on the inline-start, prev/next actions on the inline-end */
+  .vd-tour-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--vd3-space-fib-8, 0.75rem);
+    margin-block-start: var(--vd3-space-fib-13, 0.8125rem);
+  }
+
+  .vd-tour-counter {
+    font-size: var(--vd3-font-size-xs, 0.75rem);
+    line-height: var(--vd3-line-height-tight, 1.236);
+    color: var(--vd3-color-text-secondary, #495057);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .vd-tour-actions {
+    display: flex;
+    align-items: center;
+    gap: var(--vd3-space-fib-5, 0.5rem);
+  }
+
+  /* Ghost step button, restyled locally (zero-dependency: does not require button.css) */
+  .vd-tour-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--vd3-space-fib-3, 0.375rem);
+    padding: var(--vd3-space-fib-3, 0.375rem) var(--vd3-space-fib-8, 0.75rem);
+    font-family: inherit;
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+    font-weight: 500;
+    line-height: var(--vd3-line-height-tight, 1.236);
+    white-space: nowrap;
+    color: var(--vd3-color-text-primary, #1a1d20);
+    background-color: transparent;
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-fib-5, 0.3125rem);
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+    transition:
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      border-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  .vd-tour-btn:hover:not(:disabled):not([aria-disabled="true"]) {
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+  }
+
+  .vd-tour-btn--primary,
+  .vd-tour-btn-primary {
+    background-color: var(--vd3-color-focus, #fab005);
+    border-color: var(--vd3-color-focus, #fab005);
+    color: var(--vd3-color-gray-1000, #1a1d20);
+    font-weight: 600;
+  }
+
+  .vd-tour-btn--primary:hover:not(:disabled):not([aria-disabled="true"]),
+  .vd-tour-btn-primary:hover:not(:disabled):not([aria-disabled="true"]) {
+    background-color: var(--vd3-color-interactive, #f59f00);
+    border-color: var(--vd3-color-interactive, #f59f00);
+  }
+
+  /* Dual-Ring Focus (FOC-001…004) */
+  .vd-tour-btn:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow));
+  }
+
+  /* Disabled State (e.g. Prev on the first step) */
+  .vd-tour-btn:disabled,
+  .vd-tour-btn[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+    box-shadow: none;
+  }
+
+  /* Optional scrim. NON-BLOCKING by design: pointer-events none, because a tour
+     is non-modal — the page must stay clickable. Decorative only (aria-hidden). */
+  .vd-tour-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: var(--vd3-z-modal-backdrop, 1040);
+    background-color: var(--vd3-color-gray-1000, #1a1d20);
+    opacity: var(--vd3-glass-tint-lg, 0.21);
+    pointer-events: none;
+  }
+
+  [data-theme="dark"] .vd-tour-backdrop {
+    opacity: var(--vd3-glass-tint-xl, 0.34);
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-tour,
+    .vd-tour-progress::after,
+    .vd-tour-btn {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-tour,
+  [data-motion="reduce"] .vd-tour-progress::after,
+  [data-motion="reduce"] .vd-tour-btn {
+    transition: none !important;
+  }
+}

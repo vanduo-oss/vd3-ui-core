@@ -8,7 +8,7 @@
 /* 1. Golden Ratio Layout Primitives (#13-16) */
 @import './layout.css' layer(vd3.layout);
 
-/* 2. Interactive & Surface Components (#27-39) */
+/* 2. Interactive & Surface Components (#27-60) */
 @import './button.css' layer(vd3.components);
 @import './dialog.css' layer(vd3.components);
 @import './card.css' layer(vd3.components);
@@ -22,3 +22,24 @@
 @import './switch.css' layer(vd3.components);
 @import './alert.css' layer(vd3.components);
 @import './tabs.css' layer(vd3.components);
+@import './drawer.css' layer(vd3.components);
+@import './tooltip.css' layer(vd3.components);
+@import './popover.css' layer(vd3.components);
+@import './menu.css' layer(vd3.components);
+@import './context-menu.css' layer(vd3.components);
+@import './menubar.css' layer(vd3.components);
+@import './breadcrumb.css' layer(vd3.components);
+@import './pagination.css' layer(vd3.components);
+@import './avatar.css' layer(vd3.components);
+@import './progress.css' layer(vd3.components);
+@import './spinner.css' layer(vd3.components);
+@import './skeleton.css' layer(vd3.components);
+@import './slider.css' layer(vd3.components);
+@import './datepicker.css' layer(vd3.components);
+@import './timepicker.css' layer(vd3.components);
+@import './upload.css' layer(vd3.components);
+@import './carousel.css' layer(vd3.components);
+@import './toolbar.css' layer(vd3.components);
+@import './segmented.css' layer(vd3.components);
+@import './hover-card.css' layer(vd3.components);
+@import './tour.css' layer(vd3.components);

@@ -1,0 +1,139 @@
+/**
+ * VD3 UI CORE — Menu Component (Feature #43)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, W3C ARIA APG Menu Button Pattern — https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/
+ */
+
+@layer vd3.components {
+  /* Dropdown menu surface — anchored beneath a relatively positioned trigger */
+  .vd-menu {
+    position: absolute;
+    inset-inline-start: 0;
+    top: 100%;
+    z-index: var(--vd3-z-dropdown, 1000);
+    /* F_12 x phi = F_13 = 233px minimum menu width (Class A derivation) */
+    min-inline-size: calc(var(--vd3-space-fib-144, 9rem) * var(--vd3-phi, 1.6180339887));
+    max-inline-size: calc(100vw - var(--vd3-space-fib-34, 2.125rem));
+    margin-block-start: var(--vd3-space-fib-2, 0.25rem);
+    padding: var(--vd3-space-fib-5, 0.5rem) 0;
+    list-style: none;
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    border: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    border-radius: var(--vd3-radius-fib-8, 0.5rem);
+    box-shadow: var(--vd3-shadow-4, 0 8px 13px -3px #0000001a, 0 3px 5px -3px #0000001a);
+    box-sizing: border-box;
+  }
+
+  .vd-menu[hidden] {
+    display: none;
+  }
+
+  /* Menu item (role="menuitem" host: <button>, <a>, or <li> wrapping one) */
+  .vd-menu-item {
+    display: flex;
+    align-items: center;
+    gap: var(--vd3-space-fib-8, 0.75rem);
+    width: 100%;
+    padding: var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-13, 0.8125rem);
+    font-family: inherit;
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+    font-weight: 500;
+    line-height: var(--vd3-line-height-tight, 1.236);
+    color: var(--vd3-color-text-primary, #1a1d20);
+    text-align: start;
+    text-decoration: none;
+    white-space: nowrap;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    user-select: none;
+    box-sizing: border-box;
+    transition:
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  .vd-menu-item:hover:not(:disabled):not([aria-disabled="true"]) {
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+    color: var(--vd3-color-text-primary, #1a1d20);
+  }
+
+  /* Current item (aria-current="page" | "true") */
+  .vd-menu-item[aria-current="true"],
+  .vd-menu-item[aria-current="page"] {
+    color: var(--vd3-color-focus, #fab005);
+    font-weight: 600;
+  }
+
+  /* Dual-Ring Focus (FOC-001…004) */
+  .vd-menu-item:focus-visible {
+    outline: none;
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow));
+  }
+
+  /* Danger variant (destructive actions) */
+  .vd-menu-item--danger,
+  .vd-menu-item-danger {
+    color: var(--vd3-color-critical, #fa5252);
+  }
+
+  .vd-menu-item--danger:hover:not(:disabled):not([aria-disabled="true"]),
+  .vd-menu-item-danger:hover:not(:disabled):not([aria-disabled="true"]) {
+    color: var(--vd3-color-critical, #fa5252);
+    background-color: color-mix(in srgb, var(--vd3-color-critical, #fa5252) calc(var(--vd3-glass-tint-md, 0.13) * 100%), transparent);
+  }
+
+  /* Disabled State */
+  .vd-menu-item:disabled,
+  .vd-menu-item[aria-disabled="true"] {
+    cursor: not-allowed;
+    color: var(--vd3-color-text-secondary, #495057);
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+    box-shadow: none;
+  }
+
+  /* Divider (role="separator") */
+  .vd-menu-divider {
+    height: 0;
+    margin-block: var(--vd3-space-fib-5, 0.5rem);
+    border: 0;
+    border-block-start: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+  }
+
+  /* Group label (non-interactive heading inside the menu) */
+  .vd-menu-label {
+    display: block;
+    padding: var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-13, 0.8125rem);
+    font-size: var(--vd3-font-size-xs, 0.75rem);
+    font-weight: 600;
+    line-height: var(--vd3-line-height-tight, 1.236);
+    text-transform: uppercase;
+    letter-spacing: var(--vd3-tracking-wider, 0.05em);
+    color: var(--vd3-color-text-secondary, #495057);
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  /* Dark Theme Nuances — deeper elevation on dark canvas */
+  [data-theme="dark"] .vd-menu {
+    box-shadow: var(--vd3-shadow-5, 0 13px 21px -5px #0000001a, 0 5px 8px -5px #0000001a);
+  }
+
+  /* Reduced Motion Compliance (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-menu,
+    .vd-menu-item {
+      transition: none !important;
+    }
+  }
+
+  [data-motion="reduce"] .vd-menu,
+  [data-motion="reduce"] .vd-menu-item {
+    transition: none !important;
+  }
+}

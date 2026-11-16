@@ -1,0 +1,106 @@
+/**
+ * VD3 UI CORE — Progress Component (Feature #49)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, WAI-ARIA progressbar role (no APG pattern exists for progress)
+ */
+
+@layer vd3.components {
+  /* Track — layer fill, pill radius, F_5 = 8px tall */
+  .vd-progress {
+    display: flex;
+    width: 100%;
+    height: var(--vd3-space-fib-5, 0.5rem);
+    overflow: hidden;
+    background-color: var(--vd3-color-layer, #f8f9fa);
+    border-radius: var(--vd3-radius-full, 9999rem);
+  }
+
+  /* Fill — the behavioral layer sets --_vd-progress-value (custom property)
+     or an inline width; this CSS never hardcodes a value. */
+  .vd-progress-bar {
+    --_vd-progress-fill: var(--vd3-color-focus, #fab005);
+
+    width: var(--_vd-progress-value, 0%);
+    height: 100%;
+    background-color: var(--_vd-progress-fill);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    transition: width var(--vd3-duration-233, 233ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1));
+  }
+
+  /* Semantic variants — swap only the fill custom property */
+  .vd-progress--success .vd-progress-bar,
+  .vd-progress-success .vd-progress-bar,
+  .vd-progress-bar.vd-progress--success,
+  .vd-progress-bar.vd-progress-success {
+    --_vd-progress-fill: var(--vd3-color-golden-3, #68c20a);
+  }
+
+  .vd-progress--warning .vd-progress-bar,
+  .vd-progress-warning .vd-progress-bar,
+  .vd-progress-bar.vd-progress--warning,
+  .vd-progress-bar.vd-progress-warning {
+    --_vd-progress-fill: var(--vd3-color-focus, #fab005);
+  }
+
+  .vd-progress--critical .vd-progress-bar,
+  .vd-progress-critical .vd-progress-bar,
+  .vd-progress-bar.vd-progress--critical,
+  .vd-progress-bar.vd-progress-critical {
+    --_vd-progress-fill: var(--vd3-color-critical, #fa5252);
+  }
+
+  /* Indeterminate — golden-split bar (1/phi^2 wide) sliding along the
+     logical inline axis so RTL layouts mirror correctly */
+  .vd-progress--indeterminate .vd-progress-bar,
+  .vd-progress-indeterminate .vd-progress-bar {
+    position: relative;
+    width: calc(var(--vd3-inv-phi-sq, 0.382) * 100%);
+    animation: vd-progress-slide var(--vd3-duration-987, 987ms) var(--vd3-ease-in-out, cubic-bezier(0.618, 0, 0.382, 1)) infinite;
+  }
+
+  @keyframes vd-progress-slide {
+    from { inset-inline-start: calc(var(--vd3-inv-phi-sq, 0.382) * -100%); }
+    to   { inset-inline-start: 100%; }
+  }
+
+  /* Dual-Ring Focus (only if a behavioral layer makes the track focusable) */
+  .vd-progress:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
+  }
+
+  /* Disabled State */
+  .vd-progress:disabled,
+  .vd-progress[aria-disabled="true"] {
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+  }
+
+  /* Dark Theme Nuances */
+  [data-theme="dark"] .vd-progress--success .vd-progress-bar,
+  [data-theme="dark"] .vd-progress-success .vd-progress-bar,
+  [data-theme="dark"] .vd-progress-bar.vd-progress--success,
+  [data-theme="dark"] .vd-progress-bar.vd-progress-success {
+    --_vd-progress-fill: var(--vd3-color-golden-6, #0ac265);
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-progress-bar {
+      transition: none !important;
+    }
+    .vd-progress--indeterminate .vd-progress-bar,
+    .vd-progress-indeterminate .vd-progress-bar {
+      animation: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-progress-bar {
+    transition: none !important;
+  }
+  [data-motion="reduce"] .vd-progress--indeterminate .vd-progress-bar,
+  [data-motion="reduce"] .vd-progress-indeterminate .vd-progress-bar {
+    animation: none !important;
+  }
+}

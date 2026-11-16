@@ -1,0 +1,92 @@
+/**
+ * VD3 UI CORE — Breadcrumb Component (Feature #46)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, ARIA navigation landmark (nav + aria-label) + aria-current="page"; no APG pattern exists
+ */
+
+@layer vd3.components {
+  /* Trail list — markup is <nav aria-label="Breadcrumb"><ol class="vd-breadcrumb"> */
+  .vd-breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--vd3-space-fib-5, 0.5rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--vd3-font-size-sm, 0.8125rem);
+    line-height: var(--vd3-line-height-tight, 1.236);
+    color: var(--vd3-color-text-secondary, #495057);
+  }
+
+  .vd-breadcrumb-item {
+    display: flex;
+    align-items: center;
+    gap: var(--vd3-space-fib-5, 0.5rem);
+  }
+
+  /* Decorative separator — the empty alt text ("" after the slash) marks the
+     generated content aria-hidden for assistive technology; it carries no
+     meaning. Painted on ::after so it never leads the first item. */
+  .vd-breadcrumb-item:not(:last-child)::after {
+    content: "/" / "";
+    color: var(--vd3-color-text-secondary, #495057);
+    font-weight: 400;
+  }
+
+  .vd-breadcrumb-link {
+    color: var(--vd3-color-interactive, #f59f00);
+    text-decoration: none;
+    border-radius: var(--vd3-radius-fib-3, 0.1875rem);
+    transition:
+      color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      background-color var(--vd3-duration-89, 89ms) var(--vd3-ease-out),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out);
+  }
+
+  .vd-breadcrumb-link:hover {
+    color: var(--vd3-color-text-primary, #1a1d20);
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+    text-decoration: underline;
+  }
+
+  /* Dual-Ring Focus (FOC-001…004) */
+  .vd-breadcrumb-link:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
+  }
+
+  /* Current page — last crumb, non-interactive */
+  .vd-breadcrumb-link[aria-current="page"] {
+    color: var(--vd3-color-text-secondary, #495057);
+    font-weight: 600;
+    background-color: transparent;
+    text-decoration: none;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  /* Disabled State */
+  .vd-breadcrumb-link:disabled,
+  .vd-breadcrumb-link[aria-disabled="true"] {
+    color: var(--vd3-color-text-secondary, #495057);
+    background-color: transparent;
+    text-decoration: none;
+    cursor: not-allowed;
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+    box-shadow: none;
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-breadcrumb-link {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-breadcrumb-link {
+    transition: none !important;
+  }
+}

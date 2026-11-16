@@ -1,0 +1,129 @@
+/**
+ * VD3 UI CORE — Slider Component (Feature #52)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: WCAG 2.1/2.2 AA, W3C ARIA APG Slider Pattern — https://www.w3.org/WAI/ARIA/apg/patterns/slider/
+ */
+
+@layer vd3.components {
+  /* Native range input styled as a slider.
+     Track: F_3 = 6px pill. Thumb: F_8 = 21px circle in the focus color. */
+  input[type="range"].vd-slider {
+    --_vd-slider-track-h: var(--vd3-space-fib-3, 0.375rem);
+    --_vd-slider-thumb: var(--vd3-space-fib-21, 1.3125rem);
+
+    -webkit-appearance: none;
+    appearance: none;
+    display: block;
+    width: 100%;
+    height: var(--_vd-slider-thumb);
+    margin: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  /* Track (WebKit / Blink) */
+  input[type="range"].vd-slider::-webkit-slider-runnable-track {
+    height: var(--_vd-slider-track-h);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+  }
+
+  /* Thumb (WebKit / Blink) — margin centers it on the 6px track */
+  input[type="range"].vd-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: calc((var(--_vd-slider-track-h) - var(--_vd-slider-thumb)) / 2);
+    width: var(--_vd-slider-thumb);
+    height: var(--_vd-slider-thumb);
+    border: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-canvas, #ffffff);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    background-color: var(--vd3-color-focus, #fab005);
+    box-shadow: var(--vd3-shadow-1, 0 1px 2px #0000000d);
+    transition:
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1)),
+      transform var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1));
+  }
+
+  /* Track + filled progress (Firefox) */
+  input[type="range"].vd-slider::-moz-range-track {
+    height: var(--_vd-slider-track-h);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    background-color: var(--vd3-color-layer-hover, #f1f3f5);
+  }
+
+  input[type="range"].vd-slider::-moz-range-progress {
+    height: var(--_vd-slider-track-h);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    background-color: var(--vd3-color-focus, #fab005);
+  }
+
+  /* Thumb (Firefox) */
+  input[type="range"].vd-slider::-moz-range-thumb {
+    width: var(--_vd-slider-thumb);
+    height: var(--_vd-slider-thumb);
+    border: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-canvas, #ffffff);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    background-color: var(--vd3-color-focus, #fab005);
+    box-shadow: var(--vd3-shadow-1, 0 1px 2px #0000000d);
+    transition:
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1)),
+      transform var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1));
+  }
+
+  /* Dual-Ring Focus — applied to the thumb per the APG slider pattern */
+  input[type="range"].vd-slider:focus-visible {
+    outline: none;
+  }
+
+  input[type="range"].vd-slider:focus-visible::-webkit-slider-thumb {
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
+  }
+
+  input[type="range"].vd-slider:focus-visible::-moz-range-thumb {
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
+  }
+
+  /* Disabled State */
+  input[type="range"].vd-slider:disabled,
+  input[type="range"].vd-slider[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+  }
+
+  input[type="range"].vd-slider:disabled::-webkit-slider-thumb,
+  input[type="range"].vd-slider[aria-disabled="true"]::-webkit-slider-thumb {
+    cursor: not-allowed;
+  }
+
+  input[type="range"].vd-slider:disabled::-moz-range-thumb,
+  input[type="range"].vd-slider[aria-disabled="true"]::-moz-range-thumb {
+    cursor: not-allowed;
+  }
+
+  /* Dark Theme Nuances — thumb rim follows the dark canvas role automatically;
+     track keeps layer-hover (gray-7 in dark) */
+  [data-theme="dark"] input[type="range"].vd-slider::-webkit-slider-runnable-track,
+  [data-theme="dark"] input[type="range"].vd-slider::-moz-range-track {
+    background-color: var(--vd3-color-layer-hover, #495057);
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    input[type="range"].vd-slider::-webkit-slider-thumb,
+    input[type="range"].vd-slider::-moz-range-thumb {
+      transition: none !important;
+      transform: none !important;
+    }
+  }
+  [data-motion="reduce"] input[type="range"].vd-slider::-webkit-slider-thumb,
+  [data-motion="reduce"] input[type="range"].vd-slider::-moz-range-thumb {
+    transition: none !important;
+    transform: none !important;
+  }
+}
