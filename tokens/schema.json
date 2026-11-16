@@ -4,7 +4,7 @@
   "title": "VD3 UI CORE Design Token Schema (DTCG 2.0)",
   "description": "JSON schema for VD3 UI CORE design tokens conforming to the W3C Design Tokens Community Group (DTCG) specification with VD3 mathematical extensions.",
   "type": "object",
-  "required": ["$description", "$vd3", "math", "color", "space", "line", "radius", "shadow", "glow", "z", "container", "type", "motion", "easing", "aspect", "glass"],
+  "required": ["$description", "$vd3", "math", "color", "theme", "space", "line", "focus", "radius", "shadow", "glow", "z", "container", "breakpoint", "type", "motion", "easing", "aspect", "glass"],
   "properties": {
     "$description": { "type": "string" },
     "$vd3": {
@@ -20,6 +20,7 @@
     "theme": { "type": "object" },
     "space": { "type": "object" },
     "line": { "type": "object" },
+    "focus": { "type": "object" },
     "radius": { "type": "object" },
     "shadow": { "type": "object" },
     "glow": { "type": "object" },

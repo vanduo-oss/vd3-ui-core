@@ -1,7 +1,7 @@
 {
   "$description": "vd3 design tokens — NORMATIVE single source of truth. W3C DTCG format. VALUES AUDITED against @vanduo-oss/vd3@1.9.0 (dist/tokens.json, vd3-core.css, vd3.css) — see docs/token-audit.md. Structure and naming are binding; public CSS names follow v1.9 verbatim (see conventions/naming.md mapping table). Generated CSS in library repos MUST match this file (CI check). Basis classes: A = phi/Fibonacci/Lucas-derived, B = conventional-by-design (written reason), C = registered exception (foundations/proportion.md registry).",
   "$vd3": {
-    "spec": "vd3-ui-core@1.0.1-draft",
+    "spec": "vd3-ui-core@1.0.2-draft",
     "auditedAgainst": "@vanduo-oss/vd3@1.9.0"
   },
   "math": {
@@ -83,6 +83,7 @@
       "text-secondary": { "$value": "{color.primitive.gray.7}",  "$description": "v1.9 --vd-text-secondary / --vd-text-muted", "$extensions": { "vd3": { "class": "B", "reason": "WCAG AA compliant supporting text" } } },
       "border":         { "$value": "{color.primitive.gray.3}",  "$description": "v1.9 --vd-border-color", "$extensions": { "vd3": { "class": "B", "reason": "Structural boundary rule" } } },
       "focus":          { "$value": "{color.primitive.gold.6}",  "$description": "v1.9 --vd-color-primary (default light primary = amber). v1.9 has NO dedicated focus-geometry tokens — ring width/offset are the F3-7 gap, new in 1.0.", "$extensions": { "vd3": { "class": "B", "reason": "High-visibility focus ring indicator" } } },
+      "focus-glow":     { "$value": "rgba(250, 176, 5, 0.4)",      "$description": "v1.9 --vd3-color-focus-glow (light). Halo ink for the dual-ring glow. NEW as a role in 1.0.2 (previously CSS-only).", "$extensions": { "vd3": { "class": "B", "reason": "Alpha-blended focus halo matching focus role" } } },
       "interactive":    { "$value": "{color.primitive.gold.7}",  "$description": "v1.9 --vd-color-primary-hover/dark", "$extensions": { "vd3": { "class": "B", "reason": "Interactive button hover/active" } } },
       "critical":       { "$value": "{color.primitive.red.6}",   "$description": "v1.9 --vd-color-error / --vd-color-danger", "$extensions": { "vd3": { "class": "B", "reason": "Accessible error indicator" } } },
       "shadow":         { "$value": "#0000001a",                 "$description": "Shadow ink, light theme (dark uses #0000004d). v1.9 fib shadows bake hex-alpha literals.", "$extensions": { "vd3": { "class": "B", "reason": "Alpha-blended black ink for shadows" } } }
@@ -101,6 +102,7 @@
           "text-secondary": { "$value": "{color.primitive.gray.3}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode secondary text (AAA)" } } },
           "border":         { "$value": "{color.primitive.gray.7}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode boundary stroke" } } },
           "focus":          { "$value": "{color.primitive.gold.4}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode luminous focus ring" } } },
+          "focus-glow":     { "$value": "rgba(255, 212, 59, 0.4)", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode focus halo (parity with light role)" } } },
           "interactive":    { "$value": "{color.primitive.gold.4}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode interactive primary" } } },
           "critical":       { "$value": "{color.primitive.red.4}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode accessible error text" } } },
           "shadow":         { "$value": "#0000004d", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode shadow opacity adjustment" } } }
@@ -130,6 +132,16 @@
     "thin":    { "$value": "2px", "$description": "2px thin border", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_3 = 2" } } },
     "regular": { "$value": "3px", "$description": "3px regular border", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_4 = 3" } } },
     "thick":   { "$value": "5px", "$description": "5px thick border", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_5 = 5" } } }
+  },
+  "focus": {
+    "$description": "Dual-ring focus indicator geometry — tokenized in 1.0.2 from the CSS-only --vd3-focus-ring-* contract (foundations/focus.md, FOC-001…FOC-004). CSS mapping: focus.ring.* -> --vd3-focus-ring-*.",
+    "ring": {
+      "width":        { "$type": "dimension", "$value": "2px", "$description": "F_3 = 2px = line.thin · --vd3-focus-ring-width", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_3 = 2 (equals line.thin)" } } },
+      "offset":       { "$type": "dimension", "$value": "2px", "$description": "F_3 = 2px canvas spacer · --vd3-focus-ring-offset", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_3 = 2" } } },
+      "color":        { "$type": "color", "$value": "{color.role.focus}", "$description": "Ring ink · --vd3-focus-ring-color", "$extensions": { "vd3": { "class": "B", "reason": "Alias of the semantic focus role (WCAG 2.2 SC 2.4.13 >= 3:1)" } } },
+      "offset-color": { "$type": "color", "$value": "{color.role.canvas}", "$description": "Offset gap matches the canvas · --vd3-focus-ring-offset-color", "$extensions": { "vd3": { "class": "B", "reason": "Alias of the semantic canvas role" } } },
+      "glow":         { "$type": "shadow", "$value": "0 0 8px {color.role.focus-glow}", "$description": "8px = F_6 halo · --vd3-focus-ring-glow", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_6 = 8 blur" } } }
+    }
   },
   "radius": {
     "$type": "dimension",

@@ -1,6 +1,6 @@
 # Focus & Accessibility Contracts
 
-Status: stable · Spec: 1.0.1-draft
+Status: stable · Spec: 1.0.2-draft
 
 Focus management is a foundational pillar of accessibility in VD3 UI CORE. This specification defines the mathematical geometry, token contracts, and APG operational behaviors governing keyboard navigation and focus indicators across all components.
 
@@ -20,6 +20,13 @@ To eliminate focus contrast degradation, VD3 mandates a **Dual-Ring Architecture
 1. **Inner Ring (Offset Gap)**: A 2px spacer colored to match the immediate background canvas (`--vd3-color-canvas`), ensuring sharp boundary separation from the active element.
 2. **Outer Ring (Focus Stroke)**: A 2px high-luminance indicator colored with `--vd3-color-focus` (`gold.6` #fab005 in light theme; `gold.4` #ffd43b in dark theme).
 3. **Ambient Halo**: An 8px ($F_6$) diffused atmospheric glow (`--vd3-focus-ring-glow`) that reinforces visual detection without compromising geometric sharpness.
+
+## Normative Requirement IDs (FOC-###)
+
+- **FOC-001** — Focus indicators MUST activate only on keyboard interaction via the native `:focus-visible` pseudo-class. `outline: none` / `outline: 0` without the dual-ring `box-shadow` contract below is a violation.
+- **FOC-002** — Ring geometry: `focus.ring.width` ≥ 2px and `focus.ring.offset` ≥ 2px. Both equal $F_3 = 2$px = `line.thin` (Class A), tokenized in `tokens/vd3.tokens.json` as `focus.ring.*` (new in 1.0.2; previously CSS-only `--vd3-focus-ring-*`).
+- **FOC-003** — The ring color MUST achieve ≥ 3:1 contrast against both the unfocused component border and the surrounding canvas (WCAG 2.2 SC 2.4.13): light `gold.6` on `canvas` = 3.8:1, dark `gold.4` on `canvas` = 8.9:1.
+- **FOC-004** — Overlays (dialog, drawer, offcanvas) MUST trap focus, move initial focus per APG, and restore focus to the invoking element on close (see `components/dialog/spec.md` DLG-001…004).
 
 ## Normative Focus Tokens
 

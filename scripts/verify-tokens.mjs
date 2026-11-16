@@ -538,6 +538,37 @@ suite('Three-Class Basis Classification (A, B, C)', () => {
   );
 });
 
+// SUITE 16: Focus Ring Geometry Tokens (FOC-001..004 tokenization, 1.0.2)
+suite('Focus Ring Geometry Tokens (FOC contract, F_3 = 2px)', () => {
+  assert(tokens.focus?.ring !== undefined, 'focus.ring token group exists');
+
+  assert(binetFib(3) === 2, 'Binet F_3 === 2 (line.thin parity)');
+  assert(binetFib(6) === 8, 'Binet F_6 === 8 (glow blur parity)');
+
+  if (tokens.focus?.ring) {
+    const w = tokens.focus.ring.width?.$value;
+    const o = tokens.focus.ring.offset?.$value;
+    assert(w === '2px', `focus.ring.width (${w}) === 2px (F_3 = line.thin)`);
+    assert(o === '2px', `focus.ring.offset (${o}) === 2px (F_3)`);
+    assert(
+      tokens.focus.ring.color?.$value === '{color.role.focus}',
+      'focus.ring.color aliases color.role.focus'
+    );
+    assert(
+      tokens.focus.ring['offset-color']?.$value === '{color.role.canvas}',
+      'focus.ring.offset-color aliases color.role.canvas'
+    );
+    const glow = tokens.focus.ring.glow?.$value || '';
+    assert(glow.includes('8px'), `focus.ring.glow (${glow}) uses F_6 = 8px blur`);
+  }
+
+  assert(tokens.color?.role?.['focus-glow'] !== undefined, 'color.role.focus-glow exists (light theme)');
+  assert(
+    tokens.theme?.dark?.color?.role?.['focus-glow'] !== undefined,
+    'theme.dark.color.role.focus-glow exists (light/dark role parity)'
+  );
+});
+
 // ---------------------------------------------------------------------------
 // 5. Output Summary Formatting & Process Exit Code
 // ---------------------------------------------------------------------------
