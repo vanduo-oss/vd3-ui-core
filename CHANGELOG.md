@@ -2,6 +2,42 @@
 
 Spec follows semver independently of library releases.
 
+## 1.0.2-draft — phantom primitives shipped, component specs, focus tokens, RTL-safe CSS
+
+- New zero-framework primitives in `components/`: `switch.css` (Feature #37, APG
+  Switch pattern, golden φ track ratios 21/13 · 34/21 · 55/34, RTL-safe
+  `inset-inline-start` thumb travel), `alert.css` (#38, live-region roles,
+  info/success/warning/critical variants, RTL-safe `border-inline-start` accent),
+  `tabs.css` (#39, APG Tabs pattern, 2px = F₃ active indicator). Registered in
+  `components/index.css`; `scripts/verify-components.mjs` extended (3 new feature
+  suites #37–39, focus/MOB-001/zero-framework lists) — 416/416 assertions pass.
+- New specs: `components/SPEC.md` master index + `components/switch/spec.md`
+  (SWT-001…005), `components/alert/spec.md` (ALR-001…004),
+  `components/tabs/spec.md` (TAB-001…005). Figma manifest `spec:` links repointed
+  to live targets (`SPEC.md#<slug>` anchors or real per-slug specs); dead
+  `foundations/space.md` board reference repointed to `foundations/proportion.md`.
+- Focus contract tokenized: `focus.ring.*` group added to `tokens/vd3.tokens.json`
+  (width/offset = F₃ = 2px Class A; color/offset-color alias semantic roles;
+  glow = F₆ = 8px) + `color.role.focus-glow` in light and dark themes (parity);
+  `focus`, `theme`, `breakpoint` added to `tokens/schema.json` `required`;
+  `FOC-001…FOC-004` defined in `foundations/focus.md`; new verify-tokens suite 16
+  (385/385 assertions pass).
+- RTL: physical `left/right`/`border-left` replaced with logical
+  `inset-inline-*`/`border-inline-start` in `form.css`, `toast.css`, `code.css`
+  (LTR rendering unchanged; RTL now mirrors). Accordion chevron intentionally kept
+  physical (rotated glyph, not layout).
+- Doc drift fixed: AGENTS.md/README (6 verification commands, real component
+  list of 14 modules, PRN-001…010, canonical layer order, data-* hook ownership,
+  test:m2 script path), glossary conformance `^1.0`.
+- Site: switch/alert/tabs specimens (with `data-vd-*` contracts) and their specs
+  added to the Components chapter (`site/src/App.vue` + `scripts/build-ssg.mjs`);
+  counts 11 → 14 CSS modules.
+- Analysis artifacts: `docs/gap-analysis.md` (core vs vd3 vs Carbon/M3/Fluent/
+  Atlassian/Ant/Radix/shadcn, with proof commands) and `docs/roadmap-1.0.2-draft.md`
+  (phased gap-closure plan).
+- Spec version renumbered `1.0.1-draft` → `1.0.2-draft` across spec headers,
+  package manifests, JSON-LD, badges, and e2e assertions.
+
 ## 1.0.1-draft — framework-agnostic positioning & site polish
 
 - Site hero/meta/JSON-LD/README now state the contract explicitly: "VD3 UI Core —

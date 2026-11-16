@@ -111,7 +111,7 @@ describe('Tier 1: Documentation Site Pre-rendered Static HTML & AI Readability',
 
     const techArticle = graph.find(e => e['@type'] === 'TechArticle');
     assert.ok(techArticle, 'Schema.org graph in site/dist/index.html must contain TechArticle entity');
-    assert.strictEqual(techArticle.version, '1.0.1-draft', 'TechArticle version in site/dist/index.html must be 1.0.1-draft');
+    assert.strictEqual(techArticle.version, '1.0.2-draft', 'TechArticle version in site/dist/index.html must be 1.0.2-draft');
 
     const termSet = graph.find(e => e['@type'] === 'DefinedTermSet');
     assert.ok(termSet, 'Schema.org graph in site/dist/index.html must contain DefinedTermSet for design tokens');

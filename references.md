@@ -1,6 +1,6 @@
 # References
 
-Status: stable · Spec: 1.0.1-draft
+Status: stable · Spec: 1.0.2-draft
 
 ## Normative — vd3 MUST conform
 

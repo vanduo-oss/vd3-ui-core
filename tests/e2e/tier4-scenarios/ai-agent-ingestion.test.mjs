@@ -53,7 +53,7 @@ describe('Tier 4 Scenario 1: Headless AI Agent Ingestion Workflow', () => {
     // Verify TechArticle discovery
     const techArticle = schemaGraph.find(e => e['@type'] === 'TechArticle');
     assert.ok(techArticle, 'Must discover TechArticle entity');
-    assert.strictEqual(techArticle.version, '1.0.1-draft', 'Version must be 1.0.1-draft');
+    assert.strictEqual(techArticle.version, '1.0.2-draft', 'Version must be 1.0.2-draft');
     assert.ok(techArticle.about && techArticle.about.length >= 1, 'TechArticle must index design system foundations');
 
     // Verify DefinedTermSet discovery
