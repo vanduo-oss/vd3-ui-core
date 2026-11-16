@@ -8,7 +8,7 @@ Normative web design system specification and W3C DTCG 2025.10 design tokens for
 
 Framework-agnostic by contract (PRN-004): consume the DTCG tokens and zero-framework CSS from any stack — vanilla JS, React, Vue, Svelte — with zero runtime dependency. Project codename: **HydroCORE** (*vanduo* means water in Lithuanian).
 
-**Status: 1.0.2-draft.** Published at [core.vanduo.dev](https://core.vanduo.dev/). Agents integrating or auditing the specification should read [AGENTS.md](./AGENTS.md). Release notes are in [CHANGELOG.md](./CHANGELOG.md).
+**Status: 1.1.0-draft.** Published at [core.vanduo.dev](https://core.vanduo.dev/). Agents integrating or auditing the specification should read [AGENTS.md](./AGENTS.md). Release notes are in [CHANGELOG.md](./CHANGELOG.md).
 
 ## Repository Roles (`vanduo-oss`)
 
@@ -33,9 +33,10 @@ CI in each implementing library MUST verify:
 
 ## Architecture & Directory Structure
 
-- **[foundations/](./foundations/)** — First principles (`PRN-001`…`PRN-010`), Three-Class Basis Contract (Class A $\phi$-derived, Class B conventional-by-design, Class C registered exceptions `C-01`…`C-04`), proportion, space, line, typography, motion, elevation, glass, color, layout, and focus (FOC-001…004).
+- **[foundations/](./foundations/)** — First principles (`PRN-001`…`PRN-010`), Three-Class Basis Contract (Class A $\phi$-derived, Class B conventional-by-design, Class C registered exceptions `C-01`…`C-04`), proportion, space, line, typography, motion, elevation, glass, color, layout, focus (FOC-001…004), icons (Fibonacci sizes, φ stroke), density (comfortable/compact), and the data-viz boundary.
 - **[tokens/](./tokens/)** — Audited W3C DTCG 2025.10 token source ([vd3.tokens.json](./tokens/vd3.tokens.json)), dual-prefixed CSS custom properties (`--vd3-*` and `--vd-*` in [tokens.css](./tokens/tokens.css)), JSON Schema ([schema.json](./tokens/schema.json)), and Figma binding manifest ([figma.manifest.json](./tokens/figma.manifest.json)).
-- **[components/](./components/)** — Normative specifications ([SPEC.md](./components/SPEC.md) master index + `<slug>/spec.md` per component) and zero-framework layered CSS primitives ([index.css](./components/index.css)) for 14 core modules: the layout engine plus `button`, `dialog`, `card`, `form` (input/select/checkbox/radio/textarea), `badge`/chip, `navbar`, `accordion`, `table`, `code`, `toast`, `switch`, `alert`, `tabs`.
+- **[components/](./components/)** — Normative specifications ([SPEC.md](./components/SPEC.md) master index + `<slug>/spec.md` per component) and zero-framework layered CSS primitives ([index.css](./components/index.css)) for 35 core modules (Features #13–16 layout engine + #27–60): `button`, `dialog`, `card`, `form` (input/select/checkbox/radio/textarea), `badge`/chip, `navbar`, `accordion`, `table`, `code`, `toast`, `switch`, `alert`, `tabs`, `drawer`, `tooltip`, `popover`, `menu`, `context-menu`, `menubar`, `breadcrumb`, `pagination`, `avatar`, `progress`, `spinner`, `skeleton`, `slider`, `datepicker`, `timepicker`, `upload`, `carousel`, `toolbar`, `segmented`, `hover-card`, `tour`.
+- **[patterns/](./patterns/)** — Page-level guidance ([PATTERNS.md](./patterns/PATTERNS.md)): empty states, auth flows, app shell, onboarding, disabled/read-only.
 - **[conventions/](./conventions/)** — Token naming contract ([naming.md](./conventions/naming.md)) and IBM Carbon cross-system translation matrix ([mappings.md](./conventions/mappings.md)).
 - **[site/](./site/)** — Pre-rendered SSG specification bible built with Vue 3, Vite, and `@vanduo-oss/vd3` (`VdNavbar`, `VdThemeSwitcher`, `VdThemeCustomizer`), exposing Schema.org JSON-LD and `data-vd-*` machine-readable metadata for headless AI agents.
 - **[scripts/](./scripts/) & [tests/e2e/](./tests/e2e/)** — 6 automated verification commands validating token math, component contracts, adversarial CSS challenges, TypeScript/JSON schemas, WCAG AA/AAA accessibility, and Tier 1–4 E2E scenarios.

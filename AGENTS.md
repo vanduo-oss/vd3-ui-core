@@ -1,13 +1,14 @@
 # AGENTS.md — vd3-ui-core
 
-You are working on the normative specification and W3C DTCG token source for the **vd3** design system (`v1.0.2-draft`, published at [core.vanduo.dev](https://core.vanduo.dev/)).
+You are working on the normative specification and W3C DTCG token source for the **vd3** design system (`v1.1.0-draft`, published at [core.vanduo.dev](https://core.vanduo.dev/)).
 Before planning or writing code for this repository or any implementing `vd3` library, read:
 
 1. `foundations/principles.md` — always (`PRN-001`…`PRN-010`)
 2. `foundations/proportion.md` — the mathematical spine ($\phi$, $F_n$, $L_n$, and the Three-Class Basis Contract)
-3. The `foundations/<topic>.md` page closest to your task (`color.md`, `typography.md`, `motion.md`, `elevation.md`, `layout.md`, `line.md`, `glass.md`, `focus.md`)
-4. `components/<slug>/spec.md` and `components/SPEC.md` for every component you touch
+3. The `foundations/<topic>.md` page closest to your task (`color.md`, `typography.md`, `motion.md`, `elevation.md`, `layout.md`, `line.md`, `glass.md`, `focus.md`, `icons.md`, `density.md`, `data-viz.md`)
+4. `components/<slug>/spec.md` and `components/SPEC.md` for every component you touch; `patterns/` for page-level guidance (empty states, auth, app shell, onboarding, disabled/read-only)
 5. `conventions/naming.md` before naming any token or CSS custom property
+6. `docs/roadmap-1.1.0-draft.md` for the gap-closure plan and `docs/token-sync.md` for the cross-repo token sync contract
 
 Normative behavior reference: **W3C ARIA Authoring Practices Guide (APG)**.
 Normative token format: **W3C Design Tokens Community Group (DTCG) 2025.10**.
@@ -27,12 +28,13 @@ Consulted literature (cite, don't conform): IBM Carbon. Material 3 is excluded.
 - Authoritative source: `tokens/vd3.tokens.json` (audited against `@vanduo-oss/vd3@1.9.0`; the `@1.9.1` delta changes primitive ramps only — 0 semantic/role token changes, see `docs/token-audit.md`).
 - `tokens/tokens.css` exports both the normative `--vd3-*` variables and the backwards-compatible `--vd-*` aliases inside `@layer vd3.tokens, vd3.reset, vd3.base, vd3.layout, vd3.components, vd3.utilities;` (order enforced by e2e TEST-T1-STD-003).
 - Components consume semantic role tokens only — never raw hex or pixel literals.
-- Root theme/state hooks: `data-theme="light|dark"`, `data-font`, and `data-motion` are implemented by core's `tokens/tokens.css`. `data-palette="open-color|fibonacci"`, `data-primary`, `data-neutral`, and `data-radius` are driven by the implementing library's theme bridge (e.g. `@vanduo-oss/vd3` `useTheme`), not by core's token files.
+- Root theme/state hooks: `data-theme="light|dark"`, `data-font`, `data-motion`, and `data-density="compact"` are implemented by core's `tokens/tokens.css` (density remaps the `space.fib-*` scale only — see `foundations/density.md`). `data-palette="open-color|fibonacci"`, `data-primary`, `data-neutral`, and `data-radius` are driven by the implementing library's theme bridge (e.g. `@vanduo-oss/vd3` `useTheme`), not by core's token files.
 
 ### 3. Zero-Framework CSS Components & WAI-ARIA APG Contracts
-- `components/` ships 14 zero-framework CSS modules — the layout engine (`layout.css`) plus 13 component primitives (`button`, `dialog`, `card`, `form` (input/select/checkbox/radio/textarea), `badge`/chip, `navbar`, `accordion`, `table`, `code`, `toast`, `switch`, `alert`, `tabs`) — aggregated in `components/index.css`; specs live in `components/SPEC.md` and `components/<slug>/spec.md`.
+- `components/` ships 35 zero-framework CSS modules — the layout engine (`layout.css`, Features #13–16) plus 34 component primitives (Features #27–60: `button`, `dialog`, `card`, `form` (input/select/checkbox/radio/textarea), `badge`/chip, `navbar`, `accordion`, `table`, `code`, `toast`, `switch`, `alert`, `tabs`, `drawer`, `tooltip`, `popover`, `menu`, `context-menu`, `menubar`, `breadcrumb`, `pagination`, `avatar`, `progress`, `spinner`, `skeleton`, `slider`, `datepicker`, `timepicker`, `upload`, `carousel`, `toolbar`, `segmented`, `hover-card`, `tour`) — aggregated in `components/index.css`; every module has a per-slug spec (`components/<slug>/spec.md`) indexed by `components/SPEC.md`.
 - `tokens/` and `components/` MUST remain 100% framework-agnostic (zero Vue/React/Svelte runtime references; enforced by `pnpm test:components`).
 - Keyboard paths, focus order, and ARIA attributes MUST follow the cited W3C APG pattern.
+- Directional CSS MUST use logical properties (`inset-inline-*`, `border-inline-*`, `margin-inline-*`); physical `left`/`right` only for rotated glyph strokes with an `intentional` comment (enforced by the RTL guard suite in `pnpm test:components`).
 - Focus rings (`FOC-001`…`FOC-004`, defined in `foundations/focus.md`, tokenized as `focus.ring.*` in `tokens/vd3.tokens.json`): `:focus-visible` outline thickness $\ge 2\text{px}$ (`--vd3-line-thin`), offset $\ge 2\text{px}$.
 - Reduced motion (`MOB-001`): `@media (prefers-reduced-motion: reduce)` and `[data-motion="reduce"]` collapse spatial transforms and durations.
 

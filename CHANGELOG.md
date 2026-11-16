@@ -2,6 +2,50 @@
 
 Spec follows semver independently of library releases.
 
+## 1.1.0-draft — full gap-closure: 35 component modules, 38 specs, patterns, icons, density, governance
+
+Delivers every phase of `docs/roadmap-1.0.2-draft.md` (all marked DELIVERED). Built
+on top of the 1.0.2-draft increment (switch/alert/tabs, focus tokens, FOC-001…004).
+
+- **Phase 1.0.3 — per-slug specs for all existing modules**: `button`, `input`,
+  `select`, `checkbox`, `radio`, `badge`, `card`, `navbar`, `accordion`,
+  `table`, `code`, `toast`, `layout` spec.md files (BTN/INP/SEL/CHK/RAD/BDG/CRD/
+  NAV/ACC/TBL/COD/TST/LAY IDs, APG-cited). All 11 Figma manifest `spec:` links
+  now resolve to real files. `components/SPEC.md` rewritten as the full index.
+- **Phase 1.1 — new foundations & patterns**: `foundations/icons.md` (Fibonacci
+  icon sizes 13/21/34/55 = F₇..F₁₀, φ=1.618 stroke, role-aliased ink; resolves
+  the token-audit Phosphor unknown) + `icon.*` token group; `foundations/density.md`
+  resolving research-brief Q4 (comfortable=1 / compact=1/√φ ≈ 0.7862 via
+  `[data-density="compact"]` spacing remap in tokens.css) + `density.*` tokens;
+  `foundations/data-viz.md` boundary (vd3-charts/vd3-flowchart consume the
+  golden-angle palette); `patterns/` with PATTERNS.md + empty-states,
+  auth-flows, app-shell, onboarding, disabled-read-only.
+- **Phase 1.2 — overlay & navigation primitives** (Features #40–48): drawer,
+  tooltip, popover, menu, context-menu, menubar, breadcrumb, pagination, avatar.
+- **Phase 1.3 — feedback & complex primitives** (#49–60): progress, spinner,
+  skeleton, slider, datepicker, timepicker, upload, carousel, toolbar,
+  segmented, hover-card, tour. Each ships CSS + per-slug spec (APG: slider,
+  toolbar, menubar, menu-button, tooltip, grid, radio, accordion, switch, tabs,
+  dialog-modal, checkbox, listbox, table).
+- **Phase 1.4 — engineering & governance**: verify-tokens suite 17 (icon/density
+  math) and suite 18 (DTCG JSON↔tokens.css drift gate, 171 leaf tokens);
+  verify-components suites 20–40 (features #40–60), RTL guard suite (physical
+  horizontal props only as commented glyphs), CSS snapshot integrity suite
+  (`scripts/snapshots.json`, UPDATE_SNAPSHOTS=1); form.css gained MOB-001,
+  `:indeterminate`, `:read-only`, token-based control sizes, logical padding and
+  an RTL chevron mirror; button danger hover de-literalized; navbar gained
+  MOB-001. `CONTRIBUTING.md`, `conventions/primitives-mapping.md` (layout
+  engine vs vd3 primitives), `docs/token-sync.md` (core JSON = single source of
+  truth; library-side gate stays in the vd3 repo; cross-repo automation
+  deferred). Decisions: color picker/meter/QR/descriptions/statistic stay out
+  of core scope (recorded in SPEC.md).
+- **Site**: 18 chapters — new Icons/Density/Data-Viz foundations chapters and a
+  Patterns chapter; Components chapter renders the SPEC.md index + all 38
+  per-slug specs and 35 specimens (21 new, all `data-vd-*` contracts reconcile
+  against the token registry); counts 14 → 35 modules in hero/matrix.
+- Spec version renumbered `1.0.2-draft` → `1.1.0-draft` across headers,
+  manifests, JSON-LD, badges, and e2e assertions.
+
 ## 1.0.2-draft — phantom primitives shipped, component specs, focus tokens, RTL-safe CSS
 
 - New zero-framework primitives in `components/`: `switch.css` (Feature #37, APG

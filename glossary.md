@@ -12,3 +12,5 @@
 - **Basis class (A/B/C)** — the proportional contract's classification of every visual constant: A = φ/Fibonacci/Lucas-derived (default), B = conventional-by-design (written reason required), C = registered exception. No class D.
 - **Convergence zone** — the rule that where physics, performance, or a11y caps a value, the constant is capped and documented while sibling properties continue the progression.
 - **Exceptions registry** — the numbered list of class-C exceptions in `foundations/proportion.md` (C-01 rem-rounded small spacing, C-02 glass blur soft-cap, …), re-reviewed at each major version.
+- **Density** — the two-mode spacing multiplier (`foundations/density.md`): comfortable (1) vs compact (`1/√φ`) via `[data-density="compact"]`.
+- **Icon size** — Fibonacci icon box steps 13/21/34/55px (`icon.size.*`, `foundations/icons.md`); outline stroke is φ (1.618).
