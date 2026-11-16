@@ -170,3 +170,34 @@ Key file references: `vd3-ui-core/AGENTS.md:9,24,31,33,36,43`; `vd3-ui-core/comp
 - Ant: https://ant.design/components/overview (73, v6.7.1)
 - Headless: radix-ui.com/primitives (30+5), base-ui.com/react/components (38), ui.shadcn.com/docs/components (60+18)
 
+---
+
+## Appendix C — Cross-check vs the external "architecture audit" report (`docs/vanduo_ui_core_vd3_architecture_audit_report.md`, untracked, self-described as evaluating `v0.1.0-alpha`)
+
+Verdict: **~70% of it either overlaps what this report already found or is stale/false against the current `1.0.1-draft`.** It adds a small number of genuinely new, verified findings (C.3).
+
+### C.1 Claims that are FALSE against the current repo (stale — likely written against the alpha)
+
+| Audit claim | Reality (proof) |
+|---|---|
+| "No automated tests / no Playwright-Vitest suite" | 6 suites in `package.json` (`test:tokens`, `test:components`, `test:m2`, `typecheck`, `test:a11y`, `test:e2e` → 11 files / 35 named tests) + CI `.github/workflows/ci.yml`. (True only that there is no *screenshot/visual-regression* diffing — e2e is structural: `grep -ri screenshot tests/ scripts/ .github/` → no hits.) |
+| "Standard selector specificity, no `@layer`" | Layers declared and e2e-enforced: `tokens/tokens.css:10` `@layer vd3.tokens, vd3.reset, vd3.base, vd3.layout, vd3.components, vd3.utilities` (TEST-T1-STD-003). |
+| "Lacks W3C DTCG JSON source-of-truth" | `tokens/vd3.tokens.json` is DTCG 2025.10 + `schema.json` + `figma.manifest.json`. (True nuance, see C.3.3: CSS is *not generated* from the JSON.) |
+| "Motion tokens / reduced-motion missing" | `motion` group (14 tokens: Fibonacci ladder + aliases), `easing` (4 golden béziers), `foundations/motion.md` MOB-001, reduced-motion in `tokens.css` §20. |
+| "Z-index scale missing" | `z` group: 9 tokens, `z.base 0 … z.toast 1080`. |
+| "No ARIA contracts / focus-visible / contrast verification" | `foundations/focus.md` dual-ring contract; `:focus-visible` enforced in 8 CSS files by `verify-components.mjs`; `test:a11y` computes WCAG contrast (text-primary ≥7:1 AAA); `dialog/spec.md` cites APG. (True only that per-component ARIA/keyboard matrices exist for 1 of 11 components — our spec-coverage finding.) |
+| "Form Field wrapper missing" | `.vd-form-group`, `.vd-label`, `.vd-help-text`, `.vd-error-text`, `:user-invalid` all ship in `components/form.css`. |
+| "Dialog / Toast missing" | Both ship: `dialog.css` (+ the only `spec.md`), `toast.css` with live-region contract. Accordion also ships (`accordion.css`), listed by the audit as missing. |
+| Naming `.vd3-btn` classes, "2-tier tokens" | Actual classes are `.vd-*` (vars are `--vd3-*` + `--vd-*` aliases); color is 3-tier (primitive/role/component) per `foundations/color.md`. |
+
+### C.2 Overlaps with this report (already uncovered)
+
+Missing overlays (drawer/tooltip/popover/dropdown/context-menu), combobox/multi-select, file dropzone, range slider, skeleton/progress, tabs, breadcrumb, avatar, sortable data-table features, empty-state as component, icons foundation — all already in §2.1/§3.1. The "headless JS layer" is not a gap but a design decision: PRN-004 mandates a zero-framework core, and the behavior lives in `vd3`'s 41 composables (`useFocusTrap`, `useDropdown`, …) — worth a strategic note, not a missing feature.
+
+### C.3 Genuinely NEW findings from the audit (verified here, not in earlier sections)
+
+1. **RTL/i18n: physical directional properties are used.** `border-left` in `form.css:107`, `toast.css:47,52-56`; `border-right` in `accordion.css:63`; `left/right` positioning in `toast.css:19-29`, `code.css:56,70`. Only 4 files use logical properties (`badge`, `dialog`, `layout`, `navbar`); core has **no stylelint config** to enforce them (`ls stylelint.config.*` → none, unlike `vd3`). → add logical-properties rule + refactor.
+2. **Docs portal guide gaps.** `site/src/` is a single `App.vue` that renders the spec markdown; there are **no Getting Started/installation, theming guide, principles do/don't pages, or interactive prop/API playgrounds** (`grep -riE "getting.?started|installation|theming|playground" site/src` → no hits).
+3. **No JSON→CSS compile pipeline.** `tokens/vd3.tokens.json` is the source, but `scripts/build-ssg.mjs:32-39` only *copies* `tokens/tokens.css` into the site — the CSS is hand-maintained alongside the JSON; `verify-tokens.mjs` checks math but never regenerates. → generate `tokens.css` from the DTCG JSON (or add a drift check that fails CI when they diverge).
+4. **Minor governance gaps:** no visual-regression snapshots, no `CONTRIBUTING.md` in core (vd3 has one), no per-component stability badges (only the `_TEMPLATE.md` frontmatter has `status`), no granular npm exports — moot today since `package.json` is `"private": true` ("Spec-only except site/"), but relevant if the package is ever published.
+
