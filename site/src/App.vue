@@ -38,19 +38,105 @@ import elevationMd from '@spec/foundations/elevation.md?raw'
 import glassMd from '@spec/foundations/glass.md?raw'
 import colorMd from '@spec/foundations/color.md?raw'
 import focusMd from '@spec/foundations/focus.md?raw'
-import dialogMd from '@spec/components/dialog/spec.md?raw'
-import switchMd from '@spec/components/switch/spec.md?raw'
-import alertMd from '@spec/components/alert/spec.md?raw'
-import tabsMd from '@spec/components/tabs/spec.md?raw'
+import specIndexMd from '@spec/components/SPEC.md?raw'
+import specLayoutMd from '@spec/components/layout/spec.md?raw'
+import specButtonMd from '@spec/components/button/spec.md?raw'
+import specDialogMd from '@spec/components/dialog/spec.md?raw'
+import specCardMd from '@spec/components/card/spec.md?raw'
+import specInputMd from '@spec/components/input/spec.md?raw'
+import specSelectMd from '@spec/components/select/spec.md?raw'
+import specCheckboxMd from '@spec/components/checkbox/spec.md?raw'
+import specRadioMd from '@spec/components/radio/spec.md?raw'
+import specBadgeMd from '@spec/components/badge/spec.md?raw'
+import specNavbarMd from '@spec/components/navbar/spec.md?raw'
+import specAccordionMd from '@spec/components/accordion/spec.md?raw'
+import specTableMd from '@spec/components/table/spec.md?raw'
+import specCodeMd from '@spec/components/code/spec.md?raw'
+import specToastMd from '@spec/components/toast/spec.md?raw'
+import specSwitchMd from '@spec/components/switch/spec.md?raw'
+import specAlertMd from '@spec/components/alert/spec.md?raw'
+import specTabsMd from '@spec/components/tabs/spec.md?raw'
+import specDrawerMd from '@spec/components/drawer/spec.md?raw'
+import specTooltipMd from '@spec/components/tooltip/spec.md?raw'
+import specPopoverMd from '@spec/components/popover/spec.md?raw'
+import specMenuMd from '@spec/components/menu/spec.md?raw'
+import specContextMenuMd from '@spec/components/context-menu/spec.md?raw'
+import specMenubarMd from '@spec/components/menubar/spec.md?raw'
+import specBreadcrumbMd from '@spec/components/breadcrumb/spec.md?raw'
+import specPaginationMd from '@spec/components/pagination/spec.md?raw'
+import specAvatarMd from '@spec/components/avatar/spec.md?raw'
+import specProgressMd from '@spec/components/progress/spec.md?raw'
+import specSpinnerMd from '@spec/components/spinner/spec.md?raw'
+import specSkeletonMd from '@spec/components/skeleton/spec.md?raw'
+import specSliderMd from '@spec/components/slider/spec.md?raw'
+import specDatepickerMd from '@spec/components/datepicker/spec.md?raw'
+import specTimepickerMd from '@spec/components/timepicker/spec.md?raw'
+import specUploadMd from '@spec/components/upload/spec.md?raw'
+import specCarouselMd from '@spec/components/carousel/spec.md?raw'
+import specToolbarMd from '@spec/components/toolbar/spec.md?raw'
+import specSegmentedMd from '@spec/components/segmented/spec.md?raw'
+import specHoverCardMd from '@spec/components/hover-card/spec.md?raw'
+import specTourMd from '@spec/components/tour/spec.md?raw'
+import iconsMd from '@spec/foundations/icons.md?raw'
+import densityMd from '@spec/foundations/density.md?raw'
+import dataVizMd from '@spec/foundations/data-viz.md?raw'
+import patternsMd from '@spec/patterns/PATTERNS.md?raw'
+import patternEmptyStatesMd from '@spec/patterns/empty-states.md?raw'
+import patternAuthFlowsMd from '@spec/patterns/auth-flows.md?raw'
+import patternAppShellMd from '@spec/patterns/app-shell.md?raw'
+import patternOnboardingMd from '@spec/patterns/onboarding.md?raw'
+import patternDisabledMd from '@spec/patterns/disabled-read-only.md?raw'
 import namingMd from '@spec/conventions/naming.md?raw'
 import mappingsMd from '@spec/conventions/mappings.md?raw'
 import contentMd from '@spec/conventions/content.md?raw'
+
+const componentSpecs = [
+  { slug: 'layout', src: specLayoutMd },
+  { slug: 'button', src: specButtonMd },
+  { slug: 'dialog', src: specDialogMd },
+  { slug: 'card', src: specCardMd },
+  { slug: 'input', src: specInputMd },
+  { slug: 'select', src: specSelectMd },
+  { slug: 'checkbox', src: specCheckboxMd },
+  { slug: 'radio', src: specRadioMd },
+  { slug: 'badge', src: specBadgeMd },
+  { slug: 'navbar', src: specNavbarMd },
+  { slug: 'accordion', src: specAccordionMd },
+  { slug: 'table', src: specTableMd },
+  { slug: 'code', src: specCodeMd },
+  { slug: 'toast', src: specToastMd },
+  { slug: 'switch', src: specSwitchMd },
+  { slug: 'alert', src: specAlertMd },
+  { slug: 'tabs', src: specTabsMd },
+  { slug: 'drawer', src: specDrawerMd },
+  { slug: 'tooltip', src: specTooltipMd },
+  { slug: 'popover', src: specPopoverMd },
+  { slug: 'menu', src: specMenuMd },
+  { slug: 'context-menu', src: specContextMenuMd },
+  { slug: 'menubar', src: specMenubarMd },
+  { slug: 'breadcrumb', src: specBreadcrumbMd },
+  { slug: 'pagination', src: specPaginationMd },
+  { slug: 'avatar', src: specAvatarMd },
+  { slug: 'progress', src: specProgressMd },
+  { slug: 'spinner', src: specSpinnerMd },
+  { slug: 'skeleton', src: specSkeletonMd },
+  { slug: 'slider', src: specSliderMd },
+  { slug: 'datepicker', src: specDatepickerMd },
+  { slug: 'timepicker', src: specTimepickerMd },
+  { slug: 'upload', src: specUploadMd },
+  { slug: 'carousel', src: specCarouselMd },
+  { slug: 'toolbar', src: specToolbarMd },
+  { slug: 'segmented', src: specSegmentedMd },
+  { slug: 'hover-card', src: specHoverCardMd },
+  { slug: 'tour', src: specTourMd }
+]
+
 
 const pillars = [
   { id: 'contract', label: 'Foundations' },
   { id: 'foundations', label: 'Matrix' },
   { id: 'components', label: 'Components' },
-  { id: 'conventions', label: 'Conventions' },
+  { id: 'conventions', label: 'Conventions' },  { id: 'patterns', label: 'Patterns' },
 ]
 
 const chapters = [
@@ -65,10 +151,14 @@ const chapters = [
   { id: 'color', num: '09', label: 'Color', pillar: 'contract' },
   { id: 'grid', num: '10', label: 'Grid & Layout', pillar: 'contract' },
   { id: 'focus', num: '11', label: 'Focus', pillar: 'contract' },
-  { id: 'foundations', num: '12', label: 'Matrix', pillar: 'foundations' },
-  { id: 'components', num: '13', label: 'Components', pillar: 'components' },
-  { id: 'conventions', num: '14', label: 'Conventions', pillar: 'conventions' },
-]
+  { id: 'icons', num: '12', label: 'Icons', pillar: 'contract' },
+  { id: 'density', num: '13', label: 'Density', pillar: 'contract' },
+  { id: 'data-viz', num: '14', label: 'Data Viz', pillar: 'contract' },
+  { id: 'foundations', num: '15', label: 'Matrix', pillar: 'foundations' },
+  { id: 'components', num: '16', label: 'Components', pillar: 'components' },
+  { id: 'conventions', num: '17', label: 'Conventions', pillar: 'conventions' },
+  { id: 'patterns', num: '18', label: 'Patterns', pillar: 'patterns' },
+];
 
 const activeChapter = ref('contract')
 const activePillar = ref('contract')
@@ -248,6 +338,27 @@ const componentSnippets = {
     '<button type="button" role="switch" aria-checked="false" class="vd-switch"><span class="vd-switch-thumb"></span></button>',
   alert: '<div class="vd-alert vd-alert--critical" role="alert">...</div>',
   tabs: '<div class="vd-tabs" role="tablist"><button class="vd-tab" role="tab" aria-selected="true">…</button></div>',
+  drawer: "<aside class=\"vd-drawer vd-drawer--end\" data-open=\"true\">...</aside>",
+  tooltip: "<span class=\"vd-tooltip\" role=\"tooltip\">Hint</span>",
+  popover: "<div class=\"vd-popover\" data-placement=\"bottom\">...</div>",
+  menu: "<div class=\"vd-menu\" role=\"menu\"><div class=\"vd-menu-item\">\u2026</div></div>",
+  'context-menu': "<div class=\"vd-context-menu\" role=\"menu\">...</div>",
+  menubar: "<div class=\"vd-menubar\"><span class=\"vd-menubar-item\">File</span></div>",
+  breadcrumb: "<nav aria-label=\"Breadcrumb\"><ol class=\"vd-breadcrumb\">...</ol></nav>",
+  pagination: "<nav class=\"vd-pagination\"><ul class=\"vd-pagination-list\">...</ul></nav>",
+  avatar: "<span class=\"vd-avatar vd-avatar--round\"><span class=\"vd-avatar-initials\">VD</span></span>",
+  progress: "<div class=\"vd-progress\" role=\"progressbar\"><div class=\"vd-progress-bar\" style=\"--_vd-progress-value: 62%\"></div></div>",
+  spinner: "<span class=\"vd-spinner\" role=\"status\" aria-label=\"Loading\"></span>",
+  skeleton: "<div class=\"vd-skeleton vd-skeleton--text\"></div>",
+  slider: "<input type=\"range\" class=\"vd-slider\" min=\"0\" max=\"100\" aria-label=\"Volume\">",
+  datepicker: "<div class=\"vd-datepicker\"><div class=\"vd-datepicker-grid\">...</div></div>",
+  timepicker: "<div class=\"vd-timepicker\"><div class=\"vd-timepicker-item\">09:00</div></div>",
+  upload: "<label class=\"vd-upload\"><input class=\"vd-upload-input\" type=\"file\" aria-label=\"Upload files\"></label>",
+  carousel: "<div class=\"vd-carousel\"><div class=\"vd-carousel-track\">...</div></div>",
+  toolbar: "<div class=\"vd-toolbar\"><div class=\"vd-toolbar-group\">...</div></div>",
+  segmented: "<div class=\"vd-segmented\"><button class=\"vd-segmented-item\" aria-checked=\"true\">Day</button></div>",
+  'hover-card': "<div class=\"vd-hover-card\">...</div>",
+  tour: "<div class=\"vd-tour\">...</div>",
   layout: '<div class="vd-container-lg vd-split-golden">...</div>',
 }
 </script>
@@ -258,7 +369,7 @@ const componentSnippets = {
 
   <div class="doc-layout">
     <aside class="doc-toc" aria-label="Chapter Table of Contents">
-      <div id="doc-toc-title" class="doc-toc-title">Chapters (14)</div>
+      <div id="doc-toc-title" class="doc-toc-title">Chapters (18)</div>
       <nav aria-labelledby="doc-toc-title">
         <ol class="doc-toc-list">
           <li v-for="ch in chapters" :key="ch.id">
@@ -296,7 +407,7 @@ const componentSnippets = {
         </VdCard>
         <div class="hero-meta">
           <span><strong>3</strong> basis classes — A / B / C (No Class D)</span>
-          <span><strong>14</strong> zero-framework core CSS modules</span>
+          <span><strong>35</strong> zero-framework core CSS modules</span>
           <span><strong>0</strong> runtime deps — any framework</span>
           <span><strong>W3C APG</strong>-normative keyboard &amp; ARIA</span>
           <span><strong>W3C DTCG 2025.10</strong> token registry</span>
@@ -403,16 +514,34 @@ const componentSnippets = {
         <MdDoc :source="focusMd" />
       </section>
 
+      <!-- 12 ICONS -->
+      <section id="icons" class="doc-section">
+        <h2><span class="n">12</span> Iconography Contract <VdBadge variant="info" pill>Class A</VdBadge></h2>
+        <MdDoc :source="iconsMd" />
+      </section>
+
+      <!-- 13 DENSITY -->
+      <section id="density" class="doc-section">
+        <h2><span class="n">13</span> Density Modes <VdBadge variant="warning" pill>A / B</VdBadge></h2>
+        <MdDoc :source="densityMd" />
+      </section>
+
+      <!-- 14 DATA VIZ -->
+      <section id="data-viz" class="doc-section">
+        <h2><span class="n">14</span> Data Visualization Boundary <VdBadge variant="info" pill>Class A</VdBadge></h2>
+        <MdDoc :source="dataVizMd" />
+      </section>
+
       <!-- 12 FOUNDATION COVERAGE MATRIX -->
       <section id="foundations" class="doc-section">
-        <h2><span class="n">12</span> Foundation Coverage Matrix <VdBadge variant="primary" pill>DTCG</VdBadge></h2>
+        <h2><span class="n">15</span> Foundation Coverage Matrix <VdBadge variant="primary" pill>DTCG</VdBadge></h2>
         <FoundationTable />
       </section>
 
       <!-- 13 COMPONENTS -->
       <section id="components" class="doc-section">
         <h2>
-          <span class="n">13</span> Components — 14 Normative UI Primitives
+          <span class="n">16</span> Components — 34 Primitives + Layout Engine
           <VdBadge variant="primary" pill>Zero-Framework CSS</VdBadge>
           <VdBadge variant="info" pill>@vanduo-oss/vd3 Live</VdBadge>
         </h2>
@@ -775,6 +904,446 @@ const componentSnippets = {
 
           <article
             class="specimen-card"
+            data-vd-component="drawer"
+            data-vd-basis-class="B"
+            data-vd-tokens="z.modal z.modal-backdrop container.sm space.fib-21 motion.slow"
+          >
+            <div class="specimen-header">
+              <h3>Drawer (<code>.vd-drawer</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <button type="button" class="vd-btn vd-btn--outline vd-btn--sm">Open drawer</button> <span class="specimen-meta">Fixed panel at z.modal, Esc + backdrop close, slide 377ms.</span>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.drawer"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy drawer HTML snippet" @click="copySnippet('drawer', componentSnippets.drawer)">
+                {{ copiedKey === 'drawer' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="tooltip"
+            data-vd-basis-class="A"
+            data-vd-tokens="z.tooltip type.size.xs space.fib-5 radius.fib-3 motion.89"
+          >
+            <div class="specimen-header">
+              <h3>Tooltip (<code>.vd-tooltip</code>)</h3>
+              <VdBadge variant="info">Class A</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <span class="vd-tooltip vd-tooltip--top" role="tooltip">φ = 1.618…</span>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.tooltip"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy tooltip HTML snippet" @click="copySnippet('tooltip', componentSnippets.tooltip)">
+                {{ copiedKey === 'tooltip' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="popover"
+            data-vd-basis-class="B"
+            data-vd-tokens="z.popover shadow.4 radius.fib-8 space.fib-13 container.sm motion.233"
+          >
+            <div class="specimen-header">
+              <h3>Popover (<code>.vd-popover</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-popover"><div class="vd-popover-header">Popover title</div><div class="vd-popover-body">Anchored floating content with arrow.</div></div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.popover"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy popover HTML snippet" @click="copySnippet('popover', componentSnippets.popover)">
+                {{ copiedKey === 'popover' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="menu"
+            data-vd-basis-class="B"
+            data-vd-tokens="z.dropdown shadow.4 radius.fib-8 space.fib-8 color.role.layer-hover"
+          >
+            <div class="specimen-header">
+              <h3>Menu (<code>.vd-menu</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-menu" role="menu"><div class="vd-menu-item" role="menuitem">Rename</div><div class="vd-menu-item" role="menuitem">Duplicate</div><div class="vd-menu-divider"></div><div class="vd-menu-item vd-menu-item--danger" role="menuitem">Delete</div></div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.menu"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy menu HTML snippet" @click="copySnippet('menu', componentSnippets.menu)">
+                {{ copiedKey === 'menu' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="context-menu"
+            data-vd-basis-class="B"
+            data-vd-tokens="z.popover shadow.4 radius.fib-8 space.fib-8"
+          >
+            <div class="specimen-header">
+              <h3>Context Menu (<code>.vd-context-menu</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-context-menu" role="menu"><div class="vd-context-menu-item" role="menuitem">Open</div><div class="vd-context-menu-item vd-context-menu-item--danger" role="menuitem">Remove</div></div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets['context-menu']"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy context-menu HTML snippet" @click="copySnippet('context-menu', componentSnippets['context-menu'])">
+                {{ copiedKey === 'context-menu' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="menubar"
+            data-vd-basis-class="B"
+            data-vd-tokens="space.fib-8 line.hair color.role.layer-hover"
+          >
+            <div class="specimen-header">
+              <h3>Menubar (<code>.vd-menubar</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-menubar"><span class="vd-menubar-item" aria-haspopup="true" aria-expanded="false">File</span><span class="vd-menubar-item">Edit</span><span class="vd-menubar-item">View</span></div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.menubar"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy menubar HTML snippet" @click="copySnippet('menubar', componentSnippets.menubar)">
+                {{ copiedKey === 'menubar' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="breadcrumb"
+            data-vd-basis-class="B"
+            data-vd-tokens="space.fib-5 type.size.sm color.role.interactive motion.89"
+          >
+            <div class="specimen-header">
+              <h3>Breadcrumb (<code>.vd-breadcrumb</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <nav aria-label="Breadcrumb"><ol class="vd-breadcrumb"><li class="vd-breadcrumb-item"><a class="vd-breadcrumb-link" href="#foundations">Foundations</a></li><li class="vd-breadcrumb-item"><a class="vd-breadcrumb-link" href="#components" aria-current="page">Color</a></li></ol></nav>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.breadcrumb"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy breadcrumb HTML snippet" @click="copySnippet('breadcrumb', componentSnippets.breadcrumb)">
+                {{ copiedKey === 'breadcrumb' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="pagination"
+            data-vd-basis-class="B"
+            data-vd-tokens="space.fib-8 line.hair radius.fib-5 type.size.sm color.role.focus"
+          >
+            <div class="specimen-header">
+              <h3>Pagination (<code>.vd-pagination</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <nav class="vd-pagination" aria-label="Pagination"><ul class="vd-pagination-list"><li class="vd-pagination-item"><a class="vd-pagination-link vd-pagination-link--prev" href="#components" aria-label="Previous page">‹</a></li><li class="vd-pagination-item"><a class="vd-pagination-link" href="#components" aria-current="page">1</a></li><li class="vd-pagination-item"><a class="vd-pagination-link" href="#components">2</a></li></ul></nav>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.pagination"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy pagination HTML snippet" @click="copySnippet('pagination', componentSnippets.pagination)">
+                {{ copiedKey === 'pagination' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="avatar"
+            data-vd-basis-class="A"
+            data-vd-tokens="space.fib-21 space.fib-34 radius.full line.thin color.role.layer"
+          >
+            <div class="specimen-header">
+              <h3>Avatar (<code>.vd-avatar</code>)</h3>
+              <VdBadge variant="info">Class A</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <span class="vd-avatar vd-avatar--md vd-avatar--round"><span class="vd-avatar-initials">VD</span><span class="vd-avatar-status vd-avatar-status--online"></span></span>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.avatar"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy avatar HTML snippet" @click="copySnippet('avatar', componentSnippets.avatar)">
+                {{ copiedKey === 'avatar' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="progress"
+            data-vd-basis-class="A"
+            data-vd-tokens="space.fib-5 radius.full color.role.focus motion.233"
+          >
+            <div class="specimen-header">
+              <h3>Progress (<code>.vd-progress</code>)</h3>
+              <VdBadge variant="info">Class A</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-progress" role="progressbar" aria-valuenow="62" aria-label="Upload progress"><div class="vd-progress-bar" style="--_vd-progress-value: 62%"></div></div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.progress"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy progress HTML snippet" @click="copySnippet('progress', componentSnippets.progress)">
+                {{ copiedKey === 'progress' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="spinner"
+            data-vd-basis-class="A"
+            data-vd-tokens="space.fib-21 radius.full line.hair color.role.focus motion.610 easing.linear"
+          >
+            <div class="specimen-header">
+              <h3>Spinner (<code>.vd-spinner</code>)</h3>
+              <VdBadge variant="info">Class A</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <span class="vd-spinner vd-spinner--md" role="status" aria-label="Loading"></span>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.spinner"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy spinner HTML snippet" @click="copySnippet('spinner', componentSnippets.spinner)">
+                {{ copiedKey === 'spinner' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="skeleton"
+            data-vd-basis-class="A"
+            data-vd-tokens="color.role.layer-hover radius.fib-5 motion.377 easing.in-out"
+          >
+            <div class="specimen-header">
+              <h3>Skeleton (<code>.vd-skeleton</code>)</h3>
+              <VdBadge variant="info">Class A</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-skeleton vd-skeleton--text" style="--_vd-skeleton-w: 82%"></div><div class="vd-skeleton vd-skeleton--text" style="--_vd-skeleton-w: 58%"></div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.skeleton"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy skeleton HTML snippet" @click="copySnippet('skeleton', componentSnippets.skeleton)">
+                {{ copiedKey === 'skeleton' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="slider"
+            data-vd-basis-class="A"
+            data-vd-tokens="space.fib-3 space.fib-21 radius.full line.thin color.role.focus motion.89"
+          >
+            <div class="specimen-header">
+              <h3>Slider (<code>.vd-slider</code>)</h3>
+              <VdBadge variant="info">Class A</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <input type="range" class="vd-slider" min="0" max="100" value="40" aria-label="Volume">
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.slider"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy slider HTML snippet" @click="copySnippet('slider', componentSnippets.slider)">
+                {{ copiedKey === 'slider' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="datepicker"
+            data-vd-basis-class="B"
+            data-vd-tokens="z.popover shadow.4 radius.fib-8 space.fib-13 color.role.focus"
+          >
+            <div class="specimen-header">
+              <h3>Date Picker (<code>.vd-datepicker</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-datepicker"><div class="vd-datepicker-header"><span class="vd-datepicker-title">November 2026</span></div><div class="vd-datepicker-grid"><span class="vd-datepicker-day">15</span><span class="vd-datepicker-day" aria-selected="true">16</span><span class="vd-datepicker-day">17</span></div></div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.datepicker"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy datepicker HTML snippet" @click="copySnippet('datepicker', componentSnippets.datepicker)">
+                {{ copiedKey === 'datepicker' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="timepicker"
+            data-vd-basis-class="B"
+            data-vd-tokens="z.popover space.fib-8 type.size.sm color.role.focus"
+          >
+            <div class="specimen-header">
+              <h3>Time Picker (<code>.vd-timepicker</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-timepicker"><div class="vd-timepicker-item" aria-selected="true">09:00</div><div class="vd-timepicker-item">09:30</div><div class="vd-timepicker-item">10:00</div></div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.timepicker"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy timepicker HTML snippet" @click="copySnippet('timepicker', componentSnippets.timepicker)">
+                {{ copiedKey === 'timepicker' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="upload"
+            data-vd-basis-class="B"
+            data-vd-tokens="line.thin radius.fib-8 space.fib-21 color.role.border icon.size.lg"
+          >
+            <div class="specimen-header">
+              <h3>File Upload (<code>.vd-upload</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <label class="vd-upload"><span class="vd-upload-icon" aria-hidden="true">↑</span><span class="vd-upload-text">Drop files here</span><span class="vd-upload-hint">or click to browse</span><input class="vd-upload-input" type="file" aria-label="Upload files"></label>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.upload"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy upload HTML snippet" @click="copySnippet('upload', componentSnippets.upload)">
+                {{ copiedKey === 'upload' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="carousel"
+            data-vd-basis-class="B"
+            data-vd-tokens="space.fib-34 radius.fib-8 motion.377 color.role.focus focus.ring.width"
+          >
+            <div class="specimen-header">
+              <h3>Carousel (<code>.vd-carousel</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-carousel"><div class="vd-carousel-track" style="--_vd-carousel-index: 0"><div class="vd-carousel-slide">Slide 1</div><div class="vd-carousel-slide">Slide 2</div></div><button type="button" class="vd-carousel-prev" aria-label="Previous slide">‹</button><button type="button" class="vd-carousel-next" aria-label="Next slide">›</button></div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.carousel"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy carousel HTML snippet" @click="copySnippet('carousel', componentSnippets.carousel)">
+                {{ copiedKey === 'carousel' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="toolbar"
+            data-vd-basis-class="B"
+            data-vd-tokens="space.fib-8 line.hair radius.fib-8 color.role.layer"
+          >
+            <div class="specimen-header">
+              <h3>Toolbar (<code>.vd-toolbar</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-toolbar"><div class="vd-toolbar-group"><button type="button" class="vd-toolbar-button">B</button><button type="button" class="vd-toolbar-button">I</button></div><span class="vd-toolbar-separator"></span><button type="button" class="vd-toolbar-button">Link</button></div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.toolbar"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy toolbar HTML snippet" @click="copySnippet('toolbar', componentSnippets.toolbar)">
+                {{ copiedKey === 'toolbar' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="segmented"
+            data-vd-basis-class="B"
+            data-vd-tokens="radius.full line.hair space.fib-1 color.role.layer shadow.1"
+          >
+            <div class="specimen-header">
+              <h3>Segmented (<code>.vd-segmented</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-segmented" role="radiogroup" aria-label="View"><button type="button" class="vd-segmented-item" aria-checked="true">Day</button><button type="button" class="vd-segmented-item" aria-checked="false">Week</button><button type="button" class="vd-segmented-item" aria-checked="false">Month</button></div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.segmented"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy segmented HTML snippet" @click="copySnippet('segmented', componentSnippets.segmented)">
+                {{ copiedKey === 'segmented' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="hover-card"
+            data-vd-basis-class="B"
+            data-vd-tokens="z.popover shadow.4 radius.fib-8 space.fib-13 container.sm motion.144"
+          >
+            <div class="specimen-header">
+              <h3>Hover Card (<code>.vd-hover-card</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-hover-card"><p class="vd-hover-card-title">Hover card</p><p class="vd-hover-card-body">Rich preview on hover or keyboard focus.</p></div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets['hover-card']"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy hover-card HTML snippet" @click="copySnippet('hover-card', componentSnippets['hover-card'])">
+                {{ copiedKey === 'hover-card' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+
+          <article
+            class="specimen-card"
+            data-vd-component="tour"
+            data-vd-basis-class="B"
+            data-vd-tokens="z.popover shadow.5 radius.fib-8 space.fib-21 motion.233"
+          >
+            <div class="specimen-header">
+              <h3>Tour (<code>.vd-tour</code>)</h3>
+              <VdBadge variant="warning">Class B</VdBadge>
+            </div>
+            <div class="specimen-preview specimen-preview--block">
+              <div class="vd-tour"><p class="vd-tour-title">Step 2 of 5</p><p class="vd-tour-body">This is where the tokens live.</p><div class="vd-tour-progress"></div><div class="vd-tour-footer"><span class="vd-tour-counter">2 / 5</span><div class="vd-tour-actions"><button type="button" class="vd-tour-btn">Back</button><button type="button" class="vd-tour-btn vd-tour-btn--primary">Next</button></div></div></div>
+            </div>
+            <div class="vd-code-block">
+              <pre class="vd-code" data-language="html" tabindex="0"><code v-text="componentSnippets.tour"></code></pre>
+              <button type="button" class="vd-code-copy" aria-label="Copy tour HTML snippet" @click="copySnippet('tour', componentSnippets.tour)">
+                {{ copiedKey === 'tour' ? 'Copied ✓' : 'Copy' }}
+              </button>
+            </div>
+          </article>
+          <article
+            class="specimen-card"
             data-vd-component="layout"
             data-vd-basis-class="B"
             data-vd-tokens="container.lg space.fib-21 math.phi math.inv-phi"
@@ -874,23 +1443,39 @@ const componentSnippets = {
           </article>
         </div>
 
-        <h3>Dialog Behavioral Specification (W3C APG Modal Pattern)</h3>
-        <MdDoc :source="dialogMd" />
-        <h3>Switch · Alert · Tabs Specifications (new in 1.0.2)</h3>
-        <MdDoc :source="switchMd" />
-        <MdDoc :source="alertMd" />
-        <MdDoc :source="tabsMd" />
+        <h3>Component Specification Index</h3>
+        <MdDoc :source="specIndexMd" />
+        <h3>Per-Slug Component Specifications</h3>
+        <template v-for="sp in componentSpecs" :key="sp.slug">
+          <h4>{{ sp.slug }}</h4>
+          <MdDoc :source="sp.src" />
+        </template>
       </section>
 
       <!-- 14 CONVENTIONS -->
       <section id="conventions" class="doc-section">
-        <h2><span class="n">14</span> Conventions — Naming, Mappings &amp; Content <VdBadge variant="info" pill>Normative</VdBadge></h2>
+        <h2><span class="n">17</span> Conventions — Naming, Mappings &amp; Content <VdBadge variant="info" pill>Normative</VdBadge></h2>
         <h3>Public &amp; Token Naming</h3>
         <MdDoc :source="namingMd" />
         <h3>Cross-System Token Mappings</h3>
         <MdDoc :source="mappingsMd" />
         <h3>Editorial Tone &amp; Content Strings</h3>
         <MdDoc :source="contentMd" />
+      </section>
+      <!-- 18 PATTERNS -->
+      <section id="patterns" class="doc-section">
+        <h2><span class="n">18</span> Patterns — Guidance Over Components <VdBadge variant="info" pill>Guidance</VdBadge></h2>
+        <MdDoc :source="patternsMd" />
+        <h3>empty-states</h3>
+        <MdDoc :source="patternEmptyStatesMd" />
+        <h3>auth-flows</h3>
+        <MdDoc :source="patternAuthFlowsMd" />
+        <h3>app-shell</h3>
+        <MdDoc :source="patternAppShellMd" />
+        <h3>onboarding</h3>
+        <MdDoc :source="patternOnboardingMd" />
+        <h3>disabled-read-only</h3>
+        <MdDoc :source="patternDisabledMd" />
       </section>
     </main>
   </div>
@@ -901,7 +1486,7 @@ const componentSnippets = {
   <footer>
     <div class="inner">
       <p>
-        <strong>vd3-ui-core</strong> · Specification v1.0.2-draft · Markdown specs and W3C DTCG
+        <strong>vd3-ui-core</strong> · Specification v1.1.0-draft · Markdown specs and W3C DTCG
         <code>tokens/vd3.tokens.json</code> are the normative source of truth. Library conformance:
         <code>"implements": "vd3-ui-core@^1.0"</code>.
       </p>

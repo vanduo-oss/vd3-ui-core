@@ -266,6 +266,7 @@ const pillars = [
   { id: 'foundations', label: 'Matrix' },
   { id: 'components', label: 'Components' },
   { id: 'conventions', label: 'Conventions' },
+  { id: 'patterns', label: 'Patterns' },
 ];
 
 const chapters = [
@@ -280,9 +281,13 @@ const chapters = [
   { id: 'color', num: '09', label: 'Color' },
   { id: 'grid', num: '10', label: 'Grid & Layout' },
   { id: 'focus', num: '11', label: 'Focus' },
-  { id: 'foundations', num: '12', label: 'Matrix' },
-  { id: 'components', num: '13', label: 'Components' },
-  { id: 'conventions', num: '14', label: 'Conventions' },
+  { id: 'icons', num: '12', label: 'Icons' },
+  { id: 'density', num: '13', label: 'Density' },
+  { id: 'data-viz', num: '14', label: 'Data Viz' },
+  { id: 'foundations', num: '15', label: 'Matrix' },
+  { id: 'components', num: '16', label: 'Components' },
+  { id: 'conventions', num: '17', label: 'Conventions' },
+  { id: 'patterns', num: '18', label: 'Patterns' },
 ];
 
 const foundationRows = [
@@ -297,7 +302,11 @@ const foundationRows = [
   ['grid + layout', 'Spec’d', 'B / A', '12-column responsive engine + Class A golden split & Fibonacci grids'],
   ['z-index', 'New in 1.0', 'B', 'Conventional semantic layering from base (0) to toast (1080)'],
   ['focus', 'New in 1.0', 'B', 'WCAG 2.2 SC 2.4.13 Dual-Ring focus indicator with inner offset gap'],
-  ['components', 'New in 1.0', 'A / B / C', '14 zero-framework semantic HTML + @layer vd3.components stylesheets'],
+  ['icons', 'New in 1.1', 'A', 'Fibonacci icon sizes 13/21/34/55px (F_7..F_10), phi stroke 1.618, semantic-role icon ink'],
+  ['density', 'New in 1.1', 'A / B', 'Two modes via [data-density]: comfortable (1) and compact (1/sqrt(phi) spacing scale)'],
+  ['data-viz', 'Boundary', 'A', 'vd3-charts / vd3-flowchart consume the golden-angle palette; core ships no chart components'],
+  ['patterns', 'New in 1.1', 'B', 'Empty states, auth flows, app shell, onboarding, disabled/read-only — guidance over normative components'],
+  ['components', 'New in 1.0', 'A / B / C', '35 zero-framework CSS modules (layout engine + 34 primitives), 38 per-slug specs, @layer vd3.components'],
   ['conventions', 'Normative', 'B', 'Identifier naming, cross-system mappings, and editorial copy rules'],
 ];
 
@@ -435,6 +444,174 @@ const specimens = [
     code: '<div class="vd-tabs" role="tablist"><button class="vd-tab" role="tab" aria-selected="true">…</button></div>',
   },
   {
+    id: "drawer",
+    title: "Drawer (.vd-drawer)",
+    basis: "B",
+    tokens: "z.modal z.modal-backdrop container.sm space.fib-21 motion.slow",
+    preview: `<button type="button" class="vd-btn vd-btn--outline vd-btn--sm">Open drawer</button> <span class="specimen-meta">Fixed panel at z.modal, Esc + backdrop close, slide 377ms.</span>`,
+    code: "<aside class=\"vd-drawer vd-drawer--end\" data-open=\"true\">...</aside>",
+  },
+  {
+    id: "tooltip",
+    title: "Tooltip (.vd-tooltip)",
+    basis: "A",
+    tokens: "z.tooltip type.size.xs space.fib-5 radius.fib-3 motion.89",
+    preview: `<span class="vd-tooltip vd-tooltip--top" role="tooltip">φ = 1.618…</span>`,
+    code: "<span class=\"vd-tooltip\" role=\"tooltip\">Hint</span>",
+  },
+  {
+    id: "popover",
+    title: "Popover (.vd-popover)",
+    basis: "B",
+    tokens: "z.popover shadow.4 radius.fib-8 space.fib-13 container.sm motion.233",
+    preview: `<div class="vd-popover"><div class="vd-popover-header">Popover title</div><div class="vd-popover-body">Anchored floating content with arrow.</div></div>`,
+    code: "<div class=\"vd-popover\" data-placement=\"bottom\">...</div>",
+  },
+  {
+    id: "menu",
+    title: "Menu (.vd-menu)",
+    basis: "B",
+    tokens: "z.dropdown shadow.4 radius.fib-8 space.fib-8 color.role.layer-hover",
+    preview: `<div class="vd-menu" role="menu"><div class="vd-menu-item" role="menuitem">Rename</div><div class="vd-menu-item" role="menuitem">Duplicate</div><div class="vd-menu-divider"></div><div class="vd-menu-item vd-menu-item--danger" role="menuitem">Delete</div></div>`,
+    code: "<div class=\"vd-menu\" role=\"menu\"><div class=\"vd-menu-item\">\u2026</div></div>",
+  },
+  {
+    id: "context-menu",
+    title: "Context Menu (.vd-context-menu)",
+    basis: "B",
+    tokens: "z.popover shadow.4 radius.fib-8 space.fib-8",
+    preview: `<div class="vd-context-menu" role="menu"><div class="vd-context-menu-item" role="menuitem">Open</div><div class="vd-context-menu-item vd-context-menu-item--danger" role="menuitem">Remove</div></div>`,
+    code: "<div class=\"vd-context-menu\" role=\"menu\">...</div>",
+  },
+  {
+    id: "menubar",
+    title: "Menubar (.vd-menubar)",
+    basis: "B",
+    tokens: "space.fib-8 line.hair color.role.layer-hover",
+    preview: `<div class="vd-menubar"><span class="vd-menubar-item" aria-haspopup="true" aria-expanded="false">File</span><span class="vd-menubar-item">Edit</span><span class="vd-menubar-item">View</span></div>`,
+    code: "<div class=\"vd-menubar\"><span class=\"vd-menubar-item\">File</span></div>",
+  },
+  {
+    id: "breadcrumb",
+    title: "Breadcrumb (.vd-breadcrumb)",
+    basis: "B",
+    tokens: "space.fib-5 type.size.sm color.role.interactive motion.89",
+    preview: `<nav aria-label="Breadcrumb"><ol class="vd-breadcrumb"><li class="vd-breadcrumb-item"><a class="vd-breadcrumb-link" href="#foundations">Foundations</a></li><li class="vd-breadcrumb-item"><a class="vd-breadcrumb-link" href="#components" aria-current="page">Color</a></li></ol></nav>`,
+    code: "<nav aria-label=\"Breadcrumb\"><ol class=\"vd-breadcrumb\">...</ol></nav>",
+  },
+  {
+    id: "pagination",
+    title: "Pagination (.vd-pagination)",
+    basis: "B",
+    tokens: "space.fib-8 line.hair radius.fib-5 type.size.sm color.role.focus",
+    preview: `<nav class="vd-pagination" aria-label="Pagination"><ul class="vd-pagination-list"><li class="vd-pagination-item"><a class="vd-pagination-link vd-pagination-link--prev" href="#components" aria-label="Previous page">‹</a></li><li class="vd-pagination-item"><a class="vd-pagination-link" href="#components" aria-current="page">1</a></li><li class="vd-pagination-item"><a class="vd-pagination-link" href="#components">2</a></li></ul></nav>`,
+    code: "<nav class=\"vd-pagination\"><ul class=\"vd-pagination-list\">...</ul></nav>",
+  },
+  {
+    id: "avatar",
+    title: "Avatar (.vd-avatar)",
+    basis: "A",
+    tokens: "space.fib-21 space.fib-34 radius.full line.thin color.role.layer",
+    preview: `<span class="vd-avatar vd-avatar--md vd-avatar--round"><span class="vd-avatar-initials">VD</span><span class="vd-avatar-status vd-avatar-status--online"></span></span>`,
+    code: "<span class=\"vd-avatar vd-avatar--round\"><span class=\"vd-avatar-initials\">VD</span></span>",
+  },
+  {
+    id: "progress",
+    title: "Progress (.vd-progress)",
+    basis: "A",
+    tokens: "space.fib-5 radius.full color.role.focus motion.233",
+    preview: `<div class="vd-progress" role="progressbar" aria-valuenow="62" aria-label="Upload progress"><div class="vd-progress-bar" style="--_vd-progress-value: 62%"></div></div>`,
+    code: "<div class=\"vd-progress\" role=\"progressbar\"><div class=\"vd-progress-bar\" style=\"--_vd-progress-value: 62%\"></div></div>",
+  },
+  {
+    id: "spinner",
+    title: "Spinner (.vd-spinner)",
+    basis: "A",
+    tokens: "space.fib-21 radius.full line.hair color.role.focus motion.610 easing.linear",
+    preview: `<span class="vd-spinner vd-spinner--md" role="status" aria-label="Loading"></span>`,
+    code: "<span class=\"vd-spinner\" role=\"status\" aria-label=\"Loading\"></span>",
+  },
+  {
+    id: "skeleton",
+    title: "Skeleton (.vd-skeleton)",
+    basis: "A",
+    tokens: "color.role.layer-hover radius.fib-5 motion.377 easing.in-out",
+    preview: `<div class="vd-skeleton vd-skeleton--text" style="--_vd-skeleton-w: 82%"></div><div class="vd-skeleton vd-skeleton--text" style="--_vd-skeleton-w: 58%"></div>`,
+    code: "<div class=\"vd-skeleton vd-skeleton--text\"></div>",
+  },
+  {
+    id: "slider",
+    title: "Slider (.vd-slider)",
+    basis: "A",
+    tokens: "space.fib-3 space.fib-21 radius.full line.thin color.role.focus motion.89",
+    preview: `<input type="range" class="vd-slider" min="0" max="100" value="40" aria-label="Volume">`,
+    code: "<input type=\"range\" class=\"vd-slider\" min=\"0\" max=\"100\" aria-label=\"Volume\">",
+  },
+  {
+    id: "datepicker",
+    title: "Date Picker (.vd-datepicker)",
+    basis: "B",
+    tokens: "z.popover shadow.4 radius.fib-8 space.fib-13 color.role.focus",
+    preview: `<div class="vd-datepicker"><div class="vd-datepicker-header"><span class="vd-datepicker-title">November 2026</span></div><div class="vd-datepicker-grid"><span class="vd-datepicker-day">15</span><span class="vd-datepicker-day" aria-selected="true">16</span><span class="vd-datepicker-day">17</span></div></div>`,
+    code: "<div class=\"vd-datepicker\"><div class=\"vd-datepicker-grid\">...</div></div>",
+  },
+  {
+    id: "timepicker",
+    title: "Time Picker (.vd-timepicker)",
+    basis: "B",
+    tokens: "z.popover space.fib-8 type.size.sm color.role.focus",
+    preview: `<div class="vd-timepicker"><div class="vd-timepicker-item" aria-selected="true">09:00</div><div class="vd-timepicker-item">09:30</div><div class="vd-timepicker-item">10:00</div></div>`,
+    code: "<div class=\"vd-timepicker\"><div class=\"vd-timepicker-item\">09:00</div></div>",
+  },
+  {
+    id: "upload",
+    title: "File Upload (.vd-upload)",
+    basis: "B",
+    tokens: "line.thin radius.fib-8 space.fib-21 color.role.border icon.size.lg",
+    preview: `<label class="vd-upload"><span class="vd-upload-icon" aria-hidden="true">↑</span><span class="vd-upload-text">Drop files here</span><span class="vd-upload-hint">or click to browse</span><input class="vd-upload-input" type="file" aria-label="Upload files"></label>`,
+    code: "<label class=\"vd-upload\"><input class=\"vd-upload-input\" type=\"file\" aria-label=\"Upload files\"></label>",
+  },
+  {
+    id: "carousel",
+    title: "Carousel (.vd-carousel)",
+    basis: "B",
+    tokens: "space.fib-34 radius.fib-8 motion.377 color.role.focus focus.ring.width",
+    preview: `<div class="vd-carousel"><div class="vd-carousel-track" style="--_vd-carousel-index: 0"><div class="vd-carousel-slide">Slide 1</div><div class="vd-carousel-slide">Slide 2</div></div><button type="button" class="vd-carousel-prev" aria-label="Previous slide">‹</button><button type="button" class="vd-carousel-next" aria-label="Next slide">›</button></div>`,
+    code: "<div class=\"vd-carousel\"><div class=\"vd-carousel-track\">...</div></div>",
+  },
+  {
+    id: "toolbar",
+    title: "Toolbar (.vd-toolbar)",
+    basis: "B",
+    tokens: "space.fib-8 line.hair radius.fib-8 color.role.layer",
+    preview: `<div class="vd-toolbar"><div class="vd-toolbar-group"><button type="button" class="vd-toolbar-button">B</button><button type="button" class="vd-toolbar-button">I</button></div><span class="vd-toolbar-separator"></span><button type="button" class="vd-toolbar-button">Link</button></div>`,
+    code: "<div class=\"vd-toolbar\"><div class=\"vd-toolbar-group\">...</div></div>",
+  },
+  {
+    id: "segmented",
+    title: "Segmented (.vd-segmented)",
+    basis: "B",
+    tokens: "radius.full line.hair space.fib-1 color.role.layer shadow.1",
+    preview: `<div class="vd-segmented" role="radiogroup" aria-label="View"><button type="button" class="vd-segmented-item" aria-checked="true">Day</button><button type="button" class="vd-segmented-item" aria-checked="false">Week</button><button type="button" class="vd-segmented-item" aria-checked="false">Month</button></div>`,
+    code: "<div class=\"vd-segmented\"><button class=\"vd-segmented-item\" aria-checked=\"true\">Day</button></div>",
+  },
+  {
+    id: "hover-card",
+    title: "Hover Card (.vd-hover-card)",
+    basis: "B",
+    tokens: "z.popover shadow.4 radius.fib-8 space.fib-13 container.sm motion.144",
+    preview: `<div class="vd-hover-card"><p class="vd-hover-card-title">Hover card</p><p class="vd-hover-card-body">Rich preview on hover or keyboard focus.</p></div>`,
+    code: "<div class=\"vd-hover-card\">...</div>",
+  },
+  {
+    id: "tour",
+    title: "Tour (.vd-tour)",
+    basis: "B",
+    tokens: "z.popover shadow.5 radius.fib-8 space.fib-21 motion.233",
+    preview: `<div class="vd-tour"><p class="vd-tour-title">Step 2 of 5</p><p class="vd-tour-body">This is where the tokens live.</p><div class="vd-tour-progress"></div><div class="vd-tour-footer"><span class="vd-tour-counter">2 / 5</span><div class="vd-tour-actions"><button type="button" class="vd-tour-btn">Back</button><button type="button" class="vd-tour-btn vd-tour-btn--primary">Next</button></div></div></div>`,
+    code: "<div class=\"vd-tour\">...</div>",
+  },
+  {
     id: 'layout',
     title: 'Layout Engine (.vd-split-golden)',
     basis: 'B',
@@ -539,11 +716,32 @@ const sectionsHtml = [
     badge: 'WCAG 2.2 AA/AAA',
     md: readSpec('foundations/focus.md'),
   },
+  {
+    id: 'icons',
+    num: '12',
+    title: 'Iconography Contract',
+    badge: 'Class A',
+    md: readSpec('foundations/icons.md'),
+  },
+  {
+    id: 'density',
+    num: '13',
+    title: 'Density Modes',
+    badge: 'A / B',
+    md: readSpec('foundations/density.md'),
+  },
+  {
+    id: 'data-viz',
+    num: '14',
+    title: 'Data Visualization Boundary',
+    badge: 'Class A',
+    md: readSpec('foundations/data-viz.md'),
+  },
 ];
 
 const foundationMatrixHtml = `
 <section id="foundations" class="doc-section">
-  <h2><span class="n">12</span> Foundation Coverage Matrix <span class="vd-badge vd-badge--info">DTCG 2025.10</span></h2>
+  <h2><span class="n">15</span> Foundation Coverage Matrix <span class="vd-badge vd-badge--info">DTCG 2025.10</span></h2>
   <div class="vd-table-container" tabindex="0" role="region" aria-label="Foundation coverage matrix">
     <table class="vd-table vd-table--hover">
       <thead>
@@ -561,14 +759,20 @@ const foundationMatrixHtml = `
   </div>
 </section>`;
 
+const componentSpecSlugs = ["layout", "button", "dialog", "card", "input", "select", "checkbox", "radio", "badge", "navbar", "accordion", "table", "code", "toast", "switch", "alert", "tabs", "drawer", "tooltip", "popover", "menu", "context-menu", "menubar", "breadcrumb", "pagination", "avatar", "progress", "spinner", "skeleton", "slider", "datepicker", "timepicker", "upload", "carousel", "toolbar", "segmented", "hover-card", "tour"];
+
 const componentsSectionHtml = `
 <section id="components" class="doc-section">
-  <h2><span class="n">13</span> Components — 14 Normative UI Primitives <span class="vd-badge vd-badge--info">Zero-Framework CSS</span></h2>
+  <h2><span class="n">16</span> Components — 34 Primitives + Layout Engine <span class="vd-badge vd-badge--info">Zero-Framework CSS</span></h2>
   <p class="lead">
     Every core stylesheet resides inside <code>@layer vd3.components</code> or <code>@layer vd3.layout</code>,
     binds strictly to W3C DTCG tokens from <code>tokens/vd3.tokens.json</code>, and exposes machine-readable
-    <code>data-vd-*</code> contracts.
+    <code>data-vd-*</code> contracts. Every module has a per-slug behavioral spec below.
   </p>
+  <h3>Component Specification Index</h3>
+  <div class="md-doc">
+    ${renderMarkdown(readSpec('components/SPEC.md'), 3, 'Component specification index')}
+  </div>
   <div class="specimen-grid">
     ${specimens
       .map(
@@ -587,31 +791,36 @@ const componentsSectionHtml = `
       )
       .join('\n')}
   </div>
-  <h3>Dialog Behavioral Specification (W3C APG Modal Pattern)</h3>
-  <div class="md-doc">
-    ${renderMarkdown(readSpec('components/dialog/spec.md'), 3, 'Dialog specification table')}
-  </div>
-  <h3>Switch · Alert · Tabs Specifications (new in 1.0.2)</h3>
-  <div class="md-doc">
-    ${renderMarkdown(readSpec('components/switch/spec.md'), 3, 'Switch specification table')}
-  </div>
-  <div class="md-doc">
-    ${renderMarkdown(readSpec('components/alert/spec.md'), 3, 'Alert specification table')}
-  </div>
-  <div class="md-doc">
-    ${renderMarkdown(readSpec('components/tabs/spec.md'), 3, 'Tabs specification table')}
-  </div>
+  <h3>Per-Slug Component Specifications (${componentSpecSlugs.length} specs, W3C APG where applicable)</h3>
+  ${componentSpecSlugs
+    .map(
+      (slug) => `<h4>${escHtml(slug)}</h4>
+  <div class="md-doc">${renderMarkdown(readSpec('components/' + slug + '/spec.md'), 4, slug + ' specification')}</div>`
+    )
+    .join('\n  ')}
 </section>`;
 
 const conventionsSectionHtml = `
 <section id="conventions" class="doc-section">
-  <h2><span class="n">14</span> Conventions — Naming, Mappings &amp; Content <span class="vd-badge vd-badge--info">Normative</span></h2>
+  <h2><span class="n">17</span> Conventions — Naming, Mappings &amp; Content <span class="vd-badge vd-badge--info">Normative</span></h2>
   <h3>Public &amp; Token Naming</h3>
   <div class="md-doc">${renderMarkdown(readSpec('conventions/naming.md'), 3, 'Naming convention table')}</div>
   <h3>Cross-System Token Mappings</h3>
   <div class="md-doc">${renderMarkdown(readSpec('conventions/mappings.md'), 3, 'Cross-system mapping table')}</div>
   <h3>Editorial Tone &amp; Content Strings</h3>
   <div class="md-doc">${renderMarkdown(readSpec('conventions/content.md'), 3, 'Content conventions table')}</div>
+</section>`;
+
+const patternsSectionHtml = `
+<section id="patterns" class="doc-section">
+  <h2><span class="n">18</span> Patterns — Guidance Over Components <span class="vd-badge vd-badge--info">Guidance</span></h2>
+  <div class="md-doc">${renderMarkdown(readSpec('patterns/PATTERNS.md'), 2, 'Patterns index')}</div>
+  ${['empty-states', 'auth-flows', 'app-shell', 'onboarding', 'disabled-read-only']
+    .map(
+      (pat) => `<h3>${escHtml(pat)}</h3>
+  <div class="md-doc">${renderMarkdown(readSpec('patterns/' + pat + '.md'), 3, pat + ' pattern')}</div>`
+    )
+    .join('\n  ')}
 </section>`;
 
 const ssgBody = `
@@ -621,7 +830,7 @@ const ssgBody = `
       <div class="vd-navbar-container">
         <div class="vd-navbar-brand">
           <a href="#main-content" class="brand">vd3<em>-ui-core</em></a>
-          <span class="vd-badge vd-badge--info" data-version="1.0.2-draft">v1.0.1 · draft</span>
+          <span class="vd-badge vd-badge--info" data-version="1.1.0-draft">v1.0.1 · draft</span>
         </div>
         <div class="vd-navbar-menu">
           <nav class="site-nav-pillars" aria-label="Primary specification navigation">
@@ -642,7 +851,7 @@ const ssgBody = `
 
   <div class="doc-layout">
     <aside class="doc-toc" aria-label="Chapter Table of Contents">
-      <div id="doc-toc-title" class="doc-toc-title">Chapters (14)</div>
+      <div id="doc-toc-title" class="doc-toc-title">Chapters (18)</div>
       <nav aria-labelledby="doc-toc-title">
         <ol class="doc-toc-list">
           ${chapters
@@ -675,7 +884,7 @@ const ssgBody = `
         </div>
         <div class="hero-meta">
           <span><strong>3</strong> basis classes — A / B / C (No Class D)</span>
-          <span><strong>14</strong> zero-framework core CSS modules</span>
+          <span><strong>35</strong> zero-framework core CSS modules</span>
           <span><strong>0</strong> runtime deps — any framework</span>
           <span><strong>W3C APG</strong>-normative keyboard &amp; ARIA</span>
           <span><strong>W3C DTCG 2025.10</strong> token registry</span>
@@ -710,13 +919,14 @@ const ssgBody = `
       ${foundationMatrixHtml}
       ${componentsSectionHtml}
       ${conventionsSectionHtml}
+      ${patternsSectionHtml}
     </main>
   </div>
 
   <footer>
     <div class="inner">
       <p>
-        <strong>vd3-ui-core</strong> · Specification v1.0.2-draft · Markdown specs and W3C DTCG
+        <strong>vd3-ui-core</strong> · Specification v1.1.0-draft · Markdown specs and W3C DTCG
         <code>tokens/vd3.tokens.json</code> are the normative source of truth. Library conformance:
         <code>"implements": "vd3-ui-core@^1.0"</code>.
       </p>
