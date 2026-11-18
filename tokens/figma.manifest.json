@@ -5,7 +5,7 @@
   "tokensSource": "https://core.vanduo.dev/tokens/vd3.tokens.json",
   "cssSource": "https://core.vanduo.dev/tokens/tokens.css",
   "figma": {
-    "fileName": "VD3 Design System — UI Core & Components (v1.0)",
+    "fileName": "VD3 Design System — UI Core & Components (v1.1.0-draft)",
     "fileKey": "ae5AMiPoVXuHdaRfawhyjh",
     "fileUrl": "https://www.figma.com/design/ae5AMiPoVXuHdaRfawhyjh",
     "planKey": "team::1550908432214286411",
@@ -14,7 +14,7 @@
   "plugin": {
     "id": "473bca03-b7e4-4a6f-9b5c-1a755a58af4b",
     "name": "VD3 Design System Builder & Token Sync",
-    "version": "6d6824bf91a335c4313fcd249cdcea8d64dfd4d9",
+    "version": "114ffcd19367149bee1ffc82d080ff8732553251",
     "tryInFileUrl": "https://www.figma.com/design/ae5AMiPoVXuHdaRfawhyjh?try-tool-resource-content-id=473bca03-b7e4-4a6f-9b5c-1a755a58af4b&try-tool-resource-type=gen_tool",
     "tryInNewFileUrl": "https://www.figma.com/file/new?try-tool-resource-content-id=473bca03-b7e4-4a6f-9b5c-1a755a58af4b&try-tool-resource-type=gen_tool&type=design&mode=design"
   },
@@ -53,15 +53,58 @@
     ]
   },
   "pluginPages": [
-    "00 · Cover & Quickstart",
-    "01 · Foundations — Proportions & Space",
-    "02 · Foundations — Color, Typography & Elevation",
-    "03 · Core Components"
+    {
+      "pageId": "19:343",
+      "name": "00 · Cover & Quickstart",
+      "nodeId": "20:4"
+    },
+    {
+      "pageId": "19:344",
+      "name": "01 · Foundations — Proportions & Space",
+      "nodeId": "20:38"
+    },
+    {
+      "pageId": "19:345",
+      "name": "02 · Foundations — Color, Typography & Elevation",
+      "nodeId": "20:115"
+    },
+    {
+      "pageId": "19:346",
+      "name": "03 · Actions & Forms",
+      "nodeId": "21:2"
+    },
+    {
+      "pageId": "19:347",
+      "name": "04 · Navigation & Layout",
+      "nodeId": "23:2"
+    },
+    {
+      "pageId": "19:348",
+      "name": "05 · Overlays & Menus",
+      "nodeId": "21:264"
+    },
+    {
+      "pageId": "19:349",
+      "name": "06 · Data Display & Feedback",
+      "nodeId": "22:2"
+    },
+    {
+      "pageId": "19:350",
+      "name": "07 · Light vs Dark Showcase",
+      "nodeId": "24:2"
+    }
   ],
   "variableCollections": {
     "VD3 Color Primitives": {
+      "collectionId": "VariableCollectionId:19:2",
       "modes": ["Fibonacci", "Open Color"],
+      "modeIds": {
+        "Fibonacci": "19:0",
+        "Open Color": "19:1"
+      },
       "type": "COLOR",
+      "variableCount": 261,
+      "source": "@vanduo-oss/vd3@1.9.1",
       "families": [
         "gray", "charcoal", "slate", "zinc", "neutral", "stone",
         "red", "orange", "amber", "yellow", "lime", "green",
@@ -78,8 +121,14 @@
       "normativeTokenNotes": "golden-angle (8 steps, 0..7) exports as --vd3-color-golden-<step>; gold exports as --vd3-color-gold-<step> (legacy --vd-yellow-<step>); anchor gray/10 exports as --vd3-color-gray-1000."
     },
     "VD3 Semantic Theme": {
+      "collectionId": "VariableCollectionId:19:264",
       "modes": ["Light", "Dark"],
+      "modeIds": {
+        "Light": "19:2",
+        "Dark": "19:3"
+      },
       "type": "COLOR",
+      "variableCount": 20,
       "aliasedTo": "VD3 Color Primitives",
       "variables": [
         { "name": "bg/canvas", "light": "common/white", "dark": "gray/9", "web": "var(--vd-bg-primary)" },
@@ -97,47 +146,63 @@
         { "name": "color/info", "light": "golden-angle/1", "dark": "golden-angle/1", "web": "var(--vd3-color-info)" },
         { "name": "color/success", "light": "golden-angle/6", "dark": "golden-angle/6", "web": "var(--vd3-color-success)" },
         { "name": "color/warning", "light": "gold/6", "dark": "gold/4", "web": "var(--vd3-color-warning)" },
-        { "name": "color/danger", "light": "red/6", "dark": "red/4", "web": "var(--vd-color-danger)" }
+        { "name": "color/danger", "light": "red/6", "dark": "red/4", "web": "var(--vd-color-danger)" },
+        { "name": "color/info-subtle", "light": "cyan/0", "dark": "cyan/9", "web": "var(--vd3-color-layer)" },
+        { "name": "color/success-subtle", "light": "emerald/0", "dark": "emerald/9", "web": "var(--vd3-color-layer)" },
+        { "name": "color/warning-subtle", "light": "gold/0", "dark": "gold/9", "web": "var(--vd3-color-layer)" },
+        { "name": "color/danger-subtle", "light": "red/0", "dark": "red/9", "web": "var(--vd3-color-layer)" }
       ]
     },
     "VD3 Scale & Proportions": {
+      "collectionId": "VariableCollectionId:19:285",
       "modes": ["Value"],
+      "modeIds": {
+        "Value": "19:4"
+      },
       "type": "FLOAT",
+      "variableCount": 41,
       "variables": [
         "space/fib-1", "space/fib-2", "space/fib-3", "space/fib-5", "space/fib-8",
         "space/fib-13", "space/fib-21", "space/fib-34", "space/fib-55", "space/fib-89", "space/fib-144",
         "radius/fib-2", "radius/fib-3", "radius/fib-5", "radius/fib-8", "radius/fib-13", "radius/fib-21", "radius/full",
         "line/hair", "line/thin", "line/regular", "line/thick",
-        "container/sm", "container/md", "container/lg", "container/xl", "container/2xl"
+        "container/sm", "container/md", "container/lg", "container/xl", "container/2xl",
+        "icon/size-sm", "icon/size-md", "icon/size-lg", "icon/size-xl", "icon/stroke-outline", "icon/gap",
+        "density/scale-comfortable", "density/scale-compact",
+        "focus/ring-width", "focus/ring-offset",
+        "glass/blur-sm", "glass/blur-md", "glass/blur-lg", "glass/blur-xl"
       ]
     }
   },
   "styles": {
     "textStyles": [
-      "VD3/Display 4xl",
-      "VD3/Heading 3xl",
-      "VD3/Heading 2xl",
-      "VD3/Heading xl",
-      "VD3/Heading lg",
-      "VD3/Body md",
-      "VD3/Body sm",
-      "VD3/Caption xs",
-      "VD3/Code Mono"
+      { "name": "VD3/Display 4xl", "styleId": "S:53e17ddc9d9b1340c76c2f63324fe1179d759a7f," },
+      { "name": "VD3/Heading 3xl", "styleId": "S:6c21b561fdc8d0a2419082a700a153dfefe51940," },
+      { "name": "VD3/Heading 2xl", "styleId": "S:26a3d76aa76eb2543e16a7462d5aa4f7e86808bc," },
+      { "name": "VD3/Heading xl", "styleId": "S:3cb42c46483721b06aca8ac7dfed8ee0943e1fbb," },
+      { "name": "VD3/Heading lg", "styleId": "S:60bb9ae83c610668446ab62414c4ea4c827cac8f," },
+      { "name": "VD3/Body md", "styleId": "S:5c583b399a12cd82230798b731db4b99c57f5352," },
+      { "name": "VD3/Body sm", "styleId": "S:71fe2bde79ce97e1d6000d4d27ee4695e2bb7b64," },
+      { "name": "VD3/Caption xs", "styleId": "S:cb2997d50b2eaf305a895c44c174191f8bd1a3de," },
+      { "name": "VD3/Code Mono", "styleId": "S:55eb138af10baf015c8b5fd15d3450df3392f836," }
     ],
     "effectStyles": [
-      "VD3/Shadow 1 (1-2)",
-      "VD3/Shadow 2 (2-3)",
-      "VD3/Shadow 3 (3-5)",
-      "VD3/Shadow 4 (8-13)",
-      "VD3/Shadow 5 (13-21)",
-      "VD3/Shadow 6 (21-34)",
-      "VD3/Focus Ring (Dual)"
+      { "name": "VD3/Shadow 1 (1-2)", "styleId": "S:26b7c617822a1837972ee7fa91c75c24edda09ce," },
+      { "name": "VD3/Shadow 2 (2-3)", "styleId": "S:152174a17e926519b9c7bd145f9a9a4f2c8f3219," },
+      { "name": "VD3/Shadow 3 (3-5)", "styleId": "S:32e4cec2c42cfcbd7a81ba77e90cb922462f3ae8," },
+      { "name": "VD3/Shadow 4 (8-13)", "styleId": "S:378ce1f8961249413f0642b8b825be9d60d3a4e7," },
+      { "name": "VD3/Shadow 5 (13-21)", "styleId": "S:12732dab790e64fbf815357ffb605fb729c52334," },
+      { "name": "VD3/Shadow 6 (21-34)", "styleId": "S:8d75c487941a3a917a62a20644266eb82c938840," },
+      { "name": "VD3/Focus Ring (Dual)", "styleId": "S:fa1b01915ae06446b27176ba67086ab30a74c731," }
     ]
   },
   "components": [
     {
       "slug": "button",
       "figmaComponentSet": "Button",
+      "nodeId": "21:96",
+      "page": "03 · Actions & Forms",
+      "pageId": "19:346",
       "cssClass": ".vd-btn",
       "spec": "components/button/spec.md",
       "variantProperties": {
@@ -147,8 +212,35 @@
       }
     },
     {
+      "slug": "segmented",
+      "figmaComponentSet": "Segmented",
+      "nodeId": "21:118",
+      "page": "03 · Actions & Forms",
+      "pageId": "19:346",
+      "cssClass": ".vd-segmented",
+      "spec": "components/segmented/spec.md",
+      "variantProperties": {
+        "Active": ["1", "2", "3"]
+      }
+    },
+    {
+      "slug": "toolbar",
+      "figmaComponentSet": "Toolbar",
+      "nodeId": "21:133",
+      "page": "03 · Actions & Forms",
+      "pageId": "19:346",
+      "cssClass": ".vd-toolbar",
+      "spec": "components/toolbar/spec.md",
+      "variantProperties": {
+        "Variant": ["Default", "Compact"]
+      }
+    },
+    {
       "slug": "input",
       "figmaComponentSet": "Input",
+      "nodeId": "21:142",
+      "page": "03 · Actions & Forms",
+      "pageId": "19:346",
       "cssClass": ".vd-input",
       "spec": "components/input/spec.md",
       "variantProperties": {
@@ -158,6 +250,9 @@
     {
       "slug": "select",
       "figmaComponentSet": "Select",
+      "nodeId": "21:155",
+      "page": "03 · Actions & Forms",
+      "pageId": "19:346",
       "cssClass": ".vd-select",
       "spec": "components/select/spec.md",
       "variantProperties": {
@@ -167,6 +262,9 @@
     {
       "slug": "checkbox",
       "figmaComponentSet": "Checkbox",
+      "nodeId": "21:172",
+      "page": "03 · Actions & Forms",
+      "pageId": "19:346",
       "cssClass": ".vd-checkbox",
       "spec": "components/checkbox/spec.md",
       "variantProperties": {
@@ -177,6 +275,9 @@
     {
       "slug": "radio",
       "figmaComponentSet": "Radio",
+      "nodeId": "21:180",
+      "page": "03 · Actions & Forms",
+      "pageId": "19:346",
       "cssClass": ".vd-radio",
       "spec": "components/radio/spec.md",
       "variantProperties": {
@@ -186,6 +287,9 @@
     {
       "slug": "switch",
       "figmaComponentSet": "Switch",
+      "nodeId": "21:189",
+      "page": "03 · Actions & Forms",
+      "pageId": "19:346",
       "cssClass": ".vd-switch",
       "spec": "components/switch/spec.md",
       "variantProperties": {
@@ -193,26 +297,252 @@
       }
     },
     {
-      "slug": "badge",
-      "figmaComponentSet": "Badge",
-      "cssClass": ".vd-badge",
-      "spec": "components/badge/spec.md",
+      "slug": "slider",
+      "figmaComponentSet": "Slider",
+      "nodeId": "21:208",
+      "page": "03 · Actions & Forms",
+      "pageId": "19:346",
+      "cssClass": "input[type=range].vd-slider",
+      "spec": "components/slider/spec.md",
       "variantProperties": {
-        "Variant": ["Primary", "Info", "Success", "Warning", "Danger"]
+        "Value": ["38%", "62%"],
+        "State": ["Focus"]
       }
     },
     {
-      "slug": "alert",
-      "figmaComponentSet": "Alert",
-      "cssClass": ".vd-alert",
-      "spec": "components/alert/spec.md",
+      "slug": "datepicker",
+      "figmaComponentSet": "Datepicker",
+      "nodeId": "21:239",
+      "page": "03 · Actions & Forms",
+      "pageId": "19:346",
+      "cssClass": ".vd-datepicker",
+      "spec": "components/datepicker/spec.md",
       "variantProperties": {
-        "Variant": ["Info", "Success", "Warning", "Danger"]
+        "State": ["Open", "Selected"]
+      }
+    },
+    {
+      "slug": "timepicker",
+      "figmaComponentSet": "Timepicker",
+      "nodeId": "21:248",
+      "page": "03 · Actions & Forms",
+      "pageId": "19:346",
+      "cssClass": ".vd-timepicker",
+      "spec": "components/timepicker/spec.md",
+      "variantProperties": {
+        "Format": ["24h", "12h"]
+      }
+    },
+    {
+      "slug": "upload",
+      "figmaComponentSet": "Upload",
+      "nodeId": "21:257",
+      "page": "03 · Actions & Forms",
+      "pageId": "19:346",
+      "cssClass": ".vd-upload",
+      "spec": "components/upload/spec.md",
+      "variantProperties": {
+        "State": ["Idle", "Dragover"]
+      }
+    },
+    {
+      "slug": "layout",
+      "figmaComponentSet": "Layout",
+      "nodeId": "23:18",
+      "page": "04 · Navigation & Layout",
+      "pageId": "19:347",
+      "cssClass": ".vd-layout-golden",
+      "spec": "components/layout/spec.md",
+      "variantProperties": {
+        "Pattern": ["Golden Split (61.8/38.2)", "12-Col Grid"]
+      }
+    },
+    {
+      "slug": "navbar",
+      "figmaComponentSet": "Navbar",
+      "nodeId": "23:31",
+      "page": "04 · Navigation & Layout",
+      "pageId": "19:347",
+      "cssClass": ".vd-navbar",
+      "spec": "components/navbar/spec.md",
+      "variantProperties": {
+        "Variant": ["Glass Sticky", "Solid"]
+      }
+    },
+    {
+      "slug": "tabs",
+      "figmaComponentSet": "Tabs",
+      "nodeId": "23:44",
+      "page": "04 · Navigation & Layout",
+      "pageId": "19:347",
+      "cssClass": ".vd-tabs",
+      "spec": "components/tabs/spec.md",
+      "variantProperties": {
+        "ActiveTab": ["1", "2", "3"]
+      }
+    },
+    {
+      "slug": "breadcrumb",
+      "figmaComponentSet": "Breadcrumb",
+      "nodeId": "23:57",
+      "page": "04 · Navigation & Layout",
+      "pageId": "19:347",
+      "cssClass": ".vd-breadcrumb",
+      "spec": "components/breadcrumb/spec.md",
+      "variantProperties": {
+        "Variant": ["Standard", "Current"]
+      }
+    },
+    {
+      "slug": "pagination",
+      "figmaComponentSet": "Pagination",
+      "nodeId": "23:80",
+      "page": "04 · Navigation & Layout",
+      "pageId": "19:347",
+      "cssClass": ".vd-pagination",
+      "spec": "components/pagination/spec.md",
+      "variantProperties": {
+        "ActivePage": ["1", "2"]
+      }
+    },
+    {
+      "slug": "menubar",
+      "figmaComponentSet": "Menubar",
+      "nodeId": "23:99",
+      "page": "04 · Navigation & Layout",
+      "pageId": "19:347",
+      "cssClass": ".vd-menubar",
+      "spec": "components/menubar/spec.md",
+      "variantProperties": {
+        "State": ["Rest", "ActiveMenu"]
+      }
+    },
+    {
+      "slug": "accordion",
+      "figmaComponentSet": "Accordion",
+      "nodeId": "23:111",
+      "page": "04 · Navigation & Layout",
+      "pageId": "19:347",
+      "cssClass": ".vd-accordion",
+      "spec": "components/accordion/spec.md",
+      "variantProperties": {
+        "State": ["Collapsed", "Expanded"]
+      }
+    },
+    {
+      "slug": "carousel",
+      "figmaComponentSet": "Carousel",
+      "nodeId": "23:126",
+      "page": "04 · Navigation & Layout",
+      "pageId": "19:347",
+      "cssClass": ".vd-carousel",
+      "spec": "components/carousel/spec.md",
+      "variantProperties": {
+        "Slide": ["1 of 3", "2 of 3"]
+      }
+    },
+    {
+      "slug": "dialog",
+      "figmaComponentSet": "Dialog",
+      "nodeId": "21:284",
+      "page": "05 · Overlays & Menus",
+      "pageId": "19:348",
+      "cssClass": ".vd-dialog",
+      "spec": "components/dialog/spec.md",
+      "variantProperties": {
+        "Size": ["sm (521px)", "md (610px)"]
+      }
+    },
+    {
+      "slug": "drawer",
+      "figmaComponentSet": "Drawer",
+      "nodeId": "21:291",
+      "page": "05 · Overlays & Menus",
+      "pageId": "19:348",
+      "cssClass": ".vd-drawer",
+      "spec": "components/drawer/spec.md",
+      "variantProperties": {
+        "Placement": ["End (377px)", "Start"]
+      }
+    },
+    {
+      "slug": "popover",
+      "figmaComponentSet": "Popover",
+      "nodeId": "21:300",
+      "page": "05 · Overlays & Menus",
+      "pageId": "19:348",
+      "cssClass": ".vd-popover",
+      "spec": "components/popover/spec.md",
+      "variantProperties": {
+        "State": ["Open", "With Actions"]
+      }
+    },
+    {
+      "slug": "tooltip",
+      "figmaComponentSet": "Tooltip",
+      "nodeId": "21:305",
+      "page": "05 · Overlays & Menus",
+      "pageId": "19:348",
+      "cssClass": ".vd-tooltip",
+      "spec": "components/tooltip/spec.md",
+      "variantProperties": {
+        "Placement": ["Top", "Bottom"]
+      }
+    },
+    {
+      "slug": "hover-card",
+      "figmaComponentSet": "HoverCard",
+      "nodeId": "21:312",
+      "page": "05 · Overlays & Menus",
+      "pageId": "19:348",
+      "cssClass": ".vd-hover-card",
+      "spec": "components/hover-card/spec.md",
+      "variantProperties": {
+        "Variant": ["Profile", "Spec Preview"]
+      }
+    },
+    {
+      "slug": "menu",
+      "figmaComponentSet": "Menu",
+      "nodeId": "21:327",
+      "page": "05 · Overlays & Menus",
+      "pageId": "19:348",
+      "cssClass": ".vd-menu",
+      "spec": "components/menu/spec.md",
+      "variantProperties": {
+        "State": ["Default", "ActiveItem"]
+      }
+    },
+    {
+      "slug": "context-menu",
+      "figmaComponentSet": "ContextMenu",
+      "nodeId": "21:340",
+      "page": "05 · Overlays & Menus",
+      "pageId": "19:348",
+      "cssClass": ".vd-context-menu",
+      "spec": "components/context-menu/spec.md",
+      "variantProperties": {
+        "State": ["Open", "With Shortcut"]
+      }
+    },
+    {
+      "slug": "tour",
+      "figmaComponentSet": "Tour",
+      "nodeId": "21:359",
+      "page": "05 · Overlays & Menus",
+      "pageId": "19:348",
+      "cssClass": ".vd-tour",
+      "spec": "components/tour/spec.md",
+      "variantProperties": {
+        "Step": ["Step 1 of 3", "Step 2 of 3"]
       }
     },
     {
       "slug": "card",
       "figmaComponentSet": "Card",
+      "nodeId": "22:12",
+      "page": "06 · Data Display & Feedback",
+      "pageId": "19:349",
       "cssClass": ".vd-card",
       "spec": "components/card/spec.md",
       "variantProperties": {
@@ -220,21 +550,123 @@
       }
     },
     {
-      "slug": "tabs",
-      "figmaComponentSet": "Tabs",
-      "cssClass": ".vd-tabs",
-      "spec": "components/tabs/spec.md",
+      "slug": "table",
+      "figmaComponentSet": "Table",
+      "nodeId": "22:33",
+      "page": "06 · Data Display & Feedback",
+      "pageId": "19:349",
+      "cssClass": ".vd-table",
+      "spec": "components/table/spec.md",
       "variantProperties": {
-        "ActiveTab": ["1", "2"]
+        "Density": ["Comfortable", "Compact"]
       }
     },
     {
-      "slug": "dialog",
-      "figmaComponentSet": "Dialog",
-      "cssClass": ".vd-dialog",
-      "spec": "components/dialog/spec.md",
+      "slug": "code",
+      "figmaComponentSet": "Code",
+      "nodeId": "22:40",
+      "page": "06 · Data Display & Feedback",
+      "pageId": "19:349",
+      "cssClass": "pre.vd-code",
+      "spec": "components/code/spec.md",
       "variantProperties": {
-        "Size": ["sm (521px)"]
+        "Variant": ["Code Block", "Spec Card"]
+      }
+    },
+    {
+      "slug": "badge",
+      "figmaComponentSet": "Badge",
+      "nodeId": "22:53",
+      "page": "06 · Data Display & Feedback",
+      "pageId": "19:349",
+      "cssClass": ".vd-badge",
+      "spec": "components/badge/spec.md",
+      "variantProperties": {
+        "Variant": ["Primary", "Info", "Success", "Warning", "Danger", "Chip"]
+      }
+    },
+    {
+      "slug": "avatar",
+      "figmaComponentSet": "Avatar",
+      "nodeId": "22:60",
+      "page": "06 · Data Display & Feedback",
+      "pageId": "19:349",
+      "cssClass": ".vd-avatar",
+      "spec": "components/avatar/spec.md",
+      "variantProperties": {
+        "Size": ["sm (21px)", "md (34px)", "lg (55px)"]
+      }
+    },
+    {
+      "slug": "icon",
+      "figmaComponentSet": "Icon",
+      "nodeId": "22:73",
+      "page": "06 · Data Display & Feedback",
+      "pageId": "19:349",
+      "cssClass": ".vd-icon",
+      "spec": "components/icon/spec.md",
+      "variantProperties": {
+        "Size": ["sm (13px)", "md (21px)", "lg (34px)", "xl (55px)"]
+      }
+    },
+    {
+      "slug": "alert",
+      "figmaComponentSet": "Alert",
+      "nodeId": "22:86",
+      "page": "06 · Data Display & Feedback",
+      "pageId": "19:349",
+      "cssClass": ".vd-alert",
+      "spec": "components/alert/spec.md",
+      "variantProperties": {
+        "Variant": ["Info", "Success", "Warning", "Danger"]
+      }
+    },
+    {
+      "slug": "toast",
+      "figmaComponentSet": "Toast",
+      "nodeId": "22:103",
+      "page": "06 · Data Display & Feedback",
+      "pageId": "19:349",
+      "cssClass": ".vd-toast",
+      "spec": "components/toast/spec.md",
+      "variantProperties": {
+        "Variant": ["Info", "Success", "Warning", "Critical"]
+      }
+    },
+    {
+      "slug": "progress",
+      "figmaComponentSet": "Progress",
+      "nodeId": "22:116",
+      "page": "06 · Data Display & Feedback",
+      "pageId": "19:349",
+      "cssClass": ".vd-progress",
+      "spec": "components/progress/spec.md",
+      "variantProperties": {
+        "Value": ["38%", "62%", "100%"]
+      }
+    },
+    {
+      "slug": "spinner",
+      "figmaComponentSet": "Spinner",
+      "nodeId": "22:126",
+      "page": "06 · Data Display & Feedback",
+      "pageId": "19:349",
+      "cssClass": ".vd-spinner",
+      "spec": "components/spinner/spec.md",
+      "variantProperties": {
+        "Size": ["sm (13px)", "md (21px)", "lg (34px)"]
+      }
+    },
+    {
+      "slug": "skeleton",
+      "figmaComponentSet": "Skeleton",
+      "nodeId": "22:130",
+      "page": "06 · Data Display & Feedback",
+      "pageId": "19:349",
+      "cssClass": ".vd-skeleton",
+      "spec": "components/skeleton/spec.md",
+      "variantProperties": {
+        "Shape": ["Text Line", "Avatar Circle", "Card Block"]
       }
     }
   ]
