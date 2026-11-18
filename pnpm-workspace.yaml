@@ -6,3 +6,8 @@ minimumReleaseAgeExclude:
   - '@vanduo-oss/vd3@1.9.1'
 onlyBuiltDependencies:
   - esbuild
+auditConfig:
+  # Temporary: build-time-only transitive devDependency (site > vite > picomatch <=4.0.7, CWE-1333 ReDoS).
+  # No upstream patch published yet (patched_versions: null). Remove once picomatch >4.0.7 is released.
+  ignoreGhsas:
+    - GHSA-fc5q-39xc-vjpf
