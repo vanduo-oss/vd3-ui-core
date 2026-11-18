@@ -8,7 +8,7 @@
 
 @layer vd3.components {
   .vd-alert {
-    --_vd-alert-accent: var(--vd3-color-golden-1, #0ab5b5);
+    --_vd-alert-accent: var(--vd3-color-info, #0ab5b5);
 
     display: flex;
     align-items: flex-start;
@@ -23,13 +23,13 @@
     line-height: var(--vd3-line-height-normal, 1.5);
   }
 
-  /* Variants — accents from the golden-angle palette / semantic roles */
+  /* Variants — semantic status roles */
   .vd-alert--info,
-  .vd-alert-info     { --_vd-alert-accent: var(--vd3-color-golden-1, #0ab5b5); }
+  .vd-alert-info     { --_vd-alert-accent: var(--vd3-color-info, #0ab5b5); }
   .vd-alert--success,
-  .vd-alert-success  { --_vd-alert-accent: var(--vd3-color-golden-6, #0ac265); }
+  .vd-alert-success  { --_vd-alert-accent: var(--vd3-color-success, #0ac265); }
   .vd-alert--warning,
-  .vd-alert-warning  { --_vd-alert-accent: var(--vd3-color-focus, #fab005); }
+  .vd-alert-warning  { --_vd-alert-accent: var(--vd3-color-warning, #fab005); }
   .vd-alert--critical,
   .vd-alert-critical { --_vd-alert-accent: var(--vd3-color-critical, #fa5252); }
 

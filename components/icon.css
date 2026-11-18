@@ -1,0 +1,118 @@
+/**
+ * VD3 UI CORE — Icon Primitive Component (Feature #61)
+ * Cascade Layer: @layer vd3.components
+ * Conformance: foundations/icons.md (ICN-001…005), WCAG 2.1/2.2 AA
+ */
+
+@layer vd3.components {
+  /* Base inline SVG / icon wrapper — defaults to md (F_8 = 21px) and currentColor */
+  .vd-icon {
+    --_vd-icon-size: var(--vd3-icon-size-md, 1.3125rem);
+    --_vd-icon-color: currentColor;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    inline-size: var(--_vd-icon-size);
+    block-size: var(--_vd-icon-size);
+    color: var(--_vd-icon-color);
+    font-size: var(--_vd-icon-size);
+    line-height: 1;
+    vertical-align: middle;
+    stroke-width: var(--vd3-icon-stroke-outline, 1.618);
+    transition:
+      color var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1)),
+      transform var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1)),
+      box-shadow var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1));
+  }
+
+  .vd-icon > svg {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    stroke: currentColor;
+    stroke-width: inherit;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+
+  /* Fibonacci Size Ladder (F_7..F_10 — Class A) */
+  .vd-icon--sm,
+  .vd-icon-sm {
+    --_vd-icon-size: var(--vd3-icon-size-sm, 0.8125rem);
+  }
+
+  .vd-icon--md,
+  .vd-icon-md {
+    --_vd-icon-size: var(--vd3-icon-size-md, 1.3125rem);
+  }
+
+  .vd-icon--lg,
+  .vd-icon-lg {
+    --_vd-icon-size: var(--vd3-icon-size-lg, 2.125rem);
+  }
+
+  .vd-icon--xl,
+  .vd-icon-xl {
+    --_vd-icon-size: var(--vd3-icon-size-xl, 3.4375rem);
+  }
+
+  /* Semantic Role Ink Variants */
+  .vd-icon--primary {
+    --_vd-icon-color: var(--vd3-icon-color, var(--vd3-color-text-primary, #1a1d20));
+  }
+
+  .vd-icon--secondary,
+  .vd-icon--muted {
+    --_vd-icon-color: var(--vd3-icon-color-secondary, var(--vd3-color-text-secondary, #495057));
+  }
+
+  .vd-icon--accent,
+  .vd-icon--interactive {
+    --_vd-icon-color: var(--vd3-icon-color-accent, var(--vd3-color-focus, #fab005));
+  }
+
+  .vd-icon--critical {
+    --_vd-icon-color: var(--vd3-icon-color-critical, var(--vd3-color-critical, #fa5252));
+  }
+
+  .vd-icon--disabled,
+  .vd-icon[aria-disabled="true"] {
+    opacity: var(--vd3-inv-phi-sq, 0.382);
+  }
+
+  /* Icon-to-label pairing helper */
+  .vd-icon-pair {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--vd3-icon-gap, var(--vd3-space-fib-5, 0.5rem));
+  }
+
+  /* RTL directional glyph flip */
+  :dir(rtl) .vd-icon--directional,
+  [dir="rtl"] .vd-icon--directional {
+    transform: scaleX(-1);
+  }
+
+  /* Dual-Ring Focus (when an icon wrapper is explicitly focusable, e.g. button/tabindex) */
+  .vd-icon:focus-visible {
+    outline: none;
+    border-radius: var(--vd3-radius-fib-3, 0.1875rem);
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-icon {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-icon {
+    transition: none !important;
+  }
+}

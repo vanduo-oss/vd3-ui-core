@@ -108,20 +108,28 @@
 
   /* Dark Theme Nuances — thumb rim follows the dark canvas role automatically;
      track keeps layer-hover (gray-7 in dark) */
-  [data-theme="dark"] input[type="range"].vd-slider::-webkit-slider-runnable-track,
+  [data-theme="dark"] input[type="range"].vd-slider::-webkit-slider-runnable-track {
+    background-color: var(--vd3-color-layer-hover, #495057);
+  }
   [data-theme="dark"] input[type="range"].vd-slider::-moz-range-track {
     background-color: var(--vd3-color-layer-hover, #495057);
   }
 
   /* Reduced Motion (MOB-001) */
   @media (prefers-reduced-motion: reduce) {
-    input[type="range"].vd-slider::-webkit-slider-thumb,
+    input[type="range"].vd-slider::-webkit-slider-thumb {
+      transition: none !important;
+      transform: none !important;
+    }
     input[type="range"].vd-slider::-moz-range-thumb {
       transition: none !important;
       transform: none !important;
     }
   }
-  [data-motion="reduce"] input[type="range"].vd-slider::-webkit-slider-thumb,
+  [data-motion="reduce"] input[type="range"].vd-slider::-webkit-slider-thumb {
+    transition: none !important;
+    transform: none !important;
+  }
   [data-motion="reduce"] input[type="range"].vd-slider::-moz-range-thumb {
     transition: none !important;
     transform: none !important;

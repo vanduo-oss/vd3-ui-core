@@ -2,7 +2,7 @@
 slug: radio
 status: stable
 spec: vd3-ui-core@1.1.0-draft
-apg: https://www.w3.org/WAI/ARIA/apg/patterns/radio/
+apg: https://www.w3.org/WAI/ARIA/apg/patterns/radio-group/
 ---
 
 ## Summary
@@ -15,8 +15,8 @@ multiple selections (use checkboxes), or free text (use input).
 ## Anatomy
 Group: `<fieldset>` + `<legend>` (or `role="radiogroup"` +
 `aria-labelledby`) containing one row per option: `<label>` wrapping or
-`for`-bound to a `.vd-radio`. The control is a 20×20 circle with border
-`line.thin` and radius `radius.full` (C-04); the checked indicator is an 8px
+`for`-bound to a `.vd-radio`. The control is a 21×21 (`space.fib-21` = $F_8$) circle with border
+`line.thin` and radius `radius.full` (C-04); the checked indicator is an 8px (`spacing.5`)
 `::before` dot in `color.role.focus`.
 
 ## States
@@ -74,9 +74,9 @@ tab order; `:focus-visible` dual ring on the focused radio (FOC-001…004).
 `focus.ring.glow`.
 
 ## Deviations & references
-Conforms to the APG Radio Group Pattern. Consulted: Carbon RadioButton /
-RadioButtonGroup (role mapping per `conventions/mappings.md`) — same group
-naming and roving-tabindex contract. Deviations flagged for the 1.0.3 CSS pass:
-(1) the 20×20 control size is a fixed literal, not a token; (2) the two MOB-001
-reduce blocks are absent from `form.css` v1 — RAD-005 is normative and the CSS
-gap is flagged.
+Conforms to the APG Radio Group Pattern (`https://www.w3.org/WAI/ARIA/apg/patterns/radio-group/`).
+Consulted: Carbon RadioButton / RadioButtonGroup (role mapping per `conventions/mappings.md`) —
+same group naming and roving-tabindex contract. All control geometry (`space.fib-21`,
+`spacing.5`), disabled borders (`color.role.border-subtle`), and both `MOB-001` reduced-motion
+blocks (`@media (prefers-reduced-motion: reduce)` and `[data-motion="reduce"]`) are
+implemented in `components/form.css`.

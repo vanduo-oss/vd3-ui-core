@@ -4,7 +4,7 @@
   "title": "VD3 UI CORE Design Token Schema (DTCG 2.0)",
   "description": "JSON schema for VD3 UI CORE design tokens conforming to the W3C Design Tokens Community Group (DTCG) specification with VD3 mathematical extensions.",
   "type": "object",
-  "required": ["$description", "$vd3", "math", "color", "theme", "space", "line", "focus", "icon", "density", "radius", "shadow", "glow", "z", "container", "breakpoint", "type", "motion", "easing", "aspect", "glass"],
+  "required": ["$description", "$vd3", "math", "color", "theme", "space", "spacing", "line", "border", "focus", "icon", "density", "radius", "shadow", "glow", "z", "container", "breakpoint", "font", "type", "motion", "easing", "aspect", "glass"],
   "properties": {
     "$description": { "type": "string" },
     "$vd3": {
@@ -19,7 +19,9 @@
     "color": { "type": "object" },
     "theme": { "type": "object" },
     "space": { "type": "object" },
+    "spacing": { "type": "object" },
     "line": { "type": "object" },
+    "border": { "type": "object" },
     "focus": { "type": "object" },
     "icon": { "type": "object" },
     "density": { "type": "object" },
@@ -29,6 +31,7 @@
     "z": { "type": "object" },
     "container": { "type": "object" },
     "breakpoint": { "type": "object" },
+    "font": { "type": "object" },
     "type": { "type": "object" },
     "motion": { "type": "object" },
     "easing": { "type": "object" },

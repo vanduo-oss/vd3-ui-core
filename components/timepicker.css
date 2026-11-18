@@ -30,6 +30,24 @@
     display: none;
   }
 
+  .vd-timepicker:popover-open {
+    display: block;
+  }
+
+  @supports (position-area: block-end) {
+    .vd-timepicker[popover] {
+      position: fixed;
+      inset: auto;
+      margin: var(--vd3-space-fib-2, 0.25rem) 0 0;
+      position-anchor: var(--_vd-anchor);
+      position-area: block-end span-inline-end;
+      position-try-fallbacks: flip-block, flip-inline;
+    }
+    .vd-timepicker[popover][data-placement="top"] {
+      position-area: block-start span-inline-end;
+    }
+  }
+
   /* Time option */
   .vd-timepicker-item {
     display: block;

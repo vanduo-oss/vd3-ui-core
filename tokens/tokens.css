@@ -2,7 +2,9 @@
  * VD3 UI CORE — Tokens CSS
  * Single Source of Truth compiled Design Tokens
  * Cascade Layer: @layer vd3.tokens
- * Dual theme: :root (light) and [data-theme="dark"]
+ * Dual theme: :root (light default, color-scheme: light dark), OS dark preference
+ *             (@media (prefers-color-scheme: dark) on :root:not([data-theme="light"])),
+ *             and explicit [data-theme="light"] / [data-theme="dark"]
  * Reduced motion: @media (prefers-reduced-motion: reduce) and [data-motion="reduce"]
  */
 
@@ -11,6 +13,8 @@
 
 @layer vd3.tokens {
   :root {
+    color-scheme: light dark;
+
     /* -------------------------------------------------------------------------
        1. Mathematical Constants (Class A)
        ------------------------------------------------------------------------- */
@@ -138,19 +142,6 @@
     --vd3-line-height-normal: 1.5;
     --vd3-line-height-relaxed: 1.618;
     --vd3-line-height-loose: 2.0;
-
-    --vd3-leading-tight: 1.236;
-    --vd3-leading-snug: 1.382;
-    --vd3-leading-normal: 1.5;
-    --vd3-leading-relaxed: 1.618;
-    --vd3-leading-loose: 2.0;
-
-    --vd3-letter-spacing-tighter: -0.05em;
-    --vd3-letter-spacing-tight: -0.025em;
-    --vd3-letter-spacing-normal: 0;
-    --vd3-letter-spacing-wide: 0.025em;
-    --vd3-letter-spacing-wider: 0.05em;
-    --vd3-letter-spacing-widest: 0.1em;
 
     --vd3-tracking-tighter: -0.05em;
     --vd3-tracking-tight: -0.025em;
@@ -300,6 +291,9 @@
     --vd3-color-focus-glow: rgba(250, 176, 5, 0.4);
     --vd3-color-interactive: var(--vd3-color-gold-7);
     --vd3-color-critical: var(--vd3-color-red-6);
+    --vd3-color-info: var(--vd3-color-golden-1);
+    --vd3-color-success: var(--vd3-color-golden-6);
+    --vd3-color-warning: var(--vd3-color-gold-6);
     --vd3-color-shadow: #0000001a;
 
     /* -------------------------------------------------------------------------
@@ -375,18 +369,18 @@
     --vd-line-height-relaxed: var(--vd3-line-height-relaxed);
     --vd-line-height-loose: var(--vd3-line-height-loose);
 
-    --vd-leading-tight: var(--vd3-leading-tight);
-    --vd-leading-snug: var(--vd3-leading-snug);
-    --vd-leading-normal: var(--vd3-leading-normal);
-    --vd-leading-relaxed: var(--vd3-leading-relaxed);
-    --vd-leading-loose: var(--vd3-leading-loose);
+    --vd-leading-tight: var(--vd3-line-height-tight);
+    --vd-leading-snug: var(--vd3-line-height-snug);
+    --vd-leading-normal: var(--vd3-line-height-normal);
+    --vd-leading-relaxed: var(--vd3-line-height-relaxed);
+    --vd-leading-loose: var(--vd3-line-height-loose);
 
-    --vd-letter-spacing-tighter: var(--vd3-letter-spacing-tighter);
-    --vd-letter-spacing-tight: var(--vd3-letter-spacing-tight);
-    --vd-letter-spacing-normal: var(--vd3-letter-spacing-normal);
-    --vd-letter-spacing-wide: var(--vd3-letter-spacing-wide);
-    --vd-letter-spacing-wider: var(--vd3-letter-spacing-wider);
-    --vd-letter-spacing-widest: var(--vd3-letter-spacing-widest);
+    --vd-letter-spacing-tighter: var(--vd3-tracking-tighter);
+    --vd-letter-spacing-tight: var(--vd3-tracking-tight);
+    --vd-letter-spacing-normal: var(--vd3-tracking-normal);
+    --vd-letter-spacing-wide: var(--vd3-tracking-wide);
+    --vd-letter-spacing-wider: var(--vd3-tracking-wider);
+    --vd-letter-spacing-widest: var(--vd3-tracking-widest);
 
     --vd-shadow-1: var(--vd3-shadow-1);
     --vd-shadow-2: var(--vd3-shadow-2);
@@ -464,8 +458,20 @@
     --vd-border-color: var(--vd3-color-border);
     --vd-color-primary: var(--vd3-color-focus);
     --vd-color-primary-hover: var(--vd3-color-interactive);
+    --vd-color-warning: var(--vd3-color-warning);
     --vd-color-error: var(--vd3-color-critical);
     --vd-color-danger: var(--vd3-color-critical);
+
+    --vd-icon-size-sm: var(--vd3-icon-size-sm);
+    --vd-icon-size-md: var(--vd3-icon-size-md);
+    --vd-icon-size-lg: var(--vd3-icon-size-lg);
+    --vd-icon-size-xl: var(--vd3-icon-size-xl);
+    --vd-icon-stroke-outline: var(--vd3-icon-stroke-outline);
+    --vd-icon-color: var(--vd3-icon-color);
+    --vd-icon-color-secondary: var(--vd3-icon-color-secondary);
+    --vd-icon-color-accent: var(--vd3-icon-color-accent);
+    --vd-icon-color-critical: var(--vd3-icon-color-critical);
+    --vd-icon-gap: var(--vd3-icon-gap);
   }
 
   /* ---------------------------------------------------------------------------
@@ -527,9 +533,67 @@
   }
 
   /* ---------------------------------------------------------------------------
-     19. Dark Theme Overrides
+     19. Explicit Light, OS Dark Preference & Dark Theme Overrides
      --------------------------------------------------------------------------- */
+  [data-theme="light"] {
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --vd3-color-canvas: var(--vd3-color-gray-9);
+      --vd3-color-canvas-rgb: 33, 37, 41;
+      --vd3-color-layer: var(--vd3-color-gray-8);
+      --vd3-color-layer-hover: var(--vd3-color-gray-7);
+      --vd3-color-text-primary: var(--vd3-color-gray-0);
+      --vd3-color-text-secondary: var(--vd3-color-gray-3);
+      --vd3-color-border: var(--vd3-color-gray-7);
+      --vd3-color-border-subtle: var(--vd3-color-gray-8);
+      --vd3-color-focus: var(--vd3-color-gold-4);
+      --vd3-color-focus-glow: rgba(255, 212, 59, 0.4);
+      --vd3-color-interactive: var(--vd3-color-gold-4);
+      --vd3-color-critical: var(--vd3-color-red-4);
+      --vd3-color-info: var(--vd3-color-golden-1);
+      --vd3-color-success: var(--vd3-color-golden-6);
+      --vd3-color-warning: var(--vd3-color-gold-4);
+      --vd3-color-shadow: #0000004d;
+
+      /* Dark theme elevation shadows with adjusted opacity */
+      --vd3-shadow-1: 0 1px 2px #00000033;
+      --vd3-shadow-2: 0 2px 3px 0 #0000004d, 0 1px 2px -1px #0000004d;
+      --vd3-shadow-3: 0 3px 5px -1px #0000004d, 0 2px 3px -2px #0000004d;
+      --vd3-shadow-4: 0 8px 13px -3px #0000004d, 0 3px 5px -3px #0000004d;
+      --vd3-shadow-5: 0 13px 21px -5px #0000004d, 0 5px 8px -5px #0000004d;
+      --vd3-shadow-6: 0 21px 34px -8px #00000080;
+    }
+  }
+
+  /* Progressive enhancement: CSS Color 5 light-dark() when no explicit [data-theme] is set.
+     Wide-gamut OKLCH equivalents for the golden-angle palette remain non-breaking until
+     sRGB fallbacks are wrapped in @supports (color: oklch(0% 0 0)) + @media (color-gamut: p3). */
+  @supports (color: light-dark(#fff, #000)) {
+    :root:not([data-theme]) {
+      --vd3-color-canvas: light-dark(#ffffff, var(--vd3-color-gray-9));
+      --vd3-color-layer: light-dark(var(--vd3-color-gray-0), var(--vd3-color-gray-8));
+      --vd3-color-layer-hover: light-dark(var(--vd3-color-gray-1), var(--vd3-color-gray-7));
+      --vd3-color-text-primary: light-dark(var(--vd3-color-gray-1000), var(--vd3-color-gray-0));
+      --vd3-color-text-secondary: light-dark(var(--vd3-color-gray-7), var(--vd3-color-gray-3));
+      --vd3-color-border: light-dark(var(--vd3-color-gray-3), var(--vd3-color-gray-7));
+      --vd3-color-border-subtle: light-dark(var(--vd3-color-gray-2), var(--vd3-color-gray-8));
+      --vd3-color-focus: light-dark(var(--vd3-color-gold-6), var(--vd3-color-gold-4));
+      --vd3-color-focus-glow: light-dark(rgba(250, 176, 5, 0.4), rgba(255, 212, 59, 0.4));
+      --vd3-color-interactive: light-dark(var(--vd3-color-gold-7), var(--vd3-color-gold-4));
+      --vd3-color-critical: light-dark(var(--vd3-color-red-6), var(--vd3-color-red-4));
+      --vd3-color-info: light-dark(var(--vd3-color-golden-1), var(--vd3-color-golden-1));
+      --vd3-color-success: light-dark(var(--vd3-color-golden-6), var(--vd3-color-golden-6));
+      --vd3-color-warning: light-dark(var(--vd3-color-gold-6), var(--vd3-color-gold-4));
+      --vd3-color-shadow: light-dark(#0000001a, #0000004d);
+    }
+  }
+
   [data-theme="dark"] {
+    color-scheme: dark;
     --vd3-color-canvas: var(--vd3-color-gray-9);
     --vd3-color-canvas-rgb: 33, 37, 41;
     --vd3-color-layer: var(--vd3-color-gray-8);
@@ -542,6 +606,9 @@
     --vd3-color-focus-glow: rgba(255, 212, 59, 0.4);
     --vd3-color-interactive: var(--vd3-color-gold-4);
     --vd3-color-critical: var(--vd3-color-red-4);
+    --vd3-color-info: var(--vd3-color-golden-1);
+    --vd3-color-success: var(--vd3-color-golden-6);
+    --vd3-color-warning: var(--vd3-color-gold-4);
     --vd3-color-shadow: #0000004d;
 
     /* Dark theme elevation shadows with adjusted opacity */
@@ -599,5 +666,15 @@
     --vd-duration-377: 0ms;
     --vd-duration-610: 0ms;
     --vd-duration-987: 0ms;
+  }
+
+  [data-motion="reduce"],
+  [data-motion="reduce"] *,
+  [data-motion="reduce"] *::before,
+  [data-motion="reduce"] *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -118,7 +118,7 @@ describe('Tier 1: Mathematical Foundations & Design Tokens', () => {
     assert.ok(tokens.space, 'Tokens space group must exist');
 
     const expectedSpacing = {
-      'fib-1': { rem: '0.125rem', px: 2, basis: 'A' },
+      'fib-1': { rem: '0.125rem', px: 2, basis: 'C-01' },
       'fib-2': { rem: '0.25rem', px: 4, basis: 'C-01' },
       'fib-3': { rem: '0.375rem', px: 6, basis: 'C-01' },
       'fib-5': { rem: '0.5rem', px: 8, basis: 'C-01' },

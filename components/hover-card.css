@@ -36,6 +36,26 @@
     display: none;
   }
 
+  @supports (position-area: block-end) {
+    .vd-hover-card[popover] {
+      position: fixed;
+      inset: auto;
+      margin: var(--vd3-space-fib-3, 0.375rem) 0 0;
+      position-anchor: var(--_vd-anchor);
+      position-area: block-end;
+      position-try-fallbacks: flip-block, flip-inline;
+    }
+    .vd-hover-card[popover][data-placement="top"] {
+      position-area: block-start;
+    }
+    .vd-hover-card[popover][data-placement="start"] {
+      position-area: inline-start;
+    }
+    .vd-hover-card[popover][data-placement="end"] {
+      position-area: inline-end;
+    }
+  }
+
   .vd-hover-card-title {
     margin: 0 0 var(--vd3-space-fib-5, 0.5rem);
     font-size: var(--vd3-font-size-base, 1rem);

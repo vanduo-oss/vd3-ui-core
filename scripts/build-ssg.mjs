@@ -306,7 +306,7 @@ const foundationRows = [
   ['density', 'New in 1.1', 'A / B', 'Two modes via [data-density]: comfortable (1) and compact (1/sqrt(phi) spacing scale)'],
   ['data-viz', 'Boundary', 'A', 'vd3-charts / vd3-flowchart consume the golden-angle palette; core ships no chart components'],
   ['patterns', 'New in 1.1', 'B', 'Empty states, auth flows, app shell, onboarding, disabled/read-only — guidance over normative components'],
-  ['components', 'New in 1.0', 'A / B / C', '35 zero-framework CSS modules (layout engine + 34 primitives), 38 per-slug specs, @layer vd3.components'],
+  ['components', 'New in 1.0', 'A / B / C', '36 zero-framework CSS modules (layout engine + 35 primitives), 39 per-slug specs, @layer vd3.components'],
   ['conventions', 'Normative', 'B', 'Identifier naming, cross-system mappings, and editorial copy rules'],
 ];
 
@@ -327,21 +327,21 @@ const specimens = [
     basis: 'B',
     tokens: 'container.sm radius.fib-13 shadow.5 z.modal',
     preview: `<div class="specimen-actions">
-        <button id="demo-dialog-trigger" type="button" class="vd-btn vd-btn--outline vd-btn--sm" aria-haspopup="dialog" aria-controls="demo-modal-dialog">Open Live Modal</button>
+        <button id="demo-dialog-trigger" type="button" class="vd-btn vd-btn--outline vd-btn--sm" command="show-modal" commandfor="demo-modal-dialog" aria-haspopup="dialog" aria-controls="demo-modal-dialog">Open Live Modal</button>
         <span class="specimen-meta">Native &lt;dialog&gt;.showModal(), Lucas L₁₃ 521px max-width, Esc dismissal.</span>
       </div>
       <dialog id="demo-modal-dialog" class="vd-dialog" aria-labelledby="demo-dlg-title">
         <div class="vd-dialog-header">
-          <p id="demo-dlg-title" class="vd-dialog-title">VD3 Native Modal Contract</p>
-          <button type="button" class="vd-btn vd-btn--ghost vd-btn--sm vd-dialog-close" aria-label="Close dialog">×</button>
+          <h2 id="demo-dlg-title" class="vd-dialog-title">VD3 Native Modal Contract</h2>
+          <button type="button" class="vd-btn vd-btn--ghost vd-btn--sm vd-dialog-close" data-dialog-close aria-label="Close dialog">×</button>
         </div>
         <div class="vd-dialog-body"><p>Uses native &lt;dialog&gt;.showModal(), Lucas L₁₃ 521px max-width, Esc dismissal, and focus restoration.</p></div>
         <div class="vd-dialog-footer">
-          <button type="button" class="vd-btn vd-btn--outline vd-btn--sm">Cancel</button>
-          <button type="button" class="vd-btn vd-btn--primary vd-btn--sm">Acknowledge</button>
+          <button type="button" class="vd-btn vd-btn--outline vd-btn--sm" data-dialog-close>Cancel</button>
+          <button type="button" class="vd-btn vd-btn--primary vd-btn--sm" data-dialog-close>Acknowledge</button>
         </div>
       </dialog>`,
-    code: '<dialog class="vd-dialog" aria-labelledby="dlg-title">...</dialog>',
+    code: '<dialog class="vd-dialog" aria-labelledby="dlg-title"><div class="vd-dialog-header"><h2 id="dlg-title" class="vd-dialog-title">Confirm</h2><button type="button" class="vd-dialog-close" aria-label="Close">×</button></div><div class="vd-dialog-body"><p>Lucas L13 modal contract.</p></div></dialog>',
   },
   {
     id: 'card',
@@ -349,7 +349,7 @@ const specimens = [
     basis: 'A',
     tokens: 'math.phi radius.fib-8 space.fib-21 shadow.2',
     preview: `<div class="vd-card vd-card--elevated"><div class="vd-card-body">Golden proportion card surface bound to Fibonacci shadow level 2.</div></div>`,
-    code: '<article class="vd-card vd-card--elevated"><div class="vd-card-body">...</div></article>',
+    code: '<article class="vd-card vd-card--elevated"><div class="vd-card-body">Golden proportion card surface bound to shadow.2.</div></article>',
   },
   {
     id: 'form',
@@ -379,7 +379,7 @@ const specimens = [
     tokens: 'z.sticky space.fib-13 color.role.canvas line.hair',
     preview: `<span class="vd-badge vd-badge--info">z-sticky: 1020</span>
       <span>Sticky header bar paired with anchor scroll-margin-top compensation.</span>`,
-    code: '<nav class="vd-navbar" aria-label="Secondary">...</nav>',
+    code: '<nav class="vd-navbar" aria-label="Secondary"><div class="vd-navbar-container"><a href="#overview" class="vd-navbar-brand">vd3</a><div class="vd-navbar-menu"><a class="vd-nav-link" href="#foundations" aria-current="page">Foundations</a></div></div></nav>',
   },
   {
     id: 'accordion',
@@ -387,7 +387,7 @@ const specimens = [
     basis: 'A',
     tokens: 'space.fib-13 space.fib-21 radius.fib-8 motion.144',
     preview: `<details class="vd-accordion"><summary class="vd-accordion-summary">Native disclosure contract (144ms)</summary><div class="vd-accordion-content">Zero JS required for Enter/Space disclosure toggling.</div></details>`,
-    code: '<details class="vd-accordion"><summary class="vd-accordion-summary">Spec</summary></details>',
+    code: '<details class="vd-accordion"><summary class="vd-accordion-summary">Spec</summary><div class="vd-accordion-content">Disclosure body.</div></details>',
   },
   {
     id: 'table',
@@ -395,7 +395,7 @@ const specimens = [
     basis: 'A',
     tokens: 'space.fib-8 space.fib-13 line.hair color.role.layer',
     preview: `<div class="vd-table-container" tabindex="0" role="region" aria-label="Sample metric table"><table class="vd-table vd-table--compact"><thead><tr><th scope="col">Step</th><th scope="col">px</th></tr></thead><tbody><tr><th scope="row">F₈</th><td>21px</td></tr></tbody></table></div>`,
-    code: '<div class="vd-table-container" tabindex="0"><table class="vd-table">...</table></div>',
+    code: '<div class="vd-table-container" tabindex="0" role="region" aria-label="Metric table"><table class="vd-table"><thead><tr><th scope="col">Step</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">F8</th><td>21px</td></tr></tbody></table></div>',
   },
   {
     id: 'code',
@@ -424,7 +424,7 @@ const specimens = [
     tokens: 'space.fib-21 space.fib-34 radius.full color.role.focus focus.ring.width motion.144',
     preview: `<button type="button" role="switch" aria-checked="true" class="vd-switch" aria-label="Notifications enabled"><span class="vd-switch-thumb"></span></button>
       <button type="button" role="switch" aria-checked="false" class="vd-switch vd-switch--sm" aria-label="Compact mode"></button>`,
-    code: '<button type="button" role="switch" aria-checked="false" class="vd-switch"><span class="vd-switch-thumb"></span></button>',
+    code: '<button type="button" role="switch" aria-checked="false" class="vd-switch" aria-label="Enable option"><span class="vd-switch-thumb"></span></button>',
   },
   {
     id: 'alert',
@@ -432,7 +432,7 @@ const specimens = [
     basis: 'B',
     tokens: 'space.fib-13 space.fib-21 line.regular color.role.critical color.role.focus radius.fib-8',
     preview: `<div class="vd-alert vd-alert--warning" role="alert"><span class="vd-alert-icon" aria-hidden="true">!</span><div class="vd-alert-content"><p class="vd-alert-title">Registered exception C-02</p><p class="vd-alert-body">Glass blur soft-caps at 20px — the Convergence Zone is documented in foundations/glass.md.</p></div><button type="button" class="vd-alert-close" aria-label="Dismiss alert">×</button></div>`,
-    code: '<div class="vd-alert vd-alert--critical" role="alert">...</div>',
+    code: '<div class="vd-alert vd-alert--critical" role="alert"><span class="vd-alert-icon" aria-hidden="true">!</span><div class="vd-alert-content"><p class="vd-alert-title">Critical Notice</p><p class="vd-alert-body">Semantic role token check failed.</p></div></div>',
   },
   {
     id: 'tabs',
@@ -440,16 +440,17 @@ const specimens = [
     basis: 'B',
     tokens: 'space.fib-8 space.fib-13 line.hair line.thin color.role.focus motion.89',
     preview: `<div class="vd-tabs" role="tablist" aria-label="Specimen tabs"><button type="button" class="vd-tab" role="tab" id="ssg-tab-a" aria-selected="true" aria-controls="ssg-panel-a">Tokens</button><button type="button" class="vd-tab" role="tab" id="ssg-tab-b" aria-selected="false" aria-controls="ssg-panel-b" tabindex="-1">Components</button></div>
-      <div class="vd-tab-panel" role="tabpanel" id="ssg-panel-a" aria-labelledby="ssg-tab-a">DTCG 2025.10 registry — 150+ leaf tokens, all basis-classed.</div>`,
-    code: '<div class="vd-tabs" role="tablist"><button class="vd-tab" role="tab" aria-selected="true">…</button></div>',
+      <div class="vd-tab-panel" role="tabpanel" id="ssg-panel-a" aria-labelledby="ssg-tab-a">DTCG 2025.10 registry — 150+ leaf tokens, all basis-classed.</div>
+      <div class="vd-tab-panel" role="tabpanel" id="ssg-panel-b" aria-labelledby="ssg-tab-b" hidden>36 zero-framework CSS modules in @layer vd3.components and @layer vd3.layout.</div>`,
+    code: '<div class="vd-tabs" role="tablist" aria-label="Views"><button type="button" class="vd-tab" role="tab" id="t1" aria-selected="true" aria-controls="p1">Tokens</button><button type="button" class="vd-tab" role="tab" id="t2" aria-selected="false" aria-controls="p2" tabindex="-1">CSS</button></div><div class="vd-tab-panel" role="tabpanel" id="p1" aria-labelledby="t1">DTCG content</div>',
   },
   {
     id: "drawer",
     title: "Drawer (.vd-drawer)",
     basis: "B",
     tokens: "z.modal z.modal-backdrop container.sm space.fib-21 motion.slow",
-    preview: `<button type="button" class="vd-btn vd-btn--outline vd-btn--sm">Open drawer</button> <span class="specimen-meta">Fixed panel at z.modal, Esc + backdrop close, slide 377ms.</span>`,
-    code: "<aside class=\"vd-drawer vd-drawer--end\" data-open=\"true\">...</aside>",
+    preview: `<button type="button" class="vd-btn vd-btn--outline vd-btn--sm" data-drawer-open="ssg-demo-drawer" aria-haspopup="dialog" aria-controls="ssg-demo-drawer">Open drawer</button> <span class="specimen-meta">Fixed panel at z.modal, Esc + backdrop close, slide 377ms.</span>`,
+    code: '<aside class="vd-drawer vd-drawer--end" role="dialog" aria-modal="true" aria-labelledby="drw-title" data-open="true"><div class="vd-drawer-header"><h2 id="drw-title" class="vd-drawer-title">Details</h2><button type="button" class="vd-drawer-close" aria-label="Close">×</button></div><div class="vd-drawer-body"><p>Sliding panel.</p></div></aside>',
   },
   {
     id: "tooltip",
@@ -457,7 +458,7 @@ const specimens = [
     basis: "A",
     tokens: "z.tooltip type.size.xs space.fib-5 radius.fib-3 motion.89",
     preview: `<span class="vd-tooltip vd-tooltip--top" role="tooltip">φ = 1.618…</span>`,
-    code: "<span class=\"vd-tooltip\" role=\"tooltip\">Hint</span>",
+    code: '<span class="vd-tooltip" role="tooltip">Hint</span>',
   },
   {
     id: "popover",
@@ -465,7 +466,7 @@ const specimens = [
     basis: "B",
     tokens: "z.popover shadow.4 radius.fib-8 space.fib-13 container.sm motion.233",
     preview: `<div class="vd-popover"><div class="vd-popover-header">Popover title</div><div class="vd-popover-body">Anchored floating content with arrow.</div></div>`,
-    code: "<div class=\"vd-popover\" data-placement=\"bottom\">...</div>",
+    code: '<div class="vd-popover" data-placement="bottom" popover="auto"><div class="vd-popover-header">Details</div><div class="vd-popover-body">Anchored disclosure panel.</div></div>',
   },
   {
     id: "menu",
@@ -473,7 +474,7 @@ const specimens = [
     basis: "B",
     tokens: "z.dropdown shadow.4 radius.fib-8 space.fib-8 color.role.layer-hover",
     preview: `<div class="vd-menu" role="menu"><div class="vd-menu-item" role="menuitem">Rename</div><div class="vd-menu-item" role="menuitem">Duplicate</div><div class="vd-menu-divider"></div><div class="vd-menu-item vd-menu-item--danger" role="menuitem">Delete</div></div>`,
-    code: "<div class=\"vd-menu\" role=\"menu\"><div class=\"vd-menu-item\">\u2026</div></div>",
+    code: '<div class="vd-menu" role="menu"><button type="button" class="vd-menu-item" role="menuitem">Rename</button><button type="button" class="vd-menu-item" role="menuitem">Duplicate</button></div>',
   },
   {
     id: "context-menu",
@@ -481,7 +482,7 @@ const specimens = [
     basis: "B",
     tokens: "z.popover shadow.4 radius.fib-8 space.fib-8",
     preview: `<div class="vd-context-menu" role="menu"><div class="vd-context-menu-item" role="menuitem">Open</div><div class="vd-context-menu-item vd-context-menu-item--danger" role="menuitem">Remove</div></div>`,
-    code: "<div class=\"vd-context-menu\" role=\"menu\">...</div>",
+    code: '<div class="vd-context-menu" role="menu"><button type="button" class="vd-context-menu-item" role="menuitem">Inspect</button><button type="button" class="vd-context-menu-item vd-context-menu-item--danger" role="menuitem">Remove</button></div>',
   },
   {
     id: "menubar",
@@ -489,7 +490,7 @@ const specimens = [
     basis: "B",
     tokens: "space.fib-8 line.hair color.role.layer-hover",
     preview: `<div class="vd-menubar"><span class="vd-menubar-item" aria-haspopup="true" aria-expanded="false">File</span><span class="vd-menubar-item">Edit</span><span class="vd-menubar-item">View</span></div>`,
-    code: "<div class=\"vd-menubar\"><span class=\"vd-menubar-item\">File</span></div>",
+    code: '<div class="vd-menubar" role="menubar" aria-label="Editor"><button type="button" class="vd-menubar-item" role="menuitem" aria-haspopup="true" aria-expanded="false">File</button><button type="button" class="vd-menubar-item" role="menuitem">Edit</button></div>',
   },
   {
     id: "breadcrumb",
@@ -497,7 +498,7 @@ const specimens = [
     basis: "B",
     tokens: "space.fib-5 type.size.sm color.role.interactive motion.89",
     preview: `<nav aria-label="Breadcrumb"><ol class="vd-breadcrumb"><li class="vd-breadcrumb-item"><a class="vd-breadcrumb-link" href="#foundations">Foundations</a></li><li class="vd-breadcrumb-item"><a class="vd-breadcrumb-link" href="#components" aria-current="page">Color</a></li></ol></nav>`,
-    code: "<nav aria-label=\"Breadcrumb\"><ol class=\"vd-breadcrumb\">...</ol></nav>",
+    code: '<nav aria-label="Breadcrumb"><ol class="vd-breadcrumb"><li class="vd-breadcrumb-item"><a class="vd-breadcrumb-link" href="#foundations">Foundations</a></li><li class="vd-breadcrumb-item"><a class="vd-breadcrumb-link" href="#components" aria-current="page">Color</a></li></ol></nav>',
   },
   {
     id: "pagination",
@@ -505,7 +506,7 @@ const specimens = [
     basis: "B",
     tokens: "space.fib-8 line.hair radius.fib-5 type.size.sm color.role.focus",
     preview: `<nav class="vd-pagination" aria-label="Pagination"><ul class="vd-pagination-list"><li class="vd-pagination-item"><a class="vd-pagination-link vd-pagination-link--prev" href="#components" aria-label="Previous page">‹</a></li><li class="vd-pagination-item"><a class="vd-pagination-link" href="#components" aria-current="page">1</a></li><li class="vd-pagination-item"><a class="vd-pagination-link" href="#components">2</a></li></ul></nav>`,
-    code: "<nav class=\"vd-pagination\"><ul class=\"vd-pagination-list\">...</ul></nav>",
+    code: '<nav class="vd-pagination" aria-label="Pagination"><ul class="vd-pagination-list"><li class="vd-pagination-item"><a class="vd-pagination-link" href="#page-1" aria-current="page">1</a></li><li class="vd-pagination-item"><a class="vd-pagination-link" href="#page-2">2</a></li></ul></nav>',
   },
   {
     id: "avatar",
@@ -513,7 +514,7 @@ const specimens = [
     basis: "A",
     tokens: "space.fib-21 space.fib-34 radius.full line.thin color.role.layer",
     preview: `<span class="vd-avatar vd-avatar--md vd-avatar--round"><span class="vd-avatar-initials">VD</span><span class="vd-avatar-status vd-avatar-status--online"></span></span>`,
-    code: "<span class=\"vd-avatar vd-avatar--round\"><span class=\"vd-avatar-initials\">VD</span></span>",
+    code: '<span class="vd-avatar vd-avatar--round"><span class="vd-avatar-initials">VD</span></span>',
   },
   {
     id: "progress",
@@ -521,7 +522,7 @@ const specimens = [
     basis: "A",
     tokens: "space.fib-5 radius.full color.role.focus motion.233",
     preview: `<div class="vd-progress" role="progressbar" aria-valuenow="62" aria-label="Upload progress"><div class="vd-progress-bar" style="--_vd-progress-value: 62%"></div></div>`,
-    code: "<div class=\"vd-progress\" role=\"progressbar\"><div class=\"vd-progress-bar\" style=\"--_vd-progress-value: 62%\"></div></div>",
+    code: '<div class="vd-progress" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" aria-label="Progress"><div class="vd-progress-bar" style="--_vd-progress-value: 62%"></div></div>',
   },
   {
     id: "spinner",
@@ -529,7 +530,7 @@ const specimens = [
     basis: "A",
     tokens: "space.fib-21 radius.full line.hair color.role.focus motion.610 easing.linear",
     preview: `<span class="vd-spinner vd-spinner--md" role="status" aria-label="Loading"></span>`,
-    code: "<span class=\"vd-spinner\" role=\"status\" aria-label=\"Loading\"></span>",
+    code: '<span class="vd-spinner" role="status" aria-label="Loading"></span>',
   },
   {
     id: "skeleton",
@@ -537,7 +538,7 @@ const specimens = [
     basis: "A",
     tokens: "color.role.layer-hover radius.fib-5 motion.377 easing.in-out",
     preview: `<div class="vd-skeleton vd-skeleton--text" style="--_vd-skeleton-w: 82%"></div><div class="vd-skeleton vd-skeleton--text" style="--_vd-skeleton-w: 58%"></div>`,
-    code: "<div class=\"vd-skeleton vd-skeleton--text\"></div>",
+    code: '<div class="vd-skeleton vd-skeleton--text"></div>',
   },
   {
     id: "slider",
@@ -545,7 +546,7 @@ const specimens = [
     basis: "A",
     tokens: "space.fib-3 space.fib-21 radius.full line.thin color.role.focus motion.89",
     preview: `<input type="range" class="vd-slider" min="0" max="100" value="40" aria-label="Volume">`,
-    code: "<input type=\"range\" class=\"vd-slider\" min=\"0\" max=\"100\" aria-label=\"Volume\">",
+    code: '<input type="range" class="vd-slider" min="0" max="100" aria-label="Volume">',
   },
   {
     id: "datepicker",
@@ -553,7 +554,7 @@ const specimens = [
     basis: "B",
     tokens: "z.popover shadow.4 radius.fib-8 space.fib-13 color.role.focus",
     preview: `<div class="vd-datepicker"><div class="vd-datepicker-header"><span class="vd-datepicker-title">November 2026</span></div><div class="vd-datepicker-grid"><span class="vd-datepicker-day">15</span><span class="vd-datepicker-day" aria-selected="true">16</span><span class="vd-datepicker-day">17</span></div></div>`,
-    code: "<div class=\"vd-datepicker\"><div class=\"vd-datepicker-grid\">...</div></div>",
+    code: '<div class="vd-datepicker" role="dialog" aria-label="Choose date"><div class="vd-datepicker-header"><span class="vd-datepicker-title">November 2026</span></div><div class="vd-datepicker-grid" role="grid"><button type="button" class="vd-datepicker-day" aria-selected="true">16</button><button type="button" class="vd-datepicker-day">17</button></div></div>',
   },
   {
     id: "timepicker",
@@ -561,7 +562,7 @@ const specimens = [
     basis: "B",
     tokens: "z.popover space.fib-8 type.size.sm color.role.focus",
     preview: `<div class="vd-timepicker"><div class="vd-timepicker-item" aria-selected="true">09:00</div><div class="vd-timepicker-item">09:30</div><div class="vd-timepicker-item">10:00</div></div>`,
-    code: "<div class=\"vd-timepicker\"><div class=\"vd-timepicker-item\">09:00</div></div>",
+    code: '<div class="vd-timepicker"><div class="vd-timepicker-item" aria-selected="true">09:00</div></div>',
   },
   {
     id: "upload",
@@ -569,7 +570,7 @@ const specimens = [
     basis: "B",
     tokens: "line.thin radius.fib-8 space.fib-21 color.role.border icon.size.lg",
     preview: `<label class="vd-upload"><span class="vd-upload-icon" aria-hidden="true">↑</span><span class="vd-upload-text">Drop files here</span><span class="vd-upload-hint">or click to browse</span><input class="vd-upload-input" type="file" aria-label="Upload files"></label>`,
-    code: "<label class=\"vd-upload\"><input class=\"vd-upload-input\" type=\"file\" aria-label=\"Upload files\"></label>",
+    code: '<label class="vd-upload"><input class="vd-upload-input" type="file" aria-label="Upload files"></label>',
   },
   {
     id: "carousel",
@@ -577,7 +578,7 @@ const specimens = [
     basis: "B",
     tokens: "space.fib-34 radius.fib-8 motion.377 color.role.focus focus.ring.width",
     preview: `<div class="vd-carousel"><div class="vd-carousel-track" style="--_vd-carousel-index: 0"><div class="vd-carousel-slide">Slide 1</div><div class="vd-carousel-slide">Slide 2</div></div><button type="button" class="vd-carousel-prev" aria-label="Previous slide">‹</button><button type="button" class="vd-carousel-next" aria-label="Next slide">›</button></div>`,
-    code: "<div class=\"vd-carousel\"><div class=\"vd-carousel-track\">...</div></div>",
+    code: '<div class="vd-carousel" role="region" aria-roledescription="carousel" aria-label="Slides"><div class="vd-carousel-track" style="--_vd-carousel-index: 0"><div class="vd-carousel-slide">Slide 1</div><div class="vd-carousel-slide">Slide 2</div></div><button type="button" class="vd-carousel-prev" aria-label="Previous slide">‹</button><button type="button" class="vd-carousel-next" aria-label="Next slide">›</button></div>',
   },
   {
     id: "toolbar",
@@ -585,7 +586,7 @@ const specimens = [
     basis: "B",
     tokens: "space.fib-8 line.hair radius.fib-8 color.role.layer",
     preview: `<div class="vd-toolbar"><div class="vd-toolbar-group"><button type="button" class="vd-toolbar-button">B</button><button type="button" class="vd-toolbar-button">I</button></div><span class="vd-toolbar-separator"></span><button type="button" class="vd-toolbar-button">Link</button></div>`,
-    code: "<div class=\"vd-toolbar\"><div class=\"vd-toolbar-group\">...</div></div>",
+    code: '<div class="vd-toolbar" role="toolbar" aria-label="Formatting"><div class="vd-toolbar-group"><button type="button" class="vd-toolbar-button" aria-pressed="false">Bold</button><button type="button" class="vd-toolbar-button" aria-pressed="false">Italic</button></div><span class="vd-toolbar-separator" role="separator"></span><button type="button" class="vd-toolbar-button">Link</button></div>',
   },
   {
     id: "segmented",
@@ -593,7 +594,7 @@ const specimens = [
     basis: "B",
     tokens: "radius.full line.hair space.fib-1 color.role.layer shadow.1",
     preview: `<div class="vd-segmented" role="radiogroup" aria-label="View"><button type="button" class="vd-segmented-item" aria-checked="true">Day</button><button type="button" class="vd-segmented-item" aria-checked="false">Week</button><button type="button" class="vd-segmented-item" aria-checked="false">Month</button></div>`,
-    code: "<div class=\"vd-segmented\"><button class=\"vd-segmented-item\" aria-checked=\"true\">Day</button></div>",
+    code: '<div class="vd-segmented" role="radiogroup" aria-label="View"><button type="button" class="vd-segmented-item" aria-checked="true">Day</button></div>',
   },
   {
     id: "hover-card",
@@ -601,7 +602,7 @@ const specimens = [
     basis: "B",
     tokens: "z.popover shadow.4 radius.fib-8 space.fib-13 container.sm motion.144",
     preview: `<div class="vd-hover-card"><p class="vd-hover-card-title">Hover card</p><p class="vd-hover-card-body">Rich preview on hover or keyboard focus.</p></div>`,
-    code: "<div class=\"vd-hover-card\">...</div>",
+    code: '<div class="vd-hover-card"><p class="vd-hover-card-title">Token Reference</p><p class="vd-hover-card-body">Fibonacci F8 spacing preview.</p></div>',
   },
   {
     id: "tour",
@@ -609,7 +610,15 @@ const specimens = [
     basis: "B",
     tokens: "z.popover shadow.5 radius.fib-8 space.fib-21 motion.233",
     preview: `<div class="vd-tour"><p class="vd-tour-title">Step 2 of 5</p><p class="vd-tour-body">This is where the tokens live.</p><div class="vd-tour-progress"></div><div class="vd-tour-footer"><span class="vd-tour-counter">2 / 5</span><div class="vd-tour-actions"><button type="button" class="vd-tour-btn">Back</button><button type="button" class="vd-tour-btn vd-tour-btn--primary">Next</button></div></div></div>`,
-    code: "<div class=\"vd-tour\">...</div>",
+    code: '<div class="vd-tour" role="dialog" aria-labelledby="tour-title"><h2 id="tour-title" class="vd-tour-title">Step 1 of 3</h2><p class="vd-tour-body">Explore normative DTCG tokens.</p><div class="vd-tour-footer"><span class="vd-tour-counter">1 / 3</span><div class="vd-tour-actions"><button type="button" class="vd-tour-btn vd-tour-btn--primary">Next</button></div></div></div>',
+  },
+  {
+    id: 'icon',
+    title: 'Icon (.vd-icon)',
+    basis: 'A',
+    tokens: 'icon.size.md icon.size.lg icon.stroke.outline color.role.text-primary',
+    preview: `<div class="vd-icon-pair"><span class="vd-icon vd-icon--sm vd-icon--secondary" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span><span class="vd-icon vd-icon--md vd-icon--primary" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span class="vd-icon vd-icon--lg vd-icon--accent" aria-hidden="true"><svg viewBox="0 0 24 24"><polygon points="12 3 21 19 3 19"/></svg></span><span class="specimen-meta">Fibonacci F₇–F₁₀ (13/21/34/55px) · φ stroke 1.618</span></div>`,
+    code: '<span class="vd-icon-pair"><span class="vd-icon vd-icon--md vd-icon--primary" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/></svg></span><span>Golden Ratio</span></span>',
   },
   {
     id: 'layout',
@@ -617,19 +626,20 @@ const specimens = [
     basis: 'B',
     tokens: 'container.lg space.fib-21 math.phi math.inv-phi',
     preview: `<span>61.8% primary measure paired with 38.2% secondary rail inside 987px container.</span>`,
-    code: '<div class="vd-container-lg vd-split-golden">...</div>',
+    code: '<div class="vd-container-lg vd-split-golden"><section class="vd-split-major">61.8% Primary</section><aside class="vd-split-minor">38.2% Secondary</aside></div>',
   },
 ];
 
 const spacingSummaryMd = `
-One normative Fibonacci ladder governs padding, margin, and layout gaps. Adjacent steps converge toward φ = 1.618; sub-8px micro-adjustments use Registered Exception C-01.
+One normative Fibonacci ladder governs padding, margin, and layout gaps. Adjacent steps converge toward φ = 1.618; sub-13px adjustments use Registered Exception C-01.
 
 | Step | Token | rem | px | Basis |
 | --- | --- | --- | --- | --- |
-| F₃ | \`space.fib-2\` | 0.125rem | 2px | C-01 |
-| F₄ | \`space.fib-3\` | 0.1875rem | 3px | C-01 |
-| F₅ | \`space.fib-5\` | 0.3125rem | 5px | C-01 |
-| F₆ | \`space.fib-8\` | 0.5rem | 8px | Class A |
+| F₂ | \`space.fib-1\` | 0.125rem | 2px | C-01 |
+| F₃ | \`space.fib-2\` | 0.25rem | 4px | C-01 |
+| F₄ | \`space.fib-3\` | 0.375rem | 6px | C-01 |
+| F₅ | \`space.fib-5\` | 0.5rem | 8px | C-01 |
+| F₆ | \`space.fib-8\` | 0.75rem | 12px | C-01 |
 | F₇ | \`space.fib-13\` | 0.8125rem | 13px | Class A |
 | F₈ | \`space.fib-21\` | 1.3125rem | 21px | Class A |
 | F₉ | \`space.fib-34\` | 2.125rem | 34px | Class A |
@@ -759,17 +769,96 @@ const foundationMatrixHtml = `
   </div>
 </section>`;
 
-const componentSpecSlugs = ["layout", "button", "dialog", "card", "input", "select", "checkbox", "radio", "badge", "navbar", "accordion", "table", "code", "toast", "switch", "alert", "tabs", "drawer", "tooltip", "popover", "menu", "context-menu", "menubar", "breadcrumb", "pagination", "avatar", "progress", "spinner", "skeleton", "slider", "datepicker", "timepicker", "upload", "carousel", "toolbar", "segmented", "hover-card", "tour"];
+const componentSpecSlugs = ["layout", "button", "dialog", "card", "input", "select", "checkbox", "radio", "badge", "navbar", "accordion", "table", "code", "toast", "switch", "alert", "tabs", "drawer", "tooltip", "popover", "menu", "context-menu", "menubar", "breadcrumb", "pagination", "avatar", "progress", "spinner", "skeleton", "slider", "datepicker", "timepicker", "upload", "carousel", "toolbar", "segmented", "hover-card", "tour", "icon"];
+
+const stripSearchMd = (md) =>
+  String(md || '')
+    .replace(/^---[\s\S]*?---\r?\n/, '')
+    .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/[#>*`|_\[\]()]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+const patternSlugs = ['empty-states', 'auth-flows', 'app-shell', 'onboarding', 'disabled-read-only'];
+
+const ssgSearchDocs = [
+  ...chapters.map((ch) => {
+    const sec = sectionsHtml.find((s) => s.id === ch.id);
+    return {
+      id: ch.id,
+      title: `${ch.num} ${ch.label}`,
+      category: 'Foundations',
+      href: `#${ch.id}`,
+      content: sec ? stripSearchMd(sec.md).slice(0, 1000) : `${ch.label} chapter`,
+    };
+  }),
+  ...specimens.map((s) => ({
+    id: `specimen-${s.id}`,
+    title: s.title,
+    category: 'Specimen',
+    href: `#specimen-${s.id}`,
+    content: `${s.tokens} ${s.code}`.slice(0, 1000),
+  })),
+  {
+    id: 'spec-index-heading',
+    title: 'Component Specification Index',
+    category: 'Spec',
+    href: '#spec-index-heading',
+    content: stripSearchMd(readSpec('components/SPEC.md')).slice(0, 1000),
+  },
+  ...componentSpecSlugs.map((slug) => ({
+    id: `spec-${slug}`,
+    title: `${slug} specification`,
+    category: 'Spec',
+    href: `#spec-${slug}`,
+    content: stripSearchMd(readSpec(`components/${slug}/spec.md`)).slice(0, 1000),
+  })),
+  {
+    id: 'convention-naming',
+    title: 'Public & Token Naming Conventions',
+    category: 'Conventions',
+    href: '#convention-naming',
+    content: stripSearchMd(readSpec('conventions/naming.md')).slice(0, 1000),
+  },
+  {
+    id: 'convention-mappings',
+    title: 'Cross-System Token Mappings',
+    category: 'Conventions',
+    href: '#convention-mappings',
+    content: stripSearchMd(readSpec('conventions/mappings.md')).slice(0, 1000),
+  },
+  {
+    id: 'convention-content',
+    title: 'Editorial Tone & Content Strings',
+    category: 'Conventions',
+    href: '#convention-content',
+    content: stripSearchMd(readSpec('conventions/content.md')).slice(0, 1000),
+  },
+  {
+    id: 'patterns-overview',
+    title: 'Patterns — Guidance Over Components',
+    category: 'Patterns',
+    href: '#patterns',
+    content: stripSearchMd(readSpec('patterns/PATTERNS.md')).slice(0, 1000),
+  },
+  ...patternSlugs.map((pat) => ({
+    id: `pattern-${pat}`,
+    title: `${pat} pattern`,
+    category: 'Patterns',
+    href: `#pattern-${pat}`,
+    content: stripSearchMd(readSpec(`patterns/${pat}.md`)).slice(0, 1000),
+  })),
+];
 
 const componentsSectionHtml = `
 <section id="components" class="doc-section">
-  <h2><span class="n">16</span> Components — 34 Primitives + Layout Engine <span class="vd-badge vd-badge--info">Zero-Framework CSS</span></h2>
+  <h2><span class="n">16</span> Components — 35 Primitives + Layout Engine <span class="vd-badge vd-badge--info">Zero-Framework CSS</span></h2>
   <p class="lead">
     Every core stylesheet resides inside <code>@layer vd3.components</code> or <code>@layer vd3.layout</code>,
     binds strictly to W3C DTCG tokens from <code>tokens/vd3.tokens.json</code>, and exposes machine-readable
     <code>data-vd-*</code> contracts. Every module has a per-slug behavioral spec below.
   </p>
-  <h3>Component Specification Index</h3>
+  <h3 id="spec-index-heading">Component Specification Index</h3>
   <div class="md-doc">
     ${renderMarkdown(readSpec('components/SPEC.md'), 3, 'Component specification index')}
   </div>
@@ -777,7 +866,7 @@ const componentsSectionHtml = `
     ${specimens
       .map(
         (s) => `
-    <article class="specimen-card" data-vd-component="${escHtml(s.id)}" data-vd-basis-class="${escHtml(s.basis)}" data-vd-tokens="${escHtml(s.tokens)}">
+    <article id="specimen-${escHtml(s.id)}" class="specimen-card" data-vd-component="${escHtml(s.id)}" data-vd-basis-class="${escHtml(s.basis)}" data-vd-tokens="${escHtml(s.tokens)}">
       <div class="specimen-header">
         <h3>${escHtml(s.title)}</h3>
         <span class="vd-badge vd-badge--info">Class ${escHtml(s.basis)}</span>
@@ -791,34 +880,42 @@ const componentsSectionHtml = `
       )
       .join('\n')}
   </div>
-  <h3>Per-Slug Component Specifications (${componentSpecSlugs.length} specs, W3C APG where applicable)</h3>
-  ${componentSpecSlugs
-    .map(
-      (slug) => `<h4>${escHtml(slug)}</h4>
-  <div class="md-doc">${renderMarkdown(readSpec('components/' + slug + '/spec.md'), 4, slug + ' specification')}</div>`
-    )
-    .join('\n  ')}
+  <h3 id="per-slug-specs">Per-Slug Component Specifications (${componentSpecSlugs.length} specs, W3C APG where applicable)</h3>
+  <div class="spec-entries">
+    ${componentSpecSlugs
+      .map(
+        (slug) => `<article id="spec-${escHtml(slug)}" class="spec-entry"><h4 class="spec-entry-title">${escHtml(slug)}</h4>
+  <div class="md-doc">${renderMarkdown(readSpec('components/' + slug + '/spec.md'), 4, slug + ' specification')}</div></article>`
+      )
+      .join('\n    ')}
+  </div>
 </section>`;
 
 const conventionsSectionHtml = `
 <section id="conventions" class="doc-section">
   <h2><span class="n">17</span> Conventions — Naming, Mappings &amp; Content <span class="vd-badge vd-badge--info">Normative</span></h2>
-  <h3>Public &amp; Token Naming</h3>
-  <div class="md-doc">${renderMarkdown(readSpec('conventions/naming.md'), 3, 'Naming convention table')}</div>
-  <h3>Cross-System Token Mappings</h3>
-  <div class="md-doc">${renderMarkdown(readSpec('conventions/mappings.md'), 3, 'Cross-system mapping table')}</div>
-  <h3>Editorial Tone &amp; Content Strings</h3>
-  <div class="md-doc">${renderMarkdown(readSpec('conventions/content.md'), 3, 'Content conventions table')}</div>
+  <article id="convention-naming" class="convention-entry">
+    <h3>Public &amp; Token Naming</h3>
+    <div class="md-doc">${renderMarkdown(readSpec('conventions/naming.md'), 3, 'Naming convention table')}</div>
+  </article>
+  <article id="convention-mappings" class="convention-entry">
+    <h3>Cross-System Token Mappings</h3>
+    <div class="md-doc">${renderMarkdown(readSpec('conventions/mappings.md'), 3, 'Cross-system mapping table')}</div>
+  </article>
+  <article id="convention-content" class="convention-entry">
+    <h3>Editorial Tone &amp; Content Strings</h3>
+    <div class="md-doc">${renderMarkdown(readSpec('conventions/content.md'), 3, 'Content conventions table')}</div>
+  </article>
 </section>`;
 
 const patternsSectionHtml = `
 <section id="patterns" class="doc-section">
   <h2><span class="n">18</span> Patterns — Guidance Over Components <span class="vd-badge vd-badge--info">Guidance</span></h2>
   <div class="md-doc">${renderMarkdown(readSpec('patterns/PATTERNS.md'), 2, 'Patterns index')}</div>
-  ${['empty-states', 'auth-flows', 'app-shell', 'onboarding', 'disabled-read-only']
+  ${patternSlugs
     .map(
-      (pat) => `<h3>${escHtml(pat)}</h3>
-  <div class="md-doc">${renderMarkdown(readSpec('patterns/' + pat + '.md'), 3, pat + ' pattern')}</div>`
+      (pat) => `<article id="pattern-${escHtml(pat)}" class="pattern-entry"><h3>${escHtml(pat)}</h3>
+  <div class="md-doc">${renderMarkdown(readSpec('patterns/' + pat + '.md'), 3, pat + ' pattern')}</div></article>`
     )
     .join('\n  ')}
 </section>`;
@@ -842,7 +939,7 @@ const ssgBody = `
               .join('\n            ')}
           </nav>
           <div class="vd-navbar-actions">
-            <span class="vd-btn vd-btn--sm vd-btn--outline font-cycle-btn" title="Typeface: Open Sans — activate to change"><span class="font-cycle-aa" style="font-family: &quot;Open Sans&quot;, -apple-system, BlinkMacSystemFont, sans-serif">Aa</span></span>
+            <button type="button" class="vd-btn vd-btn--sm vd-btn--outline font-cycle-btn" title="Typeface: Open Sans — activate to change" aria-label="Cycle UI typeface"><span class="font-cycle-aa" style="font-family: &quot;Open Sans&quot;, -apple-system, BlinkMacSystemFont, sans-serif">Aa</span></button>
           </div>
         </div>
       </div>
@@ -851,6 +948,16 @@ const ssgBody = `
 
   <div class="doc-layout">
     <aside class="doc-toc" aria-label="Chapter Table of Contents">
+      <div class="vd-doc-search doc-toc-search" role="search" aria-label="Specification search">
+        <div class="vd-doc-search-input-wrapper">
+          <span class="vd-doc-search-icon ph ph-magnifying-glass" aria-hidden="true"></span>
+          <input id="doc-search-input" type="search" class="vd-doc-search-input" placeholder="Search standard &amp; specs…" aria-label="Search VD3 specification (Cmd+K or Ctrl+K)" role="combobox" autocomplete="off" aria-expanded="false" aria-autocomplete="list" aria-controls="doc-search-results" />
+          <kbd class="vd-doc-search-shortcut" aria-hidden="true">⌘K</kbd>
+        </div>
+        <div class="vd-doc-search-results">
+          <ul id="doc-search-results" class="vd-doc-search-results-list" role="listbox" aria-label="Specification search results" hidden></ul>
+        </div>
+      </div>
       <div id="doc-toc-title" class="doc-toc-title">Chapters (18)</div>
       <nav aria-labelledby="doc-toc-title">
         <ol class="doc-toc-list">
@@ -884,7 +991,7 @@ const ssgBody = `
         </div>
         <div class="hero-meta">
           <span><strong>3</strong> basis classes — A / B / C (No Class D)</span>
-          <span><strong>35</strong> zero-framework core CSS modules</span>
+          <span><strong>36</strong> zero-framework core CSS modules</span>
           <span><strong>0</strong> runtime deps — any framework</span>
           <span><strong>W3C APG</strong>-normative keyboard &amp; ARIA</span>
           <span><strong>W3C DTCG 2025.10</strong> token registry</span>
@@ -893,7 +1000,7 @@ const ssgBody = `
           <a href="/tokens/vd3.tokens.json" class="vd-btn vd-btn--sm vd-btn--primary">DTCG Tokens JSON</a>
           <a href="/tokens/schema.json" class="vd-btn vd-btn--sm vd-btn--outline">Token Schema JSON</a>
           <a href="/tokens/figma.manifest.json" class="vd-btn vd-btn--sm vd-btn--outline">Figma Manifest JSON</a>
-          <a href="https://www.figma.com/design/ae5AMiPoVXuHdaRfawhyjh" target="_blank" rel="noopener noreferrer" class="vd-btn vd-btn--sm vd-btn--outline">Figma UI Kit</a>
+          <a href="https://www.figma.com/design/ae5AMiPoVXuHdaRfawhyjh" target="_blank" rel="noopener noreferrer" class="vd-btn vd-btn--sm vd-btn--outline">Figma UI Kit<span class="vd-sr-only"> (opens in new tab)</span></a>
           <a href="#components" class="vd-btn vd-btn--sm vd-btn--outline">Jump to Components</a>
         </div>
         <p class="footnote">
@@ -932,7 +1039,126 @@ const ssgBody = `
       </p>
     </div>
   </footer>
+  <aside id="ssg-demo-drawer" class="vd-drawer vd-drawer--end" role="dialog" aria-modal="true" aria-labelledby="ssg-drawer-title" hidden>
+    <div class="vd-drawer-header">
+      <h2 id="ssg-drawer-title" class="vd-drawer-title">VD3 Dual-Mode Drawer</h2>
+      <button type="button" class="vd-drawer-close vd-btn vd-btn--ghost vd-btn--sm" data-drawer-close="ssg-demo-drawer" aria-label="Close drawer">×</button>
+    </div>
+    <div class="vd-drawer-body">
+      <p>Sliding modal drawer at <code>z.modal</code> (1050) with Esc dismissal and focus restoration.</p>
+    </div>
+  </aside>
 `;
+
+const ssgFallbackScript = `<script id="vd3-ssg-fallback">
+(function () {
+  var docs = ${JSON.stringify(ssgSearchDocs).replace(/</g, '\\u003c')};
+  function activeSsg() { return document.documentElement.dataset.vd3Hydrated !== 'true'; }
+  document.addEventListener('click', function (e) {
+    if (!activeSsg()) return;
+    var t = e.target && e.target.closest ? e.target : null;
+    if (!t) return;
+    var dlgTrigger = t.closest('#demo-dialog-trigger');
+    if (dlgTrigger) {
+      var d = document.getElementById('demo-modal-dialog');
+      if (d && typeof d.showModal === 'function' && !d.open) d.showModal();
+      return;
+    }
+    if (t.closest('[data-dialog-close]')) {
+      var openDlg = t.closest('dialog');
+      if (openDlg && typeof openDlg.close === 'function') openDlg.close();
+      return;
+    }
+    var drwOpen = t.closest('[data-drawer-open]');
+    if (drwOpen) {
+      var drw = document.getElementById(drwOpen.getAttribute('data-drawer-open'));
+      if (drw) { drw.hidden = false; drw.setAttribute('data-open', 'true'); }
+      return;
+    }
+    var drwClose = t.closest('[data-drawer-close]');
+    if (drwClose) {
+      var drw2 = document.getElementById(drwClose.getAttribute('data-drawer-close'));
+      if (drw2) { drw2.removeAttribute('data-open'); drw2.hidden = true; }
+      return;
+    }
+    var sw = t.closest('[role="switch"]');
+    if (sw) {
+      sw.setAttribute('aria-checked', String(sw.getAttribute('aria-checked') !== 'true'));
+      return;
+    }
+    var tab = t.closest('[role="tab"]');
+    if (tab && tab.parentElement) {
+      var tabs = tab.parentElement.querySelectorAll('[role="tab"]');
+      for (var i = 0; i < tabs.length; i++) {
+        var sel = tabs[i] === tab;
+        tabs[i].setAttribute('aria-selected', String(sel));
+        tabs[i].tabIndex = sel ? 0 : -1;
+        var pid = tabs[i].getAttribute('aria-controls');
+        var panel = pid ? document.getElementById(pid) : null;
+        if (panel) panel.hidden = !sel;
+      }
+      return;
+    }
+    var cp = t.closest('.vd-code-copy');
+    if (cp && cp.parentElement) {
+      var pre = cp.parentElement.querySelector('pre code');
+      if (pre && navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(pre.textContent || '').catch(function () {});
+        cp.textContent = 'Copied ✓';
+      }
+      return;
+    }
+    var fc = t.closest('.font-cycle-btn');
+    if (fc) {
+      var fonts = ['open-sans', 'ubuntu', 'inter', 'plus-jakarta', 'system'];
+      var cur = document.documentElement.getAttribute('data-font') || 'open-sans';
+      var next = fonts[(fonts.indexOf(cur) + 1) % fonts.length];
+      document.documentElement.setAttribute('data-font', next);
+    }
+  });
+  document.addEventListener('input', function (e) {
+    if (!activeSsg()) return;
+    var input = e.target;
+    if (!input || input.id !== 'doc-search-input') return;
+    var list = document.getElementById('doc-search-results');
+    var box = list ? list.parentElement : null;
+    if (!list || !box) return;
+    var q = (input.value || '').trim().toLowerCase();
+    if (!q) {
+      box.classList.remove('is-open');
+      list.hidden = true;
+      list.innerHTML = '';
+      input.setAttribute('aria-expanded', 'false');
+      return;
+    }
+    var matches = docs.filter(function (d) {
+      return d.title.toLowerCase().indexOf(q) !== -1 || d.content.toLowerCase().indexOf(q) !== -1;
+    }).slice(0, 10);
+    list.innerHTML = '';
+    for (var i = 0; i < matches.length; i++) {
+      var li = document.createElement('li');
+      li.setAttribute('role', 'none');
+      var a = document.createElement('a');
+      a.href = matches[i].href;
+      a.className = 'vd-doc-search-result';
+      a.setAttribute('role', 'option');
+      a.textContent = matches[i].title + ' (' + matches[i].category + ')';
+      li.appendChild(a);
+      list.appendChild(li);
+    }
+    box.classList.add('is-open');
+    list.hidden = false;
+    input.setAttribute('aria-expanded', 'true');
+  });
+  document.addEventListener('keydown', function (e) {
+    if (!activeSsg()) return;
+    if ((e.metaKey || e.ctrlKey) && e.key && e.key.toLowerCase() === 'k') {
+      var inp = document.getElementById('doc-search-input');
+      if (inp) { e.preventDefault(); inp.focus(); }
+    }
+  });
+})();
+</script>`;
 
 let builtHtml = fs.readFileSync(distHtmlPath, 'utf8');
 const emptyAppRegex = /<div\s+id=["']app["']\s*>\s*<\/div>/;
@@ -941,7 +1167,9 @@ if (!emptyAppRegex.test(builtHtml)) {
   process.exit(1);
 }
 
-builtHtml = builtHtml.replace(emptyAppRegex, `<div id="app">${ssgBody}\n</div>`);
+builtHtml = builtHtml
+  .replace(emptyAppRegex, `<div id="app">${ssgBody}\n</div>`)
+  .replace('</body>', `${ssgFallbackScript}\n</body>`);
 fs.writeFileSync(distHtmlPath, builtHtml, 'utf8');
 
 console.log(`[build-ssg] Pre-rendered SSG HTML injected into site/dist/index.html (${builtHtml.length} chars)`);

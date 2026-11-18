@@ -20,9 +20,9 @@ import { leadings, typeSizes } from '../../spec'
 <style scoped>
 .type-row {
   display: flex; align-items: baseline; gap: var(--vd-space-fib-13);
-  border-bottom: 1px solid var(--vd-border-color); padding-block: var(--vd-space-fib-5);
+  border-block-end: 1px solid var(--vd-border-color); padding-block: var(--vd-space-fib-5);
 }
-.lbl { font-size: 0.75rem; color: var(--vd-text-secondary); width: 170px; flex-shrink: 0; }
+.lbl { font-size: 0.75rem; color: var(--vd-text-secondary); inline-size: 170px; flex-shrink: 0; }
 .mono { font-family: var(--vd-font-family-mono); }
 .chips { display: flex; gap: var(--vd-space-fib-8); flex-wrap: wrap; margin-block-start: var(--vd-space-fib-13); }
 </style>

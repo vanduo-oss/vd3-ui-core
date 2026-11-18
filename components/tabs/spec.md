@@ -12,10 +12,12 @@ NOT for: sequential steps (use stepper), primary navigation (use navbar), or
 content that should all be visible (use accordion).
 
 ## Anatomy
-`.vd-tabs` (`role="tablist"`) containing `.vd-tab` buttons (`role="tab"`,
-`aria-selected`, `aria-controls` → panel id), followed by `.vd-tab-panel`
-elements (`role="tabpanel"`, `aria-labelledby` → tab id, `hidden` when inactive).
-Selected tab indicator: `border-bottom` 2px (`line.thin` = F₃) in `color.role.focus`.
+`.vd-tabs` (`role="tablist"`, horizontal default or `[aria-orientation="vertical"]` /
+`.vd-tabs--vertical`) containing `.vd-tab` buttons (`role="tab"`, `aria-selected`,
+`aria-controls` → panel id), followed by `.vd-tab-panel` elements (`role="tabpanel"`,
+`aria-labelledby` → tab id, `hidden` when inactive). Selected tab indicator:
+`2px` (`line.thin` = F₃) in `color.role.focus` (`border-block-end` in horizontal
+mode; `border-inline-end` in vertical mode).
 
 ## States
 Rest / hover (layer-hover fill) / `[aria-selected="true"]` (active: text-primary,
@@ -31,15 +33,19 @@ Contract-level: `role="tablist"` wrapper; each tab `role="tab"` +
 
 | Key | Effect |
 |---|---|
-| Tab | Move focus into the tablist (selected tab is the single tab stop, roving tabindex) |
-| Right / Down arrow | Activate next tab, wrapping at the end |
-| Left / Up arrow | Activate previous tab, wrapping at the start |
+| Tab | When focus enters the tablist, focuses the active tab; when on the active tab, moves focus into the active `tabpanel` (or first focusable element inside it) |
+| Shift+Tab | Move focus back out of the `tabpanel` to the active tab (or previous focusable element before the tablist) |
+| Right / Left Arrow (horizontal tablist) | Activate next / previous tab, wrapping at the ends |
+| Down / Up Arrow (`aria-orientation="vertical"`) | Activate next / previous tab in a vertical tablist, wrapping at the ends |
 | Home / End | Activate first / last tab |
-| Delete | (Optional, with `aria-orientation`) delete the tab if closable |
+| Space / Enter | (Optional, Manual Activation variant) Activate the currently focused tab when selection does not follow focus automatically |
+| Delete | (Optional) Delete the focused tab if the tab is closable |
 
 ## Focus
-Roving tabindex: only the selected tab is in the tab order; arrow keys move focus
-AND selection (automatic activation). `:focus-visible` dual ring on the focused tab.
+Roving tabindex: only the selected tab has `tabindex="0"` in the tablist; arrow
+keys move focus AND selection under the default automatic-activation variant
+(`TAB-002`). Optional manual-activation implementations move focus on arrows and
+activate on `Space` / `Enter`. `:focus-visible` dual ring on the focused tab.
 
 ## Accessibility requirements
 - TAB-001 Tablist/tab/tabpanel roles and `aria-controls`/`aria-labelledby` wiring are mandatory.

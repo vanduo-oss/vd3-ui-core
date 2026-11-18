@@ -27,7 +27,7 @@
   .vd-table {
     width: 100%;
     border-collapse: collapse;
-    text-align: left;
+    text-align: start;
     font-family: var(--vd3-font-family-sans, system-ui, sans-serif);
     font-size: var(--vd3-font-size-base, 1rem);
     line-height: var(--vd3-line-height-normal, 1.5);
@@ -39,7 +39,7 @@
     font-size: var(--vd3-font-size-sm, 0.8125rem);
     color: var(--vd3-color-text-secondary, #495057);
     padding: var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-8, 0.75rem);
-    text-align: left;
+    text-align: start;
     caption-side: bottom;
   }
 
@@ -115,7 +115,7 @@
   /* Tabular Numbers & Numeric Alignment */
   .vd-table [data-align="numeric"],
   .vd-table-cell--numeric {
-    text-align: right;
+    text-align: end;
     font-variant-numeric: tabular-nums;
   }
 
@@ -125,5 +125,54 @@
 
   [data-theme="dark"] .vd-table--sticky-header th {
     background-color: var(--vd3-color-layer, #2b3035);
+  }
+
+  /* Container-Aware Responsive Adaptation (F-SITE-015) */
+  @container (max-width: 521px) {
+    .vd-table {
+      font-size: var(--vd3-font-size-sm, 0.8125rem);
+    }
+    .vd-table th,
+    .vd-table td {
+      padding: var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-8, 0.75rem);
+    }
+  }
+
+  @container (max-width: 377px) {
+    .vd-table th,
+    .vd-table td {
+      padding: var(--vd3-space-fib-5, 0.5rem);
+    }
+    .vd-table-caption {
+      padding: var(--vd3-space-fib-3, 0.375rem) var(--vd3-space-fib-5, 0.5rem);
+    }
+  }
+
+  @supports not (container-type: inline-size) {
+    @media (max-width: 576px) {
+      .vd-table {
+        font-size: var(--vd3-font-size-sm, 0.8125rem);
+      }
+      .vd-table th,
+      .vd-table td {
+        padding: var(--vd3-space-fib-5, 0.5rem) var(--vd3-space-fib-8, 0.75rem);
+      }
+    }
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-table--hover tbody tr,
+    .vd-table-hover tbody tr,
+    .vd-table--hover tbody tr:hover,
+    .vd-table-hover tbody tr:hover {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-table--hover tbody tr,
+  [data-motion="reduce"] .vd-table-hover tbody tr,
+  [data-motion="reduce"] .vd-table--hover tbody tr:hover,
+  [data-motion="reduce"] .vd-table-hover tbody tr:hover {
+    transition: none !important;
   }
 }

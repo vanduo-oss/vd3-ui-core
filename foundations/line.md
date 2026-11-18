@@ -47,7 +47,7 @@ VD3 categorizes all lines and rules into two operational domains:
 
 2. **Decorative Dividers**:
    - Lines that provide visual grouping without altering document comprehension (e.g., content `<hr>` separators, card section dividers).
-   - Conformance: Paired with `--vd3-color-border-subtle` and accompanied by `aria-hidden="true"` or semantic semantic HTML separation.
+   - Conformance: Paired with `--vd3-color-border-subtle` and accompanied by `aria-hidden="true"` or semantic HTML separation.
    - Token mapping: `line.hair` (`1px`) paired with `--vd3-color-border-subtle`.
 
 ## CSS Usage Snippets
@@ -65,13 +65,13 @@ VD3 categorizes all lines and rules into two operational domains:
 
 /* Callout accent rail */
 .vd-callout-warning {
-  border-left: var(--vd3-border-width-thick, 5px) solid var(--vd3-color-warning);
+  border-inline-start: var(--vd3-border-width-thick, 5px) solid var(--vd3-color-warning);
 }
 
 /* Subtle separator */
 .vd-divider {
   border: 0;
-  border-top: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border-subtle);
+  border-block-start: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border-subtle);
   margin-block: var(--vd3-space-fib-21);
 }
 ```

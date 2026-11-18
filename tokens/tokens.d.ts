@@ -73,14 +73,20 @@ export interface VD3ColorRoleTokens {
   $type?: 'color';
   $description?: string;
   canvas: DTCGToken<string>;
+  'canvas-rgb': DTCGToken<string>;
   layer: DTCGToken<string>;
   'layer-hover': DTCGToken<string>;
   'text-primary': DTCGToken<string>;
   'text-secondary': DTCGToken<string>;
   border: DTCGToken<string>;
+  'border-subtle': DTCGToken<string>;
   focus: DTCGToken<string>;
+  'focus-glow': DTCGToken<string>;
   interactive: DTCGToken<string>;
   critical: DTCGToken<string>;
+  info: DTCGToken<string>;
+  success: DTCGToken<string>;
+  warning: DTCGToken<string>;
   shadow: DTCGToken<string>;
 }
 
@@ -101,6 +107,7 @@ export interface VD3ThemeTokens {
     color: {
       role: VD3ColorRoleTokens;
     };
+    shadow: VD3ShadowTokens;
   };
 }
 
@@ -120,6 +127,24 @@ export interface VD3SpaceTokens {
   'fib-144': DTCGToken<string>;
 }
 
+export interface VD3SpacingTokens {
+  $type?: 'dimension';
+  $description?: string;
+  px: {
+    '1': DTCGToken<string>;
+    '2': DTCGToken<string>;
+    '3': DTCGToken<string>;
+    '5': DTCGToken<string>;
+    '8': DTCGToken<string>;
+    '13': DTCGToken<string>;
+    '21': DTCGToken<string>;
+    '34': DTCGToken<string>;
+    '55': DTCGToken<string>;
+    '89': DTCGToken<string>;
+    '144': DTCGToken<string>;
+  };
+}
+
 export interface VD3LineTokens {
   $type?: 'dimension';
   $description?: string;
@@ -127,6 +152,63 @@ export interface VD3LineTokens {
   thin: DTCGToken<string>;
   regular: DTCGToken<string>;
   thick: DTCGToken<string>;
+}
+
+export interface VD3BorderTokens {
+  $type?: 'dimension';
+  $description?: string;
+  width: {
+    hair: DTCGToken<string>;
+    thin: DTCGToken<string>;
+    regular: DTCGToken<string>;
+    thick: DTCGToken<string>;
+  };
+}
+
+export interface VD3FocusTokens {
+  $description?: string;
+  ring: {
+    width: DTCGToken<string>;
+    offset: DTCGToken<string>;
+    color: DTCGToken<string>;
+    'offset-color': DTCGToken<string>;
+    glow: DTCGToken<string>;
+  };
+}
+
+export interface VD3IconTokens {
+  $description?: string;
+  size: {
+    $type?: 'dimension';
+    $description?: string;
+    sm: DTCGToken<string>;
+    md: DTCGToken<string>;
+    lg: DTCGToken<string>;
+    xl: DTCGToken<string>;
+  };
+  stroke: {
+    $description?: string;
+    outline: DTCGToken<number>;
+  };
+  color: {
+    $type?: 'color';
+    $description?: string;
+    default: DTCGToken<string>;
+    secondary: DTCGToken<string>;
+    accent: DTCGToken<string>;
+    critical: DTCGToken<string>;
+  };
+  gap: DTCGToken<string>;
+}
+
+export interface VD3DensityTokens {
+  $type?: 'number';
+  $description?: string;
+  scale: {
+    comfortable: DTCGToken<number>;
+    compact: DTCGToken<number>;
+  };
+  multiplier: DTCGToken<string | number>;
 }
 
 export interface VD3RadiusTokens {
@@ -139,6 +221,16 @@ export interface VD3RadiusTokens {
   'fib-13': DTCGToken<string>;
   'fib-21': DTCGToken<string>;
   full: DTCGToken<string>;
+}
+
+export interface VD3ShadowNamedTokens {
+  $description?: string;
+  sm: DTCGToken<string>;
+  default: DTCGToken<string>;
+  md: DTCGToken<string>;
+  lg: DTCGToken<string>;
+  xl: DTCGToken<string>;
+  '2xl': DTCGToken<string>;
 }
 
 export interface VD3ShadowTokens {
@@ -194,6 +286,16 @@ export interface VD3BreakpointTokens {
   '2xl': DTCGToken<string>;
 }
 
+export interface VD3FontTokens {
+  $description?: string;
+  family: {
+    $type?: 'fontFamily';
+    sans: DTCGToken<string>;
+    serif: DTCGToken<string>;
+    mono: DTCGToken<string>;
+  };
+}
+
 export interface VD3TypeTokens {
   $description?: string;
   size: {
@@ -208,6 +310,11 @@ export interface VD3TypeTokens {
     '4xl': DTCGToken<string>;
     '5xl': DTCGToken<string>;
     '6xl': DTCGToken<string>;
+    'lg-static': DTCGToken<string>;
+    'xl-static': DTCGToken<string>;
+    '2xl-static': DTCGToken<string>;
+    '3xl-static': DTCGToken<string>;
+    '4xl-static': DTCGToken<string>;
   };
   leading: {
     $type?: 'number';
@@ -289,13 +396,19 @@ export interface VD3Tokens {
   color: VD3ColorTokens;
   theme: VD3ThemeTokens;
   space: VD3SpaceTokens;
+  spacing: VD3SpacingTokens;
   line: VD3LineTokens;
+  border: VD3BorderTokens;
+  focus: VD3FocusTokens;
+  icon: VD3IconTokens;
+  density: VD3DensityTokens;
   radius: VD3RadiusTokens;
-  shadow: VD3ShadowTokens;
+  shadow: VD3ShadowTokens & { named: VD3ShadowNamedTokens };
   glow: VD3GlowTokens;
   z: VD3ZTokens;
   container: VD3ContainerTokens;
   breakpoint: VD3BreakpointTokens;
+  font: VD3FontTokens;
   type: VD3TypeTokens;
   motion: VD3MotionTokens;
   easing: VD3EasingTokens;
@@ -330,10 +443,9 @@ export type VD3CSSPropertyName =
   | `--vd3-glass-blur-${'sm' | 'md' | 'lg' | 'xl'}`
   | `--vd3-glass-saturate-${'md' | 'lg'}`
   | `--vd3-glass-tint-${'sm' | 'md' | 'lg' | 'xl'}`
-  | `--vd3-font-size-${'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl'}`
+  | `--vd3-font-family-${'sans' | 'serif' | 'mono'}`
+  | `--vd3-font-size-${'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | 'lg-static' | 'xl-static' | '2xl-static' | '3xl-static' | '4xl-static'}`
   | `--vd3-line-height-${'tight' | 'snug' | 'normal' | 'relaxed' | 'loose'}`
-  | `--vd3-leading-${'tight' | 'snug' | 'normal' | 'relaxed' | 'loose'}`
-  | `--vd3-letter-spacing-${'tighter' | 'tight' | 'normal' | 'wide' | 'wider' | 'widest'}`
   | `--vd3-tracking-${'tighter' | 'tight' | 'normal' | 'wide' | 'wider' | 'widest'}`
   | `--vd3-shadow-${1 | 2 | 3 | 4 | 5 | 6 | 'sm' | 'md' | 'lg' | 'xl' | '2xl'}`
   | '--vd3-shadow'
@@ -345,8 +457,15 @@ export type VD3CSSPropertyName =
   | `--vd3-color-gold-${4 | 6 | 7}`
   | `--vd3-color-red-${4 | 6}`
   | `--vd3-color-golden-${0 | 1 | 2 | 3 | 4 | 5 | 6 | 7}`
-  | `--vd3-color-${'canvas' | 'layer' | 'layer-hover' | 'text-primary' | 'text-secondary' | 'border' | 'border-subtle' | 'focus' | 'focus-glow' | 'interactive' | 'critical' | 'shadow'}`
-  | `--vd3-focus-ring-${'width' | 'offset' | 'color' | 'offset-color' | 'glow'}`;
+  | `--vd3-color-${'canvas' | 'canvas-rgb' | 'layer' | 'layer-hover' | 'text-primary' | 'text-secondary' | 'border' | 'border-subtle' | 'focus' | 'focus-glow' | 'interactive' | 'critical' | 'info' | 'success' | 'warning' | 'shadow'}`
+  | `--vd3-focus-ring-${'width' | 'offset' | 'color' | 'offset-color' | 'glow'}`
+  | `--vd3-icon-size-${'sm' | 'md' | 'lg' | 'xl'}`
+  | '--vd3-icon-stroke-outline'
+  | '--vd3-icon-color'
+  | `--vd3-icon-color-${'secondary' | 'accent' | 'critical'}`
+  | '--vd3-icon-gap'
+  | '--vd3-density-scale'
+  | `--vd3-density-scale-${'comfortable' | 'compact'}`;
 
 export type VDCSSPropertyName =
   | '--vd-phi'
@@ -359,6 +478,7 @@ export type VDCSSPropertyName =
   | '--vd-radius-full'
   | `--vd-container-${'sm' | 'md' | 'lg' | 'xl' | '2xl'}`
   | `--vd-breakpoint-${'sm' | 'md' | 'lg' | 'xl' | '2xl'}`
+  | `--vd-font-family-${'sans' | 'mono'}`
   | `--vd-font-size-${'xs' | 'sm' | 'base' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl'}`
   | `--vd-line-height-${'tight' | 'snug' | 'normal' | 'relaxed' | 'loose'}`
   | `--vd-leading-${'tight' | 'snug' | 'normal' | 'relaxed' | 'loose'}`
@@ -382,5 +502,11 @@ export type VDCSSPropertyName =
   | '--vd-border-color'
   | '--vd-color-primary'
   | '--vd-color-primary-hover'
+  | '--vd-color-warning'
   | '--vd-color-error'
-  | '--vd-color-danger';
+  | '--vd-color-danger'
+  | `--vd-icon-size-${'sm' | 'md' | 'lg' | 'xl'}`
+  | '--vd-icon-stroke-outline'
+  | '--vd-icon-color'
+  | `--vd-icon-color-${'secondary' | 'accent' | 'critical'}`
+  | '--vd-icon-gap';

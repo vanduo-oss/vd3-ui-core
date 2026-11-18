@@ -23,20 +23,21 @@ checkbox/switch), one-of-few choices (use radio), or commands (use button).
 - Rest: background `color.role.canvas`, border `line.thin` ×
   `color.role.border`, radius `radius.fib-5`, color `color.role.text-primary`,
   padding `space.fib-5` × `space.fib-8`, font `type.size.base`, line-height
-  `type.leading.tight`. `.vd-textarea` adds `min-height: 80px`,
-  `resize: vertical`, line-height `type.leading.normal`.
+  `type.leading.tight`. `.vd-textarea` adds `min-height: space.fib-89` (`89px`),
+  `resize: vertical`, line-height `type.leading.normal`, and inherits full border,
+  padding, `:focus-visible`, `:user-invalid`, `:disabled`, and `:read-only` styling.
 - Hover: no dedicated hover style in v1 (native cursor only).
 - Focus-visible: border-color → `color.role.focus` plus the dual-ring box-shadow
   from `focus.ring.*` (offset ring in `color.role.canvas`).
 - Invalid (`:user-invalid` or `[aria-invalid="true"]`): border →
   `color.role.critical`; on `:focus-visible` the whole ring swaps to
   `color.role.critical` with a critical glow. `.vd-error-text` uses
-  `color.role.critical` (dark theme: `theme.dark.color.role.critical`).
+  `color-mix(in srgb, color.role.critical 38.2%, color.role.text-primary)` for WCAG AA contrast.
 - Disabled (`:disabled`, `[aria-disabled="true"]`): background
-  `color.role.layer`, border `color.primitive.gray.2` (border-subtle), color
+  `color.role.layer`, border `color.role.border-subtle`, color
   `color.role.text-secondary`, `cursor: not-allowed`, `opacity: 0.618` (1/φ).
-- Read-only: native `readonly` has no dedicated visual state in v1 (see
-  Deviations).
+- Read-only (`:read-only` on `.vd-input` / `.vd-textarea`): background swaps to
+  `color.role.layer`.
 - Motion: border-color / box-shadow transitions over `motion.89` / `easing.out`;
   the MOB-001 collapse applies (INP-005).
 
@@ -95,7 +96,7 @@ No APG pattern exists for native text inputs — the contract is the WAI-ARIA
 textbox role (native) plus WCAG labeling rules. Consulted: Carbon TextInput /
 TextArea (role mapping per `conventions/mappings.md`) — adopts the
 label-above-field anatomy, invalid border + message pairing, and helper text
-below the field. Gaps flagged for the 1.0.3 CSS pass: (1) `form.css` v1 ships
-the `motion.89` transitions but not yet the two MOB-001 reduce blocks — INP-005
-is normative and the CSS gap is flagged; (2) `readonly` has no dedicated visual
-state in v1; (3) the textarea `min-height: 80px` is a fixed literal, not a token.
+below the field. Both `MOB-001` reduced-motion blocks (`@media (prefers-reduced-motion: reduce)`
+and `[data-motion="reduce"]`), `.vd-input:read-only` / `.vd-textarea:read-only`
+styling, and tokenized `.vd-textarea` (`min-height: space.fib-89`) are implemented
+in `components/form.css`.

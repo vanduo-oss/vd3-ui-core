@@ -23,13 +23,12 @@ children (`aria-selected`). The chevron is a decorative CSS background SVG
 - Rest: the same field chrome as `.vd-input` (background `color.role.canvas`,
   border `line.thin` × `color.role.border`, radius `radius.fib-5`, color
   `color.role.text-primary`, font `type.size.base` / `type.leading.tight`),
-  plus `appearance: none` and the chevron background image (light theme fill
-  `color.primitive.gray.7`; dark theme stroke `color.primitive.gray.3`).
-- Focus-visible: border → `color.role.focus` plus the dual ring `focus.ring.*`.
-- Invalid: `:user-invalid` / `[aria-invalid="true"]` → border and focus ring →
-  `color.role.critical`.
+- Chevron image: light theme uses `color.primitive.gray.7`; dark theme uses
+  `color.primitive.gray.3`.
 - Disabled (`:disabled`, `[aria-disabled="true"]`): as `.vd-input` — layer
-  background, `color.primitive.gray.2` border, 0.618 opacity, not-allowed.
+  background, `color.role.border-subtle` border, 0.618 opacity, not-allowed.
+  Note: native `<select>` does not support `readonly` in HTML and is excluded
+  from `:read-only` background rules so default `<select>` keeps `color.role.canvas`.
 - Motion: `motion.89` / `easing.out` transitions on border-color / box-shadow;
   the MOB-001 collapse applies (SEL-005).
 
@@ -87,8 +86,8 @@ FOC-001…004. With the popup open, focus either stays on the listbox with
 Conforms to the APG Listbox Pattern (select-only variant) for custom builds; the
 native select satisfies it through platform behavior. Consulted: Carbon Select
 / Dropdown / ComboBox (role mapping per `conventions/mappings.md`) — adopts
-single-select semantics and label association. Deviations flagged for the 1.0.3
-CSS pass: (1) the chevron background is positioned with physical `right` in
-`form.css` v1 — migration to logical `inset-inline-end` for RTL is flagged;
-(2) the two MOB-001 reduce blocks are absent from `form.css` v1 — SEL-005 is
-normative and the CSS gap is flagged.
+single-select semantics and label association. Both `MOB-001` reduced-motion
+blocks (`@media (prefers-reduced-motion: reduce)` and `[data-motion="reduce"]`)
+and `[dir="rtl"] .vd-select` chevron background-position mirroring are
+implemented in `components/form.css` (note: `background-position` has no logical
+horizontal keyword, so `[dir="rtl"]` mirrors `right` → `left` intentionally).

@@ -2,7 +2,7 @@
 slug: segmented
 status: stable
 spec: vd3-ui-core@1.1.0-draft
-apg: https://www.w3.org/WAI/ARIA/apg/patterns/radio/
+apg: https://www.w3.org/WAI/ARIA/apg/patterns/radio-group/
 ---
 
 ## Summary

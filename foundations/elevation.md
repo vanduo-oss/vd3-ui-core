@@ -19,9 +19,11 @@ Each level is constructed as a dual-layer composite (primary shadow + ambient fi
 | **5** | `13px / 21px` | $(F_7, F_8)$ | `--vd3-shadow-5` | `--vd-shadow-xl` | Active drawers, focused modal overlays |
 | **6** | `21px / 34px` | $(F_8, F_9)$ | `--vd3-shadow-6` | `--vd-shadow-2xl` | Topmost spotlights, lightbox media viewers |
 
+*Level 4 Step Rationale*: Level 4 intentionally advances from Level 3 $(F_4, F_5) = (3\text{px}, 5\text{px})$ to $(F_6, F_7) = (8\text{px}, 13\text{px})$, skipping $(F_5, F_6) = (5\text{px}, 8\text{px})$. This two-step Fibonacci gap provides unmistakable optical separation between compact contextual popovers/menus (Level 3) and blocking modal dialogs/drawers (Level 4), while preserving v1.9 `--vd-shadow-lg` compatibility. Named aliases (`shadow.named.{sm,default,md,lg,xl,2xl}`) resolve to `--vd3-shadow-{sm,md,lg,xl,2xl}` and `--vd3-shadow`.
+
 ### Shadow Theme Adaptation
 - **Light Theme**: Shadow ink uses `--vd3-color-shadow: #0000001a` (10% alpha black).
-- **Dark Theme**: Shadow ink adjusts to `--vd3-color-shadow: #0000004d` (30% alpha black) with elevated secondary layer opacity to maintain depth perception against dark surfaces.
+- **Dark Theme**: `theme.dark.shadow` (`1`..`6`) swaps shadow ink opacity (`#00000033`, `#0000004d`, `#00000080`) and pairs with `--vd3-color-shadow: #0000004d` (30% alpha black) to maintain depth perception against dark surfaces.
 
 ## Ambient Glow Steps (Feature #22)
 

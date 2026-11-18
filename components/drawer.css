@@ -1,7 +1,9 @@
 /**
  * VD3 UI CORE — Drawer Component (Feature #40)
  * Cascade Layer: @layer vd3.components
- * Conformance: WCAG 2.1/2.2 AA, W3C ARIA APG Dialog (Modal) Pattern — non-modal variant (https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+ * Conformance: WCAG 2.1/2.2 AA, W3C ARIA APG Dialog (Modal) Pattern — Dual-Mode Contract:
+ *   Modal default (.vd-drawer + .vd-drawer-backdrop) and Non-modal variant (.vd-drawer--non-modal)
+ *   https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/
  */
 
 @layer vd3.components {
@@ -49,6 +51,7 @@
     box-shadow: var(--vd3-shadow-4, 0 8px 13px -3px #0000001a, 0 3px 5px -3px #0000001a);
     overflow-y: auto;
     overflow-x: hidden;
+    overscroll-behavior: contain;
     visibility: hidden;
     transform: translateX(-100%);
     transition:
@@ -174,13 +177,26 @@
     color: var(--vd3-color-text-primary, #1a1d20);
   }
 
-  /* Dual-Ring Focus */
+  /* Dual-Ring Focus (panel surface and close button) */
+  .vd-drawer:focus-visible,
   .vd-drawer-close:focus-visible {
     outline: none;
     box-shadow:
       0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
       0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
       var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
+  }
+
+  /* Non-modal variant: parallel task rail at z.fixed with no blocking backdrop */
+  .vd-drawer--non-modal,
+  .vd-drawer[aria-modal="false"] {
+    z-index: var(--vd3-z-fixed, 1020);
+  }
+  .vd-drawer--non-modal ~ .vd-drawer-backdrop,
+  .vd-drawer[aria-modal="false"] ~ .vd-drawer-backdrop,
+  .vd-drawer-backdrop--non-modal {
+    display: none;
+    pointer-events: none;
   }
 
   /* Disabled State */

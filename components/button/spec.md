@@ -2,7 +2,7 @@
 slug: button
 status: stable
 spec: vd3-ui-core@1.1.0-draft
-apg: none
+apg: https://www.w3.org/WAI/ARIA/apg/patterns/button/
 ---
 
 ## Summary
@@ -25,11 +25,11 @@ aliases `.vd-btn-primary` etc.; size modifiers `.vd-btn--sm|md|lg` with aliases
   `color.role.border`, radius `radius.fib-5`, color `color.role.text-primary`,
   padding `space.fib-5` × `space.fib-13`, font `type.size.base` with
   `type.leading.tight`.
-- Hover (`:not(:disabled)` only): primary swaps bg + border to
-  `color.primitive.gold.7` plus a `brightness(0.96)` filter; secondary swaps bg
-  to `color.role.layer-hover` and border to `color.primitive.gray.5`;
-  ghost/outline swap bg to `color.role.layer-hover` (outline also raises the
-  border to border-strong, falling back to `color.role.border`).
+- Hover (`:not(:disabled)` only): primary uses `color.role.interactive` with a
+  `brightness(0.96)` filter; secondary/outline swap bg to `color.role.layer-hover`
+  and compute hover border via `color-mix(in srgb, color.role.border 61.8%,
+  color.role.text-secondary)`; ghost swaps bg to `color.role.layer-hover`;
+  danger darkens `color.role.critical` via `filter: brightness(0.92)` (token-only).
 - Active: `transform: scale(0.98)` over `motion.55` / `easing.out`.
 - Focus-visible: `outline: none` plus the dual-ring `box-shadow` from
   `focus.ring.offset`, `focus.ring.offset-color` (= `color.role.canvas`),
@@ -53,14 +53,15 @@ Disable with the `disabled` attribute or `aria-disabled="true"`. Variants and
 sizes are orthogonal classes; combining them is the supported composition model.
 Label casing and verb+noun phrasing follow `conventions/content.md`.
 
-## Keyboard — NORMATIVE: no APG pattern exists for buttons; the contract is native element semantics
+## Keyboard — NORMATIVE: APG Button Pattern (`patterns/button/`)
 
 | Key | Effect |
 |---|---|
 | Tab / Shift+Tab | Move focus to / from the button |
 | Space / Enter | Activate (native click) on `<button>`; on `<a>`, Enter follows the link, Space does not |
 
-No custom key handling is permitted; authors MUST use the native element.
+Authors SHOULD use the native `<button>` element (or `<a>` when navigating) per
+the W3C ARIA APG Button Pattern; toggle buttons also expose `aria-pressed`.
 WCAG 2.2 SC 2.5.8 (Target Size Minimum, AA): every size exceeds the 24×24 CSS px
 minimum (sm ≈ 30px tall, md ≈ 40px, lg ≈ 50px; icon-only ≈ 40×40).
 
@@ -97,11 +98,10 @@ One tab stop per button; `:focus-visible` dual ring per FOC-001…004
 `focus.ring.offset-color`, `focus.ring.glow`, `math.inv-phi-sq`.
 
 ## Deviations & references
-No APG pattern exists for buttons — the normative contract is native
-`<button>`/`<a>` semantics plus WCAG 2.2 SC 2.5.8 (target size, cited above).
+Conforms to the W3C ARIA APG Button Pattern (`https://www.w3.org/WAI/ARIA/apg/patterns/button/`)
+and WCAG 2.2 SC 2.5.8 (target size, cited above).
 Consulted: Carbon Button (role mapping per `conventions/mappings.md`) — adopts
 the variant families (primary / secondary / ghost / outline / danger ≈ Carbon
 primary / secondary / tertiary / ghost / danger). Deviates on elevation: vd3
-buttons carry no resting shadow, the dual focus ring carries the emphasis. One
-CSS gap flagged for the 1.0.3 pass: the danger hover shade is a fixed literal
-(`#e03131`) in `button.css` rather than a token ramp step.
+buttons carry no resting shadow, the dual focus ring carries the emphasis.
+(All variant colors, borders, and danger hover filter are 100% token-driven in `button.css`.)

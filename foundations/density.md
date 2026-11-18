@@ -13,16 +13,16 @@ Density in VD3 UI CORE is a two-mode spacing multiplier driven by one root hook.
 
 The compact factor reuses the system's own modular step: typography scales steps by $\sqrt{\phi} \approx 1.2720196495$ (`math.sqrt-phi`, `foundations/typography.md`); density scales spacing by the same step in reverse — `1/sqrt(phi)` = `phi^(-1/2)` ≈ `0.7862`. One golden step down in density for one golden step up in type keeps both systems in the same proportional family (PRN-001).
 
-`data-density` joins the core-implemented root state hooks alongside `data-theme`, `data-font`, and `data-motion` (the AGENTS.md §2 hook list is a follow-up edit; this page is the normative source per PRN-002 / PRN-007).
+`data-density` joins the core-implemented root state hooks alongside `data-theme`, `data-font`, and `data-motion` (aligned with `AGENTS.md §2` and integrated in `tokens/vd3.tokens.json` and `tokens/tokens.css`).
 
-## Tokens — proposed `density` top-level group (ready-to-paste JSON)
+## Tokens — `density` top-level group
 
-This file does not edit `tokens/`; the block below is the normative snippet for the follow-up token edit. Every leaf carries `$extensions.vd3.class` per the Three-Class Basis Contract.
+The normative `density` token group is integrated in `tokens/vd3.tokens.json` and verified by `scripts/verify-tokens.mjs`. Every leaf carries `$extensions.vd3.class` per the Three-Class Basis Contract.
 
 ```json
 "density": {
   "$type": "number",
-  "$description": "Density scale factors — exactly two modes (Q4 resolution, phase 1.1). Runtime hook data-density=\"compact\" on the root element sets --vd3-density-scale and remaps every --vd3-space-fib-* to calc(<base> * var(--vd3-density-scale)) in tokens.css. Spacing only: containers, breakpoints, type, line weights, radii are structural and never scaled. CSS mapping: density.scale.* -> --vd3-density-scale-*; runtime var --vd3-density-scale.",
+  "$description": "Density scale factors — exactly two modes (resolves docs/research-brief.md open question Q4; new in 1.1, foundations/density.md). Runtime hook data-density=\"compact\" on the root element sets --vd3-density-scale and remaps every --vd3-space-fib-* to calc(<base> * var(--vd3-density-scale)) in tokens.css. Spacing only: containers, breakpoints, type, line weights, radii are structural and never scaled. CSS mapping: density.scale.* -> --vd3-density-scale-*; density.multiplier -> --vd3-density-scale.",
   "scale": {
     "comfortable": {
       "$value": 1,
@@ -32,8 +32,13 @@ This file does not edit `tokens/`; the block below is the normative snippet for 
     "compact": {
       "$value": 0.7862,
       "$description": "Compact mode · --vd3-density-scale-compact · activated by [data-density=\"compact\"] on the root element",
-      "$extensions": { "vd3": { "class": "A", "derivation": "phi^(-1/2) — reciprocal of the sqrt(phi) typography modular step, applied to spacing" } }
+      "$extensions": { "vd3": { "class": "A", "derivation": "phi^(-1/2) = 1/sqrt(phi) = 0.7862 — reciprocal of the sqrt(phi) typography modular step, applied to spacing" } }
     }
+  },
+  "multiplier": {
+    "$value": "{density.scale.comfortable}",
+    "$description": "Runtime density multiplier · --vd3-density-scale",
+    "$extensions": { "vd3": { "class": "B", "reason": "Defaults to comfortable identity (1); overridden by [data-density=\"compact\"]" } }
   }
 }
 ```
@@ -122,4 +127,4 @@ Density is not motion. `data-density="compact"` never touches `--vd3-duration-*`
 
 - Consulted, not conformed (per AGENTS.md): IBM Carbon ships **productive/expressive** density pairs per theme on its 2x spacing grid ([Carbon themes](https://carbondesignsystem.com/elements/themes/overview/), [Carbon 2x grid](https://carbondesignsystem.com/elements/2x-grid/overview/)). vd3 deliberately diverges: one root hook, one Class A factor (`phi^(-1/2)`), spacing-only. Carbon's fixed 2x steps are the class B convention vd3 does not adopt (PRN-003, PRN-008).
 - The Q4 alternative — fluid type scale + glass/surface registers alone — was rejected as insufficient: those change type expression and surface strength, not rhythm. Compact mode complements them.
-- This document does not edit `tokens/`; the JSON and CSS blocks above are the ready-to-paste normative snippets for the follow-up token-file edit.
+- Both the DTCG definitions in `tokens/vd3.tokens.json` and the CSS implementation in `tokens/tokens.css` are verified by `scripts/verify-tokens.mjs`.

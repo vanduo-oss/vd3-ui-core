@@ -19,7 +19,7 @@ Icons are drawn on a square em box; the box size is the only normative
 dimension. The scale is the Fibonacci sequence from $F_7$ to $F_{10}$
 (closed-form Binet equation in `foundations/proportion.md`):
 
-| Step | Token (proposed `icon.size.*`) | CSS variable | px | rem (16px base) | Term | Basis | Architectural role |
+| Step | Token | CSS variable | px | rem (16px base) | Term | Basis | Architectural role |
 |---|---|---|---|---|---|---|---|
 | sm | `icon.size.sm` | `--vd3-icon-size-sm` | 13px | 0.8125rem | $F_7$ | Class A | inline with text, dense controls |
 | md | `icon.size.md` | `--vd3-icon-size-md` | 21px | 1.3125rem | $F_8$ | Class A | DEFAULT (`.vd-icon` base) — buttons, form controls, nav links |
@@ -53,7 +53,7 @@ from 24px to `icon.size.md` (21px) in the next spec-major, recorded in
 
 Outline (stroke-based) icons use stroke width $1.618 \approx \phi$:
 
-- Token (proposed): `icon.stroke.outline` = `1.618` — a unitless SVG
+- Token: `icon.stroke.outline` = `1.618` — a unitless SVG
   `stroke-width` expressed in the icon viewBox's user units (the Phosphor
   outline / regular weight is the reference glyph set).
 - Basis: Class A, derivation $\phi = (1+\sqrt{5})/2 = 1.6180339887$, rounded
@@ -107,37 +107,35 @@ yet located."* This section closes that unknown:
 
 | Registry entry | Value | Basis | Derivation | Status |
 |---|---|---|---|---|
-| `icon.size.sm` | 13px (0.8125rem) | Class A | $F_7 = 13$ | Registered (this page) |
-| `icon.size.md` | 21px (1.3125rem) | Class A | $F_8 = 21$ | Registered — default |
-| `icon.size.lg` | 34px (2.125rem) | Class A | $F_9 = 34$ | Registered |
-| `icon.size.xl` | 55px (3.4375rem) | Class A | $F_{10} = 55$ | Registered (extends the brief's 13/21/34) |
-| `icon.stroke.outline` | 1.618 | Class A | $\phi$, 3-decimal rounding | Registered |
+| `icon.size.sm` | 13px (0.8125rem) | Class A | $F_7 = 13$ | Registered & tokenized |
+| `icon.size.md` | 21px (1.3125rem) | Class A | $F_8 = 21$ | Registered & tokenized — default |
+| `icon.size.lg` | 34px (2.125rem) | Class A | $F_9 = 34$ | Registered & tokenized |
+| `icon.size.xl` | 55px (3.4375rem) | Class A | $F_{10} = 55$ | Registered & tokenized (extends the brief's 13/21/34) |
+| `icon.stroke.outline` | 1.618 | Class A | $\phi$, 3-decimal rounding | Registered & tokenized |
+| `icon.gap` | 8px (0.5rem) | Class C (C-01) | Alias for `space.fib-5` | Registered & tokenized |
 | library `md` = 24px | 24px | Class B (library alias) | type-scale step × 1.5; deliberate deviation, see §1 | Registered deviation |
 
-The corresponding `icon` token group is NOT yet present in
-`tokens/vd3.tokens.json` (verified: no `icon` key exists). The
-ready-to-merge snippet below is the proposed group — integration adds it to
-the token file; this phase does not edit `tokens/vd3.tokens.json`:
+The normative `icon` token group is integrated and verified in `tokens/vd3.tokens.json` (and exported as `--vd3-icon-*` with `--vd-icon-*` legacy aliases in `tokens/tokens.css`, verified by `scripts/verify-tokens.mjs`):
 
 ```json
 "icon": {
-  "$description": "Iconography contract (foundations/icons.md, phase 1.1). Sizes are Fibonacci steps F_7..F_10 (Class A) on a 16px rem base; stroke width is phi (Class A); color leaves are semantic-role aliases only. Resolves the token-audit open unknown 'Phosphor icon sizing steps' (docs/token-audit.md). CSS mapping per conventions/naming.md: icon.* -> --vd3-icon-* (legacy alias --vd-icon-*).",
+  "$description": "Iconography contract (foundations/icons.md, new in 1.1). Sizes are Fibonacci steps F_7..F_10 (Class A) on a 16px rem base; stroke width is phi (Class A); color leaves are semantic-role aliases only. Resolves the token-audit open unknown 'Phosphor icon sizing steps' (docs/token-audit.md). CSS mapping per conventions/naming.md: icon.* -> --vd3-icon-* (legacy alias --vd-icon-*).",
   "size": {
     "$type": "dimension",
     "$description": "Icon box sizes — Fibonacci F_7..F_10. Base .vd-icon defaults to md (F_8 = 21px).",
-    "sm": { "$value": "0.8125rem", "$description": "13px · --vd3-icon-size-sm", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_7 = 13 (Binet); rem value identical to space.fib-13" } } },
+    "sm": { "$value": "0.8125rem", "$description": "13px · --vd3-icon-size-sm", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_7 = 13; rem value identical to space.fib-13" } } },
     "md": { "$value": "1.3125rem", "$description": "21px · --vd3-icon-size-md · default", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_8 = 21; rem value identical to space.fib-21" } } },
     "lg": { "$value": "2.125rem", "$description": "34px · --vd3-icon-size-lg", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_9 = 34; rem value identical to space.fib-34" } } },
     "xl": { "$value": "3.4375rem", "$description": "55px · --vd3-icon-size-xl", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_10 = 55; rem value identical to space.fib-55" } } }
   },
   "stroke": {
     "$description": "Outline icon stroke — SVG stroke-width in user units of the icon viewBox (Phosphor outline/regular weight is the reference).",
-    "outline": { "$type": "number", "$value": 1.618, "$description": "--vd3-icon-stroke-outline · 1.618 = phi rounded to 3 decimals; matches the select chevron in components/form.css (stroke-width='1.618')", "$extensions": { "vd3": { "class": "A", "derivation": "phi = (1 + sqrt(5)) / 2 = 1.6180339887, rounded to 3 decimals" } } }
+    "outline": { "$type": "number", "$value": 1.618, "$description": "--vd3-icon-stroke-outline · 1.618 = phi rounded to 3 decimals; matches the select chevron in components/form.css", "$extensions": { "vd3": { "class": "A", "derivation": "phi = (1 + sqrt(5)) / 2 = 1.6180339887, rounded to 3 decimals" } } }
   },
   "color": {
     "$type": "color",
     "$description": "Icon ink — semantic-role aliases only; components never consume primitives directly (foundations/color.md).",
-    "default":   { "$value": "{color.role.text-primary}",   "$description": "--vd3-icon-color · default icon ink (inherits currentColor)", "$extensions": { "vd3": { "class": "B", "reason": "Alias of color.role.text-primary" } } },
+    "default":   { "$value": "{color.role.text-primary}",   "$description": "--vd3-icon-color · default icon ink", "$extensions": { "vd3": { "class": "B", "reason": "Alias of color.role.text-primary" } } },
     "secondary": { "$value": "{color.role.text-secondary}", "$description": "--vd3-icon-color-secondary · muted / caption icons", "$extensions": { "vd3": { "class": "B", "reason": "Alias of color.role.text-secondary" } } },
     "accent":    { "$value": "{color.role.focus}",          "$description": "--vd3-icon-color-accent · interactive / active icons", "$extensions": { "vd3": { "class": "B", "reason": "Alias of color.role.focus" } } },
     "critical":  { "$value": "{color.role.critical}",       "$description": "--vd3-icon-color-critical · error status icons, always paired with text (WCAG 1.4.1)", "$extensions": { "vd3": { "class": "B", "reason": "Alias of color.role.critical" } } }
@@ -145,8 +143,8 @@ the token file; this phase does not edit `tokens/vd3.tokens.json`:
   "gap": {
     "$type": "dimension",
     "$value": "{space.fib-5}",
-    "$description": "8px icon-to-label gap · --vd3-icon-gap (proportion.md registers 'icon gap' at space.fib-5)",
-    "$extensions": { "vd3": { "class": "A", "derivation": "Alias for space.fib-5 (F_5 = 8px, C-01)" } }
+    "$description": "8px icon-to-label gap · C-01 · --vd3-icon-gap",
+    "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Alias for space.fib-5 (rem-rounded 8px small spacing step)" } }
   }
 }
 ```

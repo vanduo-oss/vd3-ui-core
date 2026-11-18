@@ -67,9 +67,7 @@
     cursor: default;
   }
 
-  /* Prev / next glyphs. Margins are logical (inline) so RTL mirrors the
-     spacing; the chevron stroke direction itself is intentional — it points
-     along the reading direction in LTR layouts. */
+  /* Prev / next glyphs — flip glyph direction in RTL to match reading order */
   .vd-pagination-link--prev::before,
   .vd-pagination-link-prev::before {
     content: "‹";
@@ -77,6 +75,14 @@
   .vd-pagination-link--next::after,
   .vd-pagination-link-next::after {
     content: "›";
+  }
+  :dir(rtl) .vd-pagination-link--prev::before,
+  :dir(rtl) .vd-pagination-link-prev::before {
+    content: "›";
+  }
+  :dir(rtl) .vd-pagination-link--next::after,
+  :dir(rtl) .vd-pagination-link-next::after {
+    content: "‹";
   }
 
   /* Dual-Ring Focus (FOC-001…004) */
@@ -114,11 +120,32 @@
   [data-theme="dark"] .vd-pagination-link[aria-disabled="true"] {
     background-color: var(--vd3-color-layer, #343a40);
   }
-  [data-theme="dark"] .vd-pagination-link:focus-visible {
-    box-shadow:
-      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #212529)),
-      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #ffd43b)),
-      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(255, 212, 59, 0.4)));
+
+  /* Container-Aware Responsive Adaptation (F-SITE-015) */
+  @container (max-width: 377px) {
+    .vd-pagination-list {
+      gap: var(--vd3-space-fib-2, 0.25rem);
+      justify-content: center;
+    }
+    .vd-pagination-link {
+      min-inline-size: var(--vd3-space-fib-21, 1.3125rem);
+      padding: var(--vd3-space-fib-3, 0.375rem) var(--vd3-space-fib-5, 0.5rem);
+      font-size: var(--vd3-font-size-xs, 0.75rem);
+    }
+  }
+
+  @supports not (container-type: inline-size) {
+    @media (max-width: 576px) {
+      .vd-pagination-list {
+        gap: var(--vd3-space-fib-2, 0.25rem);
+        justify-content: center;
+      }
+      .vd-pagination-link {
+        min-inline-size: var(--vd3-space-fib-21, 1.3125rem);
+        padding: var(--vd3-space-fib-3, 0.375rem) var(--vd3-space-fib-5, 0.5rem);
+        font-size: var(--vd3-font-size-xs, 0.75rem);
+      }
+    }
   }
 
   /* Reduced Motion (MOB-001) */

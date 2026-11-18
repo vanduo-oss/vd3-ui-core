@@ -18,8 +18,8 @@ const dots = Array.from({ length: N }, (_, i) => {
 
 <template>
   <div class="gs" role="img" aria-label="Golden split: minor 38.2 percent, major 61.8 percent">
-    <div class="minor">minor · 38.2% (1/φ)</div>
-    <div class="major">major · 61.8% (1 − 1/φ)</div>
+    <div class="minor">minor · 38.2% (1/φ²)</div>
+    <div class="major">major · 61.8% (1/φ)</div>
   </div>
 
   <h3>Containers — Fibonacci &amp; Lucas are both citizens</h3>
@@ -50,7 +50,7 @@ const dots = Array.from({ length: N }, (_, i) => {
 <style scoped>
 .gs {
   display: flex; border-radius: var(--vd-border-radius-md); overflow: hidden;
-  border: 1px solid var(--vd-border-color); min-height: var(--vd-space-fib-34);
+  border: 1px solid var(--vd-border-color); min-block-size: var(--vd-space-fib-34);
   margin-block: var(--vd-space-fib-8);
 }
 .gs > div { display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; }
@@ -61,6 +61,6 @@ const dots = Array.from({ length: N }, (_, i) => {
 .center { display: flex; justify-content: center; }
 .footnote {
   font-size: 0.75rem; color: var(--vd-text-secondary); margin-block-start: var(--vd-space-fib-13);
-  border-left: 2px solid var(--vd-primary-6); padding-left: var(--vd-space-fib-8);
+  border-inline-start: 2px solid var(--vd-primary-6); padding-inline-start: var(--vd-space-fib-8);
 }
 </style>

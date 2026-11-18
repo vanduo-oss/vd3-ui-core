@@ -68,6 +68,43 @@
     opacity: var(--vd3-inv-phi-sq, 0.382);
   }
 
+  /* Vertical Orientation (APG aria-orientation="vertical" & .vd-tabs--vertical) */
+  .vd-tabs[aria-orientation="vertical"],
+  .vd-tabs--vertical,
+  .vd-tabs-vertical {
+    flex-direction: column;
+    align-items: stretch;
+    border-bottom: none;
+    border-inline-end: var(--vd3-border-width-hair, 1px) solid var(--vd3-color-border, #dee2e6);
+    overflow-x: visible;
+    overflow-y: auto;
+  }
+
+  .vd-tabs[aria-orientation="vertical"] .vd-tab,
+  .vd-tabs--vertical .vd-tab,
+  .vd-tabs-vertical .vd-tab {
+    justify-content: flex-start;
+    text-align: start;
+    border-bottom: none;
+    border-inline-end: var(--vd3-border-width-thin, 2px) solid transparent;
+    margin-bottom: 0;
+    margin-inline-end: calc(-1 * var(--vd3-border-width-hair, 1px));
+    border-start-start-radius: var(--vd3-radius-fib-3, 0.1875rem);
+    border-start-end-radius: 0;
+    border-end-start-radius: var(--vd3-radius-fib-3, 0.1875rem);
+    border-end-end-radius: 0;
+  }
+
+  .vd-tabs[aria-orientation="vertical"] .vd-tab[aria-selected="true"],
+  .vd-tabs[aria-orientation="vertical"] .vd-tab--active,
+  .vd-tabs--vertical .vd-tab[aria-selected="true"],
+  .vd-tabs--vertical .vd-tab--active,
+  .vd-tabs-vertical .vd-tab[aria-selected="true"],
+  .vd-tabs-vertical .vd-tab--active {
+    border-bottom-color: transparent;
+    border-inline-end-color: var(--vd3-color-focus, #fab005);
+  }
+
   /* Tab Panel */
   .vd-tab-panel {
     padding-block-start: var(--vd3-space-fib-21, 1.3125rem);

@@ -16,11 +16,11 @@ import { lineWeights } from '../../spec'
 
 <style scoped>
 .lw { display: flex; gap: var(--vd-space-fib-13); flex-wrap: wrap; margin-block-start: var(--vd-space-fib-8); }
-.lw-card { flex: 1; min-width: 130px; text-align: center; font-size: 0.8125rem; }
-.demo { height: var(--vd-space-fib-34); background: var(--vd-bg-secondary); border-radius: var(--vd-border-radius-sm); margin-block-end: var(--vd-space-fib-5); }
+.lw-card { flex: 1; min-inline-size: 130px; text-align: center; font-size: 0.8125rem; }
+.demo { block-size: var(--vd-space-fib-34); background: var(--vd-bg-secondary); border-radius: var(--vd-border-radius-sm); margin-block-end: var(--vd-space-fib-5); }
 .mono { font-family: var(--vd-font-family-mono); }
 .footnote {
   font-size: 0.75rem; color: var(--vd-text-secondary); margin-block-start: var(--vd-space-fib-13);
-  border-left: 2px solid var(--vd-primary-6); padding-left: var(--vd-space-fib-8); max-width: 70ch;
+  border-inline-start: 2px solid var(--vd-primary-6); padding-inline-start: var(--vd-space-fib-8); max-inline-size: 70ch;
 }
 </style>

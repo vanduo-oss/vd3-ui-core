@@ -28,6 +28,29 @@
     display: none;
   }
 
+  .vd-menu:popover-open {
+    display: block;
+  }
+
+  @supports (position-area: block-end) {
+    .vd-menu[popover] {
+      position: fixed;
+      inset: auto;
+      position-anchor: var(--_vd-anchor);
+      position-area: block-end span-inline-end;
+      position-try-fallbacks: flip-block, flip-inline;
+    }
+    .vd-menu[popover][data-placement="top"] {
+      position-area: block-start span-inline-end;
+    }
+    .vd-menu[popover][data-placement="start"] {
+      position-area: inline-start span-block-end;
+    }
+    .vd-menu[popover][data-placement="end"] {
+      position-area: inline-end span-block-end;
+    }
+  }
+
   /* Menu item (role="menuitem" host: <button>, <a>, or <li> wrapping one) */
   .vd-menu-item {
     display: flex;

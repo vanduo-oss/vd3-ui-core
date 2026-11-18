@@ -47,7 +47,7 @@ Every visual constant in VD3 belongs to exactly one basis class. Unclassifiable 
 
 | ID | Exception Title | Rule & Derivation | Status |
 |---|---|---|---|
-| **C-01** | Rem-rounded small spacing steps | Spacing tokens named `fib-2/3/5/8` ship as 4/6/8/12px to align with 4px subpixel rasterization grids; sequence is literal from 13px onwards. | Registered |
+| **C-01** | Rem-rounded small spacing steps | Spacing tokens named `fib-1/2/3/5/8` ship as 2/4/6/8/12px to align with 4px/2px subpixel rasterization grids; sequence is literal from 13px onwards. | Registered |
 | **C-02** | Glass blur soft-cap (Convergence Zone) | Backdrop blur radius soft-caps at 20px–26px to prevent GPU fragment fill-rate exhaustion; sibling properties continue Fibonacci progression. | Registered |
 | **C-03** | Glow blur intensities | Resolved (Q2): remapped from arithmetic 10/20/30px to Fibonacci 8/13/21px — now Class A. ID retired, never reused. | Resolved |
 | **C-04** | Pill radius | `radius.full` (9999rem) is a shape semantic contract for rounded pills, not an arithmetic scale step. | Registered |
@@ -58,7 +58,7 @@ A single normative spacing scale (PRN-002) mapped to rem on a 16px base, spannin
 
 | Token | CSS Variable | Rem Value | Pixel Value | Fibonacci Term | Basis | Specification Notes |
 |---|---|---|---|---|---|---|
-| `space.fib-1` | `--vd3-space-fib-1` | `0.125rem` | `2px` | $F_1 / F_2$ | Class A | 1px rounded to 2px for baseline screen grid |
+| `space.fib-1` | `--vd3-space-fib-1` | `0.125rem` | `2px` | $F_1 / F_2$ | Class C-01 | 1px rounded to 2px for baseline screen grid (C-01) |
 | `space.fib-2` | `--vd3-space-fib-2` | `0.25rem` | `4px` | $F_3$ | Class C-01 | Micro-gap, badge padding |
 | `space.fib-3` | `--vd3-space-fib-3` | `0.375rem` | `6px` | $F_4$ | Class C-01 | Compact button padding |
 | `space.fib-5` | `--vd3-space-fib-5` | `0.5rem` | `8px` | $F_5$ | Class C-01 | Standard input padding, icon gap |

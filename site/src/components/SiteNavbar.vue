@@ -73,9 +73,15 @@ function onHashChange() {
 }
 
 onMounted(() => {
-  theme.setTheme(theme.state.theme)
   // Cyan default primary comes from setThemeDefaults() in main.ts (also covers
-  // the customizer's "Reset to default"); stored prefs still win.
+  // the customizer's "Reset to default"); only apply stored user preference or
+  // defer to OS prefers-color-scheme when unset ('system').
+  try {
+    const savedTheme = window.localStorage.getItem('vanduo-theme-preference')
+    if (!savedTheme || savedTheme === 'system') {
+      document.documentElement.removeAttribute('data-theme')
+    }
+  } catch { /* ignore */ }
   if (theme.state.font) {
     document.documentElement.dataset.font = theme.state.font
   }
@@ -129,7 +135,7 @@ onUnmounted(() => {
 <style scoped>
 .site-header {
   position: sticky;
-  top: 0;
+  inset-block-start: 0;
   z-index: var(--vd3-z-sticky, 1020);
 }
 .brand {
@@ -155,11 +161,12 @@ nav.site-nav-pillars {
 nav a {
   display: inline-flex;
   align-items: center;
+  min-block-size: 2.75rem;
   color: var(--vd3-color-text-secondary, #495057);
   text-decoration: none;
   padding: var(--vd3-space-fib-3, 0.375rem) var(--vd3-space-fib-5, 0.5rem);
   line-height: 1.25;
-  border-bottom: 2px solid transparent;
+  border-block-end: 2px solid transparent;
   transition: color var(--vd3-duration-89, 89ms) ease-out, border-color var(--vd3-duration-89, 89ms) ease-out;
 }
 nav a:hover {
@@ -169,6 +176,6 @@ nav a.is-active,
 nav a[aria-current="page"] {
   color: var(--vd3-color-text-primary, #1a1d20);
   font-weight: 600;
-  border-bottom-color: var(--site-accent, #1946ba);
+  border-block-end-color: var(--site-accent, #1946ba);
 }
 </style>

@@ -36,8 +36,8 @@
   }
 
   [data-theme="dark"] pre.vd-code {
-    background-color: #1a1d20;
-    color: #f8f9fa;
+    background-color: var(--vd3-color-gray-1000, #1a1d20);
+    color: var(--vd3-color-text-primary, #f8f9fa);
   }
 
   pre.vd-code code {
@@ -59,7 +59,7 @@
     font-weight: 600;
     letter-spacing: var(--vd3-tracking-wider, 0.05em);
     color: var(--vd3-color-text-secondary, #495057);
-    opacity: 0.7;
+    opacity: var(--vd3-inv-phi, 0.618);
     pointer-events: none;
   }
 
@@ -92,18 +92,18 @@
   }
 
   /* Golden-Angle Syntax Highlighting */
-  .token-keyword  { color: #254ef0; font-weight: 600; }
-  .token-string   { color: #06763c; }
-  .token-number   { color: #c2255c; }
-  .token-property { color: #0a7486; }
-  .token-selector { color: #8f6100; }
+  .token-keyword  { color: var(--vd3-color-golden-4, #254ef0); font-weight: 600; }
+  .token-string   { color: color-mix(in srgb, var(--vd3-color-success, #0ac265) 38.2%, var(--vd3-color-text-primary, #1a1d20)); }
+  .token-number   { color: color-mix(in srgb, var(--vd3-color-golden-2, #f20d91) 38.2%, var(--vd3-color-text-primary, #1a1d20)); }
+  .token-property { color: color-mix(in srgb, var(--vd3-color-info, #0ab5b5) 38.2%, var(--vd3-color-text-primary, #1a1d20)); }
+  .token-selector { color: color-mix(in srgb, var(--vd3-color-warning, #fab005) 38.2%, var(--vd3-color-text-primary, #1a1d20)); }
   .token-comment  { color: var(--vd3-color-text-secondary, #495057); font-style: italic; }
 
-  [data-theme="dark"] .token-keyword  { color: #748ffc; }
-  [data-theme="dark"] .token-string   { color: #69db7c; }
-  [data-theme="dark"] .token-number   { color: #f06595; }
-  [data-theme="dark"] .token-property { color: #3bc9db; }
-  [data-theme="dark"] .token-selector { color: #ffd43b; }
+  [data-theme="dark"] .token-keyword  { color: color-mix(in srgb, var(--vd3-color-golden-4, #254ef0) 61.8%, var(--vd3-color-text-primary, #f8f9fa)); }
+  [data-theme="dark"] .token-string   { color: color-mix(in srgb, var(--vd3-color-success, #0ac265) 61.8%, var(--vd3-color-text-primary, #f8f9fa)); }
+  [data-theme="dark"] .token-number   { color: color-mix(in srgb, var(--vd3-color-golden-2, #f20d91) 61.8%, var(--vd3-color-text-primary, #f8f9fa)); }
+  [data-theme="dark"] .token-property { color: color-mix(in srgb, var(--vd3-color-info, #0ab5b5) 61.8%, var(--vd3-color-text-primary, #f8f9fa)); }
+  [data-theme="dark"] .token-selector { color: var(--vd3-color-warning, #ffd43b); }
 
   /* Token Spec Cards */
   .vd-spec-card {
@@ -134,5 +134,15 @@
     font-family: var(--vd3-font-family-mono, monospace);
     font-size: var(--vd3-font-size-xs, 0.75rem);
     color: var(--vd3-color-text-secondary, #495057);
+  }
+
+  /* Reduced Motion (MOB-001) */
+  @media (prefers-reduced-motion: reduce) {
+    .vd-code-copy {
+      transition: none !important;
+    }
+  }
+  [data-motion="reduce"] .vd-code-copy {
+    transition: none !important;
   }
 }

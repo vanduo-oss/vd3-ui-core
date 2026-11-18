@@ -21,6 +21,7 @@
     z-index: var(--vd3-z-modal, 1050);
     box-sizing: border-box;
     overflow: auto;
+    overscroll-behavior: contain;
 
     /* Discrete entrance/exit animation */
     opacity: 0;
@@ -28,8 +29,23 @@
     transition:
       opacity var(--vd3-duration-233, 233ms) var(--vd3-ease-out),
       transform var(--vd3-duration-233, 233ms) var(--vd3-ease-out),
-      overlay var(--vd3-duration-233, 233ms) allow-discrete,
-      display var(--vd3-duration-233, 233ms) allow-discrete;
+      overlay var(--vd3-duration-233, 233ms),
+      display var(--vd3-duration-233, 233ms);
+    transition-behavior: allow-discrete;
+  }
+
+  dialog.vd-dialog:modal {
+    overscroll-behavior: contain;
+  }
+
+  .vd-dialog:focus-visible,
+  .vd-dialog__close:focus-visible,
+  .vd-dialog-close:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 var(--vd3-focus-ring-offset, 2px) var(--vd3-focus-ring-offset-color, var(--vd3-color-canvas, #ffffff)),
+      0 0 0 calc(var(--vd3-focus-ring-offset, 2px) + var(--vd3-focus-ring-width, 2px)) var(--vd3-focus-ring-color, var(--vd3-color-focus, #fab005)),
+      var(--vd3-focus-ring-glow, 0 0 8px var(--vd3-color-focus-glow, rgba(250, 176, 5, 0.4)));
   }
 
   .vd-dialog--md,
@@ -51,15 +67,18 @@
 
   /* Frosted Glass Backdrop (C-02 Convergence Zone Glass 4) */
   .vd-dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+    overscroll-behavior: contain;
+    background-color: color-mix(in srgb, var(--vd3-color-gray-1000, #1a1d20) 55%, transparent);
     backdrop-filter: blur(var(--vd3-glass-blur-xl, 26px)) saturate(162%);
     -webkit-backdrop-filter: blur(var(--vd3-glass-blur-xl, 26px)) saturate(162%);
     opacity: 0;
     transition:
       opacity var(--vd3-duration-233, 233ms) var(--vd3-ease-out),
       backdrop-filter var(--vd3-duration-233, 233ms) var(--vd3-ease-out),
-      overlay var(--vd3-duration-233, 233ms) allow-discrete,
-      display var(--vd3-duration-233, 233ms) allow-discrete;
+      overlay var(--vd3-duration-233, 233ms),
+      display var(--vd3-duration-233, 233ms);
+    transition-behavior: allow-discrete;
   }
 
   .vd-dialog[open]::backdrop {
@@ -73,7 +92,7 @@
   }
 
   [data-theme="dark"] .vd-dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.68);
+    background-color: color-mix(in srgb, var(--vd3-color-gray-1000, #1a1d20) 68%, transparent);
     backdrop-filter: blur(var(--vd3-glass-blur-xl, 26px)) saturate(200%);
     -webkit-backdrop-filter: blur(var(--vd3-glass-blur-xl, 26px)) saturate(200%);
   }

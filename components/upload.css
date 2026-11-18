@@ -37,8 +37,8 @@
     background-color: var(--vd3-color-layer-hover, #f1f3f5);
   }
 
-  /* Dual-ring focus — shown on the zone while the hidden input is focused */
-  .vd-upload:focus-within {
+  /* Dual-ring focus — shown on the zone while the hidden input has focus-visible */
+  .vd-upload:has(:focus-visible) {
     outline: none;
     border-color: var(--vd3-color-focus, #fab005);
     box-shadow:
@@ -85,7 +85,7 @@
     clip-path: inset(50%);
   }
 
-  /* The clipped input itself never draws a ring — the zone ring (focus-within) does */
+  /* The clipped input itself never draws a ring — the zone ring (:has(:focus-visible)) does */
   .vd-upload-input:focus-visible {
     outline: none;
   }

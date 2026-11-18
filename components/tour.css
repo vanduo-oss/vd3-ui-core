@@ -37,6 +37,26 @@
     display: none;
   }
 
+  @supports (position-area: block-end) {
+    .vd-tour[popover] {
+      position: fixed;
+      inset: auto;
+      margin: var(--vd3-space-fib-5, 0.5rem) 0 0;
+      position-anchor: var(--_vd-anchor);
+      position-area: block-end;
+      position-try-fallbacks: flip-block, flip-inline;
+    }
+    .vd-tour[popover][data-placement="top"] {
+      position-area: block-start;
+    }
+    .vd-tour[popover][data-placement="start"] {
+      position-area: inline-start;
+    }
+    .vd-tour[popover][data-placement="end"] {
+      position-area: inline-end;
+    }
+  }
+
   .vd-tour-title {
     margin: 0 0 var(--vd3-space-fib-5, 0.5rem);
     font-size: var(--vd3-font-size-lg, 1.125rem);

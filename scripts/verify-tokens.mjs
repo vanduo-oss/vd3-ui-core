@@ -611,38 +611,111 @@ suite('Iconography & Density Tokens (F_7..F_10 sizes, phi stroke, phi^-1/2 densi
   }
 });
 
-// SUITE 18: JSON -> CSS drift gate (every leaf token must export a --vd3-* var in tokens.css)
+// SUITE 18: JSON -> CSS drift gate (every leaf token must export a --vd3-* var in tokens.css with equal resolved value)
 suite('DTCG JSON to tokens.css Export Drift Gate', () => {
   const tokensCssPath = path.resolve(__dirname, '../tokens/tokens.css');
   assert(fs.existsSync(tokensCssPath), 'tokens/tokens.css exists');
   const css = fs.readFileSync(tokensCssPath, 'utf8');
+  const strippedCss = css.replace(/\/\*[\s\S]*?\*\//g, '');
   const definedVars = new Set(
-    [...css.matchAll(/(--vd3-[a-z0-9-]+)\s*:/g)].map((m) => m[1])
+    [...strippedCss.matchAll(/(--vd3-[a-z0-9-]+)\s*:/g)].map((m) => m[1])
   );
+
+  function extractLayerBody(source, layerName) {
+    const escaped = layerName.replace(/\./g, '\\.');
+    const match = new RegExp(`@layer\\s+${escaped}\\s*\\{`).exec(source);
+    if (!match) return '';
+    const start = match.index + match[0].length;
+    let depth = 1;
+    for (let i = start; i < source.length; i++) {
+      if (source[i] === '{') depth++;
+      else if (source[i] === '}') {
+        depth--;
+        if (depth === 0) return source.slice(start, i);
+      }
+    }
+    return '';
+  }
+
+  function extractTopLevelBlocks(layerBody) {
+    const blocks = [];
+    let i = 0;
+    while (i < layerBody.length) {
+      const braceOpen = layerBody.indexOf('{', i);
+      if (braceOpen === -1) break;
+      const selector = layerBody.slice(i, braceOpen).trim();
+      let depth = 1;
+      let rClose = braceOpen + 1;
+      while (rClose < layerBody.length && depth > 0) {
+        if (layerBody[rClose] === '{') depth++;
+        else if (layerBody[rClose] === '}') depth--;
+        rClose++;
+      }
+      const body = layerBody.slice(braceOpen + 1, rClose - 1);
+      blocks.push({ selector, body });
+      i = rClose;
+    }
+    return blocks;
+  }
+
+  function parseDecls(blockBody) {
+    const map = new Map();
+    for (const m of blockBody.matchAll(/(--vd3-[a-z0-9-]+)\s*:\s*([^;]+);/g)) {
+      map.set(m[1].trim(), m[2].trim());
+    }
+    return map;
+  }
+
+  const layerBody = extractLayerBody(strippedCss, 'vd3.tokens');
+  const topBlocks = extractTopLevelBlocks(layerBody);
+  const rootVars = new Map();
+  const darkVars = new Map();
+  for (const blk of topBlocks) {
+    if (blk.selector === ':root') {
+      for (const [k, v] of parseDecls(blk.body)) rootVars.set(k, v);
+    } else if (blk.selector === '[data-theme="dark"]') {
+      for (const [k, v] of parseDecls(blk.body)) darkVars.set(k, v);
+    }
+  }
+  assert(rootVars.size > 100, `Parsed ${rootVars.size} --vd3-* declarations in top-level :root`);
+  assert(darkVars.size >= 22, `Parsed ${darkVars.size} --vd3-* declarations in [data-theme="dark"]`);
 
   const kebab = (s) => s.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 
   function cssVarFor(tokenPath) {
     const p = tokenPath.split('.');
-    if (p[0] === 'theme') return '--vd3-color-' + kebab(p.slice(4).join('-')); // theme.dark.color.role.X -> --vd3-color-X (dark block)
+    if (p[0] === 'theme') {
+      if (p[2] === 'color' && p[3] === 'role') return '--vd3-color-' + kebab(p.slice(4).join('-'));
+      if (p[2] === 'shadow') return '--vd3-shadow-' + p.slice(3).join('-');
+      return null;
+    }
     if (p[0] === 'color' && p[1] === 'primitive' && p[2] === 'golden-angle') return '--vd3-color-golden-' + p.slice(3).join('-');
     if (p[0] === 'color' && p[1] === 'primitive') return '--vd3-color-' + kebab(p.slice(2).join('-'));
     if (p[0] === 'color' && p[1] === 'role') return '--vd3-color-' + kebab(p.slice(2).join('-'));
     if (p[0] === 'math') return '--vd3-' + kebab(p.slice(1).join('-'));
     if (p[0] === 'space') return '--vd3-space-' + p.slice(1).join('-');
+    if (p[0] === 'spacing' && p[1] === 'px') return '--vd3-spacing-' + p.slice(2).join('-');
     if (p[0] === 'line') return '--vd3-line-' + p.slice(1).join('-');
+    if (p[0] === 'border' && p[1] === 'width') return '--vd3-border-width-' + p.slice(2).join('-');
     if (p[0] === 'focus') return '--vd3-focus-' + kebab(p.slice(1).join('-'));
     if (p[0] === 'icon') {
       if (p[1] === 'color' && p[2] === 'default') return '--vd3-icon-color';
       return '--vd3-icon-' + kebab(p.slice(1).join('-'));
     }
-    if (p[0] === 'density') return '--vd3-density-' + kebab(p.slice(1).join('-'));
+    if (p[0] === 'density') {
+      if (p[1] === 'multiplier') return '--vd3-density-scale';
+      return '--vd3-density-' + kebab(p.slice(1).join('-'));
+    }
     if (p[0] === 'radius') return '--vd3-radius-' + p.slice(1).join('-');
-    if (p[0] === 'shadow') return '--vd3-shadow-' + p.slice(1).join('-');
+    if (p[0] === 'shadow') {
+      if (p[1] === 'named') return p[2] === 'default' ? '--vd3-shadow' : '--vd3-shadow-' + p.slice(2).join('-');
+      return '--vd3-shadow-' + p.slice(1).join('-');
+    }
     if (p[0] === 'glow') return '--vd3-glow-' + p.slice(1).join('-');
     if (p[0] === 'z') return '--vd3-z-' + kebab(p.slice(1).join('-'));
     if (p[0] === 'container') return '--vd3-container-' + p.slice(1).join('-');
     if (p[0] === 'breakpoint') return '--vd3-breakpoint-' + p.slice(1).join('-');
+    if (p[0] === 'font' && p[1] === 'family') return '--vd3-font-family-' + p.slice(2).join('-');
     if (p[0] === 'motion') return '--vd3-duration-' + kebab(p.slice(1).join('-'));
     if (p[0] === 'easing') return '--vd3-ease-' + kebab(p.slice(1).join('-'));
     if (p[0] === 'aspect') return '--vd3-aspect-' + kebab(p.slice(1).join('-'));
@@ -653,21 +726,91 @@ suite('DTCG JSON to tokens.css Export Drift Gate', () => {
     return null;
   }
 
+  function getByPath(obj, dotPath) {
+    return dotPath.split('.').reduce((acc, key) => (acc && typeof acc === 'object' ? acc[key] : undefined), obj);
+  }
+
+  function resolveDtcgValue(tokenPath, val, seen = new Set()) {
+    if (Array.isArray(val)) return `cubic-bezier(${val.join(', ')})`;
+    let str = String(val);
+    str = str.replace(/\{([a-zA-Z0-9._-]+)\}/g, (_, ref) => {
+      if (seen.has(ref)) throw new Error(`Circular DTCG reference: ${ref}`);
+      const target = getByPath(tokens, ref);
+      if (!target || typeof target !== 'object' || !('$value' in target)) {
+        throw new Error(`Unresolved DTCG reference "${ref}" in ${tokenPath}`);
+      }
+      return resolveDtcgValue(ref, target.$value, new Set([...seen, ref]));
+    });
+    if (tokenPath === 'math.golden-angle') str = `${str}deg`;
+    return str;
+  }
+
+  function resolveCssValue(rawVal, scopeVars, seen = new Set()) {
+    let cur = String(rawVal).trim();
+    for (let pass = 0; pass < 16; pass++) {
+      let changed = false;
+      const next = cur.replace(/var\(\s*(--[a-zA-Z0-9_-]+)\s*(?:,\s*([^)]+))?\)/g, (full, name, fallback) => {
+        if (scopeVars.has(name) && !seen.has(name)) {
+          changed = true;
+          return resolveCssValue(scopeVars.get(name), scopeVars, new Set([...seen, name]));
+        }
+        if (fallback !== undefined) {
+          changed = true;
+          return fallback.trim();
+        }
+        return full;
+      });
+      cur = next;
+      if (!changed) break;
+    }
+    return cur;
+  }
+
+  function normalizeValue(val) {
+    const collapsed = String(val).trim().replace(/\s+/g, ' ').replace(/\s*,\s*/g, ', ');
+    if (/^-?\d+(\.\d+)?$/.test(collapsed)) return String(Number(collapsed));
+    return collapsed;
+  }
+
   const leaves = getLeafTokens(tokens);
+  const darkScopeVars = new Map([...rootVars, ...darkVars]);
+  const mappedCssVars = new Set();
   let checked = 0;
   let skipped = 0;
-  for (const { path: tokenPath } of leaves) {
+  for (const { path: tokenPath, token } of leaves) {
     const varName = cssVarFor(tokenPath);
     if (!varName) {
       skipped++;
       continue;
     }
     checked++;
+    mappedCssVars.add(varName);
     assert(
       definedVars.has(varName),
       `Token ${tokenPath} must export ${varName} in tokens/tokens.css (drift gate)`
     );
+
+    const isDarkTheme = tokenPath.startsWith('theme.dark.');
+    const targetScope = isDarkTheme ? darkVars : rootVars;
+    const resolveScope = isDarkTheme ? darkScopeVars : rootVars;
+    assert(
+      targetScope.has(varName),
+      `Token ${tokenPath} must be declared in ${isDarkTheme ? '[data-theme="dark"]' : ':root'} as ${varName}`
+    );
+    if (targetScope.has(varName)) {
+      const expected = normalizeValue(resolveDtcgValue(tokenPath, token.$value));
+      const actual = normalizeValue(resolveCssValue(targetScope.get(varName), resolveScope));
+      assert(
+        actual === expected,
+        `Value mismatch for ${tokenPath} (${varName}): DTCG="${expected}" vs CSS="${actual}"`
+      );
+    }
   }
+  const unmappedRootVars = [...rootVars.keys()].filter((v) => !mappedCssVars.has(v));
+  assert(
+    unmappedRootVars.length === 0,
+    `All :root --vd3-* variables must map to DTCG tokens (unmapped: ${unmappedRootVars.join(', ')})`
+  );
   assert(checked > 100, `Drift gate covered ${checked} leaf tokens (skipped ${skipped} non-CSS groups)`);
 });
 

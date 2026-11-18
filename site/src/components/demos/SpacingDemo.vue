@@ -7,7 +7,7 @@ import { spaceSteps } from '../../spec'
   <div class="scale">
     <div v-for="s in spaceSteps" :key="s.name" class="scale-row">
       <span class="mono lbl">{{ s.token }}</span>
-      <div class="scale-bar" :style="{ width: Math.min(s.px * 8, 400) + 'px' }" />
+      <div class="scale-bar" :style="{ inlineSize: Math.min(s.px * 8, 400) + 'px' }" />
       <span class="val">{{ s.px }}px
         <VdBadge v-if="s.c01" variant="warning" pill size="sm">C-01</VdBadge>
       </span>
@@ -15,7 +15,7 @@ import { spaceSteps } from '../../spec'
   </div>
   <p class="footnote"><strong>Exception C-01:</strong> steps ≤ 12px ship as the rem-rounded working
   scale (2·4·6·8·12); the sequence becomes literal from 13px onward. Registered, reviewed at each major.
-  The px helper scale (<code>--vd-spacing-*</code>) is generated as aliases of these tokens.</p>
+  The px helper scale (<code>--vd3-spacing-*</code>) is generated as aliases of these tokens.</p>
 </template>
 
 <style scoped>
@@ -27,12 +27,12 @@ import { spaceSteps } from '../../spec'
 .mono { font-family: var(--vd-font-family-mono); }
 .lbl { color: var(--vd-text-secondary); }
 .scale-bar {
-  height: var(--vd-space-fib-8); border-radius: var(--vd-border-radius-sm);
+  block-size: var(--vd-space-fib-8); border-radius: var(--vd-border-radius-sm);
   background: linear-gradient(90deg, color-mix(in srgb, var(--vd-primary-6) 70%, var(--vd-bg-primary)), var(--vd-primary-6));
 }
 .val { color: var(--vd-text-secondary); font-size: 0.75rem; display: flex; align-items: center; gap: var(--vd-space-fib-3); }
 .footnote {
   font-size: 0.75rem; color: var(--vd-text-secondary); margin-block-start: var(--vd-space-fib-13);
-  border-left: 2px solid var(--vd-primary-6); padding-left: var(--vd-space-fib-8); max-width: 70ch;
+  border-inline-start: 2px solid var(--vd-primary-6); padding-inline-start: var(--vd-space-fib-8); max-inline-size: 70ch;
 }
 </style>

@@ -23,16 +23,16 @@ import { VdBadge, VdChip } from '@vanduo-oss/vd3'
 .gd { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--vd-space-fib-8); margin-block-start: var(--vd-space-fib-8); }
 .gd > div {
   background: color-mix(in srgb, var(--vd-primary-6) 20%, var(--vd-bg-primary));
-  border: 1px solid var(--vd-border-color); border-radius: var(--vd-border-radius-sm); height: var(--vd-space-fib-21);
+  border: 1px solid var(--vd-border-color); border-radius: var(--vd-border-radius-sm); block-size: var(--vd-space-fib-21);
 }
 .gd.golden { grid-template-columns: 1fr 1.618fr; margin-block-start: var(--vd-space-fib-13); }
 .gd.golden > div {
-  height: var(--vd-space-fib-55); display: flex; align-items: center; justify-content: center;
+  block-size: var(--vd-space-fib-55); display: flex; align-items: center; justify-content: center;
   font-size: 0.75rem; color: var(--vd-text-secondary);
 }
 .chips { display: flex; gap: var(--vd-space-fib-8); flex-wrap: wrap; margin-block-start: var(--vd-space-fib-13); }
 .footnote {
   font-size: 0.75rem; color: var(--vd-text-secondary); margin-block-start: var(--vd-space-fib-13);
-  border-left: 2px solid var(--vd-primary-6); padding-left: var(--vd-space-fib-8); max-width: 70ch;
+  border-inline-start: 2px solid var(--vd-primary-6); padding-inline-start: var(--vd-space-fib-8); max-inline-size: 70ch;
 }
 </style>

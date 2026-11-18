@@ -21,6 +21,11 @@
     will-change: transform;
   }
 
+  /* Transform axes are physical; flip slide translation sign in RTL (intentional physical axis) */
+  :dir(rtl) .vd-carousel-track {
+    transform: translateX(calc(var(--_vd-carousel-index, 0) * 100%));
+  }
+
   /* Slide — exactly one viewport wide */
   .vd-carousel-slide {
     flex: 0 0 100%;
@@ -85,6 +90,14 @@
     border-right: var(--vd3-line-thin, 2px) solid currentColor; /* intentional physical stroke — rotated chevron glyph */
     transform: rotate(45deg);
     margin-inline-end: var(--vd3-space-fib-2, 0.25rem); /* optical re-centering of the rotated stroke */
+  }
+
+  /* Mirror directional chevrons in RTL via rotation (no new physical border properties) */
+  :dir(rtl) .vd-carousel-prev::before {
+    transform: rotate(135deg);
+  }
+  :dir(rtl) .vd-carousel-next::before {
+    transform: rotate(-135deg);
   }
 
   /* Dual-ring focus on the controls */

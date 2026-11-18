@@ -26,7 +26,7 @@ To eliminate focus contrast degradation, VD3 mandates a **Dual-Ring Architecture
 - **FOC-001** — Focus indicators MUST activate only on keyboard interaction via the native `:focus-visible` pseudo-class. `outline: none` / `outline: 0` without the dual-ring `box-shadow` contract below is a violation.
 - **FOC-002** — Ring geometry: `focus.ring.width` ≥ 2px and `focus.ring.offset` ≥ 2px. Both equal $F_3 = 2$px = `line.thin` (Class A), tokenized in `tokens/vd3.tokens.json` as `focus.ring.*` (new in 1.0.2; previously CSS-only `--vd3-focus-ring-*`).
 - **FOC-003** — The ring color MUST achieve ≥ 3:1 contrast against both the unfocused component border and the surrounding canvas (WCAG 2.2 SC 2.4.13): light `gold.6` on `canvas` = 3.8:1, dark `gold.4` on `canvas` = 8.9:1.
-- **FOC-004** — Overlays (dialog, drawer, offcanvas) MUST trap focus, move initial focus per APG, and restore focus to the invoking element on close (see `components/dialog/spec.md` DLG-001…004).
+- **FOC-004** — Modal overlays (dialog, modal drawer/offcanvas) MUST trap focus, move initial focus per APG, and restore focus to the invoking element on close (see `components/dialog/spec.md` DLG-001…004 and `components/drawer/spec.md`). Non-modal drawers (`.vd-drawer--non-modal`, `aria-modal="false"`, `patterns/app-shell.md` APP-004) leave background content interactive without trapping focus.
 
 ## Normative Focus Tokens
 

@@ -32,10 +32,36 @@
       visibility 0s linear var(--vd3-duration-89, 89ms);
   }
 
-  .vd-tooltip[data-open="true"] {
+  .vd-tooltip[data-open="true"],
+  .vd-tooltip:popover-open {
     opacity: 1;
     visibility: visible;
     transition: opacity var(--vd3-duration-89, 89ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1));
+  }
+
+  @supports (position-area: block-end) {
+    .vd-tooltip[popover] {
+      position: fixed;
+      inset: auto;
+      position-anchor: var(--_vd-anchor);
+      position-area: block-start;
+      position-try-fallbacks: flip-block, flip-inline;
+    }
+    .vd-tooltip[popover].vd-tooltip--bottom,
+    .vd-tooltip[popover].vd-tooltip-bottom,
+    .vd-tooltip[popover][data-placement="bottom"] {
+      position-area: block-end;
+    }
+    .vd-tooltip[popover].vd-tooltip--start,
+    .vd-tooltip[popover].vd-tooltip-start,
+    .vd-tooltip[popover][data-placement="start"] {
+      position-area: inline-start;
+    }
+    .vd-tooltip[popover].vd-tooltip--end,
+    .vd-tooltip[popover].vd-tooltip-end,
+    .vd-tooltip[popover][data-placement="end"] {
+      position-area: inline-end;
+    }
   }
 
   /* Arrow is optional: only placement modifiers render it (::before glyph).

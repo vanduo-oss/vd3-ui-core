@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="light" data-primary="cyan" data-font="open-sans">
+<html lang="en" data-primary="cyan" data-font="open-sans">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -83,6 +83,37 @@
       }
     ]
   }
+  </script>
+  <script>
+    (function () {
+      try {
+        var root = document.documentElement;
+        var s = window.localStorage;
+        var theme = s.getItem('vanduo-theme-preference');
+        if (theme === 'light' || theme === 'dark') {
+          root.setAttribute('data-theme', theme);
+        } else {
+          root.removeAttribute('data-theme');
+        }
+        var palette = s.getItem('vanduo-palette');
+        if (palette === 'open-color' || palette === 'fibonacci') root.setAttribute('data-palette', palette);
+        var primary = s.getItem('vanduo-primary-color');
+        if (primary) root.setAttribute('data-primary', primary);
+        var neutral = s.getItem('vanduo-neutral-color');
+        if (neutral) root.setAttribute('data-neutral', neutral);
+        var radius = s.getItem('vanduo-radius');
+        if (radius) {
+          root.setAttribute('data-radius', radius);
+          root.style.setProperty('--vd-radius-scale', radius);
+        }
+        var font = s.getItem('vanduo-font-preference');
+        if (font) root.setAttribute('data-font', font);
+        var motion = s.getItem('vanduo-motion');
+        if (motion === 'full' || motion === 'reduce' || motion === 'off') {
+          root.setAttribute('data-motion', motion);
+        }
+      } catch (_e) {}
+    })();
   </script>
 </head>
 <body>

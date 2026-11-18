@@ -66,38 +66,38 @@
         "gray", "charcoal", "slate", "zinc", "neutral", "stone",
         "red", "orange", "amber", "yellow", "lime", "green",
         "emerald", "teal", "cyan", "sky", "blue", "indigo",
-        "violet", "purple", "fuchsia", "pink", "rose", "gold", "black"
+        "violet", "purple", "fuchsia", "pink", "rose", "gold", "black",
+        "golden-angle"
       ],
       "steps": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      "goldenAngleSteps": [0, 1, 2, 3, 4, 5, 6, 7],
       "anchors": ["common/white", "common/black", "gray/10"],
       "webCodeSyntaxPattern": "var(--vd-<family>-<step>)",
-      "normativeTokenPattern": "--vd3-color-primitive-<family>-<step>"
+      "webCodeSyntaxNotes": "Legacy --vd-* aliases map gold -> var(--vd-yellow-<step>) and gray/10 -> var(--vd3-color-gray-1000) / var(--vd-bg-darker); golden-angle has no --vd-golden-* legacy alias in tokens/tokens.css (use normative var(--vd3-color-golden-<step>)).",
+      "normativeTokenPattern": "--vd3-color-<family>-<step>",
+      "normativeTokenNotes": "golden-angle (8 steps, 0..7) exports as --vd3-color-golden-<step>; gold exports as --vd3-color-gold-<step> (legacy --vd-yellow-<step>); anchor gray/10 exports as --vd3-color-gray-1000."
     },
     "VD3 Semantic Theme": {
       "modes": ["Light", "Dark"],
       "type": "COLOR",
       "aliasedTo": "VD3 Color Primitives",
       "variables": [
-        { "name": "bg/canvas", "light": "common/white", "dark": "gray/10", "web": "var(--vd-bg-primary)" },
-        { "name": "bg/layer", "light": "gray/0", "dark": "gray/9", "web": "var(--vd-bg-secondary)" },
-        { "name": "bg/layer-hover", "light": "gray/1", "dark": "gray/8", "web": "var(--vd-bg-tertiary)" },
-        { "name": "text/primary", "light": "gray/9", "dark": "gray/0", "web": "var(--vd-text-primary)" },
+        { "name": "bg/canvas", "light": "common/white", "dark": "gray/9", "web": "var(--vd-bg-primary)" },
+        { "name": "bg/layer", "light": "gray/0", "dark": "gray/8", "web": "var(--vd-bg-secondary)" },
+        { "name": "bg/layer-hover", "light": "gray/1", "dark": "gray/7", "web": "var(--vd-bg-tertiary)" },
+        { "name": "text/primary", "light": "gray/10", "dark": "gray/0", "web": "var(--vd-text-primary)" },
         { "name": "text/secondary", "light": "gray/7", "dark": "gray/3", "web": "var(--vd-text-secondary)" },
-        { "name": "text/muted", "light": "gray/6", "dark": "gray/5", "web": "var(--vd-text-muted)" },
-        { "name": "text/on-primary", "light": "common/white", "dark": "gray/9", "web": "var(--vd-text-inverse)" },
+        { "name": "text/muted", "light": "gray/7", "dark": "gray/3", "web": "var(--vd-text-muted)" },
+        { "name": "text/on-primary", "light": "gray/10", "dark": "gray/10", "web": "var(--vd3-color-gray-1000)" },
         { "name": "border/default", "light": "gray/3", "dark": "gray/7", "web": "var(--vd-border-color)" },
-        { "name": "border/subtle", "light": "gray/2", "dark": "gray/8", "web": "var(--vd-border-color-light)" },
-        { "name": "color/primary", "light": "blue/7", "dark": "gold/3", "web": "var(--vd-color-primary)" },
-        { "name": "color/primary-hover", "light": "blue/8", "dark": "gold/4", "web": "var(--vd-color-primary-hover)" },
-        { "name": "color/focus", "light": "gold/4", "dark": "gold/3", "web": "var(--vd-color-focus)" },
-        { "name": "color/success", "light": "green/7", "dark": "green/4", "web": "var(--vd-color-success)" },
-        { "name": "color/success-subtle", "light": "green/0", "dark": "green/9", "web": "var(--vd-success-0)" },
-        { "name": "color/warning", "light": "amber/7", "dark": "amber/4", "web": "var(--vd-color-warning)" },
-        { "name": "color/warning-subtle", "light": "amber/0", "dark": "amber/9", "web": "var(--vd-warning-0)" },
-        { "name": "color/danger", "light": "red/6", "dark": "red/4", "web": "var(--vd-color-danger)" },
-        { "name": "color/danger-subtle", "light": "red/0", "dark": "red/9", "web": "var(--vd-danger-0)" },
-        { "name": "color/info", "light": "teal/7", "dark": "teal/4", "web": "var(--vd-color-info)" },
-        { "name": "color/info-subtle", "light": "teal/0", "dark": "teal/9", "web": "var(--vd-info-0)" }
+        { "name": "border/subtle", "light": "gray/2", "dark": "gray/8", "web": "var(--vd3-color-border-subtle)" },
+        { "name": "color/primary", "light": "gold/6", "dark": "gold/4", "web": "var(--vd-color-primary)" },
+        { "name": "color/primary-hover", "light": "gold/7", "dark": "gold/4", "web": "var(--vd-color-primary-hover)" },
+        { "name": "color/focus", "light": "gold/6", "dark": "gold/4", "web": "var(--vd3-color-focus)" },
+        { "name": "color/info", "light": "golden-angle/1", "dark": "golden-angle/1", "web": "var(--vd3-color-info)" },
+        { "name": "color/success", "light": "golden-angle/6", "dark": "golden-angle/6", "web": "var(--vd3-color-success)" },
+        { "name": "color/warning", "light": "gold/6", "dark": "gold/4", "web": "var(--vd3-color-warning)" },
+        { "name": "color/danger", "light": "red/6", "dark": "red/4", "web": "var(--vd-color-danger)" }
       ]
     },
     "VD3 Scale & Proportions": {

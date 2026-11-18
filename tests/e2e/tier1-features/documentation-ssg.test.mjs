@@ -161,4 +161,48 @@ describe('Tier 1: Documentation Site Pre-rendered Static HTML & AI Readability',
       );
     }
   });
+
+  it('TEST-T1-SSG-006: Search input sits directly above Chapters, 36 specimens & 39 specs expose anchors, and code blocks are untruncated', () => {
+    const { path: distPath, html: liveHtml } = loadLiveDocumentationHtml();
+
+    const searchInputPos = liveHtml.indexOf('id="doc-search-input"');
+    const tocTitlePos = liveHtml.indexOf('id="doc-toc-title"');
+    assert.ok(searchInputPos > -1, `Expected #doc-search-input in "${distPath}"`);
+    assert.ok(tocTitlePos > -1, `Expected #doc-toc-title in "${distPath}"`);
+    assert.ok(
+      searchInputPos < tocTitlePos,
+      '#doc-search-input (.vd-doc-search) must appear directly above #doc-toc-title (Chapters)'
+    );
+    assert.ok(
+      liveHtml.includes('class="vd-doc-search doc-toc-search"'),
+      'Expected .vd-doc-search container in TOC sidebar'
+    );
+
+    const specimenCards = extractElementsByAttribute(liveHtml, 'data-vd-component');
+    assert.strictEqual(
+      specimenCards.length,
+      36,
+      `Expected 36 specimen cards (35 primitives + layout engine), found ${specimenCards.length}`
+    );
+    assert.ok(
+      specimenCards.some((el) => el.attrs['data-vd-component'] === 'icon' && el.attrs.id === 'specimen-icon'),
+      'Expected icon specimen card with id="specimen-icon"'
+    );
+
+    const specCount = (liveHtml.match(/id="spec-[a-z0-9-]+"/g) || []).length;
+    assert.ok(specCount >= 39, `Expected >= 39 per-slug spec anchors (#spec-*), found ${specCount}`);
+    assert.ok(liveHtml.includes('id="spec-icon"'), 'Expected #spec-icon per-slug specification anchor');
+    assert.ok(liveHtml.includes('id="convention-naming"'), 'Expected #convention-naming anchor');
+    assert.ok(liveHtml.includes('id="pattern-empty-states"'), 'Expected #pattern-empty-states anchor');
+
+    const codeMatches = [...liveHtml.matchAll(/<pre\b[^>]*class="[^"]*\bvd-code\b[^"]*"[^>]*><code>([\s\S]*?)<\/code><\/pre>/g)];
+    assert.ok(codeMatches.length >= 36, `Expected >= 36 specimen code blocks, found ${codeMatches.length}`);
+    for (const m of codeMatches) {
+      const codeBody = m[1];
+      assert.ok(
+        !codeBody.includes('...') && !codeBody.includes('\u2026'),
+        `Specimen code block must not contain ellipsis truncation: ${codeBody.slice(0, 80)}`
+      );
+    }
+  });
 });

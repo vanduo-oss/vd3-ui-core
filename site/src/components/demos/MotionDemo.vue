@@ -31,11 +31,11 @@ function replay() {
 .lbl { color: var(--vd-text-secondary); }
 .lbl small { font-size: 10px; }
 .track {
-  position: relative; height: var(--vd-space-fib-13); background: var(--vd-bg-secondary);
+  position: relative; block-size: var(--vd-space-fib-13); background: var(--vd-bg-secondary);
   border-radius: 999px; overflow: hidden;
 }
 .runner {
-  position: absolute; inset-block: 0; left: 0; width: 34px; background: var(--vd-primary-6);
+  position: absolute; inset-block: 0; inset-inline-start: 0; inline-size: 34px; background: var(--vd-primary-6);
   border-radius: 999px; transform: translateX(-40px);
 }
 .playing .runner { animation: slide var(--d, 233ms) var(--vd-ease-out, cubic-bezier(0.16, 1, 0.3, 1)) forwards; }
@@ -44,6 +44,6 @@ function replay() {
 [data-motion='reduce'] .playing .runner { animation-duration: 1ms; }
 .footnote {
   font-size: 0.75rem; color: var(--vd-text-secondary); margin-block-start: var(--vd-space-fib-13);
-  border-left: 2px solid var(--vd-primary-6); padding-left: var(--vd-space-fib-8); max-width: 70ch;
+  border-inline-start: 2px solid var(--vd-primary-6); padding-inline-start: var(--vd-space-fib-8); max-inline-size: 70ch;
 }
 </style>

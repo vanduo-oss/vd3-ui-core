@@ -42,6 +42,8 @@ toggled via `hidden`. No size/variant modifiers in v1.
 | Enter / Space (on a menubar item) | Open its dropdown and focus the first menu item |
 | Up Arrow (on a menubar item) | Open its dropdown and focus the last menu item |
 | Escape (in dropdown) | Close the dropdown; focus returns to the menubar item |
+| Right Arrow (in dropdown) | Close the current dropdown, move focus to the next menubar item, and open its dropdown (or open submenu if the focused item has one) |
+| Left Arrow (in dropdown) | Close the current dropdown, move focus to the previous menubar item, and open its dropdown |
 | Down / Up / Home / End (in dropdown) | Navigate menu items per the APG menu contract (wrapping) |
 | Tab | Leave the menubar (dropdowns close) |
 

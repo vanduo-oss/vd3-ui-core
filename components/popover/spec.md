@@ -21,19 +21,26 @@ and `.vd-popover-body`. The trigger carries `aria-expanded="true|false"` and
 `color.role.canvas` fill, `shadow.4`, `radius.fib-8`, stacked at `z.popover`.
 
 ## States
-Rest (closed: `hidden`, `display: none`) / open (not `hidden`: opacity 1,
-`transform: none`, entrance via `@starting-style` + `display … allow-discrete`
-over `motion.233` = 233ms) / `:focus-visible` dual ring on the panel when it
-receives programmatic focus (`focus.ring.*` + retained `shadow.4`). Each state
-swaps only tokens.
+Rest (closed: `hidden` or non-`:popover-open`, `display: none`) / open
+(`:not([hidden]):not([popover])` or native `:popover-open`: opacity 1,
+`transform: none`, entrance via `@starting-style` + `overlay` + `display` with
+standalone `transition-behavior: allow-discrete;` over `motion.233` = 233ms) /
+`:focus-visible` dual ring on the panel when it receives programmatic focus
+(`focus.ring.*` + retained `shadow.4`). Under `@supports (position-area: block-end)`,
+`[popover]` panels promote to the browser top layer and position via CSS Anchor
+Positioning (`position-anchor: var(--_vd-anchor)`, `position-area`,
+`position-try-fallbacks: flip-block, flip-inline`), gracefully falling back to
+container-relative `position: absolute` in browsers without Anchor Positioning.
+Each state swaps only tokens.
 
 ## Props / API
 Contract-level: trigger button with `aria-haspopup="dialog"`,
-`aria-expanded="true|false"`, `aria-controls` → popover id; popover element
-`role="dialog"`, `aria-modal="false"`, `aria-labelledby` → header id, toggled by
-removing/adding the `hidden` attribute. Placement via `data-placement`.
-Positioning against the trigger rect, outside-click dismissal, and focus
-management are behavioral-layer concerns; CSS only renders the surface.
+`aria-expanded="true|false"`, `aria-controls` → popover id (or native HTML Popover
+API `popovertarget="<popover-id>"` with `popover="auto"`/`"manual"`); popover
+element `role="dialog"`, `aria-modal="false"`, `aria-labelledby` → header id,
+toggled via `:popover-open` or removing/adding `hidden`. Placement via
+`data-placement`. Progressive CSS Anchor Positioning pairs with `--_vd-anchor` /
+`anchor-name` while preserving container-relative fallback positioning.
 
 ## Keyboard — NORMATIVE: no APG pattern exists
 There is no APG popover pattern; the behavioral contract is the non-modal dialog

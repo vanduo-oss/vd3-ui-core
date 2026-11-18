@@ -13,22 +13,24 @@ interruptions (use dialog), or critical content the user must read (use alert
 with `role="alert"`).
 
 ## Anatomy
-`.vd-toast-container` (fixed placement; default bottom-inline-end; modifiers
-`--bottom-left`, `--top-right`, `--top-left`, `--bottom-center`) containing
-`.vd-toast` (variant accent on `border-inline-start`, RTL-safe) with
-`.vd-toast-icon`, `.vd-toast-content` (`.vd-toast-title` + `.vd-toast-message`),
-and optional dismiss `.vd-toast-close`. Variants: `--info` / `--success` /
-`--warning` / `--danger` (alias `--critical`). Enter/exit via the
-`vd-toast-enter` / `vd-toast-exit` keyframes (`motion.233` = `motion.base`).
+`.vd-toast-container` (fixed placement; default `--bottom-end`; logical
+modifiers `--bottom-start`, `--bottom-end`, `--top-start`, `--top-end`,
+`--bottom-center`, `--top-center`) containing `.vd-toast` (Fibonacci inline bounds
+`233px`–`377px`, $F_{13}$–$F_{14}$, variant accent on `border-inline-start`,
+RTL-safe) with `.vd-toast-icon`, `.vd-toast-content` (`.vd-toast-title` +
+`.vd-toast-message`), and optional dismiss `.vd-toast-close`. Variants:
+`--info` / `--success` / `--warning` / `--danger` (alias `--critical`).
+Enter/exit via `vd-toast-enter` / `vd-toast-exit` keyframes (`motion.233` = `motion.base`).
 
 ## States
 Rest (layer fill, `shadow.4`, thick inline-start accent = `color.role.interactive`)
-/ variant accent swap (`--warning` → `color.role.focus`; `--danger` / `--critical`
-→ `color.role.critical`) / close hover (`color.role.text-secondary` →
-`color.role.text-primary`, 55ms) / close `:focus-visible` (dual ring) / enter
-animation (opacity + translateY + scale, 233ms `easing.out`) / reduced motion
-(both `@media (prefers-reduced-motion: reduce)` and `[data-motion="reduce"]`
-collapse the animation to ~0ms). Each visual state swaps only tokens.
+/ variant accent swap (`--info` → `color.role.info`; `--success` → `color.role.success`;
+`--warning` → `color.role.warning`; `--danger` / `--critical` → `color.role.critical`) /
+close hover (`color.role.text-secondary` → `color.role.text-primary`, 55ms) /
+close `:focus-visible` (dual ring) / enter animation (opacity + translateY + scale,
+233ms `easing.out`) / reduced motion (both `@media (prefers-reduced-motion: reduce)`
+and `[data-motion="reduce"]` collapse the animation to ~0ms). Each visual state
+swaps only tokens.
 
 ## Props / API
 Contract-level: the container carries the live-region role — `role="status"` for
@@ -61,10 +63,12 @@ the stack never blocks the page beneath it.
 ## Tokens consumed
 `z.toast`, `color.role.layer`, `color.role.canvas`, `color.role.text-primary`,
 `color.role.text-secondary`, `color.role.border`, `color.role.interactive`,
-`color.role.focus`, `color.role.critical`, `line.hair`, `line.thick`,
-`radius.fib-3`, `radius.fib-8`, `shadow.4`, `space.fib-2`, `space.fib-8`,
-`space.fib-13`, `space.fib-21`, `space.fib-34`, `type.size.xs`, `type.size.sm`,
-`type.leading.snug`, `type.leading.normal`, `motion.233` (alias `motion.base`),
+`color.role.focus`, `color.role.info`, `color.role.success`, `color.role.warning`,
+`color.role.critical`, `line.hair`, `line.thick`, `radius.fib-3`, `radius.fib-8`,
+`shadow.4`, `space.fib-1`, `space.fib-2`, `space.fib-8`, `space.fib-13`,
+`space.fib-21`, `space.fib-34`, `space.fib-89`, `space.fib-144`, `type.size.xs`,
+`type.size.sm`, `type.size.base`, `type.size.lg-static`, `type.leading.snug`,
+`type.leading.normal`, `motion.233` (alias `motion.base`), `motion.55`,
 `easing.out`, `focus.ring.width`, `focus.ring.offset`, `focus.ring.color`,
 `focus.ring.offset-color`, `focus.ring.glow`.
 
@@ -73,7 +77,6 @@ No APG pattern exists for toasts; the contract is WAI-ARIA live-region roles
 (`role="status"` / `role="alert"`). Consulted: Carbon ToastNotification — adopts
 the role split (polite status vs assertive alert) and the dismiss button;
 deviates on accent placement (thick `border-inline-start` bar instead of an
-icon-only leading slot) for RTL robustness, and on the info/success accent hues,
-which are raw literals in `toast.css` equal by value to
-`color.primitive.golden-angle.1` / `color.primitive.golden-angle.6` pending
-tokenization.
+icon-only leading slot) and logical container modifiers (`--bottom-start/end`,
+`--top-start/end`) for full RTL robustness. All status accents and Fibonacci
+width bounds ($F_{13} = 233\text{px}$ – $F_{14} = 377\text{px}$) are token-driven.

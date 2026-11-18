@@ -2,7 +2,7 @@
 slug: breadcrumb
 status: stable
 spec: vd3-ui-core@1.1.0-draft
-apg: none
+apg: https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/
 ---
 
 ## Summary
@@ -33,15 +33,15 @@ with `<li class="vd-breadcrumb-item"><a class="vd-breadcrumb-link" href="…">�
 per crumb; the current page keeps the same classes plus `aria-current="page"`.
 No size or variant modifiers in v1.
 
-## Keyboard — NORMATIVE: no APG pattern exists
-No APG breadcrumb pattern exists; the behavioral contract is the native link
-model inside a navigation landmark:
+## Keyboard — NORMATIVE: APG Breadcrumb Pattern (`patterns/breadcrumb/`)
+Follows the official W3C ARIA APG Breadcrumb Pattern (ordered link list inside a
+named `<nav>` landmark, with `aria-current="page"` on the current crumb):
 
 | Key | Effect |
 |---|---|
 | Tab / Shift+Tab | Move focus through the breadcrumb links in DOM order |
 | Enter | Activate the focused link (native `<a href>`) |
-| — | No arrow-key roving: the trail is a link list, not a widget |
+| — | No arrow-key roving: the trail is a link list, not a composite widget |
 
 ## Focus
 Links are sequential tab stops in DOM order; `:focus-visible` dual ring per
@@ -61,8 +61,8 @@ non-interactive (no pointer events, not a navigation target).
 `math.inv-phi-sq`.
 
 ## Deviations & references
-No APG pattern exists for breadcrumbs; the contract is the WAI-ARIA navigation
-landmark plus `aria-current="page"` (ARIA 1.2). Consulted: Carbon Breadcrumb —
+Conforms to the W3C ARIA APG Breadcrumb Pattern (`https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/`,
+`<nav aria-label="Breadcrumb">` + `<ol>` + `aria-current="page"`). Consulted: Carbon Breadcrumb —
 adopts the `nav > ol > li` anatomy and `aria-current` on the last item; deviates
 on the separator (generated `::after` with empty alt text instead of a painted
 `::before` glyph, so the separator is never announced and never leads the first

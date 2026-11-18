@@ -18,7 +18,7 @@ export const spaceSteps = entries(t.space)
   .filter(([k]) => k.startsWith('fib'))
   .map(([k, v]: [string, any]) => ({
     name: k,
-    token: `--vd-space-${k}`,
+    token: `--vd3-space-${k}`,
     rem: v.$value as string,
     px: remToPx(v.$value),
     c01: /C-01/.test(v.$description ?? ''),
@@ -27,14 +27,14 @@ export const spaceSteps = entries(t.space)
 
 export const lineWeights = entries(t.line).map(([k, v]: [string, any]) => ({
   name: k,
-  token: `--vd-line-${k}`,
+  token: `--vd3-line-${k}`,
   px: remToPx(v.$value) || parseInt(v.$value, 10),
   css: v.$value as string,
 }))
 
 export const shadowLevels = entries(t.shadow).map(([k, v]: [string, any]) => ({
   level: k,
-  token: `--vd-shadow-${k}`,
+  token: `--vd3-shadow-${k}`,
   css: (v.$value as string).replace('{color.role.shadow}', t.color.role.shadow.$value),
   pair: v.$description ?? '',
 }))
@@ -45,7 +45,9 @@ export const containers = entries(t.container).map(([k, v]: [string, any]) => ({
   note: v.$description ?? '',
 }))
 
-export const typeSizes = entries(t.type.size).map(([k, v]: [string, any]) => {
+export const typeSizes = entries(t.type.size)
+  .filter(([k]) => !k.endsWith('-static'))
+  .map(([k, v]: [string, any]) => {
   const css = v.$value as string
   // fluid clamp() sizes: display the max bound
   const px = css.startsWith('clamp')
@@ -64,14 +66,14 @@ export const motionDurations = entries(t.motion)
   .filter(([k]) => /^\d+$/.test(k) && k !== '0') // numeric fib ladder only; named aliases reference these
   .map(([k, v]: [string, any]) => ({
     name: k,
-    token: `--vd-duration-${k}`,
+    token: `--vd3-duration-${k}`,
     ms: parseInt(v.$value as string, 10),
     use: v.$description ?? '',
   }))
 
 export const motionAliases = entries(t.motion)
   .filter(([k]) => !/^\d+$/.test(k))
-  .map(([k, v]: [string, any]) => ({ name: k, token: `--vd-duration-${k}`, ref: v.$value }))
+  .map(([k, v]: [string, any]) => ({ name: k, token: `--vd3-duration-${k}`, ref: v.$value }))
 
 export const zLadder = entries(t.z).map(([k, v]: [string, any]) => ({
   name: k,
@@ -85,6 +87,6 @@ export const glowSteps = entries(t.glow).map(([k, v]: [string, any]) => ({
 
 export const roleColors = entries(t.color.role).map(([k, v]: [string, any]) => ({
   name: k,
-  token: `--vd-${k}`,
+  token: `--vd3-color-${k}`,
   ref: v.$value as string,
 }))

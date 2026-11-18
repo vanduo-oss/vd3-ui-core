@@ -14,7 +14,7 @@ several checkboxes).
 
 ## Anatomy
 A `<label>` wrapping the control or bound via `for`/`id`, containing
-`.vd-checkbox` + label text. The control is a 20×20 box with border
+`.vd-checkbox` + label text. The control is a 21×21 (`space.fib-21` = $F_8$) box with border
 `line.thin` and radius `radius.fib-3`; the checkmark is a `::before` glyph built
 from `border-inline-start` + `border-bottom` rotated −45° — a logical border
 (RTL-safe); only the glyph's rotation is a physical transform, which is
@@ -25,8 +25,9 @@ intentional.
   `color.role.border`, `cursor: pointer`.
 - Checked (`:checked`, or `aria-checked="true"`): background + border →
   `color.role.focus`; the `::before` check renders in `color.primitive.gray.1000`.
-- Indeterminate (`aria-checked="mixed"`): no dedicated glyph in `form.css` v1
-  (see Deviations).
+- Indeterminate (`:indeterminate`, paired with `aria-checked="mixed"` on custom
+  builds): background + border → `color.role.focus`; `::before` renders a
+  horizontal dash (`spacing.8` × `line.thin`) in `color.primitive.gray.1000`.
 - Focus-visible: dual ring `focus.ring.*` (outline none + box-shadow).
 - Disabled (`:disabled`, `[aria-disabled="true"]`): background
   `color.role.layer`, border `color.primitive.gray.2`, color
@@ -37,7 +38,8 @@ intentional.
 ## Props / API
 Native `<input type="checkbox" class="vd-checkbox" id="…">` + `<label for="…">`.
 Tri-state: custom build with `aria-checked="mixed"`, or the native
-`indeterminate` IDL property (behavioral layer; CSS has no glyph in v1).
+`indeterminate` IDL property (behavioral layer sets the property; CSS renders the
+`:indeterminate` horizontal bar).
 Disabled via `disabled` / `aria-disabled="true"`. Core ships no script API.
 
 ## Keyboard — NORMATIVE: APG Checkbox Pattern
@@ -75,8 +77,7 @@ One tab stop per checkbox; `:focus-visible` dual ring per FOC-001…004
 
 ## Deviations & references
 Conforms to the APG Checkbox Pattern. Consulted: Carbon Checkbox — same native
-input + label contract and Space-to-toggle. Deviations flagged for the 1.0.3
-CSS pass: (1) no `:indeterminate` glyph in `form.css` v1 — `aria-checked="mixed"`
-is contract-level here and the visual is flagged; (2) the 20×20 box size is a
-fixed literal, not a token; (3) the two MOB-001 reduce blocks are absent from
-`form.css` v1 — CHK-005 is normative and the CSS gap is flagged.
+input + label contract and Space-to-toggle. The `:indeterminate` dash glyph,
+tokenized `space.fib-21` control size, `color.role.border-subtle` disabled
+border, and both `MOB-001` reduced-motion blocks (`@media (prefers-reduced-motion: reduce)`
+and `[data-motion="reduce"]`) are implemented in `components/form.css`.

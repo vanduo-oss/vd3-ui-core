@@ -53,10 +53,11 @@ semantic role tokens only.
 | `segmented.css` | #58 | `.vd-segmented`, `.vd-segmented-item` | [`segmented/spec.md`](./segmented/spec.md) (SEG) | spec stable (1.1) |
 | `hover-card.css` | #59 | `.vd-hover-card` | [`hover-card/spec.md`](./hover-card/spec.md) (HVC) | spec stable (1.1) |
 | `tour.css` | #60 | `.vd-tour`, `.vd-tour-btn` | [`tour/spec.md`](./tour/spec.md) (TUR) | spec stable (1.1) |
+| `icon.css` | #61 | `.vd-icon`, `.vd-icon--sm/md/lg/xl`, `.vd-icon-pair` | [`icon/spec.md`](./icon/spec.md) (ICN) | spec stable (1.1) |
 
-Total: **35 CSS modules** (layout engine + 34 component primitives), 35 per-slug
-specs, all `stable`. Verified by `pnpm test:components` (43 suites, features
-#13–16 + #27–60, RTL guard, snapshot integrity).
+Total: **36 CSS modules** (layout engine + 35 component primitives), 39 per-slug
+specs, all `stable`. Verified by `pnpm test:components` (47 suites, features
+#13–16 + #27–61, RTL guard, snapshot integrity).
 
 ## Cross-cutting contracts (apply to every component)
 

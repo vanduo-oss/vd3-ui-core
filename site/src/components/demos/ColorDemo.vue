@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const goldenTrack = [
-  { step: 0, token: '--vd3-color-golden-0', hue: '200.0°', hex: '#00a3aa', label: 'Primary Water' },
-  { step: 1, token: '--vd3-color-golden-1', hue: '337.5°', hex: '#c900ae', label: 'Secondary' },
-  { step: 2, token: '--vd3-color-golden-2', hue: '115.0°', hex: '#71bf00', label: 'Phi +2' },
-  { step: 3, token: '--vd3-color-golden-3', hue: '252.5°', hex: '#0074e6', label: 'Phi +3' },
-  { step: 4, token: '--vd3-color-golden-4', hue: '30.0°', hex: '#e02100', label: 'Phi +4' },
-  { step: 5, token: '--vd3-color-golden-5', hue: '167.5°', hex: '#00a880', label: 'Phi +5' },
-  { step: 6, token: '--vd3-color-golden-6', hue: '305.0°', hex: '#9c2cf3', label: 'Phi +6' },
-  { step: 7, token: '--vd3-color-golden-7', hue: '82.5°', hex: '#e6a800', label: 'Phi +7' }
+  { step: 0, token: '--vd3-color-golden-0', hue: '45.0°', hex: '#fab005', label: 'Base (+0×φ)' },
+  { step: 1, token: '--vd3-color-golden-1', hue: '182.5°', hex: '#0ab5b5', label: 'Phi +1' },
+  { step: 2, token: '--vd3-color-golden-2', hue: '320.0°', hex: '#f20d91', label: 'Phi +2' },
+  { step: 3, token: '--vd3-color-golden-3', hue: '97.5°', hex: '#68c20a', label: 'Phi +3' },
+  { step: 4, token: '--vd3-color-golden-4', hue: '235.0°', hex: '#254ef0', label: 'Phi +4' },
+  { step: 5, token: '--vd3-color-golden-5', hue: '12.5°', hex: '#f22d0d', label: 'Phi +5' },
+  { step: 6, token: '--vd3-color-golden-6', hue: '150.0°', hex: '#0ac265', label: 'Phi +6' },
+  { step: 7, token: '--vd3-color-golden-7', hue: '287.5°', hex: '#ba0df2', label: 'Phi +7' }
 ]
 
 const fibRamps = [
@@ -65,7 +65,10 @@ const fibRamps = [
         v-for="s in goldenTrack"
         :key="s.step"
         class="color-swatch-card"
-        :style="{ backgroundColor: s.hex, color: [0, 2, 5, 7].includes(s.step) ? '#1a1d20' : '#ffffff' }"
+        :style="{
+          backgroundColor: s.hex,
+          color: [2, 5].includes(s.step) ? '#000000' : [0, 1, 3, 6].includes(s.step) ? '#1a1d20' : '#ffffff'
+        }"
       >
         <strong>{{ s.hue }}</strong>
         <span>{{ s.token }}</span>
@@ -73,7 +76,7 @@ const fibRamps = [
       </div>
     </div>
 
-    <div class="color-demo-header" style="margin-top: 1.3125rem">
+    <div class="color-demo-header" style="margin-block-start: 1.3125rem">
       <strong class="color-demo-title">Fibonacci Chromatic Scales (0 → 9 · Peak at Step 6 = round(9 / φ))</strong>
       <span class="color-demo-subtitle">Cusp-anchored OKLCH ramps · True Crimson (20°)</span>
     </div>

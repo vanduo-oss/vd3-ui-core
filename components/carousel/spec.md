@@ -2,7 +2,7 @@
 slug: carousel
 status: stable
 spec: vd3-ui-core@1.1.0-draft
-apg: none
+apg: https://www.w3.org/WAI/ARIA/apg/patterns/carousel/
 ---
 
 ## Summary
@@ -46,16 +46,17 @@ autoplay/loop (`data-*` hooks), and the slide-change announcement. Core ships
 presentation only; `transform` is `translateX(calc(var(--_vd-carousel-index,
 0) * -100%))` with `transition: transform 377ms ease-out`.
 
-## Keyboard — NORMATIVE: no APG pattern exists
-No APG carousel pattern exists; the behavioral contract below follows the
-widely deployed `aria-roledescription="carousel"` convention.
+## Keyboard — NORMATIVE: APG Carousel Pattern (`patterns/carousel/`)
+Follows the official W3C ARIA APG Carousel Pattern (`role="region"`,
+`aria-roledescription="carousel"`, slide picker / tab-like or button controls,
+and live-region pause when auto-rotating):
 
 | Key | Effect |
 |---|---|
-| Tab / Shift+Tab | Move between the prev, next, and dot buttons (native `<button>` tab order) |
-| Enter / Space | Activate the focused control / dot |
-| Left / Right arrow | Previous / next slide (handled on the region by the behavioral layer) |
-| Home / End | First / last slide (behavioral layer, optional) |
+| Tab / Shift+Tab | Move between rotation toggle, prev/next buttons, and dot controls |
+| Enter / Space | Activate the focused control / dot (or pause/resume auto-rotation) |
+| Left / Right arrow | Previous / next slide (flipped logically in `:dir(rtl)` slide track and controls) |
+| Home / End | First / last slide (when dot controls use tablist semantics in behavioral layer) |
 
 ## Focus
 Prev, next, and dots are native buttons in the tab order, each with the
@@ -89,9 +90,9 @@ handling; slide content keeps its own natural focus order.
 `focus.ring.offset-color`, `focus.ring.glow`; `math.inv-phi-sq`.
 
 ## Deviations & references
-No APG pattern and no Carbon carousel exist (Carbon ships none; nearest
-consulted: Carbon ContentSwitcher for prev/next semantics, per
-`conventions/mappings.md`). Reference implementation:
+Conforms to the W3C ARIA APG Carousel Pattern (`https://www.w3.org/WAI/ARIA/apg/patterns/carousel/`).
+Nearest consulted Carbon reference: Carbon ContentSwitcher for prev/next semantics,
+per `conventions/mappings.md`. Reference implementation:
 `vd3/css/components/flow.css` (`.vd-flow` / `.vd-carousel`) — adopts the
 track-translateX + overlay controls + dot indicators model; deviates on
 control styling (canvas chip with hair border instead of translucent dark

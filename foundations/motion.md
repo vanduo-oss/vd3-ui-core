@@ -71,6 +71,16 @@ VD3 implements this contract via CSS media query and data-attribute overrides:
   --vd3-duration-610: 0ms;
   --vd3-duration-987: 0ms;
 }
+
+[data-motion="reduce"],
+[data-motion="reduce"] *,
+[data-motion="reduce"] *::before,
+[data-motion="reduce"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
 ```
 
 *Essential Motion Exemption*: Transitions that convey crucial semantic state changes (such as an accordion opening to reveal required information) complete instantaneously without spatial animation.

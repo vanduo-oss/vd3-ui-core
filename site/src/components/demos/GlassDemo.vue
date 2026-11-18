@@ -59,6 +59,6 @@ const active = computed(() => steps.find((s) => s[0] === current.value) ?? steps
 .mono { font-family: var(--vd-font-family-mono); }
 .footnote {
   font-size: 0.75rem; color: var(--vd-text-secondary); margin-block-start: var(--vd-space-fib-13);
-  border-left: 2px solid var(--vd-primary-6); padding-left: var(--vd-space-fib-8); max-width: 70ch;
+  border-inline-start: 2px solid var(--vd-primary-6); padding-inline-start: var(--vd-space-fib-8); max-inline-size: 70ch;
 }
 </style>

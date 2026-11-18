@@ -82,16 +82,16 @@
     box-sizing: border-box;
     border-radius: var(--vd3-radius-full, 9999rem);
     border: var(--vd3-border-width-thin, 2px) solid var(--vd3-color-canvas, #ffffff);
-    background-color: var(--vd3-color-gray-5, #adb5bd); /* offline default */
+    background-color: color-mix(in srgb, var(--vd3-color-text-secondary, #495057) 61.8%, var(--vd3-color-border, #dee2e6)); /* offline default */
   }
 
   .vd-avatar-status--online,
   .vd-avatar-status-online {
-    background-color: var(--vd3-color-golden-6, #0ac265);
+    background-color: var(--vd3-color-success, #0ac265);
   }
   .vd-avatar-status--away,
   .vd-avatar-status-away {
-    background-color: var(--vd3-color-focus, #fab005);
+    background-color: var(--vd3-color-warning, #fab005);
   }
   .vd-avatar-status--busy,
   .vd-avatar-status-busy {
@@ -99,11 +99,11 @@
   }
   .vd-avatar-status--info,
   .vd-avatar-status-info {
-    background-color: var(--vd3-color-golden-1, #0ab5b5);
+    background-color: var(--vd3-color-info, #0ab5b5);
   }
   .vd-avatar-status--offline,
   .vd-avatar-status-offline {
-    background-color: var(--vd3-color-gray-5, #adb5bd);
+    background-color: color-mix(in srgb, var(--vd3-color-text-secondary, #495057) 61.8%, var(--vd3-color-border, #dee2e6));
   }
 
   /* Avatar group — stacked overlap via negative logical margin-inline-start */
@@ -165,10 +165,6 @@
   [data-theme="dark"] .vd-avatar-group .vd-avatar:not(:first-child) {
     border-color: var(--vd3-color-canvas, #212529);
     box-shadow: 0 0 0 var(--vd3-border-width-thin, 2px) var(--vd3-color-canvas, #212529);
-  }
-  [data-theme="dark"] .vd-avatar-status--offline,
-  [data-theme="dark"] .vd-avatar-status-offline {
-    background-color: var(--vd3-color-gray-6, #868e96);
   }
 
   /* Reduced Motion (MOB-001) */

@@ -29,7 +29,7 @@
     },
     "golden-angle": {
       "$value": 137.507764,
-      "$description": "Golden angle in degrees: 360 * (1 - 1/phi)",
+      "$description": "Golden angle in degrees: 360 * (1 - 1/phi). Dimensionless number in DTCG; CSS/Figma consumers append 'deg' (--vd3-golden-angle: 137.507764deg).",
       "$extensions": { "vd3": { "class": "A", "derivation": "360 * (1 - 1/phi)" } }
     }
   },
@@ -77,15 +77,20 @@
       "$type": "color",
       "$description": "Semantic roles — default (light) theme, v1.9-audited. Components consume ONLY these. Dark theme: theme.dark.color.role MUST define every role. Public CSS names follow v1.9 (--vd-bg-primary, --vd-text-primary, --vd-border-color, --vd-color-primary, --vd-color-error).",
       "canvas":         { "$value": "#ffffff",                  "$description": "v1.9 --vd-bg-primary (light). body background.", "$extensions": { "vd3": { "class": "B", "reason": "Standard high-contrast canvas" } } },
+      "canvas-rgb":     { "$type": "string", "$value": "255, 255, 255", "$description": "RGB channel triplet of color.role.canvas for rgba() compositing · --vd3-color-canvas-rgb", "$extensions": { "vd3": { "class": "B", "reason": "RGB channel triplet of semantic canvas color" } } },
       "layer":          { "$value": "{color.primitive.gray.0}",  "$description": "v1.9 --vd-bg-secondary (light)", "$extensions": { "vd3": { "class": "B", "reason": "Subtle card/layer surface elevation" } } },
       "layer-hover":    { "$value": "{color.primitive.gray.1}",  "$description": "v1.9 --vd-bg-tertiary (light)", "$extensions": { "vd3": { "class": "B", "reason": "Interactive hover state for layers" } } },
       "text-primary":   { "$value": "{color.primitive.gray.1000}", "$description": "v1.9 --vd-text-primary", "$extensions": { "vd3": { "class": "B", "reason": "WCAG AAA compliant text color" } } },
       "text-secondary": { "$value": "{color.primitive.gray.7}",  "$description": "v1.9 --vd-text-secondary / --vd-text-muted", "$extensions": { "vd3": { "class": "B", "reason": "WCAG AA compliant supporting text" } } },
       "border":         { "$value": "{color.primitive.gray.3}",  "$description": "v1.9 --vd-border-color", "$extensions": { "vd3": { "class": "B", "reason": "Structural boundary rule" } } },
+      "border-subtle":  { "$value": "{color.primitive.gray.2}",  "$description": "Subtle divider border · --vd3-color-border-subtle", "$extensions": { "vd3": { "class": "B", "reason": "Low-emphasis structural/decorative divider" } } },
       "focus":          { "$value": "{color.primitive.gold.6}",  "$description": "v1.9 --vd-color-primary (default light primary = amber). v1.9 has NO dedicated focus-geometry tokens — ring width/offset are the F3-7 gap, new in 1.0.", "$extensions": { "vd3": { "class": "B", "reason": "High-visibility focus ring indicator" } } },
       "focus-glow":     { "$value": "rgba(250, 176, 5, 0.4)",      "$description": "v1.9 --vd3-color-focus-glow (light). Halo ink for the dual-ring glow. NEW as a role in 1.0.2 (previously CSS-only).", "$extensions": { "vd3": { "class": "B", "reason": "Alpha-blended focus halo matching focus role" } } },
       "interactive":    { "$value": "{color.primitive.gold.7}",  "$description": "v1.9 --vd-color-primary-hover/dark", "$extensions": { "vd3": { "class": "B", "reason": "Interactive button hover/active" } } },
       "critical":       { "$value": "{color.primitive.red.6}",   "$description": "v1.9 --vd-color-error / --vd-color-danger", "$extensions": { "vd3": { "class": "B", "reason": "Accessible error indicator" } } },
+      "info":           { "$value": "{color.primitive.golden-angle.1}", "$description": "Semantic status info accent (golden-angle step 1); pair with text-primary or darkened mix on light surfaces · --vd3-color-info", "$extensions": { "vd3": { "class": "B", "reason": "Semantic status info accent mapped to golden-angle step 1; light-surface text requires darkening or text-primary pairing" } } },
+      "success":        { "$value": "{color.primitive.golden-angle.6}", "$description": "Semantic status success accent (golden-angle step 6); pair with text-primary or darkened mix on light surfaces · --vd3-color-success", "$extensions": { "vd3": { "class": "B", "reason": "Semantic status success accent mapped to golden-angle step 6; light-surface text requires darkening or text-primary pairing" } } },
+      "warning":        { "$value": "{color.primitive.gold.6}",  "$description": "Semantic status warning accent (gold.6); pair with text-primary or darkened mix on light surfaces · --vd3-color-warning", "$extensions": { "vd3": { "class": "B", "reason": "Semantic status warning accent; light-surface text requires darkening or text-primary pairing" } } },
       "shadow":         { "$value": "#0000001a",                 "$description": "Shadow ink, light theme (dark uses #0000004d). v1.9 fib shadows bake hex-alpha literals.", "$extensions": { "vd3": { "class": "B", "reason": "Alpha-blended black ink for shadows" } } }
     }
   },
@@ -96,24 +101,39 @@
           "$type": "color",
           "$description": "Dark theme — v1.9 [data-theme=\"dark\"] block values. MUST define every role from color.role.",
           "canvas":         { "$value": "{color.primitive.gray.9}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode canvas background" } } },
+          "canvas-rgb":     { "$type": "string", "$value": "33, 37, 41", "$description": "RGB channel triplet of dark canvas (gray.9) · --vd3-color-canvas-rgb", "$extensions": { "vd3": { "class": "B", "reason": "RGB channel triplet of dark semantic canvas color" } } },
           "layer":          { "$value": "{color.primitive.gray.8}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode elevated layer" } } },
           "layer-hover":    { "$value": "{color.primitive.gray.7}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode hover layer" } } },
           "text-primary":   { "$value": "{color.primitive.gray.0}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode primary text (AAA)" } } },
           "text-secondary": { "$value": "{color.primitive.gray.3}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode secondary text (AAA)" } } },
           "border":         { "$value": "{color.primitive.gray.7}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode boundary stroke" } } },
+          "border-subtle":  { "$value": "{color.primitive.gray.8}", "$description": "Dark subtle divider border · --vd3-color-border-subtle", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode low-emphasis structural/decorative divider" } } },
           "focus":          { "$value": "{color.primitive.gold.4}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode luminous focus ring" } } },
           "focus-glow":     { "$value": "rgba(255, 212, 59, 0.4)", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode focus halo (parity with light role)" } } },
           "interactive":    { "$value": "{color.primitive.gold.4}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode interactive primary" } } },
           "critical":       { "$value": "{color.primitive.red.4}", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode accessible error text" } } },
+          "info":           { "$value": "{color.primitive.golden-angle.1}", "$description": "Dark mode semantic status info accent (6.09:1 on dark canvas) · --vd3-color-info", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode semantic status info accent" } } },
+          "success":        { "$value": "{color.primitive.golden-angle.6}", "$description": "Dark mode semantic status success accent (6.55:1 on dark canvas) · --vd3-color-success", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode semantic status success accent" } } },
+          "warning":        { "$value": "{color.primitive.gold.4}", "$description": "Dark mode semantic status warning accent (10.82:1 on dark canvas) · --vd3-color-warning", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode semantic status warning accent" } } },
           "shadow":         { "$value": "#0000004d", "$extensions": { "vd3": { "class": "B", "reason": "Dark mode shadow opacity adjustment" } } }
         }
+      },
+      "shadow": {
+        "$type": "shadow",
+        "$description": "Dark theme elevation shadows with elevated opacity — [data-theme=\"dark\"] block values.",
+        "1": { "$value": "0 1px 2px #00000033", "$description": "Dark 1/2 pair · --vd3-shadow-1", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_2, F_3) = (1, 2)" } } },
+        "2": { "$value": "0 2px 3px 0 #0000004d, 0 1px 2px -1px #0000004d", "$description": "Dark 2/3 pair · --vd3-shadow-2", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_3, F_4) = (2, 3)" } } },
+        "3": { "$value": "0 3px 5px -1px #0000004d, 0 2px 3px -2px #0000004d", "$description": "Dark 3/5 pair · --vd3-shadow-3", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_4, F_5) = (3, 5)" } } },
+        "4": { "$value": "0 8px 13px -3px #0000004d, 0 3px 5px -3px #0000004d", "$description": "Dark 8/13 pair · --vd3-shadow-4", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_6, F_7) = (8, 13)" } } },
+        "5": { "$value": "0 13px 21px -5px #0000004d, 0 5px 8px -5px #0000004d", "$description": "Dark 13/21 pair · --vd3-shadow-5", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_7, F_8) = (13, 21)" } } },
+        "6": { "$value": "0 21px 34px -8px #00000080", "$description": "Dark 21/34 pair · --vd3-shadow-6", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_8, F_9) = (21, 34)" } } }
       }
     }
   },
   "space": {
     "$type": "dimension",
     "$description": "ONE normative spacing scale, rem on a 16px base — v1.9 --vd-space-fib-*, 11/11 match. Names are Fibonacci numbers. Values <= 12px follow registered exception C-01 (rem-rounded 2/4/6/8/12); literal from 13px. v1.9 also ships --vd-spacing-* (literal Fibonacci px — same values in px) and --vd-space-* (4px-based conventional utility scale, class B); both are aliases, not parallel systems.",
-    "fib-1":   { "$value": "0.125rem",  "$description": "2px · --vd-space-fib-1", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_1/F_2 = 1, rounded to 2px for baseline screen grid" } } },
+    "fib-1":   { "$value": "0.125rem",  "$description": "2px · C-01 · --vd-space-fib-1", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Rem-rounded small spacing step (1px rounded to 2px for baseline screen grid)" } } },
     "fib-2":   { "$value": "0.25rem",   "$description": "4px · C-01 · --vd-space-fib-2", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Rem-rounded small spacing step" } } },
     "fib-3":   { "$value": "0.375rem",  "$description": "6px · C-01 · --vd-space-fib-3", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Rem-rounded small spacing step" } } },
     "fib-5":   { "$value": "0.5rem",    "$description": "8px · C-01 · --vd-space-fib-5", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Rem-rounded small spacing step" } } },
@@ -125,6 +145,23 @@
     "fib-89":  { "$value": "5.5625rem", "$description": "89px · literal Fibonacci F_11 · --vd-space-fib-89", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_11 = 89" } } },
     "fib-144": { "$value": "9rem",     "$description": "144px · literal Fibonacci F_12 · --vd-space-fib-144", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_12 = 144" } } }
   },
+  "spacing": {
+    "$type": "dimension",
+    "$description": "Literal pixel spacing aliases mirroring space.fib-* · --vd3-spacing-* (legacy --vd-spacing-*). Values <= 12px carry C-01; >= 13px are literal Fibonacci Class A.",
+    "px": {
+      "1":   { "$value": "2px",   "$description": "2px · C-01 · --vd3-spacing-1", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Rem-rounded small pixel spacing step (1px rounded to 2px)" } } },
+      "2":   { "$value": "4px",   "$description": "4px · C-01 · --vd3-spacing-2", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Rem-rounded small pixel spacing step" } } },
+      "3":   { "$value": "6px",   "$description": "6px · C-01 · --vd3-spacing-3", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Rem-rounded small pixel spacing step" } } },
+      "5":   { "$value": "8px",   "$description": "8px · C-01 · --vd3-spacing-5", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Rem-rounded small pixel spacing step" } } },
+      "8":   { "$value": "12px",  "$description": "12px · C-01 · --vd3-spacing-8", "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Rem-rounded small pixel spacing step" } } },
+      "13":  { "$value": "13px",  "$description": "13px · --vd3-spacing-13", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_7 = 13" } } },
+      "21":  { "$value": "21px",  "$description": "21px · --vd3-spacing-21", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_8 = 21" } } },
+      "34":  { "$value": "34px",  "$description": "34px · --vd3-spacing-34", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_9 = 34" } } },
+      "55":  { "$value": "55px",  "$description": "55px · --vd3-spacing-55", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_10 = 55" } } },
+      "89":  { "$value": "89px",  "$description": "89px · --vd3-spacing-89", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_11 = 89" } } },
+      "144": { "$value": "144px", "$description": "144px · --vd3-spacing-144", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_12 = 144" } } }
+    }
+  },
   "line": {
     "$type": "dimension",
     "$description": "Border/line weights — Fibonacci 1/2/3/5px (class A). NEW IN 1.0: v1.9 ships only --vd-border-width: 1px (F3-5 gap confirmed by audit).",
@@ -132,6 +169,16 @@
     "thin":    { "$value": "2px", "$description": "2px thin border", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_3 = 2" } } },
     "regular": { "$value": "3px", "$description": "3px regular border", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_4 = 3" } } },
     "thick":   { "$value": "5px", "$description": "5px thick border", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_5 = 5" } } }
+  },
+  "border": {
+    "$type": "dimension",
+    "$description": "Semantic border-width aliases for line.* · --vd3-border-width-*.",
+    "width": {
+      "hair":    { "$value": "{line.hair}",    "$description": "1px · --vd3-border-width-hair", "$extensions": { "vd3": { "class": "B", "reason": "Semantic border-width alias for line.hair" } } },
+      "thin":    { "$value": "{line.thin}",    "$description": "2px · --vd3-border-width-thin", "$extensions": { "vd3": { "class": "B", "reason": "Semantic border-width alias for line.thin" } } },
+      "regular": { "$value": "{line.regular}", "$description": "3px · --vd3-border-width-regular", "$extensions": { "vd3": { "class": "B", "reason": "Semantic border-width alias for line.regular" } } },
+      "thick":   { "$value": "{line.thick}",   "$description": "5px · --vd3-border-width-thick", "$extensions": { "vd3": { "class": "B", "reason": "Semantic border-width alias for line.thick" } } }
+    }
   },
   "focus": {
     "$description": "Dual-ring focus indicator geometry — tokenized in 1.0.2 from the CSS-only --vd3-focus-ring-* contract (foundations/focus.md, FOC-001…FOC-004). CSS mapping: focus.ring.* -> --vd3-focus-ring-*.",
@@ -168,13 +215,13 @@
     "gap": {
       "$type": "dimension",
       "$value": "{space.fib-5}",
-      "$description": "8px icon-to-label gap · --vd3-icon-gap",
-      "$extensions": { "vd3": { "class": "A", "derivation": "Alias for space.fib-5 (F_5 = 8px, C-01)" } }
+      "$description": "8px icon-to-label gap · C-01 · --vd3-icon-gap",
+      "$extensions": { "vd3": { "class": "C", "exceptionId": "C-01", "derivation": "Alias for space.fib-5 (rem-rounded 8px small spacing step)" } }
     }
   },
   "density": {
     "$type": "number",
-    "$description": "Density scale factors — exactly two modes (resolves docs/research-brief.md open question Q4; new in 1.1, foundations/density.md). Runtime hook data-density=\"compact\" on the root element sets --vd3-density-scale and remaps every --vd3-space-fib-* to calc(<base> * var(--vd3-density-scale)) in tokens.css. Spacing only: containers, breakpoints, type, line weights, radii are structural and never scaled. CSS mapping: density.scale.* -> --vd3-density-scale-*; runtime var --vd3-density-scale.",
+    "$description": "Density scale factors — exactly two modes (resolves docs/research-brief.md open question Q4; new in 1.1, foundations/density.md). Runtime hook data-density=\"compact\" on the root element sets --vd3-density-scale and remaps every --vd3-space-fib-* to calc(<base> * var(--vd3-density-scale)) in tokens.css. Spacing only: containers, breakpoints, type, line weights, radii are structural and never scaled. CSS mapping: density.scale.* -> --vd3-density-scale-*; density.multiplier -> --vd3-density-scale.",
     "scale": {
       "comfortable": {
         "$value": 1,
@@ -186,6 +233,11 @@
         "$description": "Compact mode · --vd3-density-scale-compact · activated by [data-density=\"compact\"] on the root element",
         "$extensions": { "vd3": { "class": "A", "derivation": "phi^(-1/2) = 1/sqrt(phi) = 0.7862 — reciprocal of the sqrt(phi) typography modular step, applied to spacing" } }
       }
+    },
+    "multiplier": {
+      "$value": "{density.scale.comfortable}",
+      "$description": "Runtime density multiplier · --vd3-density-scale",
+      "$extensions": { "vd3": { "class": "B", "reason": "Defaults to comfortable identity (1); overridden by [data-density=\"compact\"]" } }
     }
   },
   "radius": {
@@ -201,13 +253,22 @@
   },
   "shadow": {
     "$type": "shadow",
-    "$description": "Elevation ladder — v1.9 fib pairs confirmed in vd3-core.css: 1/2 (--vd-shadow-sm), 2/3 (--vd-shadow), 3/5 (--vd-shadow-md fib variant), 8/13 (--vd-shadow-lg fib), 13/21 (--vd-shadow-xl fib), 21/34 (--vd-shadow-2xl). Values below are the real light-theme composites; dark theme swaps alpha (#...4d/#...80). v1.9 ALSO ships conventional sm/md/lg/xl (tokens.json) — class B aliases.",
+    "$description": "Elevation ladder — v1.9 fib pairs confirmed in vd3-core.css: 1/2 (--vd-shadow-sm), 2/3 (--vd-shadow), 3/5 (--vd-shadow-md fib variant), 8/13 (--vd-shadow-lg fib), 13/21 (--vd-shadow-xl fib), 21/34 (--vd-shadow-2xl). Values below are the real light-theme composites; dark theme swaps alpha (#...4d/#...80). v1.9 ALSO ships conventional sm/md/lg/xl (tokens.json) — class B aliases under shadow.named.",
     "1": { "$value": "0 1px 2px #0000000d", "$description": "1/2 pair · --vd-shadow-sm", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_2, F_3) = (1, 2)" } } },
     "2": { "$value": "0 2px 3px 0 #0000001a, 0 1px 2px -1px #0000001a", "$description": "2/3 pair · --vd-shadow", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_3, F_4) = (2, 3)" } } },
     "3": { "$value": "0 3px 5px -1px #0000001a, 0 2px 3px -2px #0000001a", "$description": "3/5 pair · --vd-shadow-md (fib)", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_4, F_5) = (3, 5)" } } },
     "4": { "$value": "0 8px 13px -3px #0000001a, 0 3px 5px -3px #0000001a", "$description": "8/13 pair · --vd-shadow-lg (fib)", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_6, F_7) = (8, 13)" } } },
     "5": { "$value": "0 13px 21px -5px #0000001a, 0 5px 8px -5px #0000001a", "$description": "13/21 pair · --vd-shadow-xl (fib)", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_7, F_8) = (13, 21)" } } },
-    "6": { "$value": "0 21px 34px -8px #00000040", "$description": "21/34 pair · --vd-shadow-2xl", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_8, F_9) = (21, 34)" } } }
+    "6": { "$value": "0 21px 34px -8px #00000040", "$description": "21/34 pair · --vd-shadow-2xl", "$extensions": { "vd3": { "class": "A", "derivation": "Consecutive Fibonacci pair (F_8, F_9) = (21, 34)" } } },
+    "named": {
+      "$description": "Named semantic aliases for shadow.1..6 · --vd3-shadow-* (default -> --vd3-shadow).",
+      "sm":      { "$value": "{shadow.1}", "$description": "Alias for shadow.1 · --vd3-shadow-sm", "$extensions": { "vd3": { "class": "B", "reason": "v1.9 named alias for shadow.1" } } },
+      "default": { "$value": "{shadow.2}", "$description": "Alias for shadow.2 · --vd3-shadow", "$extensions": { "vd3": { "class": "B", "reason": "v1.9 named alias for shadow.2" } } },
+      "md":      { "$value": "{shadow.3}", "$description": "Alias for shadow.3 · --vd3-shadow-md", "$extensions": { "vd3": { "class": "B", "reason": "v1.9 named alias for shadow.3" } } },
+      "lg":      { "$value": "{shadow.4}", "$description": "Alias for shadow.4 · --vd3-shadow-lg", "$extensions": { "vd3": { "class": "B", "reason": "v1.9 named alias for shadow.4" } } },
+      "xl":      { "$value": "{shadow.5}", "$description": "Alias for shadow.5 · --vd3-shadow-xl", "$extensions": { "vd3": { "class": "B", "reason": "v1.9 named alias for shadow.5" } } },
+      "2xl":     { "$value": "{shadow.6}", "$description": "Alias for shadow.6 · --vd3-shadow-2xl", "$extensions": { "vd3": { "class": "B", "reason": "v1.9 named alias for shadow.6" } } }
+    }
   },
   "glow": {
     "$type": "dimension",
@@ -247,20 +308,34 @@
     "xl":  { "$value": "1200px", "$description": "--vd-breakpoint-xl", "$extensions": { "vd3": { "class": "B", "reason": "Conventional responsive large display breakpoint" } } },
     "2xl": { "$value": "1400px", "$description": "--vd-breakpoint-2xl", "$extensions": { "vd3": { "class": "B", "reason": "Conventional responsive ultra-wide breakpoint" } } }
   },
+  "font": {
+    "$description": "Font family stacks · --vd3-font-family-*. Runtime [data-font] overrides --vd-font-family-{sans,mono} which --vd3-font-family-* unwrap.",
+    "family": {
+      "$type": "fontFamily",
+      "sans":  { "$value": "\"Ubuntu\", system-ui, -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif", "$description": "Default UI sans-serif font stack · --vd3-font-family-sans", "$extensions": { "vd3": { "class": "B", "reason": "Conventional system-matched sans-serif stack with Ubuntu default" } } },
+      "serif": { "$value": "Georgia, \"Times New Roman\", serif", "$description": "Editorial serif font stack · --vd3-font-family-serif", "$extensions": { "vd3": { "class": "B", "reason": "Conventional platform serif stack" } } },
+      "mono":  { "$value": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace", "$description": "Monospace code font stack · --vd3-font-family-mono", "$extensions": { "vd3": { "class": "B", "reason": "Conventional monospace stack with JetBrains Mono default" } } }
+    }
+  },
   "type": {
-    "$description": "Type scale — v1.9 --vd-font-size-* confirmed: static steps xs..4xl (min bounds) plus fluid clamp() for lg..6xl (max bounds are phi multiples: 1.25/1.625/2.0625/2.625/3.3125/4.25/5.375rem). Class A.",
+    "$description": "Type scale — v1.9 --vd-font-size-* confirmed: static steps xs..base plus fluid clamp() for lg..6xl (with lg-static..4xl-static mobile lower-bound fallbacks; max bounds are phi multiples: 1.25/1.625/2.0625/2.625/3.3125/4.25/5.375rem). Class A.",
     "size": {
       "$type": "dimension",
-      "xs":   { "$value": "0.75rem",  "$description": "12px · --vd-font-size-xs", "$extensions": { "vd3": { "class": "B", "reason": "Conventional accessibility floor for microcopy" } } },
-      "sm":   { "$value": "0.8125rem", "$description": "13px · --vd-font-size-sm", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_7 = 13px" } } },
-      "base": { "$value": "1rem",     "$description": "16px · --vd-font-size-base", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography baseline 16 * sqrt(phi)^0" } } },
-      "lg":   { "$value": "1.125rem", "$description": "18px static; fluid clamp(1.125rem, 1.08rem + .22vw, 1.25rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^1" } } },
-      "xl":   { "$value": "1.25rem",  "$description": "20px static; fluid clamp(1.35rem, 1.25rem + .5vw, 1.625rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^2 = 16 * phi" } } },
-      "2xl":  { "$value": "1.5rem",   "$description": "24px static; fluid clamp(1.62rem, 1.46rem + .8vw, 2.0625rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^3" } } },
-      "3xl":  { "$value": "1.875rem", "$description": "30px static; fluid clamp(1.94rem, 1.69rem + 1.25vw, 2.625rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^4 = 16 * phi^2" } } },
-      "4xl":  { "$value": "2.25rem",  "$description": "36px static; fluid clamp(2.33rem, 1.97rem + 1.8vw, 3.3125rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^5" } } },
-      "5xl":  { "$value": "clamp(2.8rem, 2.27rem + 2.65vw, 4.25rem)",  "$description": "fluid only · 68px max (16×φ³)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^6 = 16 * phi^3" } } },
-      "6xl":  { "$value": "clamp(3.36rem, 2.63rem + 3.65vw, 5.375rem)", "$description": "fluid only · 86px max", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^7" } } }
+      "xs":         { "$value": "0.75rem",  "$description": "12px · --vd-font-size-xs", "$extensions": { "vd3": { "class": "B", "reason": "Conventional accessibility floor for microcopy" } } },
+      "sm":         { "$value": "0.8125rem", "$description": "13px · --vd-font-size-sm", "$extensions": { "vd3": { "class": "A", "derivation": "Fibonacci F_7 = 13px" } } },
+      "base":       { "$value": "1rem",     "$description": "16px · --vd-font-size-base", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography baseline 16 * sqrt(phi)^0" } } },
+      "lg":         { "$value": "clamp(1.125rem, 1.08rem + .22vw, 1.25rem)", "$description": "18px static; fluid clamp(1.125rem, 1.08rem + .22vw, 1.25rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^1" } } },
+      "xl":         { "$value": "clamp(1.35rem, 1.25rem + .5vw, 1.625rem)", "$description": "20px static; fluid clamp(1.35rem, 1.25rem + .5vw, 1.625rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^2 = 16 * phi" } } },
+      "2xl":        { "$value": "clamp(1.62rem, 1.46rem + .8vw, 2.0625rem)", "$description": "24px static; fluid clamp(1.62rem, 1.46rem + .8vw, 2.0625rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^3" } } },
+      "3xl":        { "$value": "clamp(1.94rem, 1.69rem + 1.25vw, 2.625rem)", "$description": "30px static; fluid clamp(1.94rem, 1.69rem + 1.25vw, 2.625rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^4 = 16 * phi^2" } } },
+      "4xl":        { "$value": "clamp(2.33rem, 1.97rem + 1.8vw, 3.3125rem)", "$description": "36px static; fluid clamp(2.33rem, 1.97rem + 1.8vw, 3.3125rem)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^5" } } },
+      "5xl":        { "$value": "clamp(2.8rem, 2.27rem + 2.65vw, 4.25rem)",  "$description": "fluid only · 68px max (16×φ³)", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^6 = 16 * phi^3" } } },
+      "6xl":        { "$value": "clamp(3.36rem, 2.63rem + 3.65vw, 5.375rem)", "$description": "fluid only · 86px max", "$extensions": { "vd3": { "class": "A", "derivation": "Modular typography step 16 * sqrt(phi)^7" } } },
+      "lg-static":  { "$value": "1.125rem", "$description": "18px static fallback for type.size.lg · --vd3-font-size-lg-static", "$extensions": { "vd3": { "class": "B", "reason": "Static mobile lower-bound fallback for fluid modular step lg" } } },
+      "xl-static":  { "$value": "1.25rem",  "$description": "20px static fallback for type.size.xl · --vd3-font-size-xl-static", "$extensions": { "vd3": { "class": "B", "reason": "Static mobile lower-bound fallback for fluid modular step xl" } } },
+      "2xl-static": { "$value": "1.5rem",   "$description": "24px static fallback for type.size.2xl · --vd3-font-size-2xl-static", "$extensions": { "vd3": { "class": "B", "reason": "Static mobile lower-bound fallback for fluid modular step 2xl" } } },
+      "3xl-static": { "$value": "1.875rem", "$description": "30px static fallback for type.size.3xl · --vd3-font-size-3xl-static", "$extensions": { "vd3": { "class": "B", "reason": "Static mobile lower-bound fallback for fluid modular step 3xl" } } },
+      "4xl-static": { "$value": "2.25rem",  "$description": "36px static fallback for type.size.4xl · --vd3-font-size-4xl-static", "$extensions": { "vd3": { "class": "B", "reason": "Static mobile lower-bound fallback for fluid modular step 4xl" } } }
     },
     "leading": {
       "$type": "number",

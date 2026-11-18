@@ -7,6 +7,8 @@
 @layer vd3.components {
   /* Track — layer fill, pill radius, F_5 = 8px tall */
   .vd-progress {
+    --_vd-progress-fill: var(--vd3-color-focus, #fab005);
+
     display: flex;
     width: 100%;
     height: var(--vd3-space-fib-5, 0.5rem);
@@ -15,11 +17,40 @@
     border-radius: var(--vd3-radius-full, 9999rem);
   }
 
+  /* Native <progress class="vd-progress"> element */
+  progress.vd-progress {
+    --_vd-progress-indeterminate-size: calc(var(--vd3-inv-phi-sq, 0.382) * 100%);
+    --_vd-progress-indeterminate-duration: var(--vd3-duration-987, 987ms);
+
+    display: block;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 0 solid;
+    overflow: clip;
+    container-type: inline-size;
+  }
+
+  progress.vd-progress::-webkit-progress-bar {
+    background-color: transparent;
+  }
+
+  progress.vd-progress::-webkit-progress-value {
+    background-color: var(--_vd-progress-fill);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    transition: inline-size var(--vd3-duration-233, 233ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1));
+    animation: var(--_vd-progress-animation, revert-rule);
+  }
+
+  progress.vd-progress::-moz-progress-bar {
+    background-color: var(--_vd-progress-fill);
+    border-radius: var(--vd3-radius-full, 9999rem);
+    transition: inline-size var(--vd3-duration-233, 233ms) var(--vd3-ease-out, cubic-bezier(0.236, 1, 0.382, 1));
+    animation: var(--_vd-progress-animation, revert-rule);
+  }
+
   /* Fill — the behavioral layer sets --_vd-progress-value (custom property)
      or an inline width; this CSS never hardcodes a value. */
   .vd-progress-bar {
-    --_vd-progress-fill: var(--vd3-color-focus, #fab005);
-
     width: var(--_vd-progress-value, 0%);
     height: 100%;
     background-color: var(--_vd-progress-fill);
@@ -28,22 +59,29 @@
   }
 
   /* Semantic variants — swap only the fill custom property */
-  .vd-progress--success .vd-progress-bar,
-  .vd-progress-success .vd-progress-bar,
+  .vd-progress--info,
+  .vd-progress-info,
+  .vd-progress-bar.vd-progress--info,
+  .vd-progress-bar.vd-progress-info {
+    --_vd-progress-fill: var(--vd3-color-info, #0ab5b5);
+  }
+
+  .vd-progress--success,
+  .vd-progress-success,
   .vd-progress-bar.vd-progress--success,
   .vd-progress-bar.vd-progress-success {
-    --_vd-progress-fill: var(--vd3-color-golden-3, #68c20a);
+    --_vd-progress-fill: var(--vd3-color-success, #0ac265);
   }
 
-  .vd-progress--warning .vd-progress-bar,
-  .vd-progress-warning .vd-progress-bar,
+  .vd-progress--warning,
+  .vd-progress-warning,
   .vd-progress-bar.vd-progress--warning,
   .vd-progress-bar.vd-progress-warning {
-    --_vd-progress-fill: var(--vd3-color-focus, #fab005);
+    --_vd-progress-fill: var(--vd3-color-warning, #fab005);
   }
 
-  .vd-progress--critical .vd-progress-bar,
-  .vd-progress-critical .vd-progress-bar,
+  .vd-progress--critical,
+  .vd-progress-critical,
   .vd-progress-bar.vd-progress--critical,
   .vd-progress-bar.vd-progress-critical {
     --_vd-progress-fill: var(--vd3-color-critical, #fa5252);
@@ -58,9 +96,27 @@
     animation: vd-progress-slide var(--vd3-duration-987, 987ms) var(--vd3-ease-in-out, cubic-bezier(0.618, 0, 0.382, 1)) infinite;
   }
 
+  progress.vd-progress:indeterminate {
+    --_vd-progress-animation: vd-progress-native-indeterminate var(--_vd-progress-indeterminate-duration) var(--vd3-ease-in-out, cubic-bezier(0.618, 0, 0.382, 1)) infinite;
+  }
+
+  progress.vd-progress:indeterminate:dir(rtl) {
+    --_vd-progress-animation: vd-progress-native-indeterminate var(--_vd-progress-indeterminate-duration) var(--vd3-ease-in-out, cubic-bezier(0.618, 0, 0.382, 1)) infinite reverse;
+  }
+
   @keyframes vd-progress-slide {
     from { inset-inline-start: calc(var(--vd3-inv-phi-sq, 0.382) * -100%); }
     to   { inset-inline-start: 100%; }
+  }
+
+  @keyframes vd-progress-native-indeterminate {
+    from, to {
+      inline-size: var(--_vd-progress-indeterminate-size);
+      /* intentional physical: Chromium RTL indeterminate layout; mirrored via :dir(rtl) reverse */
+      margin-right: auto;
+    }
+    from { translate: -100%; }
+    to   { translate: 100cqi; }
   }
 
   /* Dual-Ring Focus (only if a behavioral layer makes the track focusable) */
@@ -78,29 +134,39 @@
     opacity: var(--vd3-inv-phi-sq, 0.382);
   }
 
-  /* Dark Theme Nuances */
-  [data-theme="dark"] .vd-progress--success .vd-progress-bar,
-  [data-theme="dark"] .vd-progress-success .vd-progress-bar,
-  [data-theme="dark"] .vd-progress-bar.vd-progress--success,
-  [data-theme="dark"] .vd-progress-bar.vd-progress-success {
-    --_vd-progress-fill: var(--vd3-color-golden-6, #0ac265);
-  }
-
   /* Reduced Motion (MOB-001) */
   @media (prefers-reduced-motion: reduce) {
     .vd-progress-bar {
+      transition: none !important;
+    }
+    progress.vd-progress::-webkit-progress-value {
+      transition: none !important;
+    }
+    progress.vd-progress::-moz-progress-bar {
       transition: none !important;
     }
     .vd-progress--indeterminate .vd-progress-bar,
     .vd-progress-indeterminate .vd-progress-bar {
       animation: none !important;
     }
+    progress.vd-progress {
+      --_vd-progress-indeterminate-duration: 9.87s; /* 10 × F_16 (987ms); literal because --vd3-duration-987 collapses to 0ms under reduced motion */
+    }
   }
   [data-motion="reduce"] .vd-progress-bar {
+    transition: none !important;
+  }
+  [data-motion="reduce"] progress.vd-progress::-webkit-progress-value {
+    transition: none !important;
+  }
+  [data-motion="reduce"] progress.vd-progress::-moz-progress-bar {
     transition: none !important;
   }
   [data-motion="reduce"] .vd-progress--indeterminate .vd-progress-bar,
   [data-motion="reduce"] .vd-progress-indeterminate .vd-progress-bar {
     animation: none !important;
+  }
+  [data-motion="reduce"] progress.vd-progress {
+    --_vd-progress-indeterminate-duration: 9.87s; /* 10 × F_16 (987ms); literal because --vd3-duration-987 collapses to 0ms under reduced motion */
   }
 }

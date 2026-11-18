@@ -2,7 +2,7 @@
 slug: alert
 status: stable
 spec: vd3-ui-core@1.1.0-draft
-apg: none
+apg: https://www.w3.org/WAI/ARIA/apg/patterns/alert/
 ---
 
 ## Summary
@@ -26,7 +26,9 @@ Contract-level: `role="alert"` for warning/critical (assertive), `role="status"`
 for info/success (polite, `aria-live="polite"` implied). Dismissible via
 `.vd-alert-close` button with an action `aria-label` per `conventions/content.md`.
 
-## Keyboard — NORMATIVE: live-region semantics
+## Keyboard — NORMATIVE: APG Alert Pattern (`patterns/alert/`)
+Conforms to the W3C ARIA APG Alert Pattern (alerts are dynamically announced via
+live-region roles without stealing keyboard focus):
 
 | Key | Effect |
 |---|---|
@@ -51,7 +53,9 @@ uses the dual ring (FOC-001/002).
 `line-height tight/normal`, `focus.ring.*`, `duration 55`, `ease-out`.
 
 ## Deviations & references
-No APG pattern exists for alert banners; contract is WAI-ARIA live-region roles.
+Conforms to the W3C ARIA APG Alert Pattern (`https://www.w3.org/WAI/ARIA/apg/patterns/alert/`)
+with `role="alert"` for warning/critical and `role="status"` (`aria-live="polite"`)
+for info/success, consuming semantic status tokens (`color.role.info|success|warning|critical`).
 Consulted: Carbon ActionableNotification / InlineNotification — adopts role
 split (toast vs inline); deviates on accent placement (inline-start bar instead
 of icon-only) for RTL robustness.

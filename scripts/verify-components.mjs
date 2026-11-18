@@ -96,6 +96,7 @@ const requiredFiles = [
   'segmented.css',
   'hover-card.css',
   'tour.css',
+  'icon.css',
   'index.css',
 ];
 
@@ -120,8 +121,8 @@ const layoutCss = fileContents['layout.css'] || '';
 
 // Canonical layer order declaration
 assert(
-  indexCss.includes('@layer vd3.tokens, vd3.reset, vd3.base, vd3.layout, vd3.components;'),
-  'index.css must declare canonical layer order @layer vd3.tokens, vd3.reset, vd3.base, vd3.layout, vd3.components;'
+  indexCss.includes('@layer vd3.tokens, vd3.reset, vd3.base, vd3.layout, vd3.components, vd3.utilities;'),
+  'index.css must declare canonical layer order @layer vd3.tokens, vd3.reset, vd3.base, vd3.layout, vd3.components, vd3.utilities;'
 );
 
 // Import of layout primitives
@@ -130,7 +131,7 @@ assert(
   "index.css must import layout.css into layer(vd3.layout)"
 );
 
-// Imports of 34 components
+// Imports of 35 components
 const componentFiles = [
   'button.css', 'dialog.css', 'card.css', 'form.css', 'badge.css',
   'navbar.css', 'accordion.css', 'table.css', 'code.css', 'toast.css',
@@ -138,7 +139,7 @@ const componentFiles = [
   'drawer.css', 'tooltip.css', 'popover.css', 'menu.css', 'context-menu.css',
   'menubar.css', 'breadcrumb.css', 'pagination.css', 'avatar.css', 'progress.css',
   'spinner.css', 'skeleton.css', 'slider.css', 'datepicker.css', 'timepicker.css',
-  'upload.css', 'carousel.css', 'toolbar.css', 'segmented.css', 'hover-card.css', 'tour.css'
+  'upload.css', 'carousel.css', 'toolbar.css', 'segmented.css', 'hover-card.css', 'tour.css', 'icon.css'
 ];
 
 for (const comp of componentFiles) {
@@ -807,7 +808,7 @@ assert(
   'toast.css entrance animation must bind to Fibonacci duration F_13 = 233ms'
 );
 
-const toastPlacements = ['bottom-left', 'top-right', 'top-left', 'bottom-center'];
+const toastPlacements = ['bottom-start', 'bottom-end', 'top-start', 'top-end', 'bottom-center', 'top-center'];
 for (const p of toastPlacements) {
   assert(
     toastCss.includes(`.vd-toast-container--${p}`),
@@ -946,12 +947,13 @@ const newFeatures = [
   { file: "slider.css", num: 52, name: "Range Slider", base: ".vd-slider", checks: ["::-webkit-slider-thumb", "::-moz-range-thumb", ":focus-visible"] },
   { file: "datepicker.css", num: 53, name: "Date Picker", base: ".vd-datepicker", checks: [".vd-datepicker-grid", ".vd-datepicker-day", "[aria-selected=\"true\"]", "[data-today]", ".vd-datepicker-prev", ".vd-datepicker-next"] },
   { file: "timepicker.css", num: 54, name: "Time Picker", base: ".vd-timepicker", checks: [".vd-timepicker-item", "[aria-selected=\"true\"]", ":focus-visible"] },
-  { file: "upload.css", num: 55, name: "File Upload", base: ".vd-upload", checks: [".vd-upload--dragover", ".vd-upload-input", ".vd-upload-list", ":focus-within"] },
+  { file: "upload.css", num: 55, name: "File Upload", base: ".vd-upload", checks: [".vd-upload--dragover", ".vd-upload-input", ".vd-upload-list", ":has(:focus-visible)"] },
   { file: "carousel.css", num: 56, name: "Carousel", base: ".vd-carousel", checks: [".vd-carousel-track", ".vd-carousel-slide", ".vd-carousel-prev", ".vd-carousel-next", ".vd-carousel-dots", ".vd-carousel-dot"] },
   { file: "toolbar.css", num: 57, name: "Toolbar", base: ".vd-toolbar", checks: [".vd-toolbar-group", ".vd-toolbar-button", ".vd-toolbar-separator"] },
   { file: "segmented.css", num: 58, name: "Segmented Control", base: ".vd-segmented", checks: [".vd-segmented-item", "[aria-checked=\"true\"]"] },
   { file: "hover-card.css", num: 59, name: "Hover Card", base: ".vd-hover-card", checks: [".vd-hover-card-title", ".vd-hover-card-body", "var(--vd3-z-popover"] },
   { file: "tour.css", num: 60, name: "Tour / Spotlight", base: ".vd-tour", checks: [".vd-tour-title", ".vd-tour-progress", ".vd-tour-btn", ".vd-tour-backdrop", "var(--vd3-z-"] },
+  { file: "icon.css", num: 61, name: "Icon Primitive", base: ".vd-icon", checks: [".vd-icon--sm", ".vd-icon--md", ".vd-icon--lg", ".vd-icon--xl", "--_vd-icon-size", "--_vd-icon-color", "var(--vd3-icon-size-md"] },
 ];
 
 for (const feat of newFeatures) {
@@ -974,12 +976,12 @@ suite('RTL Guard: logical properties only (physical horizontal props need a glyp
     const linesArr = raw.split('\n');
     // blank out block comments so only real code is scanned
     const codeOnly = raw.replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, ' ')).split('\n');
-    const physical = /(^|[\s;{])(left|right)\s*:|border-(left|right)(-color)?\s*:|background-position[^;]*\b(left|right)\b/;
+    const physical = /(^|[\s;{])(left|right)\s*:|border-(left|right)(-color|-width|-style)?\s*:|background-position[^;]*\b(left|right)\b|text-align\s*:\s*(left|right)\b|margin-(left|right)\s*:|padding-(left|right)\s*:|float\s*:\s*(left|right)\b|clear\s*:\s*(left|right)\b/;
     linesArr.forEach((orig, i) => {
       if (!physical.test(codeOnly[i])) return;
       const context = [linesArr[i - 2] || '', linesArr[i - 1] || '', orig].join('\n');
       assert(
-        /intentional|physical|\[dir="rtl"\]/.test(context),
+        /intentional|physical|\[dir="rtl"\]|:dir\(rtl\)/.test(context),
         `${f}:${i + 1} uses a physical horizontal property without an intentional-glyph/rtl comment: ${orig.trim()}`
       );
     });
@@ -1015,34 +1017,53 @@ suite('CSS Snapshot Integrity (UPDATE_SNAPSHOTS=1 to regenerate)');
 }
 
 // =============================================================================
+// Suite 41c: Vendor Pseudo-Element Selector Isolation (CSSOM drop prevention)
+// =============================================================================
+suite('Vendor Pseudo-Element Selector Isolation (no cross-engine selector lists)');
+{
+  const allCss = fs.readdirSync(componentsDir).filter((f) => f.endsWith('.css')).sort();
+  for (const f of allCss) {
+    const raw = fs.readFileSync(path.join(componentsDir, f), 'utf8');
+    const stripped = raw.replace(/\/\*[\s\S]*?\*\//g, '');
+    // Extract selector headers preceding '{' blocks (skip @at-rules)
+    const ruleRegex = /(?:^|[;{}])\s*([^{}@;][^{};]*?)\s*\{/g;
+    let match;
+    const violations = [];
+    while ((match = ruleRegex.exec(stripped)) !== null) {
+      const sel = match[1].trim();
+      if (!sel || sel.startsWith('@')) continue;
+      if (/::-(?:webkit|moz)-/.test(sel) && sel.includes(',')) {
+        const parts = sel.split(',').map((s) => s.trim()).filter(Boolean);
+        const hasWebkit = parts.some((p) => p.includes('::-webkit-'));
+        const hasMoz = parts.some((p) => p.includes('::-moz-'));
+        const hasStandardMix = parts.some((p) => !/::-(?:webkit|moz)-/.test(p));
+        const hasGroupedProgress = parts.some((p) => /::-(?:webkit|moz)-progress-/.test(p)) && parts.length > 1;
+        if ((hasWebkit && hasMoz) || hasStandardMix || hasGroupedProgress) {
+          violations.push(sel.replace(/\s+/g, ' '));
+        }
+      }
+    }
+    assert(
+      violations.length === 0,
+      `${f} combines vendor pseudo-elements in a comma-separated selector list (CSSOM drops entire rule): ${violations.join(' | ')}`
+    );
+  }
+}
+
+// =============================================================================
 // Suite 41: M1 Contrast Advisory & Dual-Ring Focus Resolution
 // =============================================================================
 suite('M1 Contrast Advisory & Dual-Ring Focus Resolution');
 
-const focusFiles = [
-  'button.css', 'form.css', 'badge.css', 'navbar.css',
-  'accordion.css', 'table.css', 'code.css', 'toast.css',
-  'switch.css', 'alert.css', 'tabs.css',
-  'drawer.css',
-  'popover.css',
-  'menu.css',
-  'context-menu.css',
-  'menubar.css',
-  'breadcrumb.css',
-  'pagination.css',
-  'avatar.css',
-  'progress.css',
-  'spinner.css',
-  'skeleton.css',
-  'slider.css',
-  'datepicker.css',
-  'timepicker.css',
-  'upload.css',
-  'carousel.css',
-  'toolbar.css',
-  'segmented.css',
-  'tour.css'
-];
+const nonFocusFiles = new Set(['index.css', 'layout.css', 'tooltip.css', 'hover-card.css']);
+const focusFiles = fs.readdirSync(componentsDir)
+  .filter((f) => f.endsWith('.css') && !nonFocusFiles.has(f))
+  .sort();
+
+assert(
+  focusFiles.length >= 33,
+  `Expected dynamic scan to find >= 33 focus-capable component CSS files, found ${focusFiles.length}`
+);
 
 for (const f of focusFiles) {
   const content = fileContents[f] || '';
@@ -1067,14 +1088,19 @@ assert(
 // =============================================================================
 suite('Reduced Motion Overrides (MOB-001)');
 
-const animatedFiles = [
-  'button.css', 'dialog.css', 'card.css', 'accordion.css', 'toast.css',
-  'switch.css', 'alert.css', 'tabs.css', 'form.css', 'navbar.css',
-  'drawer.css', 'tooltip.css', 'popover.css', 'menu.css', 'context-menu.css',
-  'menubar.css', 'breadcrumb.css', 'pagination.css', 'avatar.css', 'progress.css',
-  'spinner.css', 'skeleton.css', 'slider.css', 'datepicker.css', 'timepicker.css',
-  'upload.css', 'carousel.css', 'toolbar.css', 'segmented.css', 'hover-card.css', 'tour.css'
-];
+const animatedFiles = fs.readdirSync(componentsDir)
+  .filter((f) => f.endsWith('.css'))
+  .sort()
+  .filter((f) => {
+    const raw = fs.readFileSync(path.join(componentsDir, f), 'utf8');
+    const codeOnly = raw.replace(/\/\*[\s\S]*?\*\//g, '');
+    return /(^|[\s;{])(transition|animation)(-[a-z-]+)?\s*:/m.test(codeOnly);
+  });
+
+assert(
+  animatedFiles.length >= 34,
+  `Expected dynamic scan to find >= 34 animated component CSS files, found ${animatedFiles.length}`
+);
 
 for (const f of animatedFiles) {
   const content = fileContents[f] || '';
